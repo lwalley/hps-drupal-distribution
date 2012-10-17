@@ -5,6 +5,8 @@ core = 7.x
 includes[] = drupal-org-core.make
 
 ; Install profile
-projects[hps][version] = 1.0-alpha1
+projects[hps][type] = profile
+projects[hps][download][type] = file
+projects[hps][download][url] = ../hps.tar.gz
 
 

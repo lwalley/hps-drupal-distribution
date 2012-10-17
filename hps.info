@@ -21,13 +21,13 @@ dependencies[] = syslog
 dependencies[] = token
 
 ; Contributed modules
+dependencies[] = date
+dependencies[] = link
 dependencies[] = advanced_help
 dependencies[] = pathauto
 dependencies[] = ctools
 dependencies[] = features
 dependencies[] = strongarm
-dependencies[] = date
-dependencies[] = link
 dependencies[] = libraries
 dependencies[] = wysiwyg
 dependencies[] = imce
@@ -47,12 +47,11 @@ dependencies[] = search_api
 dependencies[] = search_api_facetapi
 dependencies[] = search_api_solr
 
-; Custom modules
+; Custom modules and features are unversioned and included with the hps profile
 dependencies[] = views_job_scheduler
 dependencies[] = dspaced_entities
 dependencies[] = dspaced
 dependencies[] = dspaced_ui
-
 ; Custom features
 ;dependencies[] = hps_default
 
