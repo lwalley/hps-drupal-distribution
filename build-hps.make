@@ -1,6 +1,4 @@
-; Drush make files for HPS distribution
-; Usage:
-; $ drush make hps.make [directory]
+; Drush make file for HPS distribution
 
 api = 2
 core = 7.x
