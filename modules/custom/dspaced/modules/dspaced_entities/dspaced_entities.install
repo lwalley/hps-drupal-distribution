@@ -1,0 +1,54 @@
+<?php
+
+/**
+ * @file
+ * Install file for DSpaced Entities module.
+ */
+
+/**
+ * Implements hook_install().
+ * @see hook_modules_installed().
+ */
+function dspaced_entities_install() {
+  // @see hook_node_info().
+  node_types_rebuild();
+  $types = node_type_get_types();
+  node_add_body_field($types['dspaced_entities_item']);
+
+  // More default bundles, fields and instances added in hook_modules_installed().
+  // @see hook_dspaced_entities_default().
+  // @see hook_modules_installed().
+}
+
+/**
+ * Implements hook_uninstall().
+ * Removes DSpaced Entities bundles, fields and field instances.
+ */
+function dspaced_entities_uninstall() {
+  $node_types = array(
+    'dspaced_entities_community',
+    'dspaced_entities_item'
+  );
+  // Delete all nodes of types defined by dspaced_entities module
+  $sql = "SELECT nid FROM {node} n WHERE n.type IN (:types)";
+  $result = db_query($sql, array(':types' => $node_types));
+  $nids = array();
+  foreach ($result as $row) {
+    $nids[] = $row->nid;
+  }
+  node_delete_multiple($nids);
+
+  // Load module and includes to get access to helper functions and hooks.
+  drupal_load('module', 'dspaced_entities');
+  module_load_include('inc', 'dspaced_entities', 'dspaced_entities.dspaced_entities_default');
+  $entities = module_invoke('dspaced_entities', 'dspaced_entities_default');
+  _dspaced_entities_uninstall_bundles($entities['bundles']);
+  _dspaced_entities_uninstall_fields($entities['fields']);
+
+  // Delete node types defined by dspaced_entities
+  foreach ($node_types as $type) {
+    node_type_delete($type);
+  }
+
+  field_purge_batch(1000);
+}

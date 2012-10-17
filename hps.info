@@ -1,0 +1,60 @@
+name = History and Philosophy of Science (HPS)
+description = HPS distribution, includes modules and configurations for creating a basic DSpace portal.
+version = 1.0-alpha1
+core = 7.x
+
+; Core modules
+dependencies[] = block
+dependencies[] = comment
+dependencies[] = help
+dependencies[] = image
+dependencies[] = menu
+dependencies[] = path
+dependencies[] = taxonomy
+dependencies[] = dblog
+dependencies[] = toolbar
+dependencies[] = field_ui
+dependencies[] = file
+dependencies[] = rdf
+dependencies[] = statistics
+dependencies[] = syslog
+dependencies[] = token
+
+; Contributed modules
+dependencies[] = advanced_help
+dependencies[] = pathauto
+dependencies[] = ctools
+dependencies[] = features
+dependencies[] = strongarm
+dependencies[] = date
+dependencies[] = link
+dependencies[] = libraries
+dependencies[] = wysiwyg
+dependencies[] = imce
+dependencies[] = imce_wysiwyg
+dependencies[] = transliteration
+dependencies[] = job_scheduler
+dependencies[] = feeds
+dependencies[] = feeds_xpathparser
+dependencies[] = feeds_selfnode_processor
+dependencies[] = views
+dependencies[] = views_ui
+dependencies[] = views_queue
+dependencies[] = entity
+dependencies[] = facetapi
+dependencies[] = facetapi_bonus
+dependencies[] = search_api
+dependencies[] = search_api_facetapi
+dependencies[] = search_api_solr
+
+; Custom modules
+dependencies[] = views_job_scheduler
+dependencies[] = dspaced_entities
+dependencies[] = dspaced
+dependencies[] = dspaced_ui
+
+; Custom features
+;dependencies[] = hps_default
+
+; Include files
+files[] = hps.profile

@@ -1,0 +1,6 @@
+name = Views Job Scheduler
+description = "Exposes Job Scheduler table in Views"
+core = 7.x
+dependencies[] = views
+dependencies[] = job_scheduler
+package = Views

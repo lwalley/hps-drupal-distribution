@@ -1,0 +1,181 @@
+<?php
+
+/**
+ * @file
+ * Module file for dspaced_entities contains implementations of core hooks
+ * and helper method.
+ */
+
+/**
+ * Implements hook_hook_info().
+ */
+function dspaced_entities_hook_info() {
+  return array(
+    'dspaced_entities_default' => array(
+      'group' => 'dspaced_entities_default',
+    )
+  );
+}
+
+/**
+ * Implements hook_node_info().
+ */
+function dspaced_entities_node_info() {
+
+  // @todo users should not be able to manually create nodes of these types
+  //   we're using default node permissions, do we need to restrict further?
+  return array(
+    'dspaced_entities_item' => array(
+      'name' => t('DSpace Item'),
+      'base' => 'node_content', // managed by default node module
+      'description' => t('Imported DSpace item.'),
+      'help' => t("Don't manually create or edit, nodes are created and updated " .
+                  "automatically from DSpace imports."),
+      'has_title' => TRUE,
+      'locked' => TRUE,
+    ),
+    'dspaced_entities_community' => array(
+      'name' => t('DSpace Community'),
+      'base' => 'node_content', // managed by default node module
+      'description' => t('Imported DSpace community.'),
+      'help' => t("Don't manually create or edit, nodes are created and updated " .
+                  "automatically from DSpace imports."),
+      'has_title' => TRUE,
+      'locked' => TRUE,
+    ),
+  );
+  // @todo We could add the default node options here then set the
+  //   node_options_<machine name> variable in hook_installed() or hook_enabled().
+}
+
+/**
+ * @todo Implements hook_rdf_mapping().
+ * /
+function dspaced_entities_rdf_mapping() {}
+}
+//*/
+
+/**
+ * Implements hook_modules_installed().
+ *
+ * Install DSpaced bundles and fields defined by this and other modules.
+ *
+ * @note Instead of creating dspaced_entities bundles and fields in
+ * hook_install() we use this hook. The only exceptions are the node entities
+ * which are defined in hook_node_info() and registered with
+ * node_types_rebuild().
+ *
+ * @see dspaced_entities_hook_install().
+ */
+function dspaced_entities_modules_installed($modules) {
+  foreach ($modules as $module) {
+    if (module_hook($module, 'dspaced_entities_default')) {
+      // Install DSpaced bundles, fields defined by other modules.
+      $entities = module_invoke($module, 'dspaced_entities_default');
+      _dspaced_entities_install_bundles($entities['bundles']);
+      _dspaced_entities_install_fields($entities['fields']);
+      _dspaced_entities_install_instances($entities['instances']);
+    }
+  }
+}
+
+/**
+ * Implements hook_modules_uninstalled().
+ *
+ * Uninstall DSpaced bundles and fields defined by other modules.
+ *
+ * @note Unlike hook_modules_installed() this hook is not called when this
+ * module is uninstalled so we call the unisntall helper methods directly from
+ * hook_uninstall().
+ *
+ * @see dspaced_entities_uninstall().
+ */
+function dspaced_entities_modules_uninstalled($modules) {
+  foreach ($modules as $module) {
+    if (module_hook($module, 'dspaced_entities_default')) {
+      // Uninstall DSpaced bundles, fields defined by other modules.
+      $entities = module_invoke($module, 'dspaced_entities_default');
+      _dspaced_entities_uninstall_bundles($entities['bundles']);
+      _dspaced_entities_uninstall_fields($entities['fields']);
+    }
+  }
+}
+
+/**
+ * Helper function to create vocabularies and update custom node types.
+ */
+function _dspaced_entities_install_bundles($bundles) {
+  foreach ($bundles as $entity_type => $bundle) {
+    foreach ($bundle as $machine_name => $info) {
+      switch($entity_type) {
+        case 'taxonomy_term':
+          // Create vocabularies
+          taxonomy_vocabulary_save((object) $info);
+          break;
+        case 'node':
+          $info = node_type_set_defaults($info);
+          node_type_save($info);
+          break;
+      }
+    }
+  }
+}
+
+/**
+ * Helper function to create fields.
+ */
+function _dspaced_entities_install_fields($fields) {
+  foreach ($fields as $field) {
+    field_create_field($field);
+  }
+}
+
+/**
+ * Helper function to create field instances on custom bundles.
+ */
+function _dspaced_entities_install_instances($instances) {
+  foreach($instances as $entity_type => $bundles) {
+    foreach ($bundles as $bundle_name => $instances) {
+      foreach ($instances as $instance) {
+        $instance['entity_type'] = $entity_type;
+        $instance['bundle'] = $bundle_name;
+        field_create_instance($instance);
+      }
+    }
+  }
+}
+
+/**
+ * Helper function to delete vocabularies and field instances.
+ */
+function _dspaced_entities_uninstall_bundles(Array $bundles) {
+  foreach ($bundles as $entity_type => $bundles) {
+    foreach ($bundles as $machine_name => $bundle) {
+      $instances = field_info_instances($entity_type, $machine_name);
+      foreach ($instances as $instance_name => $instance) {
+        field_delete_instance($instance, FALSE);
+      }
+      switch ($entity_type) {
+        case 'taxonomy_term':
+          if ($vocabulary = taxonomy_vocabulary_machine_name_load($machine_name)) {
+            taxonomy_vocabulary_delete($vocabulary->vid);
+          }
+          break;
+      }
+    }
+  }
+}
+
+/**
+ * Helper function to delete fields declared by hook_dspaced_entities_default().
+ */
+function _dspaced_entities_uninstall_fields(Array $fields) {
+  $existing_fields = array_keys(field_info_fields());
+  foreach (array_keys($fields) as $field_name) {
+    if (in_array($field_name, $existing_fields)) {
+      field_delete_field($field_name);
+    }
+  }
+  field_purge_batch(1000);
+}
+

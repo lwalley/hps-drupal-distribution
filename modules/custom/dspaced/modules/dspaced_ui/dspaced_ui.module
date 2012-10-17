@@ -1,0 +1,78 @@
+<?php
+
+/**
+ * @file
+ */
+
+/**
+ * Implements hook_views_api().
+ */
+function dspaced_ui_views_api() {
+  return array(
+    'api' => 3,
+  );
+}
+
+/**
+ * Implements hook_menu().
+ */
+function dspaced_ui_menu() {
+  $items = array();
+  $items['admin/reports/dspaced'] = array(
+    'title' => 'DSpaced monitoring',
+    'description' => 'Monitor DSpace imports.',
+    'page callback' => 'dspaced_ui_overview',
+    'access arguments' => array('administer site configuration'),
+    'file' => 'dspaced_ui.admin.inc',
+    'file path' => drupal_get_path('module', 'dspaced_ui'),
+  );
+  $items['admin/reports/dspaced/overview'] = array(
+    'title' => 'Overview',
+    'description' => 'View import schedule.',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => 0,
+  );
+  $items['admin/reports/dspaced/schedule'] = array(
+    'title' => 'Schedule',
+    'description' => 'View import schedule.',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 5,
+    'page callback' => 'views_embed_view',
+    'page arguments' => array('dspaced_ui_job_schedule', 'default'),
+    'access arguments' => array('administer site configuration'),
+  );
+  $items['admin/reports/dspaced/queue'] = array(
+    'title' => 'Queue',
+    'description' => 'Queued jobs.',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 10,
+    'page callback' => 'views_embed_view',
+    'page arguments' => array('dspaced_ui_queue', 'default'),
+    'access arguments' => array('administer site configuration'),
+  );
+  $items['admin/reports/dspaced/log'] = array(
+    'title' => 'Log',
+    'description' => 'View import log.',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 15,
+    'page callback' => 'views_embed_view',
+    'page arguments' => array('dspaced_ui_feeds_log', 'default'),
+    'access arguments' => array('administer site configuration'),
+  );
+  return $items;
+}
+
+/**
+ * Implementation of hook_theme().
+ */
+function dspaced_ui_theme($existing, $type, $theme, $path) {
+
+  return array(
+    'dspaced_ui_overview' => array(
+      'variables' => array('community_nodes' => array(),
+                           'item_count' => array()),
+      'file' => 'dspaced_ui.admin.inc',
+    ),
+  );
+
+}

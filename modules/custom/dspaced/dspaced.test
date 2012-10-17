@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Administration tests for dspaced module.
+ */
+class DspacedAdministrationTestCase extends DrupalWebTestCase {
+
+  /**
+   * Implements getInfo().
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Administration',
+      'description' => 'Administration tests for dspaced module.',
+      'group' => 'DSpaced'
+    );
+  }
+
+  /**
+   * Implements setUp().
+   */
+  function setUp() {
+    parent::setUp('dspaced');
+    // @todo Use custom permissions?
+    $this->admin_user = $this->drupalCreateUser(array('administer site configuration'));
+    $this->non_admin_user = $this->drupalCreateUser(array());
+  }
+
+  /**
+   * @todo Test settings form: permissions, repository ping, base url text field
+   * @todo Test imports? Fake web response?
+   */
+
+}

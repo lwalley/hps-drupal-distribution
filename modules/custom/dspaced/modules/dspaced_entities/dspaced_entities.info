@@ -1,0 +1,12 @@
+name = DSpaced Entities
+description = Defines bundles, fields and field instances that match DSpace entities and properties
+core = 7.x
+
+dependencies[] = image
+dependencies[] = list
+dependencies[] = number
+dependencies[] = text
+dependencies[] = date
+dependencies[] = link
+dependencies[] = number
+dependencies[] = taxonomy

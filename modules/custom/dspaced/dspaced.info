@@ -1,0 +1,10 @@
+name = DSpaced
+description = Imports DSpace communities and their items
+core = 7.x
+configure = admin/config/dspaced/settings
+
+dependencies[] = views_queue
+dependencies[] = feeds_xpathparser
+dependencies[] = dspaced_entities
+
+files[] = dspaced.test
