@@ -4,8 +4,6 @@
  * @file
  */
 
-define('FILTER_FORMAT_FILTERED_HTML', 'filtered_html');
-define('FILTER_FORMAT_FULL_HTML', 'full_html');
 /**
  * Implements hook_install().
  *
