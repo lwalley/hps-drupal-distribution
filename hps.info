@@ -1,17 +1,22 @@
 name = History and Philosophy of Science (HPS)
 description = HPS distribution, includes modules and configurations for creating a basic DSpace portal.
-version = 1.0-alpha1
 core = 7.x
 
 ; Core modules
 dependencies[] = block
 dependencies[] = comment
+dependencies[] = contextual
+dependencies[] = dashboard
 dependencies[] = help
 dependencies[] = image
+dependencies[] = list
 dependencies[] = menu
+dependencies[] = number
+dependencies[] = options
 dependencies[] = path
 dependencies[] = taxonomy
 dependencies[] = dblog
+dependencies[] = shortcut
 dependencies[] = toolbar
 dependencies[] = field_ui
 dependencies[] = file

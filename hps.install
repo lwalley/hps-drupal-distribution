@@ -20,6 +20,8 @@ define('FILTER_FORMAT_FULL_HTML', 'full_html');
  * @see hps_install_tasks()
  */
 function hps_install() {
+  // set the time limit to unlimited for install
+  drupal_set_time_limit(0);
   // Add text formats.
   $filtered_html_format = array(
     'format' => 'filtered_html',
