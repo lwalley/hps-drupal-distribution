@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * hps_default.features.user_permission.inc
+ * hps_defaults.features.user_permission.inc
  */
 
 /**
  * Implements hook_user_default_permissions().
  */
-function hps_default_user_default_permissions() {
+function hps_defaults_user_default_permissions() {
   $permissions = array();
 
   // Exported permission: access administration pages.
@@ -109,8 +109,6 @@ function hps_default_user_default_permissions() {
     'name' => 'access toolbar',
     'roles' => array(
       0 => 'administrator',
-      1 => 'editor',
-      2 => 'manager',
     ),
     'module' => 'toolbar',
   );
@@ -120,7 +118,6 @@ function hps_default_user_default_permissions() {
     'name' => 'access user profiles',
     'roles' => array(
       0 => 'administrator',
-      1 => 'authenticated user',
     ),
     'module' => 'user',
   );
@@ -346,7 +343,6 @@ function hps_default_user_default_permissions() {
     'name' => 'administer users',
     'roles' => array(
       0 => 'administrator',
-      1 => 'manager',
     ),
     'module' => 'user',
   );
@@ -392,7 +388,6 @@ function hps_default_user_default_permissions() {
     'name' => 'change own username',
     'roles' => array(
       0 => 'administrator',
-      1 => 'authenticated user',
     ),
     'module' => 'user',
   );
@@ -400,36 +395,28 @@ function hps_default_user_default_permissions() {
   // Exported permission: clear dspaced_communities feeds.
   $permissions['clear dspaced_communities feeds'] = array(
     'name' => 'clear dspaced_communities feeds',
-    'roles' => array(
-      0 => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'feeds',
   );
 
   // Exported permission: clear dspaced_community feeds.
   $permissions['clear dspaced_community feeds'] = array(
     'name' => 'clear dspaced_community feeds',
-    'roles' => array(
-      0 => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'feeds',
   );
 
   // Exported permission: clear dspaced_harvest feeds.
   $permissions['clear dspaced_harvest feeds'] = array(
     'name' => 'clear dspaced_harvest feeds',
-    'roles' => array(
-      0 => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'feeds',
   );
 
   // Exported permission: clear dspaced_item feeds.
   $permissions['clear dspaced_item feeds'] = array(
     'name' => 'clear dspaced_item feeds',
-    'roles' => array(
-      0 => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'feeds',
   );
 
@@ -465,7 +452,6 @@ function hps_default_user_default_permissions() {
     'name' => 'create page content',
     'roles' => array(
       0 => 'administrator',
-      1 => 'editor',
     ),
     'module' => 'node',
   );
@@ -520,7 +506,6 @@ function hps_default_user_default_permissions() {
     'name' => 'delete any page content',
     'roles' => array(
       0 => 'administrator',
-      1 => 'editor',
     ),
     'module' => 'node',
   );
@@ -557,7 +542,6 @@ function hps_default_user_default_permissions() {
     'name' => 'delete own page content',
     'roles' => array(
       0 => 'administrator',
-      1 => 'editor',
     ),
     'module' => 'node',
   );
@@ -567,7 +551,6 @@ function hps_default_user_default_permissions() {
     'name' => 'delete revisions',
     'roles' => array(
       0 => 'administrator',
-      1 => 'editor',
     ),
     'module' => 'node',
   );
@@ -640,7 +623,6 @@ function hps_default_user_default_permissions() {
     'name' => 'delete terms in tags',
     'roles' => array(
       0 => 'administrator',
-      1 => 'editor',
     ),
     'module' => 'taxonomy',
   );
@@ -677,7 +659,6 @@ function hps_default_user_default_permissions() {
     'name' => 'edit any page content',
     'roles' => array(
       0 => 'administrator',
-      1 => 'editor',
     ),
     'module' => 'node',
   );
@@ -696,7 +677,6 @@ function hps_default_user_default_permissions() {
     'name' => 'edit own comments',
     'roles' => array(
       0 => 'administrator',
-      1 => 'authenticated user',
     ),
     'module' => 'comment',
   );
@@ -724,7 +704,6 @@ function hps_default_user_default_permissions() {
     'name' => 'edit own page content',
     'roles' => array(
       0 => 'administrator',
-      1 => 'editor',
     ),
     'module' => 'node',
   );
@@ -797,7 +776,6 @@ function hps_default_user_default_permissions() {
     'name' => 'edit terms in tags',
     'roles' => array(
       0 => 'administrator',
-      1 => 'editor',
     ),
     'module' => 'taxonomy',
   );
@@ -805,36 +783,28 @@ function hps_default_user_default_permissions() {
   // Exported permission: import dspaced_communities feeds.
   $permissions['import dspaced_communities feeds'] = array(
     'name' => 'import dspaced_communities feeds',
-    'roles' => array(
-      0 => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'feeds',
   );
 
   // Exported permission: import dspaced_community feeds.
   $permissions['import dspaced_community feeds'] = array(
     'name' => 'import dspaced_community feeds',
-    'roles' => array(
-      0 => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'feeds',
   );
 
   // Exported permission: import dspaced_harvest feeds.
   $permissions['import dspaced_harvest feeds'] = array(
     'name' => 'import dspaced_harvest feeds',
-    'roles' => array(
-      0 => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'feeds',
   );
 
   // Exported permission: import dspaced_item feeds.
   $permissions['import dspaced_item feeds'] = array(
     'name' => 'import dspaced_item feeds',
-    'roles' => array(
-      0 => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'feeds',
   );
 
@@ -871,7 +841,6 @@ function hps_default_user_default_permissions() {
     'name' => 'revert revisions',
     'roles' => array(
       0 => 'administrator',
-      1 => 'editor',
     ),
     'module' => 'node',
   );
@@ -907,36 +876,28 @@ function hps_default_user_default_permissions() {
   // Exported permission: unlock dspaced_communities feeds.
   $permissions['unlock dspaced_communities feeds'] = array(
     'name' => 'unlock dspaced_communities feeds',
-    'roles' => array(
-      0 => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'feeds',
   );
 
   // Exported permission: unlock dspaced_community feeds.
   $permissions['unlock dspaced_community feeds'] = array(
     'name' => 'unlock dspaced_community feeds',
-    'roles' => array(
-      0 => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'feeds',
   );
 
   // Exported permission: unlock dspaced_harvest feeds.
   $permissions['unlock dspaced_harvest feeds'] = array(
     'name' => 'unlock dspaced_harvest feeds',
-    'roles' => array(
-      0 => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'feeds',
   );
 
   // Exported permission: unlock dspaced_item feeds.
   $permissions['unlock dspaced_item feeds'] = array(
     'name' => 'unlock dspaced_item feeds',
-    'roles' => array(
-      0 => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'feeds',
   );
 
@@ -992,7 +953,6 @@ function hps_default_user_default_permissions() {
     'name' => 'view own unpublished content',
     'roles' => array(
       0 => 'administrator',
-      1 => 'editor',
     ),
     'module' => 'node',
   );
@@ -1011,7 +971,6 @@ function hps_default_user_default_permissions() {
     'name' => 'view revisions',
     'roles' => array(
       0 => 'administrator',
-      1 => 'editor',
     ),
     'module' => 'node',
   );
