@@ -4,9 +4,7 @@ core = 7.x
 
 ; Core modules
 dependencies[] = block
-dependencies[] = comment
 dependencies[] = contextual
-dependencies[] = dashboard
 dependencies[] = help
 dependencies[] = image
 dependencies[] = list
@@ -16,7 +14,6 @@ dependencies[] = options
 dependencies[] = path
 dependencies[] = taxonomy
 dependencies[] = dblog
-dependencies[] = shortcut
 dependencies[] = toolbar
 dependencies[] = field_ui
 dependencies[] = file

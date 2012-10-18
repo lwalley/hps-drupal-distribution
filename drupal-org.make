@@ -1,7 +1,10 @@
 api = 2
 core = 7.x
 
-; Set projects defaults
+; Themes
+projects[zen][version] = 5.1
+
+; Set projects defaults for modules
 defaults[projects][subdir] = "contributed"
 
 ; Contributed modules
