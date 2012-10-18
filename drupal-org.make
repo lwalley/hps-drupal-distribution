@@ -36,7 +36,11 @@ projects[job_scheduler][version] = 2.0-alpha3
 projects[feeds][version] = 2.0-alpha6
 projects[feeds][patch][1171114] = http://drupal.org/files/feeds-getfile_replace_behaviour_alter-1171114-19.patch
 
-projects[feeds_xpathparser][version] = 1.0-beta3
+projects[feeds_xpathparser][version] = 1.x-dev
+projects[feeds_selfnode_processor][download][type] = git
+projects[feeds_selfnode_processor][download][url] = http://git.drupal.org/project/feeds_xpathparser.git
+projects[feeds_selfnode_processor][download][revision] = 4b1f1a40bfc5754f7fc04164ea33e37d21312f4b
+; http://drupalcode.org/project/feeds_xpathparser.git/commit/4b1f1a4
 
 projects[feeds_selfnode_processor][version] = 1.x-dev
 projects[feeds_selfnode_processor][download][type] = git
