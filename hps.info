@@ -57,8 +57,9 @@ dependencies[] = views_job_scheduler
 dependencies[] = dspaced_entities
 dependencies[] = dspaced
 dependencies[] = dspaced_ui
+
 ; Custom features
-;dependencies[] = hps_default
+dependencies[] = hps_default
 
 ; Include files
 files[] = hps.profile
