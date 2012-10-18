@@ -11,6 +11,8 @@ projects[link][version] = 1.0
 
 projects[advanced_help][version] = 1.0
 
+projects[administerusersbyrole][version] = 1.0-beta1
+
 projects[token][version] = 1.4
 
 projects[pathauto][version] = 1.2
