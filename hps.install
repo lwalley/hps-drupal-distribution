@@ -237,7 +237,6 @@ function hps_install() {
 
   // Default settings for "Basic page"
   variable_set('node_options_page', array('status')); // Don't promote
-  variable_set('comment_page', COMMENT_NODE_HIDDEN); // Disable comments
   variable_set('node_submitted_page', FALSE); // Don't show author or date
 
   // Enable user picture support and set the default to a square thumbnail option.
@@ -371,8 +370,8 @@ function hps_install() {
 
   // Enable default permissions for system roles.
   $filtered_html_permission = filter_permission_name($filtered_html_format);
-  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array('access content', 'access comments', $filtered_html_permission));
-  user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('access content', 'access comments', 'post comments', 'skip comment approval', $filtered_html_permission));
+  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array('access content', $filtered_html_permission));
+  user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('access content', $filtered_html_permission));
 
   // Create a default role for site administrators, with all available permissions assigned.
   $admin_role = new stdClass();
