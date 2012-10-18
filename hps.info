@@ -28,6 +28,7 @@ dependencies[] = syslog
 dependencies[] = date
 dependencies[] = link
 dependencies[] = advanced_help
+dependencies[] = token
 dependencies[] = pathauto
 dependencies[] = ctools
 dependencies[] = features
