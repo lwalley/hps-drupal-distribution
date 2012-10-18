@@ -55,6 +55,7 @@ function hps_defaults_user_default_permissions() {
     'name' => 'access content overview',
     'roles' => array(
       0 => 'administrator',
+      1 => 'editor',
     ),
     'module' => 'node',
   );
@@ -109,6 +110,7 @@ function hps_defaults_user_default_permissions() {
     'name' => 'access toolbar',
     'roles' => array(
       0 => 'administrator',
+      1 => 'authenticated user',
     ),
     'module' => 'toolbar',
   );
@@ -383,11 +385,116 @@ function hps_defaults_user_default_permissions() {
     'module' => 'user',
   );
 
+  // Exported permission: cancel users with no custom roles.
+  $permissions['cancel users with no custom roles'] = array(
+    'name' => 'cancel users with no custom roles',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'manager',
+    ),
+    'module' => 'administerusersbyrole',
+  );
+
+  // Exported permission: cancel users with role administrator.
+  $permissions['cancel users with role administrator'] = array(
+    'name' => 'cancel users with role administrator',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'administerusersbyrole',
+  );
+
+  // Exported permission: cancel users with role administrator and other roles.
+  $permissions['cancel users with role administrator and other roles'] = array(
+    'name' => 'cancel users with role administrator and other roles',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'administerusersbyrole',
+  );
+
+  // Exported permission: cancel users with role anonymoususer.
+  $permissions['cancel users with role anonymoususer'] = array(
+    'name' => 'cancel users with role anonymoususer',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'manager',
+    ),
+    'module' => 'administerusersbyrole',
+  );
+
+  // Exported permission: cancel users with role anonymoususer and other roles.
+  $permissions['cancel users with role anonymoususer and other roles'] = array(
+    'name' => 'cancel users with role anonymoususer and other roles',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'administerusersbyrole',
+  );
+
+  // Exported permission: cancel users with role authenticateduser.
+  $permissions['cancel users with role authenticateduser'] = array(
+    'name' => 'cancel users with role authenticateduser',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'manager',
+    ),
+    'module' => 'administerusersbyrole',
+  );
+
+  // Exported permission: cancel users with role authenticateduser and other roles.
+  $permissions['cancel users with role authenticateduser and other roles'] = array(
+    'name' => 'cancel users with role authenticateduser and other roles',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'administerusersbyrole',
+  );
+
+  // Exported permission: cancel users with role editor.
+  $permissions['cancel users with role editor'] = array(
+    'name' => 'cancel users with role editor',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'manager',
+    ),
+    'module' => 'administerusersbyrole',
+  );
+
+  // Exported permission: cancel users with role editor and other roles.
+  $permissions['cancel users with role editor and other roles'] = array(
+    'name' => 'cancel users with role editor and other roles',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'administerusersbyrole',
+  );
+
+  // Exported permission: cancel users with role manager.
+  $permissions['cancel users with role manager'] = array(
+    'name' => 'cancel users with role manager',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'manager',
+    ),
+    'module' => 'administerusersbyrole',
+  );
+
+  // Exported permission: cancel users with role manager and other roles.
+  $permissions['cancel users with role manager and other roles'] = array(
+    'name' => 'cancel users with role manager and other roles',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'administerusersbyrole',
+  );
+
   // Exported permission: change own username.
   $permissions['change own username'] = array(
     'name' => 'change own username',
     'roles' => array(
       0 => 'administrator',
+      1 => 'authenticated user',
     ),
     'module' => 'user',
   );
@@ -395,28 +502,36 @@ function hps_defaults_user_default_permissions() {
   // Exported permission: clear dspaced_communities feeds.
   $permissions['clear dspaced_communities feeds'] = array(
     'name' => 'clear dspaced_communities feeds',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'administrator',
+    ),
     'module' => 'feeds',
   );
 
   // Exported permission: clear dspaced_community feeds.
   $permissions['clear dspaced_community feeds'] = array(
     'name' => 'clear dspaced_community feeds',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'administrator',
+    ),
     'module' => 'feeds',
   );
 
   // Exported permission: clear dspaced_harvest feeds.
   $permissions['clear dspaced_harvest feeds'] = array(
     'name' => 'clear dspaced_harvest feeds',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'administrator',
+    ),
     'module' => 'feeds',
   );
 
   // Exported permission: clear dspaced_item feeds.
   $permissions['clear dspaced_item feeds'] = array(
     'name' => 'clear dspaced_item feeds',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'administrator',
+    ),
     'module' => 'feeds',
   );
 
@@ -452,6 +567,7 @@ function hps_defaults_user_default_permissions() {
     'name' => 'create page content',
     'roles' => array(
       0 => 'administrator',
+      1 => 'editor',
     ),
     'module' => 'node',
   );
@@ -463,6 +579,16 @@ function hps_defaults_user_default_permissions() {
       0 => 'administrator',
     ),
     'module' => 'path',
+  );
+
+  // Exported permission: create users.
+  $permissions['create users'] = array(
+    'name' => 'create users',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'manager',
+    ),
+    'module' => 'administerusersbyrole',
   );
 
   // Exported permission: customize shortcut links.
@@ -506,6 +632,7 @@ function hps_defaults_user_default_permissions() {
     'name' => 'delete any page content',
     'roles' => array(
       0 => 'administrator',
+      1 => 'editor',
     ),
     'module' => 'node',
   );
@@ -542,6 +669,7 @@ function hps_defaults_user_default_permissions() {
     'name' => 'delete own page content',
     'roles' => array(
       0 => 'administrator',
+      1 => 'editor',
     ),
     'module' => 'node',
   );
@@ -551,6 +679,7 @@ function hps_defaults_user_default_permissions() {
     'name' => 'delete revisions',
     'roles' => array(
       0 => 'administrator',
+      1 => 'editor',
     ),
     'module' => 'node',
   );
@@ -623,6 +752,7 @@ function hps_defaults_user_default_permissions() {
     'name' => 'delete terms in tags',
     'roles' => array(
       0 => 'administrator',
+      1 => 'editor',
     ),
     'module' => 'taxonomy',
   );
@@ -659,6 +789,7 @@ function hps_defaults_user_default_permissions() {
     'name' => 'edit any page content',
     'roles' => array(
       0 => 'administrator',
+      1 => 'editor',
     ),
     'module' => 'node',
   );
@@ -677,6 +808,7 @@ function hps_defaults_user_default_permissions() {
     'name' => 'edit own comments',
     'roles' => array(
       0 => 'administrator',
+      1 => 'authenticated user',
     ),
     'module' => 'comment',
   );
@@ -704,6 +836,7 @@ function hps_defaults_user_default_permissions() {
     'name' => 'edit own page content',
     'roles' => array(
       0 => 'administrator',
+      1 => 'editor',
     ),
     'module' => 'node',
   );
@@ -776,35 +909,147 @@ function hps_defaults_user_default_permissions() {
     'name' => 'edit terms in tags',
     'roles' => array(
       0 => 'administrator',
+      1 => 'editor',
     ),
     'module' => 'taxonomy',
+  );
+
+  // Exported permission: edit users with no custom roles.
+  $permissions['edit users with no custom roles'] = array(
+    'name' => 'edit users with no custom roles',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'manager',
+    ),
+    'module' => 'administerusersbyrole',
+  );
+
+  // Exported permission: edit users with role administrator.
+  $permissions['edit users with role administrator'] = array(
+    'name' => 'edit users with role administrator',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'administerusersbyrole',
+  );
+
+  // Exported permission: edit users with role administrator and other roles.
+  $permissions['edit users with role administrator and other roles'] = array(
+    'name' => 'edit users with role administrator and other roles',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'administerusersbyrole',
+  );
+
+  // Exported permission: edit users with role anonymoususer.
+  $permissions['edit users with role anonymoususer'] = array(
+    'name' => 'edit users with role anonymoususer',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'manager',
+    ),
+    'module' => 'administerusersbyrole',
+  );
+
+  // Exported permission: edit users with role anonymoususer and other roles.
+  $permissions['edit users with role anonymoususer and other roles'] = array(
+    'name' => 'edit users with role anonymoususer and other roles',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'administerusersbyrole',
+  );
+
+  // Exported permission: edit users with role authenticateduser.
+  $permissions['edit users with role authenticateduser'] = array(
+    'name' => 'edit users with role authenticateduser',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'manager',
+    ),
+    'module' => 'administerusersbyrole',
+  );
+
+  // Exported permission: edit users with role authenticateduser and other roles.
+  $permissions['edit users with role authenticateduser and other roles'] = array(
+    'name' => 'edit users with role authenticateduser and other roles',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'administerusersbyrole',
+  );
+
+  // Exported permission: edit users with role editor.
+  $permissions['edit users with role editor'] = array(
+    'name' => 'edit users with role editor',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'manager',
+    ),
+    'module' => 'administerusersbyrole',
+  );
+
+  // Exported permission: edit users with role editor and other roles.
+  $permissions['edit users with role editor and other roles'] = array(
+    'name' => 'edit users with role editor and other roles',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'administerusersbyrole',
+  );
+
+  // Exported permission: edit users with role manager.
+  $permissions['edit users with role manager'] = array(
+    'name' => 'edit users with role manager',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'administerusersbyrole',
+  );
+
+  // Exported permission: edit users with role manager and other roles.
+  $permissions['edit users with role manager and other roles'] = array(
+    'name' => 'edit users with role manager and other roles',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'administerusersbyrole',
   );
 
   // Exported permission: import dspaced_communities feeds.
   $permissions['import dspaced_communities feeds'] = array(
     'name' => 'import dspaced_communities feeds',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'administrator',
+    ),
     'module' => 'feeds',
   );
 
   // Exported permission: import dspaced_community feeds.
   $permissions['import dspaced_community feeds'] = array(
     'name' => 'import dspaced_community feeds',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'administrator',
+    ),
     'module' => 'feeds',
   );
 
   // Exported permission: import dspaced_harvest feeds.
   $permissions['import dspaced_harvest feeds'] = array(
     'name' => 'import dspaced_harvest feeds',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'administrator',
+    ),
     'module' => 'feeds',
   );
 
   // Exported permission: import dspaced_item feeds.
   $permissions['import dspaced_item feeds'] = array(
     'name' => 'import dspaced_item feeds',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'administrator',
+    ),
     'module' => 'feeds',
   );
 
@@ -841,6 +1086,7 @@ function hps_defaults_user_default_permissions() {
     'name' => 'revert revisions',
     'roles' => array(
       0 => 'administrator',
+      1 => 'editor',
     ),
     'module' => 'node',
   );
@@ -876,28 +1122,36 @@ function hps_defaults_user_default_permissions() {
   // Exported permission: unlock dspaced_communities feeds.
   $permissions['unlock dspaced_communities feeds'] = array(
     'name' => 'unlock dspaced_communities feeds',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'administrator',
+    ),
     'module' => 'feeds',
   );
 
   // Exported permission: unlock dspaced_community feeds.
   $permissions['unlock dspaced_community feeds'] = array(
     'name' => 'unlock dspaced_community feeds',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'administrator',
+    ),
     'module' => 'feeds',
   );
 
   // Exported permission: unlock dspaced_harvest feeds.
   $permissions['unlock dspaced_harvest feeds'] = array(
     'name' => 'unlock dspaced_harvest feeds',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'administrator',
+    ),
     'module' => 'feeds',
   );
 
   // Exported permission: unlock dspaced_item feeds.
   $permissions['unlock dspaced_item feeds'] = array(
     'name' => 'unlock dspaced_item feeds',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'administrator',
+    ),
     'module' => 'feeds',
   );
 
@@ -953,6 +1207,7 @@ function hps_defaults_user_default_permissions() {
     'name' => 'view own unpublished content',
     'roles' => array(
       0 => 'administrator',
+      1 => 'editor',
     ),
     'module' => 'node',
   );
@@ -971,6 +1226,7 @@ function hps_defaults_user_default_permissions() {
     'name' => 'view revisions',
     'roles' => array(
       0 => 'administrator',
+      1 => 'editor',
     ),
     'module' => 'node',
   );
