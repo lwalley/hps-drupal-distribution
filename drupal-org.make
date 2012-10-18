@@ -62,7 +62,7 @@ projects[facetapi][version] = 1.2
 
 projects[facetapi_bonus][version] = 1.1
 
-projects[search_api][version] = 1.2
+projects[search_api][version] = 1.3
 ; includes search_facet_api
 
 projects[search_api_solr][version] = 1.0-rc2
