@@ -59,7 +59,7 @@ dependencies[] = dspaced
 dependencies[] = dspaced_ui
 
 ; Custom features
-;dependencies[] = hps_default
+dependencies[] = hps_roles
 
 ; Include files
 files[] = hps.profile
