@@ -9,7 +9,7 @@
  * Page callback for /admin/config/dspaced/settings.
  */
 function dspaced_admin_settings() {
-dpm(node_load(1501));
+
   module_load_include('inc', 'dspaced', 'dspaced.feeds');
 
   $rest_baseurl = _dspaced_repository_rest_baseurl();
