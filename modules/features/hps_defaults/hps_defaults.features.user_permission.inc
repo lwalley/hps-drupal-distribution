@@ -499,42 +499,6 @@ function hps_defaults_user_default_permissions() {
     'module' => 'user',
   );
 
-  // Exported permission: clear dspaced_communities feeds.
-  $permissions['clear dspaced_communities feeds'] = array(
-    'name' => 'clear dspaced_communities feeds',
-    'roles' => array(
-      0 => 'administrator',
-    ),
-    'module' => 'feeds',
-  );
-
-  // Exported permission: clear dspaced_community feeds.
-  $permissions['clear dspaced_community feeds'] = array(
-    'name' => 'clear dspaced_community feeds',
-    'roles' => array(
-      0 => 'administrator',
-    ),
-    'module' => 'feeds',
-  );
-
-  // Exported permission: clear dspaced_harvest feeds.
-  $permissions['clear dspaced_harvest feeds'] = array(
-    'name' => 'clear dspaced_harvest feeds',
-    'roles' => array(
-      0 => 'administrator',
-    ),
-    'module' => 'feeds',
-  );
-
-  // Exported permission: clear dspaced_item feeds.
-  $permissions['clear dspaced_item feeds'] = array(
-    'name' => 'clear dspaced_item feeds',
-    'roles' => array(
-      0 => 'administrator',
-    ),
-    'module' => 'feeds',
-  );
-
   // Exported permission: create article content.
   $permissions['create article content'] = array(
     'name' => 'create article content',
@@ -1017,42 +981,6 @@ function hps_defaults_user_default_permissions() {
     'module' => 'administerusersbyrole',
   );
 
-  // Exported permission: import dspaced_communities feeds.
-  $permissions['import dspaced_communities feeds'] = array(
-    'name' => 'import dspaced_communities feeds',
-    'roles' => array(
-      0 => 'administrator',
-    ),
-    'module' => 'feeds',
-  );
-
-  // Exported permission: import dspaced_community feeds.
-  $permissions['import dspaced_community feeds'] = array(
-    'name' => 'import dspaced_community feeds',
-    'roles' => array(
-      0 => 'administrator',
-    ),
-    'module' => 'feeds',
-  );
-
-  // Exported permission: import dspaced_harvest feeds.
-  $permissions['import dspaced_harvest feeds'] = array(
-    'name' => 'import dspaced_harvest feeds',
-    'roles' => array(
-      0 => 'administrator',
-    ),
-    'module' => 'feeds',
-  );
-
-  // Exported permission: import dspaced_item feeds.
-  $permissions['import dspaced_item feeds'] = array(
-    'name' => 'import dspaced_item feeds',
-    'roles' => array(
-      0 => 'administrator',
-    ),
-    'module' => 'feeds',
-  );
-
   // Exported permission: manage features.
   $permissions['manage features'] = array(
     'name' => 'manage features',
@@ -1117,42 +1045,6 @@ function hps_defaults_user_default_permissions() {
       0 => 'administrator',
     ),
     'module' => 'shortcut',
-  );
-
-  // Exported permission: unlock dspaced_communities feeds.
-  $permissions['unlock dspaced_communities feeds'] = array(
-    'name' => 'unlock dspaced_communities feeds',
-    'roles' => array(
-      0 => 'administrator',
-    ),
-    'module' => 'feeds',
-  );
-
-  // Exported permission: unlock dspaced_community feeds.
-  $permissions['unlock dspaced_community feeds'] = array(
-    'name' => 'unlock dspaced_community feeds',
-    'roles' => array(
-      0 => 'administrator',
-    ),
-    'module' => 'feeds',
-  );
-
-  // Exported permission: unlock dspaced_harvest feeds.
-  $permissions['unlock dspaced_harvest feeds'] = array(
-    'name' => 'unlock dspaced_harvest feeds',
-    'roles' => array(
-      0 => 'administrator',
-    ),
-    'module' => 'feeds',
-  );
-
-  // Exported permission: unlock dspaced_item feeds.
-  $permissions['unlock dspaced_item feeds'] = array(
-    'name' => 'unlock dspaced_item feeds',
-    'roles' => array(
-      0 => 'administrator',
-    ),
-    'module' => 'feeds',
   );
 
   // Exported permission: use text format filtered_html.
