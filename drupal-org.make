@@ -1,11 +1,11 @@
 api = 2
 core = 7.x
 
-; Themes
-projects[zen][version] = 5.1
-
 ; Set projects defaults for modules
 defaults[projects][subdir] = "contributed"
+
+; Themes
+projects[zen][version] = 5.1
 
 ; Contributed modules
 projects[date][version] = 2.6
@@ -73,17 +73,11 @@ projects[search_api][version] = 1.3
 projects[search_api_solr][version] = 1.0-rc2
 
 
-; Custom unversioned modules are included in profile tar.gz
-; Override default subdirectory location
-; projects[views_job_scheduler][subdir] = custom
-; projects[dspaced_entities][subdir] = custom
-; projects[dspaced][subdir] = custom
-; projects[dspaced_ui][subdir] = custom
-
+; @note Custom unversioned modules are included in profile tar.gz
 
 ; Libraries
 libraries[ckeditor][download][type] = get
-libraries[ckeditor][download][url] = http://download.cksource.com/CKEditor%20for%20Drupal/CKEditor%203.6.2%20for%20Drupal/ckeditor_3.6.2_for_drupal_7.zip
+libraries[ckeditor][download][url] = http://download.cksource.com/CKEditor/CKEditor/CKEditor%203.6.5/ckeditor_3.6.5.zip
 
 libraries[SolrPhpClient][download][type] = get
 libraries[SolrPhpClient][download][url] = http://solr-php-client.googlecode.com/files/SolrPhpClient.r60.2011-05-04.zip
