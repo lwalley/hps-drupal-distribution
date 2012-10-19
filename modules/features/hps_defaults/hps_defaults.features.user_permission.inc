@@ -966,8 +966,6 @@ function hps_defaults_user_default_permissions() {
     'name' => 'use text format filtered_html',
     'roles' => array(
       0 => 'administrator',
-      1 => 'anonymous user',
-      2 => 'authenticated user',
     ),
     'module' => 'filter',
   );
@@ -977,6 +975,16 @@ function hps_defaults_user_default_permissions() {
     'name' => 'use text format full_html',
     'roles' => array(
       0 => 'administrator',
+    ),
+    'module' => 'filter',
+  );
+
+  // Exported permission: use text format hps_standard_html.
+  $permissions['use text format hps_standard_html'] = array(
+    'name' => 'use text format hps_standard_html',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'editor',
     ),
     'module' => 'filter',
   );
