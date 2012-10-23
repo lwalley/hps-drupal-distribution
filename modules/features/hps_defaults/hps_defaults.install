@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * @file
+ * Installation file for hps_defaults module.
+ *
+ * @note This module uses a combination of exported features and Drupal hooks so
+ * be careful not to override the custom hooks when using the Features UI to
+ * update the modules Features settings.
+ */
+
+/**
+ * Implements hook_install().
+ */
+hps_defaults_install() {
+  variable_set('theme_default', 'hpszen');
+  variable_set('admin_theme', 'seven');
+  variable_set('node_admin_theme', '1');
+}
+
