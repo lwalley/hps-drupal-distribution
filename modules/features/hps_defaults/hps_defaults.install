@@ -12,7 +12,7 @@
 /**
  * Implements hook_install().
  */
-hps_defaults_install() {
+function hps_defaults_install() {
   variable_set('theme_default', 'hpszen');
   variable_set('admin_theme', 'seven');
   variable_set('node_admin_theme', '1');
