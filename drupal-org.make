@@ -8,9 +8,19 @@ defaults[projects][subdir] = "contributed"
 projects[zen][version] = 5.1
 
 ; Contributed modules
+projects[fences][version] = 1.0
+
+projects[jquery_update][version] = 2.2
+
+projects[adaptive_image][version] = 1.4
+
 projects[date][version] = 2.6
 
 projects[link][version] = 1.0
+
+projects[field_group][version] = 1.1
+
+projects[entityreference][version] = 1.0-rc5
 
 projects[advanced_help][version] = 1.0
 

@@ -22,8 +22,13 @@ dependencies[] = statistics
 dependencies[] = syslog
 
 ; Contributed modules
+dependencies[] = fences
+dependencies[] = jquery_update
+dependencies[] = adaptive_image
 dependencies[] = date
 dependencies[] = link
+dependencies[] = field_group
+dependencies[] = entityreference
 dependencies[] = advanced_help
 dependencies[] = administerusersbyrole
 dependencies[] = token

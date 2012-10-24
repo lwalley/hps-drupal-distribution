@@ -1,5 +1,15 @@
 <?php
 /**
  * @file
- * Drupal needs this blank file.
+ * Module file for hps_defaults feature/module.
  */
+
+include_once 'hps_defaults.features.inc';
+
+function hps_defaults_entity_info_alter(&$entity_info) {
+  $entity_info['node']['view modes']['image_teaser'] = array(
+    'label' => 'Image Teaser',
+    'custom settings' => TRUE
+  );
+}
+
