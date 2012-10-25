@@ -146,11 +146,14 @@ function hpszen_preprocess_html(&$variables, $hook) {
  * @param $hook
  *   The name of the template being rendered ("page" in this case.)
  */
-/* -- Delete this line if you want to use this function
 function hpszen_preprocess_page(&$variables, $hook) {
-  $variables['sample_variable'] = t('Lorem ipsum.');
+  // Don't display the default Drupal content listing on the home page.
+  if (drupal_is_front_page()) {
+    if (isset($variables['page']['content']['system_main'])) {
+      unset($variables['page']['content']['system_main']);
+    }
+  }
 }
-// */
 
 /**
  * Override or insert variables into the node templates.
