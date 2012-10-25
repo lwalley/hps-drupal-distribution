@@ -1,7 +1,7 @@
 name = HPS Defaults
 description = Default configuration for HPS distribution.
 core = 7.x
-package = Features
+package = HPS
 php = 5.2.4
 version = 7.x-1.0-alpha1
 project = hps_defaults

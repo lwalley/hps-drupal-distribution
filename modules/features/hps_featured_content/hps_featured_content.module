@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the HPS Featured Content feature.
+ */
+
+include_once 'hps_featured_content.features.inc';
