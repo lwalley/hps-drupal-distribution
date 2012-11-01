@@ -7,39 +7,24 @@
 
 @import "base";
 
-// Default Zen Grids settings.
-$zen-column-count:  1;
-$zen-gutter-width:  40px;
-
-
-// IE6-7 don't support box-sizing: border-box. We can fix this in 1 of 3 ways:
-// - Drop support for IE 6/7. :-) In the _base.scss, set $legacy-support-for-ie6
-//   and $legacy-support-for-ie7 to false.
-// - (Preferred) Install the box-sizing polyfill and set the variable below to
-//   the absolute path URL to the boxsizing.htc file.
-//   @see https://github.com/Schepp/box-sizing-polyfill
-//   $box-sizing-polyfill-path: "/path/to/boxsizing.htc";
-// - Use the same CSS unit for grid width and gutter width (use px for both or
-//   use % for both, etc.) and set the box-sizing variable to content-box.
-//   $zen-box-sizing: content-box;
-
-
-// More efficient if we set item-base manually.
-$zen-auto-include-item-base: false;
-// $zen-auto-include-flow-item-base: false;
-
-
 //
 // Default settings for all layouts.
 //
-// @note Mobile first approach so by default we have a single column layout.
+// @note Mobile first approach so by default we have styles specific to mobile phones, basically
+//       anything with a max-width < 480px. We start with a single column layout.
 //
 #page,
 .region-bottom {
+  // Center content if we later apply max width.
   margin-left: auto;
   margin-right: auto;
-  // Use max-width to prevent excessively wide lines of text in wider screens.
-  max-width: 1400px;
+}
+
+/**
+ * Container for grid items and flow items.
+ */
+#page {
+  @include zen-grid-container();
 }
 
 //
@@ -55,42 +40,108 @@ $zen-auto-include-item-base: false;
   @include zen-grid-item-base();
 }
 
-/**
- * Containers for grid items and flow items.
- */
-#header,
-#main,
-#footer {
-  @include zen-grid-container();
-}
 #header {
-  margin-top: 2em;
+  #name-and-slogan {
+    h1 {
+      @include leader(1, $h1-font-size);
+    }
+  }
+  a#logo {
+    @include adjust-font-size-to($h1-font-size);
+    @include adjust-leading-to(3, $h1-font-size);
+    @include leader(1, $h1-font-size);
+    margin-right: rhythm(1, $h1-font-size);
+    img {
+      max-height: rhythm(3, $h1-font-size);
+    }
+  }
+}
+
+#navigation,
+#secondary-menu {
+  .block-menu .block-title,
+  .block-menu-block .block-title {
+    @include element-invisible();
+  }
+  ul {
+    padding-left: 0;
+  }
 }
 
 
+#main,
+#content,
+#footer,
+#secondary-menu {
+  @include zen-clear();
+}
 
-/**
- * Position navigation bar above content for wider screens.
- * By default it is below content.
- */
-@media all and (min-width: 480px) {
+// Position navigation bar above content for screens wide enough to handle it.
+// By default it is below content.
+@media all and (min-width: 600px) {
+
+  #header {
+    #secondary-menu {
+      float: right;
+      clear: none;
+      ul {
+        @include adjust-leading-to(3);
+        @include delimited-list('|');
+      }
+    }
+  }
   #main {
-    padding-top: 3em; /* Move all the children of #main down to make room. */
+    // Move all the children of #main down to make room.
+    padding-top: rhythm(3);
     position: relative;
   }
   #navigation {
+    // Move the navbar up inside #main's padding.
+    // @see navigation.scss
     position: absolute;
-    top: 0; /* Move the navbar up inside #main's padding. */
-    height: 3em;
+    top: 0;
     width: $zen-grid-width;
+    ul {
+      @include adjust-leading-to(3);
+      @include inline-block-list();
+    }
   }
 }
 
-@media all and (min-width: 480px) and (max-width: 959px) {
+// Start of media queries, taking layout beyond single column.
+// @note Aim is to maintain golden ratio whilst preserving the readability of the content.
+//       We do this, depending on screen size, by:
+//         1. limiting the max width of all content (for readability don't want much more than ~15 words per line)
+//         2. filling extra space with (a) wider columns, and/or (b) more columns.
+
+
+// Screen sizes that can handle two columns underneath main content.
+@media all and (min-width: 600px) and (max-width: 719px) {
+  $zen-column-count:  2;
+  .two-sidebars {
+    .region-sidebar-first {
+      @include zen-grid-item(1, 1);
+    }
+    .region-sidebar-second {
+      @include zen-grid-item(1, 2);
+    }
+  }
+}
+
+// Screen sizes that can handle one extra column adjacent to content, rest underneath.
+@media all and (min-width: 720px) and (max-width: 1199px) {
   $zen-column-count:  3;
-  /**
-   * Layout when we only have content and one sidebar (first or second).
-   */
+  #header,
+  #navigation,
+  #footer {
+    @include zen-grid-item(3, 1);
+  }
+  .no-sidebar {
+    #content {
+      @include zen-grid-item(2, 1);
+    }
+  }
+  // Golden ratio layout when we have content and one sidebar (first or second).
   .one-sidebar {
     #content {
       @include zen-grid-item(2, 1);
@@ -100,10 +151,7 @@ $zen-auto-include-item-base: false;
       @include zen-grid-item(1, 3);
     }
   }
-
-  /**
-   * Layout when we have content and two sidebars.
-   */
+  // Golden ratio layout when we have content and two sidebars, with second sidebar underneath.
   .two-sidebars {
     #content {
       @include zen-grid-item(2, 1);
@@ -112,10 +160,7 @@ $zen-auto-include-item-base: false;
       @include zen-grid-item(1, 3);
     }
 
-    /**
-     * For smaller screens we span all columns with the second sidebar,
-     * and grid the descendent .block containers instead.
-     */
+    // Span all columns with the second sidebar, and grid the descendent .block containers instead.
     .region-sidebar-second {
       @include zen-grid-item(3, 1);
       @include zen-nested-container();
@@ -137,34 +182,103 @@ $zen-auto-include-item-base: false;
     }
   }
 }
+// Still with one extra column but we use columns in addition to gutters for more fluid whitespace.
+@media all and (min-width: 1200px) and (max-width: 1999px) {
+  $zen-column-count:  24;
+  #header,
+  #navigation,
+  #footer {
+    @include zen-grid-item(20, 3);
+  }
 
-@media all and (min-width: 960px) {
-  $zen-column-count:  5;
-  /**
-   * Layout when there is only content and one sidebar (first or second).
-   */
+  // @todo figure out good way to handle .no-sidebars to prevent jumping about when switch between no sidebars and sidebars
+  .no-sidebar {
+    #content {
+      @include zen-grid-item(12, 3);
+    }
+  }
+
+  // Golden ratio (ish) layout when we have content and one sidebar (first or second).
   .one-sidebar {
     #content {
-      @include zen-grid-item(3, 1);
+      @include zen-grid-item(12, 3);
     }
     .region-sidebar-first,
     .region-sidebar-second {
-      @include zen-grid-item(2, 4);
+      @include zen-grid-item(7, 16);
     }
   }
 
-  /**
-   * Layout when there is content and two sidebars.
-   */
+  // Golden ratio layout when we have content and two sidebars, with second sidebar underneath.
   .two-sidebars {
     #content {
-      @include zen-grid-item(3, 1);
+      @include zen-grid-item(12, 3);
     }
     .region-sidebar-first {
-      @include zen-grid-item(1, 4);
+      @include zen-grid-item(7, 16);
     }
+
+    // Span all columns with the second sidebar, and grid the descendent .block containers instead.
     .region-sidebar-second {
-      @include zen-grid-item(1, 5);
+      @include zen-grid-item(20, 3);
+      @include zen-nested-container();
+      @include zen-clear(); /* Start new row */
+
+      .block {
+        @include zen-grid-item-base();
+      }
+      .block:nth-child(3n+1) {
+        @include zen-grid-item(6, 3);
+        @include zen-clear(); /* Start a new row */
+      }
+      .block:nth-child(3n+2) {
+        @include zen-grid-item(6, 10);
+      }
+      .block:nth-child(3n) {
+        @include zen-grid-item(6, 17);
+      }
     }
   }
 }
+
+// Screen sizes that can handle two extra columns.
+// We use columns in addition to gutters for whitespace between columns.
+@media all and (min-width: 2000px) {
+  $zen-column-count:  27;
+  #header,
+  #navigation,
+  #footer {
+    @include zen-grid-item(19, 5);
+    @include zen-nested-container();
+    @include zen-clear();
+  }
+
+  .no-sidebar {
+    #content {
+      @include zen-grid-item(11, 5);
+    }
+  }
+
+  .one-sidebar {
+    #content {
+      @include zen-grid-item(11, 5);
+    }
+    .region-sidebar-first,
+    .region-sidebar-second {
+      @include zen-grid-item(4, 17);
+    }
+  }
+
+  .two-sidebars {
+    #content {
+      @include zen-grid-item(11, 5);
+    }
+    .region-sidebar-first {
+      @include zen-grid-item(4, 17);
+    }
+    .region-sidebar-second {
+      @include zen-grid-item(3, 21);
+    }
+  }
+}
+

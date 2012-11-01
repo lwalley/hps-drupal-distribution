@@ -27,60 +27,23 @@ ul li.leaf {
 /*
  * The active item in a Drupal menu
  */
-/* line 39, ../sass/navigation.scss */
-li a.active {
-  color: #000;
-}
-
 /*
  * Navigation bar
  */
 /* line 47, ../sass/navigation.scss */
-#navigation {
-  /* overflow: hidden; */
-  /* Sometimes you want to prevent overlapping with main div. */
-}
-/* line 50, ../sass/navigation.scss */
-#navigation .block {
-  margin-bottom: 0;
-}
-/* line 55, ../sass/navigation.scss */
-#navigation .block-menu .block-title,
-#navigation .block-menu-block .block-title {
-  position: absolute !important;
-  height: 1px;
-  width: 1px;
-  overflow: hidden;
-  clip: rect(1px, 1px, 1px, 1px);
-}
-/* line 60, ../sass/navigation.scss */
-#navigation ul.links,
-#navigation ul.menu {
-  /* Menu block links */
-  margin: 0;
-  padding: 0;
-  text-align: left;
-  /* LTR */
-}
-/* line 65, ../sass/navigation.scss */
-#navigation ul.links li,
-#navigation ul.menu li {
-  /* A simple method to get navigation links to appear in one line. */
-  float: left;
-  /* LTR */
-  padding: 0 10px 0 0;
-  /* LTR */
-  list-style-type: none;
-  list-style-image: none;
+#navigation ul a {
+  border-style: solid;
+  border-width: 0.07143em;
+  padding: 0.67857em;
+  text-decoration: none;
 }
 
 /*
  * Main menu and Secondary menu links
  */
-/* line 84, ../sass/navigation.scss */
-#secondary-menu {
-  float: right;
-  /* LTR */
+/* line 66, ../sass/navigation.scss */
+#secondary-menu ul li a {
+  padding: 0.75em;
 }
 
 /*

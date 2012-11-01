@@ -163,18 +163,17 @@ function hpszen_preprocess_page(&$variables, $hook) {
  * @param $hook
  *   The name of the template being rendered ("node" in this case.)
  */
-/* -- Delete this line if you want to use this function
 function hpszen_preprocess_node(&$variables, $hook) {
-  $variables['sample_variable'] = t('Lorem ipsum.');
-
+  if ($variables['view_mode'] == 'hps_featured_content') {
+    $variables['theme_hook_suggestions'][] = 'node__hps_featured_content';
+  }
   // Optionally, run node-type-specific preprocess functions, like
   // hpszen_preprocess_node_page() or STARTERKIT_preprocess_node_story().
-  $function = __FUNCTION__ . '_' . $variables['node']->type;
-  if (function_exists($function)) {
-    $function($variables, $hook);
-  }
+  //$function = __FUNCTION__ . '_' . $variables['node']->type;
+  //if (function_exists($function)) {
+    //$function($variables, $hook);
+  //}
 }
-// */
 
 /**
  * Override or insert variables into the comment templates.

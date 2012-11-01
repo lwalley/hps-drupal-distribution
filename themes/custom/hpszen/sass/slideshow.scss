@@ -1,0 +1,131 @@
+/**
+ * @file
+ * HPS Zen theme's slideshow styles.
+ */
+
+@import "base";
+
+// @note Assumes .slides and .slide classes have been added to HTML list display settings on a View.
+//       When Javascript is disabled we render default View HTML list.
+//       With Javascript enabled we make a slideshow.
+//       Assumes using slideshow in content area.
+// @see Drupal.behaviors.hpszen
+// @see templates/node--hps-featured-content.tpl.php
+
+@mixin slide-vertical-rhythm($slide-lines: 22, $image-lines: 13, $pager-lines: 4, $clear: false) {
+  .block.cycling {
+    ul.slides {
+      height: rhythm($slide-lines);
+      li.slide {
+        .node .field-type-image {
+          height: rhythm($image-lines);
+        }
+      }
+    }
+    .pager {
+      top: rhythm($image-lines - $pager-lines);
+    }
+    @if $clear {
+      &:after {
+        height: rhythm($slide-lines);
+      }
+    }
+  }
+}
+
+.block.cycling { /* jQuery cycle is enabled. */
+  position: relative;
+  // For mobile first single column layout let slides stretch across gutter to fill screen width
+  margin: 0 (-1 * $zen-gutter-width / 2);
+  h1, h2, h3 {
+    @include adjust-font-size-to($base-font-size);
+  }
+  ul.slides {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    li.slide {
+      width: 100% !important;
+      .node .field-type-image {
+        // Fake crop for responsive images.
+        overflow: hidden;
+        img {
+          margin: 0 auto;
+        }
+      }
+      // For single column add gutter to slide contents (since we are forcing block to stretch across gutter)
+      header,
+      p {
+        margin-left: $zen-gutter-width / 2;
+        margin-right: $zen-gutter-width / 2;
+      }
+    }
+  }
+  .pager {
+    position: absolute;
+    width: 100%;
+    background: rgba(black, 0.5);
+    z-index: 10;
+    overflow-x: auto;
+    white-space: nowrap;
+    > a {
+      @include adjust-leading-to(4);
+      > img {
+        height: rhythm(4);
+        margin-right: 2px;
+      }
+      &.activeSlide > img {
+        border-bottom: 4px solid orange;
+        margin-top: -4px;
+      }
+    }
+  }
+  &:after {
+    content: "";
+    display: block;
+    visibility: hidden;
+  }
+}
+
+// Establish default vertical rhythm for slides in mobile first single layout.
+@include slide-vertical-rhythm();
+
+@media screen and (min-width: 480px) {
+  .block.cycling {
+    // Return to use of gutter
+    margin: 0;
+    ul.slides {
+      li.slide {
+        .node .field-type-image {
+          // For multi-column layouts reset image width to include gutters.
+          margin: 0;
+        }
+        header,
+        p {
+          margin-left: 0;
+          margin-right: 0;
+        }
+      }
+    }
+    .pager {
+      // For multi-column layouts reset controls width to include gutters.
+      margin: 0;
+    }
+  }
+}
+
+@media screen and (min-width: 480px) and (max-width: 599px) {
+  @include slide-vertical-rhythm(27, 18);
+}
+
+@media screen and (min-width: 600px) and (max-width: 959px) {
+  @include slide-vertical-rhythm(28, 20);
+}
+
+@media screen and (min-width: 960px) and (max-width: 1599px) {
+  @include slide-vertical-rhythm(29, 21);
+}
+
+@media screen and (min-width: 1600px) {
+  @include slide-vertical-rhythm(33, 26);
+}

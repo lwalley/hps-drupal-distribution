@@ -86,8 +86,7 @@ audio:not([controls]) {
 
    In order to use these fonts, you will need to convert them into formats
    suitable for web fonts. We recommend the free-to-use Font Squirrel's
-   Font-Face Generator:
-     http://www.fontsquirrel.com/fontface/generator
+   Font-Face Generator: http://www.fontsquirrel.com/fontface/generator
 
    The following is an example @font-face declaration. This font can then be
    used in any ruleset using a property like this:  font-family: Example, serif;
@@ -440,7 +439,7 @@ img {
   border: 0; /* 1 */
   -ms-interpolation-mode: bicubic; /* 2 */
 
-  /* vertical-align: bottom; */ /* Suppress the space beneath the baseline */
+  vertical-align: bottom; /* Suppress the space beneath the baseline */
 
   /* Responsive images */
   /* @todo Add responsive embedded video. */
