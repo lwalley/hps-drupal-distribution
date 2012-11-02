@@ -14,6 +14,8 @@ projects[transliteration][version] = 3.1
 
 projects[ctools][version] = 1.2
 
+projects[diff][version] = 2.0
+
 projects[advanced_help][version] = 1.0
 
 projects[administerusersbyrole][version] = 1.0-beta1
