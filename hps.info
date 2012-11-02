@@ -22,38 +22,42 @@ dependencies[] = statistics
 dependencies[] = syslog
 
 ; Contributed modules
-dependencies[] = fences
-dependencies[] = jquery_update
-dependencies[] = adaptive_image
-dependencies[] = date
-dependencies[] = link
-dependencies[] = field_group
-dependencies[] = entityreference
+dependencies[] = libraries
+dependencies[] = transliteration
+dependencies[] = ctools
 dependencies[] = advanced_help
 dependencies[] = administerusersbyrole
 dependencies[] = token
 dependencies[] = pathauto
-dependencies[] = ctools
-dependencies[] = features
-dependencies[] = strongarm
-dependencies[] = libraries
+dependencies[] = date
+dependencies[] = link
+dependencies[] = field_group
+dependencies[] = entity
+dependencies[] = entityreference
+dependencies[] = jquery_update
+dependencies[] = adaptive_image
 dependencies[] = wysiwyg
 dependencies[] = imce
 dependencies[] = imce_wysiwyg
-dependencies[] = transliteration
+dependencies[] = fences
+dependencies[] = features
+dependencies[] = strongarm
+dependencies[] = panels
 dependencies[] = job_scheduler
 dependencies[] = feeds
 dependencies[] = feeds_xpathparser
 dependencies[] = feeds_selfnode_processor
 dependencies[] = views
 dependencies[] = views_ui
+dependencies[] = views_content
 dependencies[] = views_queue
-dependencies[] = entity
 dependencies[] = facetapi
 dependencies[] = facetapi_bonus
 dependencies[] = search_api
 dependencies[] = search_api_facetapi
 dependencies[] = search_api_solr
+dependencies[] = search_api_page
+dependencies[] = taxonomy_menu
 
 ; Custom modules and features are unversioned and included with the hps profile
 dependencies[] = views_job_scheduler
@@ -64,7 +68,11 @@ dependencies[] = dspaced_ui
 ; Custom features
 dependencies[] = hps_roles
 dependencies[] = hps_defaults
+; Optional custom features
 dependencies[] = hps_featured_content
+dependencies[] = hps_news
+dependencies[] = hps_search
+dependencies[] = hps_browse
 
 ; Include files
 files[] = hps.profile

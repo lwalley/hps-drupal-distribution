@@ -8,19 +8,11 @@ defaults[projects][subdir] = "contributed"
 projects[zen][version] = 5.1
 
 ; Contributed modules
-projects[fences][version] = 1.0
+projects[libraries][version] = 2.0
 
-projects[jquery_update][version] = 2.2
+projects[transliteration][version] = 3.1
 
-projects[adaptive_image][version] = 1.4
-
-projects[date][version] = 2.6
-
-projects[link][version] = 1.0
-
-projects[field_group][version] = 1.1
-
-projects[entityreference][version] = 1.0-rc5
+projects[ctools][version] = 1.2
 
 projects[advanced_help][version] = 1.0
 
@@ -30,13 +22,19 @@ projects[token][version] = 1.4
 
 projects[pathauto][version] = 1.2
 
-projects[ctools][version] = 1.2
+projects[date][version] = 2.6
 
-projects[features][version] = 1.0
+projects[link][version] = 1.0
 
-projects[strongarm][version] = 2.0
+projects[field_group][version] = 1.1
 
-projects[libraries][version] = 2.0
+projects[entity][version] = 1.0-rc3
+
+projects[entityreference][version] = 1.0-rc5
+
+projects[jquery_update][version] = 2.2
+
+projects[adaptive_image][version] = 1.4
 
 projects[wysiwyg][version] = 2.2
 
@@ -44,7 +42,13 @@ projects[imce][version] = 1.5
 
 projects[imce_wysiwyg][version] = 1.0
 
-projects[transliteration][version] = 3.1
+projects[fences][version] = 1.0
+
+projects[features][version] = 1.0
+
+projects[strongarm][version] = 2.0
+
+projects[panels][version] = 3.3
 
 projects[job_scheduler][version] = 2.0-alpha3
 
@@ -71,7 +75,6 @@ projects[views_queue][download][type] = git
 projects[views_queue][download][url] = http://git.drupal.org/project/views_queue.git
 projects[views_queue][download][revision] = 0d661bcd22f0cafdb0942c5efd612de7cc408d48
 
-projects[entity][version] = 1.0-rc3
 
 projects[facetapi][version] = 1.2
 
@@ -81,6 +84,10 @@ projects[search_api][version] = 1.3
 ; includes search_facet_api
 
 projects[search_api_solr][version] = 1.0-rc2
+
+projects[search_api_page][version] = 1.0-beta2
+
+projects[taxonomy_menu][version] = 1.4
 
 
 ; @note Custom unversioned modules are included in profile tar.gz
