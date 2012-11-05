@@ -13,20 +13,37 @@ before using this Feature.
 What does it do?
 ----------------
 
-Provides a 'Browse by Format' menu item with child menu items automatically synched to taxonomy
-terms in a selected vocabulary 'DC Description Types'. The term pages in the vocabulary are
-customised to allow different view modes for each format, e.g. an audio teaser for 'Audio' listings,
-image teaser for 'Photographs', regular teaser for 'Essays' etc.
+Provides base configuration for converting a taxonomy vocabulary into a 'Browse by ...' menu with
+node listings pages. By default this Feature uses the 'DC Description Types' vocabulary as an
+example configuration for a 'Browse By Format' menu and listings.
 
 
 How does it do it?
 ------------------
 
-Overrides Drupal's core taxonomy term view if certain criteria are met using a combination of
-Views Content and Page Manager, both provided by Chaos Tools, and the Panels and Views modules.
-The parent 'Browse by format' menu item is created with Drupal core's menu system and it's child
-menu items are created by synching with the 'DC Description Types' vocabulary terms using the
-Taxonomy Menu module.
+Provides a custom content type 'HPS Browse By' that:
+
+  1. Contains an Entity Reference field to a vocabulary*.
+  2. Can be assigned a menu item to act as the parent menu item for the vocabulary's
+     Taxonomy Menu settings.
+  3. Behaves as a landing page which can list all of the browse by categories in the
+     vocabulary.
+
+* The vocabulary should contain all the terms that you want to browse by, and should be
+  configured using the Taxonomy Menu to create a menu item for each term. By default this
+  feature provides all of this configuration for the 'DC Description Type' vocabulary
+  imported from DSpace.
+
+Provides a node override using Page Manager/Panels which renders the vocabulary terms automatically**
+on the browse by node landing page.
+
+** Passing the vocabulary vid as a context argument from Panels to Views is a little quirky
+   @see http://drupal.org/node/1831872
+
+Provides a taxonomy term override using Page Manager/Panels which contains variants for
+category pages (i.e. sub-landing pages), and specifc to this feature, variants for specific
+DC Description Type terms i.e. formats such as Audio, Video etc. so that different formats
+can dsiplay node listings in different ways.
 
 
 How to get it working?
@@ -56,11 +73,12 @@ How to get it working?
 
    Once you're done don't forget to enable the View and the individual content panes you want to use.
 
-4. If using teaser view modes, select the fields you want to display in them
-   /admin/structure/types/manage/dspaced-entities-item/display.
+4. Configure content type view modes (teasers) /admin/structure/types/manage/dspaced-entities-item/display.
 
-   Teaser view modes are provided by the 'HPS Defaults' Feature and what fields you display in
-   them can be configured in the content type display manager.
+   By default the 'HPS Browse' View uses the render entity format with teaser view modes to display
+   DSpace Items in the browse by listings. Custom view modes e.g. 'Audio Teaser' are provided by the
+   'HPS Defaults' Feature. You can configure which DSpace Item fields should be shown in each teaser
+   mode using the DSpace Item content type display manager interface.
 
 5. Edit the 'Taxonomy term template' in Page Manager /admin/structure/pages or Panels
    /admin/structure/panels.
@@ -82,3 +100,10 @@ How to get it working?
 
    Once you're done don't forget to enable the page and the variants you want to use.
 
+6. Create a 'HPS Browse By' node, choose the 'DC Description Types' vocabulary and create a menu item
+   for the node.
+
+7. Configure the 'DC Description Types' vocabulary's Taxonomy Menu Settings to use the new node's menu
+   item as the parent menu item.
+
+8. Enable the Page Manager node override and Browse By variant /admin/structure/pages.
