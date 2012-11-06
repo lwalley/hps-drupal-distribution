@@ -1,0 +1,133 @@
+//
+// "base" partial
+//
+// To make it easier to use all variables and mixins in any Sass file in this
+// theme, each .scss file has a @import "base" declaration. And this _base.scss
+// file is in charge of importing all the other partials needed for the theme.
+//
+// This base partial is organized in this way:
+// - First we set any shared Sass variables.
+// - Next we import Compass plug-ins (Sass mixin libraries).
+// - Last we import a _custom.scss partial that includes our custom mixins.
+//
+
+
+//
+// Legacy IE support
+//
+// These variables are used by many mixins to add additional CSS to support
+// specific versions of IE or specific vendor prefixes.
+//
+// To turn on support for IE6 or IE7, set those variables to true.
+//
+// Zen does not require special handling for IE8 or later. But Compass uses that
+// variable for a couple edge cases. We include it for completeness sake. See
+// the documentation at http://compass-style.org/reference/compass/support/
+$legacy-support-for-ie6: false;
+$legacy-support-for-ie7: false;
+$legacy-support-for-ie8: true;
+
+
+//
+// Font faces, stacks and sizes.
+//
+
+// Compass' vertical_rhythm extension is a powerful tool to set up a vertical
+// rhythm for your entire page. You can see some of its mixins and functions in
+// use in the normalize.scss file.
+// @see http://compass-style.org/reference/compass/typography/vertical_rhythm/
+
+$base-font-size:   14px; // The font size set on the root html element.
+$base-line-height: 21px; // This line-height determines the basic unit of vertical rhythm.
+
+$h1-font-size:         2.5  * $base-font-size;
+$h2-font-size:         1.5  * $base-font-size;
+$h3-font-size:         1.17 * $base-font-size;
+$h4-font-size:         1    * $base-font-size;
+$h5-font-size:         0.83 * $base-font-size;
+$h6-font-size:         0.75 * $base-font-size;
+$name-font-size:       2.5  * $base-font-size;
+$slogan-font-size:     1.5  * $base-font-size;
+$navigation-font-size: 1.5  * $base-font-size;
+
+// @note DejaVu and Nimbus Sans fonts are commonly available on Linux systems
+$times-new-roman: "Times New Roman", Times, Georgia, "DejaVu Serif", serif;
+$helvetica-neue:  "Helvetica Neue", Helvetica, Arial, Geneva, "Nimbus Sans L", sans-serif;
+$arial:           Arial, Helvetica, "Nimbus Sans L", sans-serif;
+
+// For an explanation of why "sans-serif" is at the end of this list, see
+// http://meyerweb.com/eric/thoughts/2010/02/12/fixed-monospace-sizing/
+$courier:         "Courier New", "DejaVu Sans Mono", monospace, sans-serif;
+
+// Now create some variables for the font stacks we want to use on this site.
+$base-font-family: $arial;
+$font-heading:     $times-new-roman;
+$font-navigation:  $times-new-roman;
+$font-body:        $helvetica-neue;
+$font-monospace:   $courier;
+
+// Variables for default colors, shadows etc.
+$base-blue:                    #4068A5;
+
+$base-font-color:              black;
+$highlight-font-color:         $base-blue;
+
+$nav-bg:                       desaturate(lighten($base-blue, 18), 5);
+$nav-border:                   darken($nav-bg, 10);
+$nav-border-top:               lighten($nav-bg, 15);
+$nav-border-bottom:            darken($nav-bg, 25);
+$nav-border-left:              darken($nav-bg, 11);
+$nav-border-right:             lighten($nav-bg, 7);
+$nav-color:                    darken($nav-bg, 38);
+$nav-color-hover:              darken($nav-color, 25);
+
+$default-text-shadow-color:    rgba(black, 0.5);
+$default-text-shadow-h-offset: 1px;
+$default-text-shadow-v-offset: 1px;
+$default-text-shadow-blur:     1px;
+$default-text-shadow-spread:   false;
+$default-border-radius:        2px;
+$default-box-shadow-color:     rgba(black, 0.5);
+$default-box-shadow-h-offset:  1px;
+$default-box-shadow-v-offset:  1px;
+$default-box-shadow-blur:      4px;
+$default-box-shadow-spread:    false;
+$default-box-shadow-inset:     false;
+
+// The amount lists, blockquotes and comments are indented.
+$indent-amount: 1em;
+
+// Default Zen Grids settings.
+// @note Using columns as gutter to give us more control across multiple devices.
+$zen-column-count:  1;
+$zen-gutter-width:  $base-line-height * 2;
+// IE6-7 don't support box-sizing: border-box. We can fix this in 1 of 3 ways:
+// - Drop support for IE 6/7. :-) In the _base.scss, set $legacy-support-for-ie6
+//   and $legacy-support-for-ie7 to false.
+// - (Preferred) Install the box-sizing polyfill and set the variable below to
+//   the absolute path URL to the boxsizing.htc file.
+//   @see https://github.com/Schepp/box-sizing-polyfill
+//   $box-sizing-polyfill-path: "/path/to/boxsizing.htc";
+// - Use the same CSS unit for grid width and gutter width (use px for both or
+//   use % for both, etc.) and set the box-sizing variable to content-box.
+//   $zen-box-sizing: content-box;
+// More efficient if we set item-base manually.
+$zen-auto-include-item-base: false;
+// $zen-auto-include-flow-item-base: false;
+
+
+//
+// Partials to be shared with all .scss files.
+//
+
+@import "compass/support";  // Add Compass' IE and vendor prefix support variables.
+@import "compass/utilities/general/clearfix"; // Better than Drupal's clearfix.
+@import "compass/utilities/sprites"; // See http://compass-style.org/help/tutorials/spriting/
+@import "compass/css3";     // Use one CSS3 mixin instead of multiple vendor prefixes.
+@import "compass/typography/vertical_rhythm"; // Helps set up a vertical rhythm.
+@import "compass/typography/lists/horizontal-list";
+@import "compass/typography/lists/inline-list";
+@import "compass/typography/lists/inline-block-list";
+@import "zen";              // Add the Zen Grids responsive layout mixins.
+
+@import "custom";           // Import our custom mixins last.
