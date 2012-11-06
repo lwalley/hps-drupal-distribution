@@ -6,9 +6,20 @@
 
 include_once 'hps_defaults.features.inc';
 
+/**
+ * Implements hook_entity_info_alter().
+ */
 function hps_defaults_entity_info_alter(&$entity_info) {
   $entity_info['node']['view modes']['image_teaser'] = array(
     'label' => 'Image Teaser',
+    'custom settings' => TRUE
+  );
+  $entity_info['node']['view modes']['audio_teaser'] = array(
+    'label' => 'Audio Teaser',
+    'custom settings' => TRUE
+  );
+  $entity_info['node']['view modes']['video_teaser'] = array(
+    'label' => 'Video Teaser',
     'custom settings' => TRUE
   );
 }
