@@ -58,7 +58,7 @@ dependencies[] = facetapi_bonus
 dependencies[] = search_api
 dependencies[] = search_api_facetapi
 dependencies[] = search_api_solr
-dependencies[] = search_api_page
+dependencies[] = search_api_views
 dependencies[] = taxonomy_menu
 
 ; Custom modules and features are unversioned and included with the hps profile

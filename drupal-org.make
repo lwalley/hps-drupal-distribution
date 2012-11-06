@@ -87,8 +87,6 @@ projects[search_api][version] = 1.3
 
 projects[search_api_solr][version] = 1.0-rc2
 
-projects[search_api_page][version] = 1.0-beta2
-
 projects[taxonomy_menu][version] = 1.4
 
 
