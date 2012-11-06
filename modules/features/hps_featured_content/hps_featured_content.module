@@ -5,3 +5,14 @@
  */
 
 include_once 'hps_featured_content.features.inc';
+
+/**
+ * Implements hook_entity_info_alter().
+ */
+function hps_featured_content_entity_info_alter(&$entity_info) {
+  $entity_info['node']['view modes']['hps_featured_content'] = array(
+    'label' => 'Featured Content',
+    'custom settings' => TRUE
+  );
+}
+

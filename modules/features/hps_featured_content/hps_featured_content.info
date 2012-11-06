@@ -17,6 +17,7 @@ features[ctools][] = strongarm:strongarm:1
 features[ctools][] = views:views_default:3.0
 features[features_api][] = api:1
 features[field][] = node-hps_featured_content-body
+features[field][] = node-hps_featured_content-field_hps_featured_content_image
 features[field][] = node-hps_featured_content-hps_featured_entity
 features[node][] = hps_featured_content
 features[user_permission][] = create hps_featured_content content

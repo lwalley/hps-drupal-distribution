@@ -38,7 +38,7 @@ function hps_featured_content_strongarm() {
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '1',
+          'weight' => '0',
         ),
       ),
       'display' => array(),

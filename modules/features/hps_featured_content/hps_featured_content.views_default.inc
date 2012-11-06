@@ -25,7 +25,6 @@ function hps_featured_content_views_default_views() {
   $handler->display->display_options['title'] = 'Featured Content';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
-  $handler->display->display_options['access']['perm'] = 'edit any hps_featured_content content';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
@@ -66,13 +65,10 @@ function hps_featured_content_views_default_views() {
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
+    'page' => 'page',
     'dspaced_entities_item' => 'dspaced_entities_item',
   );
-  /* Filter criterion: Content: Image (dspace_image:fid) */
-  $handler->display->display_options['filters']['dspace_image_fid']['id'] = 'dspace_image_fid';
-  $handler->display->display_options['filters']['dspace_image_fid']['table'] = 'field_data_dspace_image';
-  $handler->display->display_options['filters']['dspace_image_fid']['field'] = 'dspace_image_fid';
-  $handler->display->display_options['filters']['dspace_image_fid']['operator'] = 'not empty';
+  $handler->display->display_options['filters']['type']['group'] = 1;
 
   /* Display: Entity Reference */
   $handler = $view->new_display('entityreference', 'Entity Reference', 'entityreference');
@@ -90,14 +86,38 @@ function hps_featured_content_views_default_views() {
   $handler->display->display_options['row_plugin'] = 'entityreference_fields';
   $handler->display->display_options['row_options']['separator'] = '';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Image */
+  $handler->display->display_options['fields']['dspace_image']['id'] = 'dspace_image';
+  $handler->display->display_options['fields']['dspace_image']['table'] = 'field_data_dspace_image';
+  $handler->display->display_options['fields']['dspace_image']['field'] = 'dspace_image';
+  $handler->display->display_options['fields']['dspace_image']['label'] = '';
+  $handler->display->display_options['fields']['dspace_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['dspace_image']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['dspace_image']['empty'] = '[no image]';
+  $handler->display->display_options['fields']['dspace_image']['empty_zero'] = TRUE;
+  $handler->display->display_options['fields']['dspace_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['dspace_image']['settings'] = array(
+    'image_style' => 'thumbnail',
+    'image_link' => '',
+  );
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block');
   $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'list';
+  $handler->display->display_options['style_options']['row_class'] = 'slide';
   $handler->display->display_options['style_options']['default_row_class'] = FALSE;
   $handler->display->display_options['style_options']['row_class_special'] = FALSE;
+  $handler->display->display_options['style_options']['class'] = 'slides';
   $handler->display->display_options['style_options']['wrapper_class'] = '';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
@@ -105,19 +125,38 @@ function hps_featured_content_views_default_views() {
   $handler->display->display_options['row_options']['default_field_elements'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Alternative image */
+  $handler->display->display_options['fields']['field_hps_featured_content_image']['id'] = 'field_hps_featured_content_image';
+  $handler->display->display_options['fields']['field_hps_featured_content_image']['table'] = 'field_data_field_hps_featured_content_image';
+  $handler->display->display_options['fields']['field_hps_featured_content_image']['field'] = 'field_hps_featured_content_image';
+  $handler->display->display_options['fields']['field_hps_featured_content_image']['label'] = '';
+  $handler->display->display_options['fields']['field_hps_featured_content_image']['alter']['path'] = '[hps_featured_entity]';
+  $handler->display->display_options['fields']['field_hps_featured_content_image']['element_type'] = '0';
+  $handler->display->display_options['fields']['field_hps_featured_content_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_hps_featured_content_image']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['field_hps_featured_content_image']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['field_hps_featured_content_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_hps_featured_content_image']['settings'] = array(
+    'image_style' => 'hps_large_adaptive',
+    'image_link' => '',
+  );
   /* Field: Content: Featured entity */
-  $handler->display->display_options['fields']['hps_featured_entity']['id'] = 'field_featured_entity';
-  $handler->display->display_options['fields']['hps_featured_entity']['table'] = 'field_data_field_featured_entity';
-  $handler->display->display_options['fields']['hps_featured_entity']['field'] = 'field_featured_entity';
+  $handler->display->display_options['fields']['hps_featured_entity']['id'] = 'hps_featured_entity';
+  $handler->display->display_options['fields']['hps_featured_entity']['table'] = 'field_data_hps_featured_entity';
+  $handler->display->display_options['fields']['hps_featured_entity']['field'] = 'hps_featured_entity';
   $handler->display->display_options['fields']['hps_featured_entity']['label'] = '';
+  $handler->display->display_options['fields']['hps_featured_entity']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['hps_featured_entity']['element_type'] = '0';
   $handler->display->display_options['fields']['hps_featured_entity']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['hps_featured_entity']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['hps_featured_entity']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['hps_featured_entity']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['hps_featured_entity']['type'] = 'entityreference_entity_view';
   $handler->display->display_options['fields']['hps_featured_entity']['settings'] = array(
-    'view_mode' => 'image_teaser',
+    'view_mode' => 'hps_featured_content',
     'links' => 1,
   );
-
+  $handler->display->display_options['fields']['hps_featured_entity']['field_api_classes'] = TRUE;
   /* Field: Content: Body */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
@@ -148,7 +187,6 @@ function hps_featured_content_views_default_views() {
   $handler->display->display_options['filters']['promote']['field'] = 'promote';
   $handler->display->display_options['filters']['promote']['value'] = '1';
   $handler->display->display_options['filters']['promote']['group'] = 1;
-
   $export['hps_featured_content'] = $view;
 
   return $export;
