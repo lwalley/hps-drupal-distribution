@@ -363,8 +363,9 @@ function _dspaced_item_feeds_importer() {
     'guid' => array('xpath' => 'concat("items/", entityId)'),
     'title' => array('xpath' => 'name'),
     'body' => array('xpath' => 'bitstreams/bitstreamentity' .
-      '[(mimeType = "text/xhtml" or mimeType = "application/octet-stream") ' .
-      'and contains(name, ".xhtml")]/name'),
+      '[((mimeType = "text/xhtml" or mimeType = "application/octet-stream") ' .
+      'and contains(name, ".xhtml")) or (mimeType = "text/plain" and ' .
+      'contains(name, ".pdf.txt"))]/name'),
     'status' => array('xpath' => 1), // Publish items on import of full data
     'feeds_source' => array('xpath' => 'concat("/items/", entityId, ".xml")'),
     'url' => array('xpath' => 'concat("/items/", entityId, ".xml")'),

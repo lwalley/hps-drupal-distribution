@@ -112,20 +112,24 @@ function dspaced_feeds_processor_targets_alter(&$targets, $entity_type, $bundle_
  *
  * In default dspaced_item Feeds importer the body field target is set to a
  * conditional xpath of a bitstream URL e.g. to the first bitstream URL with
- * mimeType text/xhtml. In this callback we replace the body value (the bistream
- * URL) with the actual contents of the bitstream.
+ * mimeType text/xhtml or application/octet-stream with file extension .xhtml,
+ * or the first bitstream with mimeType text/plain with file extension .pdf.txt.
+ *
+ * The following callback replaces the body value (the bistream URL) with the
+ * actual contents of the bitstream.
  *
  * @note Based on files_feeds_set_target and link_feeds_set_target from
  *   Feeds 7.x-2.0-alpha6. Check for modifications whenever Feeds module is
  *   upgraded.
  *
+ * @see _dspaced_item_feeds_importer()
  * @see hook_feeds_processor_target_alter()
  * @see file_feeds_set_target()
  * @see link_feeds_set_target()
  *
  */
 function _dspaced_body_set_target($source, $entity, $target, $value) {
-  // @todo Do we want to confirm that dc_format_medium value is text/xhtml?
+
   if (empty($value)) {
     return;
   }
@@ -165,12 +169,16 @@ function _dspaced_body_set_target($source, $entity, $target, $value) {
     try {
       if (($content = $v->getContent()) && ($mime_type = $v->getMimeType())) {
         switch ($mime_type) {
-          // @todo Check this is the only relevant mime type
+          // @todo Check if we've covered all the relevant mime types
           case 'application/xhtml+xml':
             $xhtml = simplexml_load_string($content);
             if ($xhtml && !preg_match('/not found/', $xhtml->head->title)) {
               $body_text = check_markup((string) $xhtml->body->asXML(), 'full_html');
             }
+            break;
+          case 'text/plain':
+            // Restricted to pdf.txt files
+            $body_text = check_plain($content);
             break;
         }
       }
