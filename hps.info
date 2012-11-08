@@ -60,7 +60,6 @@ dependencies[] = search_api_facetapi
 dependencies[] = search_api_solr
 dependencies[] = search_api_views
 dependencies[] = taxonomy_menu
-dependencies[] = superfish
 
 ; Custom modules and features are unversioned and included with the hps profile
 dependencies[] = views_job_scheduler

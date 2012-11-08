@@ -89,8 +89,6 @@ projects[search_api_solr][version] = 1.0-rc2
 
 projects[taxonomy_menu][version] = 1.4
 
-projects[superfish][version] = 1.8
-
 
 ; @note Custom unversioned modules are included in profile tar.gz
 
@@ -100,8 +98,5 @@ libraries[ckeditor][download][url] = http://download.cksource.com/CKEditor/CKEdi
 
 libraries[SolrPhpClient][download][type] = get
 libraries[SolrPhpClient][download][url] = http://solr-php-client.googlecode.com/files/SolrPhpClient.r60.2011-05-04.zip
-
-libraries[superfish][download][type] = get
-libraries[superfish][download][url] = https://github.com/mehrpadin/Superfish-for-Drupal/zipball/9dbdd14d08200a18cb76a68445c28b26bab16ed6
 
 ; @todo jquery cycle
