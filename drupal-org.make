@@ -54,13 +54,16 @@ projects[panels][version] = 3.3
 
 projects[job_scheduler][version] = 2.0-alpha3
 
+; @todo update to Feeds 2.0-alpha7
+; Modules/patches will need to be tested/recreated for feeds,
+; feeds_selfnode_processor and feeds_xpathparser
 projects[feeds][version] = 2.0-alpha6
 projects[feeds][patch][1171114] = http://drupal.org/files/feeds-getfile_replace_behaviour_alter-1171114-19.patch
 
 projects[feeds_xpathparser][version] = 1.x-dev
-projects[feeds_selfnode_processor][download][type] = git
-projects[feeds_selfnode_processor][download][url] = http://git.drupal.org/project/feeds_xpathparser.git
-projects[feeds_selfnode_processor][download][revision] = 4b1f1a40bfc5754f7fc04164ea33e37d21312f4b
+projects[feeds_xpathparser][download][type] = git
+projects[feeds_xpathparser][download][url] = http://git.drupal.org/project/feeds_xpathparser.git
+projects[feeds_xpathparser][download][revision] = 4b1f1a40bfc5754f7fc04164ea33e37d21312f4b
 ; http://drupalcode.org/project/feeds_xpathparser.git/commit/4b1f1a4
 
 projects[feeds_selfnode_processor][version] = 1.x-dev
@@ -76,7 +79,6 @@ projects[views_queue][version] = 1.x-dev
 projects[views_queue][download][type] = git
 projects[views_queue][download][url] = http://git.drupal.org/project/views_queue.git
 projects[views_queue][download][revision] = 0d661bcd22f0cafdb0942c5efd612de7cc408d48
-
 
 projects[facetapi][version] = 1.2
 
