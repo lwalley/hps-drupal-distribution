@@ -2,6 +2,7 @@ name = HPS Search
 description = Solr search and facets configuration for searching DSpace Items, including custom results page and views context.
 core = 7.x
 package = HPS
+php = 5.2.4
 version = 7.x-1.0-alpha1
 project = hps_search
 dependencies[] = ctools
