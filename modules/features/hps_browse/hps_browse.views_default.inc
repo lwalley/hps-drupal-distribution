@@ -700,7 +700,7 @@ function hps_browse_views_default_views() {
   $view = new view();
   $view->name = 'hps_browse_by';
   $view->description = 'List vocabulary terms for browse by landing page.';
-  $view->tag = 'default';
+  $view->tag = 'HPS';
   $view->base_table = 'taxonomy_term_data';
   $view->human_name = 'HPS Browse By';
   $view->core = 7;

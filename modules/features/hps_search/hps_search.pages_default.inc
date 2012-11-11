@@ -35,7 +35,7 @@ function hps_search_default_page_manager_pages() {
   );
   $page->default_handlers = array();
   $handler = new stdClass();
-  $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
+  $handler->disabled = TRUE;
   $handler->api_version = 1;
   $handler->name = 'page_hps_search_panel_context';
   $handler->task = 'page';
