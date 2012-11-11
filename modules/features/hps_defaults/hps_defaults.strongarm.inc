@@ -27,34 +27,6 @@ function hps_defaults_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'site_frontpage';
-  $strongarm->value = 'node';
-  $export['site_frontpage'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'default_nodes_main';
-  $strongarm->value = 1;
-  $export['default_nodes_main'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'image_jpeg_quality';
-  $strongarm->value = '80';
-  $export['image_jpeg_quality'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'image_toolkit';
-  $strongarm->value = 'gd';
-  $export['image_toolkit'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'imce_profiles';
   $strongarm->value = array(
     1 => array(
@@ -134,28 +106,9 @@ function hps_defaults_strongarm() {
       'quota' => '0',
       'tuquota' => '0',
       'extensions' => 'gif png jpg jpeg',
-      'dimensions' => '1200x1200',
+      'dimensions' => '0',
       'filenum' => '1',
-      'directories' => array(
-        0 => array(
-          'name' => 'dspaced',
-          'subnav' => 1,
-          'browse' => 1,
-          'upload' => 0,
-          'thumb' => 0,
-          'delete' => 0,
-          'resize' => 0,
-        ),
-        1 => array(
-          'name' => 'content',
-          'subnav' => 1,
-          'browse' => 1,
-          'upload' => 1,
-          'thumb' => 0,
-          'delete' => 1,
-          'resize' => 1,
-        ),
-      ),
+      'directories' => array(),
       'thumbnails' => array(),
     ),
   );
@@ -166,16 +119,16 @@ function hps_defaults_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'imce_roles_profiles';
   $strongarm->value = array(
-    5 => array(
-      'weight' => '0',
-      'public_pid' => 0,
-    ),
     3 => array(
-      'weight' => '0',
-      'public_pid' => 0,
+      'weight' => '1',
+      'public_pid' => '3',
     ),
     4 => array(
-      'weight' => '0',
+      'weight' => '5',
+      'public_pid' => '3',
+    ),
+    5 => array(
+      'weight' => '10',
       'public_pid' => '3',
     ),
     2 => array(
@@ -214,7 +167,7 @@ function hps_defaults_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'imce_settings_textarea';
-  $strongarm->value = 'edit-body*';
+  $strongarm->value = '';
   $export['imce_settings_textarea'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -223,6 +176,437 @@ function hps_defaults_strongarm() {
   $strongarm->name = 'imce_settings_thumb_method';
   $strongarm->value = 'scale_and_crop';
   $export['imce_settings_thumb_method'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_blog_pattern';
+  $strongarm->value = 'blogs/[user:name]';
+  $export['pathauto_blog_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_case';
+  $strongarm->value = '1';
+  $export['pathauto_case'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_forum_pattern';
+  $strongarm->value = '[term:vocabulary]/[term:name]';
+  $export['pathauto_forum_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_ignore_words';
+  $strongarm->value = 'a, an, as, at, before, but, by, for, from, is, in, into, like, of, off, on, onto, per, since, than, the, this, that, to, up, via, with';
+  $export['pathauto_ignore_words'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_max_component_length';
+  $strongarm->value = '100';
+  $export['pathauto_max_component_length'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_max_length';
+  $strongarm->value = '100';
+  $export['pathauto_max_length'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_article_pattern';
+  $strongarm->value = 'news/[node:title]';
+  $export['pathauto_node_article_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_dspaced_entities_community_pattern';
+  $strongarm->value = 'communities/[node:title]';
+  $export['pathauto_node_dspaced_entities_community_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_dspaced_entities_item_pattern';
+  $strongarm->value = 'pages/[node:title]';
+  $export['pathauto_node_dspaced_entities_item_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_page_pattern';
+  $strongarm->value = 'info/[node:title]';
+  $export['pathauto_node_page_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_pattern';
+  $strongarm->value = 'content/[node:title]';
+  $export['pathauto_node_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_punctuation_ampersand';
+  $strongarm->value = '0';
+  $export['pathauto_punctuation_ampersand'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_punctuation_asterisk';
+  $strongarm->value = '0';
+  $export['pathauto_punctuation_asterisk'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_punctuation_at';
+  $strongarm->value = '0';
+  $export['pathauto_punctuation_at'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_punctuation_backtick';
+  $strongarm->value = '0';
+  $export['pathauto_punctuation_backtick'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_punctuation_back_slash';
+  $strongarm->value = '0';
+  $export['pathauto_punctuation_back_slash'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_punctuation_caret';
+  $strongarm->value = '0';
+  $export['pathauto_punctuation_caret'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_punctuation_colon';
+  $strongarm->value = '0';
+  $export['pathauto_punctuation_colon'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_punctuation_comma';
+  $strongarm->value = '0';
+  $export['pathauto_punctuation_comma'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_punctuation_dollar';
+  $strongarm->value = '0';
+  $export['pathauto_punctuation_dollar'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_punctuation_double_quotes';
+  $strongarm->value = '0';
+  $export['pathauto_punctuation_double_quotes'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_punctuation_equal';
+  $strongarm->value = '0';
+  $export['pathauto_punctuation_equal'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_punctuation_exclamation';
+  $strongarm->value = '0';
+  $export['pathauto_punctuation_exclamation'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_punctuation_greater_than';
+  $strongarm->value = '0';
+  $export['pathauto_punctuation_greater_than'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_punctuation_hash';
+  $strongarm->value = '0';
+  $export['pathauto_punctuation_hash'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_punctuation_hyphen';
+  $strongarm->value = '1';
+  $export['pathauto_punctuation_hyphen'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_punctuation_left_curly';
+  $strongarm->value = '0';
+  $export['pathauto_punctuation_left_curly'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_punctuation_left_parenthesis';
+  $strongarm->value = '0';
+  $export['pathauto_punctuation_left_parenthesis'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_punctuation_left_square';
+  $strongarm->value = '0';
+  $export['pathauto_punctuation_left_square'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_punctuation_less_than';
+  $strongarm->value = '0';
+  $export['pathauto_punctuation_less_than'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_punctuation_percent';
+  $strongarm->value = '0';
+  $export['pathauto_punctuation_percent'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_punctuation_period';
+  $strongarm->value = '0';
+  $export['pathauto_punctuation_period'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_punctuation_pipe';
+  $strongarm->value = '0';
+  $export['pathauto_punctuation_pipe'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_punctuation_plus';
+  $strongarm->value = '0';
+  $export['pathauto_punctuation_plus'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_punctuation_question_mark';
+  $strongarm->value = '0';
+  $export['pathauto_punctuation_question_mark'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_punctuation_quotes';
+  $strongarm->value = '0';
+  $export['pathauto_punctuation_quotes'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_punctuation_right_curly';
+  $strongarm->value = '0';
+  $export['pathauto_punctuation_right_curly'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_punctuation_right_parenthesis';
+  $strongarm->value = '0';
+  $export['pathauto_punctuation_right_parenthesis'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_punctuation_right_square';
+  $strongarm->value = '0';
+  $export['pathauto_punctuation_right_square'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_punctuation_semicolon';
+  $strongarm->value = '0';
+  $export['pathauto_punctuation_semicolon'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_punctuation_slash';
+  $strongarm->value = '0';
+  $export['pathauto_punctuation_slash'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_punctuation_tilde';
+  $strongarm->value = '0';
+  $export['pathauto_punctuation_tilde'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_punctuation_underscore';
+  $strongarm->value = '0';
+  $export['pathauto_punctuation_underscore'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_reduce_ascii';
+  $strongarm->value = 0;
+  $export['pathauto_reduce_ascii'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_separator';
+  $strongarm->value = '-';
+  $export['pathauto_separator'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_dc_description_type_pattern';
+  $strongarm->value = 'formats/[term:name]';
+  $export['pathauto_taxonomy_term_dc_description_type_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_dc_relation_ispartof_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_dc_relation_ispartof_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_dc_subject_lcsh_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_dc_subject_lcsh_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_dc_subject_mesh_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_dc_subject_mesh_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_dc_subject_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_dc_subject_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_dc_subject_tag_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_dc_subject_tag_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_dc_type_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_dc_type_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_pattern';
+  $strongarm->value = '[term:vocabulary]/[term:name]';
+  $export['pathauto_taxonomy_term_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_tags_pattern';
+  $strongarm->value = 'tags/[term:name]';
+  $export['pathauto_taxonomy_term_tags_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_transliterate';
+  $strongarm->value = 1;
+  $export['pathauto_transliterate'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_update_action';
+  $strongarm->value = '2';
+  $export['pathauto_update_action'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_user_pattern';
+  $strongarm->value = 'users/[user:name]';
+  $export['pathauto_user_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_verbose';
+  $strongarm->value = 0;
+  $export['pathauto_verbose'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'path_alias_whitelist';
+  $strongarm->value = array(
+    'node' => TRUE,
+    'taxonomy' => TRUE,
+    'user' => TRUE,
+  );
+  $export['path_alias_whitelist'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'subpathauto_depth';
+  $strongarm->value = '1';
+  $export['subpathauto_depth'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'subpathauto_ignore_admin';
+  $strongarm->value = 1;
+  $export['subpathauto_ignore_admin'] = $strongarm;
 
   return $export;
 }
