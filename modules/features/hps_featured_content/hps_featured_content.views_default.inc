@@ -9,7 +9,6 @@
  */
 function hps_featured_content_views_default_views() {
   $export = array();
-
   $view = new view();
   $view->name = 'hps_featured_content';
   $view->description = 'Entities to reference (defaults to DSpace items with images) and displays for featured content.';
@@ -114,6 +113,7 @@ function hps_featured_content_views_default_views() {
 
   /* Display: Featured Content Slides */
   $handler = $view->new_display('panel_pane', 'Featured Content Slides', 'panel_pane_featured_content_slides');
+  $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['display_description'] = 'Lists limited number of featured content nodes with \'slides\' CSS class added to convert list to slideshow in theme.';
   $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
@@ -199,6 +199,7 @@ function hps_featured_content_views_default_views() {
   $handler->display->display_options['filters']['promote']['field'] = 'promote';
   $handler->display->display_options['filters']['promote']['value'] = '1';
   $handler->display->display_options['inherit_panels_path'] = '0';
+
   $export['hps_featured_content'] = $view;
 
   return $export;
