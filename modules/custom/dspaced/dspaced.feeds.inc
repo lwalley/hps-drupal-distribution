@@ -177,7 +177,8 @@ function _dspaced_body_set_target($source, $entity, $target, $value) {
             }
             break;
           case 'text/plain':
-            // Restricted to pdf.txt files
+            // Applies to pdf.txt files
+            // @see default _dspaced_item_feeds_importer() definition
             $body_text = check_plain($content);
             break;
         }
