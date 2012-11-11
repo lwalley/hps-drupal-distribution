@@ -5,3 +5,118 @@
  */
 
 include_once 'hps_browse.features.inc';
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ *
+ */
+function hps_browse_ctools_plugin_directory($module, $plugin) {
+  if ($module == 'ctools' && !empty($plugin)) {
+    return "plugins/$plugin";
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function hps_browse_theme($existing, $type, $theme, $path) {
+  return array(
+    'hps_browse_display_mode_links' => array(
+      'variables' => array(
+        'term' => NULL,
+        'term_path_alias' => NULL,
+        'display_modes' => NULL,
+        'active_mode' => NULL,
+      ),
+    ),
+  );
+}
+
+/**
+ * Preprocess callback for display mode links theme.
+ *
+ * Converts raw variables into renderable elements.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - term: taxonomy term object for which we need to get the path
+ *     and add the display mode suffix to.
+ *   - term_path_alias: String containing the alias of the taxonomy term URI path.
+ *   - active_mode: String containing the active mode suffix i.e. the
+ *     current display mode being viewed.*   - term
+ *   - display_modes: comma separated string of display modes with
+ *     link lables and suffix for appending to path, in the syntax
+ *     [Link Label](pathsuffix) note that an individual display mode's suffix can
+ *     be empty e.g. [Link Label]() to indicate this is the default display mode
+ *     for the taxonomy term page.
+ */
+function template_preprocess_hps_browse_display_mode_links(&$variables) {
+
+  $display_modes = explode(',', $variables['display_modes']);
+
+  $items = array();
+  foreach ($display_modes as $mode) {
+    preg_match('/\[([^]]*)\]\(([^)]*)\)/', trim($mode), $matches);
+    list($raw, $label, $suffix) = $matches;
+    $active_class = ($suffix == $variables['active_mode']) ? 'active-mode' : NULL;
+    $items[] = array(
+      'data' => array(
+        '#type'  => 'link',
+        '#title' => $label,
+        '#href'  => "{$variables['term_path_alias']}/{$suffix}"
+      ),
+      // In theory l() should assign 'active' class to the a tag if the path
+      // matches the current page, but it doesn't seem to work... so er anyway
+      // ignoring that we add some helpful classes to the li instead
+      'class' => array($active_class, $suffix),
+    );
+  }
+
+  $variables['display_modes_list'] = array(
+    '#theme' => 'item_list',
+    '#items' => $items,
+    '#type' => 'ul',
+    '#attributes' => array('class' => 'display-modes'),
+    '#pre_render' => array('_hps_browse_display_modes_list_link_render'),
+  );
+
+}
+
+/**
+ * Pre render callback for display mode links.
+ *
+ * Converts list items data containing link render elements into rendered HTML
+ * string required by theme_item_list.
+ */
+function _hps_browse_display_modes_list_link_render($elements) {
+  foreach (array_keys($elements['#items']) as $key) {
+    // Take the link render element of each item and render it into HTML string.
+    if (is_array($elements['#items'][$key]['data'])) {
+      $elements['#items'][$key]['data'] = drupal_render($elements['#items'][$key]['data']);
+    }
+  }
+  return $elements;
+}
+
+/**
+ * Theme callback for display mode links.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - term: taxonomy term object for which we need to get the path
+ *     and add the display mode suffix to.
+ *   - term_path_alias: String containing the alias of the taxonomy term URI path.
+ *   - active_mode: String containing the active mode suffix i.e. the
+ *     current display mode being viewed.*   - term
+ *   - display_modes: comma separated string of display modes with
+ *     link lables and suffix for appending to path, in the syntax
+ *     [Link Label](pathsuffix) note that an individual display mode's suffix can
+ *     be empty e.g. [Link Label]() to indicate this is the default display mode
+ *     for the taxonomy term page.
+ *   - display_modes_list: Associative array containing an item list render
+ *     element.
+ */
+function theme_hps_browse_display_mode_links($variables) {
+  $output = drupal_render($variables['display_modes_list']);
+  return $output;
+}
