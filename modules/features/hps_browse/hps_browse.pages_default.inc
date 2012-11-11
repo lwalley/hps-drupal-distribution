@@ -13,7 +13,7 @@ function hps_browse_default_page_manager_handlers() {
   $handler = new stdClass();
   $handler->disabled = TRUE;
   $handler->api_version = 1;
-  $handler->name = 'node_view_panel_context';
+  $handler->name = 'node_view_panel_context_browse_by';
   $handler->task = 'node_view';
   $handler->subtask = '';
   $handler->handler = 'panel_context';
@@ -54,12 +54,13 @@ function hps_browse_default_page_manager_handlers() {
     ),
   );
   $display = new panels_display();
-  $display->layout = 'onecol';
+  $display->layout = 'hpszen_row_1_1';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
       'default' => NULL,
       'middle' => NULL,
+      'row-1-1' => NULL,
     ),
   );
   $display->cache = array();
@@ -68,7 +69,7 @@ function hps_browse_default_page_manager_handlers() {
   $display->panels = array();
     $pane = new stdClass();
     $pane->pid = 'new-1';
-    $pane->panel = 'middle';
+    $pane->panel = 'row-1-1';
     $pane->type = 'entity_view';
     $pane->subtype = 'node';
     $pane->shown = TRUE;
@@ -88,10 +89,10 @@ function hps_browse_default_page_manager_handlers() {
     $pane->position = 0;
     $pane->locks = array();
     $display->content['new-1'] = $pane;
-    $display->panels['middle'][0] = 'new-1';
+    $display->panels['row-1-1'][0] = 'new-1';
     $pane = new stdClass();
     $pane->pid = 'new-2';
-    $pane->panel = 'middle';
+    $pane->panel = 'row-1-1';
     $pane->type = 'views_panes';
     $pane->subtype = 'hps_browse_by-panel_pane_browse_by';
     $pane->shown = TRUE;
@@ -110,22 +111,22 @@ function hps_browse_default_page_manager_handlers() {
     $pane->position = 1;
     $pane->locks = array();
     $display->content['new-2'] = $pane;
-    $display->panels['middle'][1] = 'new-2';
+    $display->panels['row-1-1'][1] = 'new-2';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = 'new-1';
   $handler->conf['display'] = $display;
-  $export['node_view_panel_context'] = $handler;
+  $export['node_view_panel_context_browse_by'] = $handler;
 
   $handler = new stdClass();
   $handler->disabled = TRUE;
   $handler->api_version = 1;
-  $handler->name = 'term_view_panel_context_articles';
+  $handler->name = 'term_view_panel_context_list';
   $handler->task = 'term_view';
   $handler->subtask = '';
   $handler->handler = 'panel_context';
-  $handler->weight = -30;
+  $handler->weight = -29;
   $handler->conf = array(
-    'title' => 'Articles',
+    'title' => 'List',
     'no_blocks' => 0,
     'pipeline' => 'standard',
     'body_classes_to_remove' => '',
@@ -136,20 +137,12 @@ function hps_browse_default_page_manager_handlers() {
     'relationships' => array(),
     'access' => array(
       'plugins' => array(
-        0 => array(
-          'name' => 'term',
+        1 => array(
+          'name' => 'term_vocabulary',
           'settings' => array(
-            'vid' => '1',
-            1 => array(
-              73 => '73',
+            'vids' => array(
+              1 => '1',
             ),
-            2 => array(),
-            3 => array(),
-            4 => array(),
-            5 => array(),
-            6 => array(),
-            7 => array(),
-            8 => array(),
           ),
           'context' => 'argument_term_1',
           'not' => FALSE,
@@ -159,12 +152,13 @@ function hps_browse_default_page_manager_handlers() {
     ),
   );
   $display = new panels_display();
-  $display->layout = 'onecol';
+  $display->layout = 'hpszen_row_1_1';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
       'default' => NULL,
       'middle' => NULL,
+      'row-1-1' => NULL,
     ),
   );
   $display->cache = array();
@@ -173,12 +167,23 @@ function hps_browse_default_page_manager_handlers() {
   $display->panels = array();
     $pane = new stdClass();
     $pane->pid = 'new-3';
-    $pane->panel = 'middle';
-    $pane->type = 'views_panes';
-    $pane->subtype = 'hps_browse-panel_pane_articles';
+    $pane->panel = 'row-1-1';
+    $pane->type = 'display_mode_links_content_type';
+    $pane->subtype = 'display_mode_links_content_type';
     $pane->shown = TRUE;
     $pane->access = array();
-    $pane->configuration = array();
+    $pane->configuration = array(
+      'context' => array(
+        0 => 'argument_term_1',
+        1 => 'empty',
+      ),
+      'display_modes' => '[List](),[Gallery](gallery),[Index](index)',
+      'form_build_id' => 'form-tIfelq7vYUdPcT5nlrxnkZfNVJXAYgJLj8Hgd1S5ql8',
+      'form_token' => 'r61k2iwilloTdqldx95v1pKA5d1J2RO7WP-mI3gEFZg',
+      'form_id' => '_display_mode_links_content_type_edit_form',
+      'override_title' => 0,
+      'override_title_text' => '',
+    );
     $pane->cache = array();
     $pane->style = array(
       'settings' => NULL,
@@ -188,355 +193,33 @@ function hps_browse_default_page_manager_handlers() {
     $pane->position = 0;
     $pane->locks = array();
     $display->content['new-3'] = $pane;
-    $display->panels['middle'][0] = 'new-3';
-  $display->hide_title = PANELS_TITLE_FIXED;
-  $display->title_pane = '0';
-  $handler->conf['display'] = $display;
-  $export['term_view_panel_context_articles'] = $handler;
-
-  $handler = new stdClass();
-  $handler->disabled = TRUE;
-  $handler->api_version = 1;
-  $handler->name = 'term_view_panel_context_audio';
-  $handler->task = 'term_view';
-  $handler->subtask = '';
-  $handler->handler = 'panel_context';
-  $handler->weight = -29;
-  $handler->conf = array(
-    'title' => 'Audio',
-    'no_blocks' => 0,
-    'pipeline' => 'standard',
-    'body_classes_to_remove' => '',
-    'body_classes_to_add' => '',
-    'css_id' => '',
-    'css' => '',
-    'contexts' => array(),
-    'relationships' => array(),
-    'access' => array(
-      'plugins' => array(
-        0 => array(
-          'name' => 'term',
-          'settings' => array(
-            'vid' => '1',
-            1 => array(
-              27 => '27',
-            ),
-            2 => array(),
-            3 => array(),
-            4 => array(),
-            5 => array(),
-            6 => array(),
-            7 => array(),
-            8 => array(),
-          ),
-          'context' => 'argument_term_1',
-          'not' => FALSE,
-        ),
-      ),
-      'logic' => 'and',
-    ),
-  );
-  $display = new panels_display();
-  $display->layout = 'onecol';
-  $display->layout_settings = array();
-  $display->panel_settings = array(
-    'style_settings' => array(
-      'default' => NULL,
-      'middle' => NULL,
-    ),
-  );
-  $display->cache = array();
-  $display->title = '%term:name';
-  $display->content = array();
-  $display->panels = array();
+    $display->panels['row-1-1'][0] = 'new-3';
     $pane = new stdClass();
     $pane->pid = 'new-4';
-    $pane->panel = 'middle';
+    $pane->panel = 'row-1-1';
     $pane->type = 'views_panes';
-    $pane->subtype = 'hps_browse-panel_pane_audio';
+    $pane->subtype = 'hps_browse-panel_pane_list';
     $pane->shown = TRUE;
     $pane->access = array();
-    $pane->configuration = array();
+    $pane->configuration = array(
+      'context' => array(
+        0 => 'argument_term_1',
+      ),
+    );
     $pane->cache = array();
     $pane->style = array(
       'settings' => NULL,
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 0;
+    $pane->position = 1;
     $pane->locks = array();
     $display->content['new-4'] = $pane;
-    $display->panels['middle'][0] = 'new-4';
+    $display->panels['row-1-1'][1] = 'new-4';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
-  $export['term_view_panel_context_audio'] = $handler;
-
-  $handler = new stdClass();
-  $handler->disabled = TRUE;
-  $handler->api_version = 1;
-  $handler->name = 'term_view_panel_context_essays';
-  $handler->task = 'term_view';
-  $handler->subtask = '';
-  $handler->handler = 'panel_context';
-  $handler->weight = -28;
-  $handler->conf = array(
-    'title' => 'Essays',
-    'no_blocks' => 0,
-    'pipeline' => 'standard',
-    'body_classes_to_remove' => '',
-    'body_classes_to_add' => '',
-    'css_id' => '',
-    'css' => '',
-    'contexts' => array(),
-    'relationships' => array(),
-    'access' => array(
-      'plugins' => array(
-        0 => array(
-          'name' => 'term',
-          'settings' => array(
-            'vid' => '1',
-            1 => array(
-              428 => '428',
-            ),
-            2 => array(),
-            3 => array(),
-            4 => array(),
-            5 => array(),
-            6 => array(),
-            7 => array(),
-            8 => array(),
-          ),
-          'context' => 'argument_term_1',
-          'not' => FALSE,
-        ),
-      ),
-      'logic' => 'and',
-    ),
-  );
-  $display = new panels_display();
-  $display->layout = 'onecol';
-  $display->layout_settings = array();
-  $display->panel_settings = array(
-    'style_settings' => array(
-      'default' => NULL,
-      'middle' => NULL,
-    ),
-  );
-  $display->cache = array();
-  $display->title = '%term:name';
-  $display->content = array();
-  $display->panels = array();
-    $pane = new stdClass();
-    $pane->pid = 'new-5';
-    $pane->panel = 'middle';
-    $pane->type = 'views_panes';
-    $pane->subtype = 'hps_browse-panel_pane_articles';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array();
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 0;
-    $pane->locks = array();
-    $display->content['new-5'] = $pane;
-    $display->panels['middle'][0] = 'new-5';
-    $pane = new stdClass();
-    $pane->pid = 'new-6';
-    $pane->panel = 'middle';
-    $pane->type = 'views_panes';
-    $pane->subtype = 'hps_browse-panel_pane_essays';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array();
-    $pane->cache = array();
-    $pane->style = array();
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 1;
-    $pane->locks = array();
-    $display->content['new-6'] = $pane;
-    $display->panels['middle'][1] = 'new-6';
-  $display->hide_title = PANELS_TITLE_FIXED;
-  $display->title_pane = '0';
-  $handler->conf['display'] = $display;
-  $export['term_view_panel_context_essays'] = $handler;
-
-  $handler = new stdClass();
-  $handler->disabled = TRUE;
-  $handler->api_version = 1;
-  $handler->name = 'term_view_panel_context_images';
-  $handler->task = 'term_view';
-  $handler->subtask = '';
-  $handler->handler = 'panel_context';
-  $handler->weight = -27;
-  $handler->conf = array(
-    'title' => 'Images',
-    'no_blocks' => 0,
-    'pipeline' => 'standard',
-    'body_classes_to_remove' => '',
-    'body_classes_to_add' => '',
-    'css_id' => '',
-    'css' => '',
-    'contexts' => array(),
-    'relationships' => array(),
-    'access' => array(
-      'plugins' => array(
-        0 => array(
-          'name' => 'term',
-          'settings' => array(
-            'vid' => '1',
-            1 => array(
-              1 => '1',
-            ),
-            2 => array(),
-            3 => array(),
-            4 => array(),
-            5 => array(),
-            6 => array(),
-            7 => array(),
-            8 => array(),
-          ),
-          'context' => 'argument_term_1',
-          'not' => FALSE,
-        ),
-      ),
-      'logic' => 'and',
-    ),
-  );
-  $display = new panels_display();
-  $display->layout = 'onecol';
-  $display->layout_settings = array();
-  $display->panel_settings = array(
-    'style_settings' => array(
-      'default' => NULL,
-      'middle' => NULL,
-    ),
-  );
-  $display->cache = array();
-  $display->title = '%term:name';
-  $display->content = array();
-  $display->panels = array();
-    $pane = new stdClass();
-    $pane->pid = 'new-7';
-    $pane->panel = 'middle';
-    $pane->type = 'views_panes';
-    $pane->subtype = 'hps_browse-panel_pane_images';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array();
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 0;
-    $pane->locks = array();
-    $display->content['new-7'] = $pane;
-    $display->panels['middle'][0] = 'new-7';
-  $display->hide_title = PANELS_TITLE_FIXED;
-  $display->title_pane = '0';
-  $handler->conf['display'] = $display;
-  $export['term_view_panel_context_images'] = $handler;
-
-  $handler = new stdClass();
-  $handler->disabled = TRUE;
-  $handler->api_version = 1;
-  $handler->name = 'term_view_panel_context_publications';
-  $handler->task = 'term_view';
-  $handler->subtask = '';
-  $handler->handler = 'panel_context';
-  $handler->weight = -26;
-  $handler->conf = array(
-    'title' => 'Publications',
-    'no_blocks' => 0,
-    'pipeline' => 'standard',
-    'body_classes_to_remove' => '',
-    'body_classes_to_add' => '',
-    'css_id' => '',
-    'css' => '',
-    'contexts' => array(),
-    'relationships' => array(),
-    'access' => array(
-      'plugins' => array(
-        0 => array(
-          'name' => 'term',
-          'settings' => array(
-            'vid' => '1',
-            1 => array(
-              33 => '33',
-            ),
-            2 => array(),
-            3 => array(),
-            4 => array(),
-            5 => array(),
-            6 => array(),
-            7 => array(),
-            8 => array(),
-          ),
-          'context' => 'argument_term_1',
-          'not' => FALSE,
-        ),
-      ),
-      'logic' => 'and',
-    ),
-  );
-  $display = new panels_display();
-  $display->layout = 'onecol';
-  $display->layout_settings = array();
-  $display->panel_settings = array(
-    'style_settings' => array(
-      'default' => NULL,
-      'middle' => NULL,
-    ),
-  );
-  $display->cache = array();
-  $display->title = '%term:name';
-  $display->content = array();
-  $display->panels = array();
-    $pane = new stdClass();
-    $pane->pid = 'new-8';
-    $pane->panel = 'middle';
-    $pane->type = 'views_panes';
-    $pane->subtype = 'hps_browse-panel_pane_';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array();
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 0;
-    $pane->locks = array();
-    $display->content['new-8'] = $pane;
-    $display->panels['middle'][0] = 'new-8';
-    $pane = new stdClass();
-    $pane->pid = 'new-9';
-    $pane->panel = 'middle';
-    $pane->type = 'views_panes';
-    $pane->subtype = 'hps_browse-panel_pane_publications';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array();
-    $pane->cache = array();
-    $pane->style = array();
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 1;
-    $pane->locks = array();
-    $display->content['new-9'] = $pane;
-    $display->panels['middle'][1] = 'new-9';
-  $display->hide_title = PANELS_TITLE_FIXED;
-  $display->title_pane = '0';
-  $handler->conf['display'] = $display;
-  $export['term_view_panel_context_publications'] = $handler;
+  $export['term_view_panel_context_list'] = $handler;
 
   $handler = new stdClass();
   $handler->disabled = TRUE;
@@ -545,7 +228,7 @@ function hps_browse_default_page_manager_handlers() {
   $handler->task = 'term_view';
   $handler->subtask = '';
   $handler->handler = 'panel_context';
-  $handler->weight = -24;
+  $handler->weight = -30;
   $handler->conf = array(
     'title' => 'Root',
     'no_blocks' => 0,
@@ -581,7 +264,7 @@ function hps_browse_default_page_manager_handlers() {
     ),
   );
   $display = new panels_display();
-  $display->layout = 'onecol';
+  $display->layout = 'hpszen_row_1_1';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
@@ -594,8 +277,8 @@ function hps_browse_default_page_manager_handlers() {
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();
-    $pane->pid = 'new-10';
-    $pane->panel = 'middle';
+    $pane->pid = 'new-5';
+    $pane->panel = 'row-1-1';
     $pane->type = 'term_description';
     $pane->subtype = 'term_description';
     $pane->shown = TRUE;
@@ -613,11 +296,11 @@ function hps_browse_default_page_manager_handlers() {
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $display->content['new-10'] = $pane;
-    $display->panels['middle'][0] = 'new-10';
+    $display->content['new-5'] = $pane;
+    $display->panels['row-1-1'][0] = 'new-5';
     $pane = new stdClass();
-    $pane->pid = 'new-11';
-    $pane->panel = 'middle';
+    $pane->pid = 'new-6';
+    $pane->panel = 'row-1-1';
     $pane->type = 'term_list';
     $pane->subtype = 'term_list';
     $pane->shown = TRUE;
@@ -639,23 +322,208 @@ function hps_browse_default_page_manager_handlers() {
     $pane->extras = array();
     $pane->position = 1;
     $pane->locks = array();
-    $display->content['new-11'] = $pane;
-    $display->panels['middle'][1] = 'new-11';
+    $display->content['new-6'] = $pane;
+    $display->panels['row-1-1'][1] = 'new-6';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
   $export['term_view_panel_context_root'] = $handler;
 
+  return $export;
+}
+
+/**
+ * Implements hook_default_page_manager_pages().
+ */
+function hps_browse_default_page_manager_pages() {
+  $page = new stdClass();
+  $page->disabled = TRUE;
+  $page->api_version = 1;
+  $page->name = 'hps_browse_by_modes';
+  $page->task = 'page';
+  $page->admin_title = 'HPS Browse By ... Alternative Display Modes';
+  $page->admin_description = 'Alternative display modes for browsing taxonomy term pages, see default taxonomy/term/%term page for default display mode.';
+  $page->path = 'taxonomy/term/%taxonomy_term/%mode';
+  $page->access = array();
+  $page->menu = array(
+    'type' => 'none',
+    'title' => 'Gallery',
+    'name' => 'navigation',
+    'weight' => '0',
+    'parent' => array(
+      'type' => 'none',
+      'title' => '',
+      'name' => 'navigation',
+      'weight' => '0',
+    ),
+  );
+  $page->arguments = array(
+    'taxonomy_term' => array(
+      'id' => 1,
+      'identifier' => 'Taxonomy term: ID',
+      'name' => 'term',
+      'settings' => array(
+        'input_form' => 'tid',
+        'vids' => array(
+          1 => 0,
+          2 => 0,
+          3 => 0,
+          4 => 0,
+          5 => 0,
+          6 => 0,
+          7 => 0,
+          8 => 0,
+        ),
+        'breadcrumb' => 0,
+        'transform' => 0,
+      ),
+    ),
+    'mode' => array(
+      'id' => 1,
+      'identifier' => 'Display Mode',
+      'name' => 'string',
+      'settings' => array(
+        'use_tail' => 1,
+      ),
+    ),
+  );
+  $page->conf = array(
+    'admin_paths' => FALSE,
+  );
+  $page->default_handlers = array();
   $handler = new stdClass();
   $handler->disabled = TRUE;
   $handler->api_version = 1;
-  $handler->name = 'term_view_panel_context_video';
-  $handler->task = 'term_view';
-  $handler->subtask = '';
+  $handler->name = 'page_hps_browse_by_modes_panel_context_gallery';
+  $handler->task = 'page';
+  $handler->subtask = 'hps_browse_by_modes';
   $handler->handler = 'panel_context';
-  $handler->weight = -25;
+  $handler->weight = -29;
   $handler->conf = array(
-    'title' => 'Video',
+    'title' => 'Gallery',
+    'no_blocks' => 1,
+    'pipeline' => 'standard',
+    'body_classes_to_remove' => '',
+    'body_classes_to_add' => '',
+    'css_id' => '',
+    'css' => '',
+    'contexts' => array(),
+    'relationships' => array(),
+    'access' => array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'term_vocabulary',
+          'settings' => array(
+            'vids' => array(
+              1 => '1',
+            ),
+          ),
+          'context' => 'argument_term_1',
+          'not' => FALSE,
+        ),
+        1 => array(
+          'name' => 'string_equal',
+          'settings' => array(
+            'operator' => '=',
+            'value' => 'gallery',
+            'case' => 0,
+          ),
+          'context' => 'argument_string_1',
+          'not' => FALSE,
+        ),
+      ),
+      'logic' => 'and',
+    ),
+  );
+  $display = new panels_display();
+  $display->layout = 'hpszen_row_1_1';
+  $display->layout_settings = array();
+  $display->panel_settings = array(
+    'style_settings' => array(
+      'default' => NULL,
+      'center' => NULL,
+      'middle' => NULL,
+      'row-1-1' => NULL,
+    ),
+    'center' => array(
+      'style' => 'naked',
+    ),
+    'middle' => array(
+      'style' => 'naked',
+    ),
+  );
+  $display->cache = array();
+  $display->title = '%tid:name';
+  $display->content = array();
+  $display->panels = array();
+    $pane = new stdClass();
+    $pane->pid = 'new-1';
+    $pane->panel = 'row-1-1';
+    $pane->type = 'display_mode_links_content_type';
+    $pane->subtype = 'display_mode_links_content_type';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'display_modes' => '[List](),[Gallery](gallery),[Index](index)',
+      'form_build_id' => 'form-FUnRMkYHQeTZ7_4FLPiXkwwi1_mRoJLpcrZKnUoMKGU',
+      'form_token' => 'r61k2iwilloTdqldx95v1pKA5d1J2RO7WP-mI3gEFZg',
+      'form_id' => '_display_mode_links_content_type_edit_form',
+      'override_title' => 1,
+      'override_title_text' => '',
+      'context' => array(
+        0 => 'argument_term_1',
+        1 => 'argument_string_1',
+      ),
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => '',
+    );
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $display->content['new-1'] = $pane;
+    $display->panels['row-1-1'][0] = 'new-1';
+    $pane = new stdClass();
+    $pane->pid = 'new-2';
+    $pane->panel = 'row-1-1';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'hps_browse-panel_pane_gallery';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'context' => array(
+        0 => 'argument_term_1',
+      ),
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $display->content['new-2'] = $pane;
+    $display->panels['row-1-1'][1] = 'new-2';
+  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->title_pane = '0';
+  $handler->conf['display'] = $display;
+  $page->default_handlers[$handler->name] = $handler;
+  $handler = new stdClass();
+  $handler->disabled = TRUE;
+  $handler->api_version = 1;
+  $handler->name = 'page_hps_browse_by_modes_panel_context_index';
+  $handler->task = 'page';
+  $handler->subtask = 'hps_browse_by_modes';
+  $handler->handler = 'panel_context';
+  $handler->weight = -28;
+  $handler->conf = array(
+    'title' => 'Index',
     'no_blocks' => 0,
     'pipeline' => 'standard',
     'body_classes_to_remove' => '',
@@ -667,21 +535,23 @@ function hps_browse_default_page_manager_handlers() {
     'access' => array(
       'plugins' => array(
         0 => array(
-          'name' => 'term',
+          'name' => 'term_vocabulary',
           'settings' => array(
-            'vid' => '1',
-            1 => array(
-              9 => '9',
+            'vids' => array(
+              1 => '1',
             ),
-            2 => array(),
-            3 => array(),
-            4 => array(),
-            5 => array(),
-            6 => array(),
-            7 => array(),
-            8 => array(),
           ),
           'context' => 'argument_term_1',
+          'not' => FALSE,
+        ),
+        1 => array(
+          'name' => 'string_equal',
+          'settings' => array(
+            'operator' => '=',
+            'value' => 'index',
+            'case' => 0,
+          ),
+          'context' => 'argument_string_1',
           'not' => FALSE,
         ),
       ),
@@ -689,40 +559,86 @@ function hps_browse_default_page_manager_handlers() {
     ),
   );
   $display = new panels_display();
-  $display->layout = 'onecol';
+  $display->layout = 'hpszen_row_1_1';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
       'default' => NULL,
+      'center' => NULL,
       'middle' => NULL,
+      'row-1-1' => NULL,
+    ),
+    'center' => array(
+      'style' => 'naked',
+    ),
+    'middle' => array(
+      'style' => 'naked',
     ),
   );
   $display->cache = array();
-  $display->title = '%term:name';
+  $display->title = '%tid:name';
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();
-    $pane->pid = 'new-12';
-    $pane->panel = 'middle';
-    $pane->type = 'views_panes';
-    $pane->subtype = 'hps_browse-panel_pane_video';
+    $pane->pid = 'new-3';
+    $pane->panel = 'row-1-1';
+    $pane->type = 'display_mode_links_content_type';
+    $pane->subtype = 'display_mode_links_content_type';
     $pane->shown = TRUE;
     $pane->access = array();
-    $pane->configuration = array();
+    $pane->configuration = array(
+      'display_modes' => '[List](),[Gallery](gallery),[Index](index)',
+      'form_build_id' => 'form-M6knRaWLKd1Oq8K1GIJkBteSgBfv9tdr7WR8AUBIMAE',
+      'form_token' => 'r61k2iwilloTdqldx95v1pKA5d1J2RO7WP-mI3gEFZg',
+      'form_id' => '_display_mode_links_content_type_edit_form',
+      'override_title' => 1,
+      'override_title_text' => '',
+      'context' => array(
+        0 => 'argument_term_1',
+        1 => 'argument_string_1',
+      ),
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => '',
+    );
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $display->content['new-3'] = $pane;
+    $display->panels['row-1-1'][0] = 'new-3';
+    $pane = new stdClass();
+    $pane->pid = 'new-4';
+    $pane->panel = 'row-1-1';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'hps_browse-panel_pane_index';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'context' => array(
+        0 => 'argument_term_1',
+      ),
+    );
     $pane->cache = array();
     $pane->style = array(
       'settings' => NULL,
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 0;
+    $pane->position = 1;
     $pane->locks = array();
-    $display->content['new-12'] = $pane;
-    $display->panels['middle'][0] = 'new-12';
+    $display->content['new-4'] = $pane;
+    $display->panels['row-1-1'][1] = 'new-4';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
-  $export['term_view_panel_context_video'] = $handler;
+  $page->default_handlers[$handler->name] = $handler;
+  $pages['hps_browse_by_modes'] = $page;
 
-  return $export;
+  return $pages;
+
 }

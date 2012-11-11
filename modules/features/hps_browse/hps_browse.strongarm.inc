@@ -126,7 +126,7 @@ function hps_browse_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_node_hps_browse_by_pattern';
-  $strongarm->value = 'browse-by/[node:title]';
+  $strongarm->value = 'browse/[node:title]';
   $export['pathauto_node_hps_browse_by_pattern'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -203,7 +203,7 @@ function hps_browse_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'taxonomy_menu_rebuild_dc_description_type';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['taxonomy_menu_rebuild_dc_description_type'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -231,7 +231,7 @@ function hps_browse_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'taxonomy_menu_vocab_parent_dc_description_type';
-  $strongarm->value = '385';
+  $strongarm->value = '539';
   $export['taxonomy_menu_vocab_parent_dc_description_type'] = $strongarm;
 
   $strongarm = new stdClass();
