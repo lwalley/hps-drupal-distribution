@@ -31,4 +31,5 @@ features[variable][] = menu_parent_hps_featured_content
 features[variable][] = node_options_hps_featured_content
 features[variable][] = node_preview_hps_featured_content
 features[variable][] = node_submitted_hps_featured_content
+features[variable][] = pathauto_node_hps_featured_content_pattern
 features[views_view][] = hps_featured_content

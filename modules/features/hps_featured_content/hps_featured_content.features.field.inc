@@ -65,15 +65,6 @@ function hps_featured_content_field_default_fields() {
           'type' => 'hidden',
           'weight' => 0,
         ),
-        'image_teaser' => array(
-          'label' => 'hidden',
-          'module' => 'text',
-          'settings' => array(
-            'trim_length' => 300,
-          ),
-          'type' => 'text_summary_or_trimmed',
-          'weight' => '0',
-        ),
         'teaser' => array(
           'label' => 'hidden',
           'module' => 'text',
@@ -159,12 +150,6 @@ function hps_featured_content_field_default_fields() {
           'weight' => 0,
         ),
         'hps_featured_content' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-        'image_teaser' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
@@ -273,13 +258,6 @@ function hps_featured_content_field_default_fields() {
           'settings' => array(),
           'type' => 'hidden',
           'weight' => 0,
-        ),
-        'image_teaser' => array(
-          'label' => 'hidden',
-          'module' => 'entityreference',
-          'settings' => array(),
-          'type' => 'entityreference_entity_id',
-          'weight' => '0',
         ),
         'teaser' => array(
           'label' => 'hidden',
