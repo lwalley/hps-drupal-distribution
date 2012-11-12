@@ -2,6 +2,7 @@ name = HPS Events
 description = Default configuration for event node type, summary listings and landing page.
 core = 7.x
 package = HPS
+php = 5.2.4
 version = 7.x-1.0-alpha1
 project = hps_events
 dependencies[] = addressfield

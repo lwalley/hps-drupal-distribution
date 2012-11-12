@@ -38,7 +38,7 @@ function hps_search_views_default_views() {
   $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'entity';
-  $handler->display->display_options['row_options']['view_mode'] = 'search_results';
+  $handler->display->display_options['row_options']['view_mode'] = 'hps_search_results';
   /* Header: Global: Result summary */
   $handler->display->display_options['header']['result']['id'] = 'result';
   $handler->display->display_options['header']['result']['table'] = 'views';
@@ -117,7 +117,7 @@ function hps_search_views_default_views() {
   $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'ctools_context';
   $handler->display->display_options['row_plugin'] = 'entity';
-  $handler->display->display_options['row_options']['view_mode'] = 'search_results';
+  $handler->display->display_options['row_options']['view_mode'] = 'hps_search_results';
   $handler->display->display_options['inherit_panels_path'] = '1';
   $export['hps_search'] = $view;
 

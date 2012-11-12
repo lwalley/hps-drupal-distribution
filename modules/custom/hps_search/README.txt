@@ -47,7 +47,7 @@ Assumes you have imported DSpace Items, see DSpaced module.
 
 5. Configure which fields should be displayed in DSpace Item content type's
    custom 'Search Results' node view (display) mode e.g.
-   /admin/structure/types/manage/dspaced-entities-item/display/search_results
+   /admin/structure/types/manage/dspaced-entities-item/display/hps_search_results
 
 6. Enable the 'HPS Search' View and context display /admin/structure/views.
 

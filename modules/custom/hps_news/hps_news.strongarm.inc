@@ -26,21 +26,6 @@ function hps_news_strongarm() {
       'teaser' => array(
         'custom_settings' => TRUE,
       ),
-      'image_teaser' => array(
-        'custom_settings' => TRUE,
-      ),
-      'audio_teaser' => array(
-        'custom_settings' => TRUE,
-      ),
-      'video_teaser' => array(
-        'custom_settings' => TRUE,
-      ),
-      'hps_featured_content' => array(
-        'custom_settings' => TRUE,
-      ),
-      'search_results' => array(
-        'custom_settings' => TRUE,
-      ),
       'full' => array(
         'custom_settings' => FALSE,
       ),

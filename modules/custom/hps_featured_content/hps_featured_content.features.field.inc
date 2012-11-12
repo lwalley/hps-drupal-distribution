@@ -52,19 +52,6 @@ function hps_featured_content_field_default_fields() {
           'type' => 'text_default',
           'weight' => '0',
         ),
-        'full' => array(
-          'label' => 'hidden',
-          'module' => 'text',
-          'settings' => array(),
-          'type' => 'text_default',
-          'weight' => '1',
-        ),
-        'hps_featured_content' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
         'teaser' => array(
           'label' => 'hidden',
           'module' => 'text',
@@ -142,18 +129,6 @@ function hps_featured_content_field_default_fields() {
           ),
           'type' => 'image',
           'weight' => 2,
-        ),
-        'full' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-        'hps_featured_content' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
         ),
         'teaser' => array(
           'label' => 'above',
@@ -245,19 +220,6 @@ function hps_featured_content_field_default_fields() {
           'settings' => array(),
           'type' => 'entityreference_entity_id',
           'weight' => '1',
-        ),
-        'full' => array(
-          'label' => 'hidden',
-          'module' => 'entityreference',
-          'settings' => array(),
-          'type' => 'entityreference_entity_id',
-          'weight' => '0',
-        ),
-        'hps_featured_content' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
         ),
         'teaser' => array(
           'label' => 'hidden',

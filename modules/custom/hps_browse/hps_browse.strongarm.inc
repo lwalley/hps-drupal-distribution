@@ -39,18 +39,6 @@ function hps_browse_strongarm() {
       'rss' => array(
         'custom_settings' => FALSE,
       ),
-      'image_teaser' => array(
-        'custom_settings' => FALSE,
-      ),
-      'audio_teaser' => array(
-        'custom_settings' => FALSE,
-      ),
-      'video_teaser' => array(
-        'custom_settings' => FALSE,
-      ),
-      'hps_featured_content' => array(
-        'custom_settings' => FALSE,
-      ),
       'token' => array(
         'custom_settings' => FALSE,
       ),

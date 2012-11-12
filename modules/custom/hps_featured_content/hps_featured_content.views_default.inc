@@ -114,7 +114,9 @@ function hps_featured_content_views_default_views() {
   /* Display: Featured Content Slides */
   $handler = $view->new_display('panel_pane', 'Featured Content Slides', 'panel_pane_featured_content_slides');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['display_description'] = 'Lists limited number of featured content nodes with \'slides\' CSS class added to convert list to slideshow in theme.';
+  $handler->display->display_options['defaults']['css_class'] = FALSE;
+  $handler->display->display_options['css_class'] = 'hps-slideshow';
+  $handler->display->display_options['display_description'] = 'Lists limited number of featured content nodes with \'hps-slideshow\' and \'slides\' CSS classes added to convert list to slideshow in HPS Zen theme.';
   $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'list';

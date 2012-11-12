@@ -10,8 +10,8 @@ include_once 'hps_search.features.inc';
  * Implements hook_entity_info_alter().
  */
 function hps_search_entity_info_alter(&$entity_info) {
-  $entity_info['node']['view modes']['search_results'] = array(
+  $entity_info['node']['view modes']['hps_search_results'] = array(
     'label' => 'Search Results',
-    'custom settings' => TRUE
+    'custom settings' => FALSE
   );
 }

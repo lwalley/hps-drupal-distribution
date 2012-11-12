@@ -12,7 +12,7 @@ include_once 'hps_featured_content.features.inc';
 function hps_featured_content_entity_info_alter(&$entity_info) {
   $entity_info['node']['view modes']['hps_featured_content'] = array(
     'label' => 'Featured Content',
-    'custom settings' => TRUE
+    'custom settings' => FALSE
   );
 }
 

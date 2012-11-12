@@ -17,7 +17,7 @@ function hps_featured_content_strongarm() {
   $strongarm->value = array(
     'view_modes' => array(
       'full' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'teaser' => array(
         'custom_settings' => TRUE,
@@ -27,9 +27,6 @@ function hps_featured_content_strongarm() {
       ),
       'token' => array(
         'custom_settings' => FALSE,
-      ),
-      'image_teaser' => array(
-        'custom_settings' => TRUE,
       ),
     ),
     'extra_fields' => array(

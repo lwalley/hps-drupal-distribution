@@ -45,36 +45,12 @@ function hps_news_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'audio_teaser' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
         'default' => array(
           'label' => 'hidden',
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
           'weight' => '0',
-        ),
-        'hps_featured_content' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-        'image_teaser' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-        'search_results' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
         ),
         'teaser' => array(
           'label' => 'hidden',
@@ -84,12 +60,6 @@ function hps_news_field_default_fields() {
           ),
           'type' => 'text_summary_or_trimmed',
           'weight' => '1',
-        ),
-        'video_teaser' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
         ),
       ),
       'entity_type' => 'node',
@@ -148,12 +118,6 @@ function hps_news_field_default_fields() {
       'deleted' => '0',
       'description' => 'Upload an image to accompany this news item. A cropped thumbnail version of this image will appear in news listings.',
       'display' => array(
-        'audio_teaser' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
         'default' => array(
           'label' => 'hidden',
           'module' => 'image',
@@ -164,24 +128,6 @@ function hps_news_field_default_fields() {
           'type' => 'image',
           'weight' => '2',
         ),
-        'hps_featured_content' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-        'image_teaser' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-        'search_results' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
         'teaser' => array(
           'label' => 'hidden',
           'module' => 'image',
@@ -191,12 +137,6 @@ function hps_news_field_default_fields() {
           ),
           'type' => 'image',
           'weight' => '0',
-        ),
-        'video_teaser' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
         ),
       ),
       'entity_type' => 'node',
@@ -263,12 +203,6 @@ function hps_news_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'audio_teaser' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
         'default' => array(
           'label' => 'hidden',
           'module' => 'text',
@@ -276,35 +210,11 @@ function hps_news_field_default_fields() {
           'type' => 'text_default',
           'weight' => '3',
         ),
-        'hps_featured_content' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-        'image_teaser' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-        'search_results' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
         'teaser' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
           'weight' => '2',
-        ),
-        'video_teaser' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
         ),
       ),
       'entity_type' => 'node',
