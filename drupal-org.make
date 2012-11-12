@@ -25,6 +25,7 @@ projects[token][version] = 1.4
 projects[pathauto][version] = 1.2
 
 projects[date][version] = 2.6
+; includes date_views
 
 projects[link][version] = 1.0
 
@@ -91,6 +92,14 @@ projects[search_api_solr][version] = 1.0-rc2
 
 projects[taxonomy_menu][version] = 1.4
 
+projects[addressfield][version] = 1.0-beta3
+
+projects[geophp][version] = 1.7
+
+projects[geofield][version] = 1.1
+
+projects[geocoder][version] = 1.2
+
 
 ; @note Custom unversioned modules are included in profile tar.gz
 
@@ -100,5 +109,8 @@ libraries[ckeditor][download][url] = http://download.cksource.com/CKEditor/CKEdi
 
 libraries[SolrPhpClient][download][type] = get
 libraries[SolrPhpClient][download][url] = http://solr-php-client.googlecode.com/files/SolrPhpClient.r60.2011-05-04.zip
+
+libraries[geoPHP][download][type] = get
+libraries[geoPHP][download][url] = https://github.com/phayes/geoPHP/archive/1.1.zip
 
 ; @todo jquery cycle
