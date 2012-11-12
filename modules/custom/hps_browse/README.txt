@@ -23,27 +23,40 @@ How does it do it?
 
 Provides a custom content type 'HPS Browse By' that:
 
-  1. Contains an Entity Reference field to a vocabulary*.
+  1. Contains an Entity Reference field to a vocabulary [1].
   2. Can be assigned a menu item to act as the parent menu item for the vocabulary's
      Taxonomy Menu settings.
   3. Behaves as a landing page which can list all of the browse by categories in the
      vocabulary.
 
-* The vocabulary should contain all the terms that you want to browse by, and should be
+[1] The vocabulary should contain all the terms that you want to browse by, and should be
   configured using the Taxonomy Menu to create a menu item for each term. By default this
   feature provides all of this configuration for the 'DC Description Type' vocabulary
   imported from DSpace.
 
-Provides a node override using Page Manager/Panels which renders the vocabulary terms automatically**
-on the browse by node landing page.
+Provides a node override using Page Manager/Panels which renders the vocabulary terms
+automatically [2] on the browse by node landing page.
 
-** Passing the vocabulary vid as a context argument from Panels to Views is a little quirky
-   @see http://drupal.org/node/1831872
+[2] Passing the vocabulary vid as a context argument from Panels to Views is a little quirky
+    @see http://drupal.org/node/1831872
 
-Provides a taxonomy term override using Page Manager/Panels which contains variants for
-category pages (i.e. sub-landing pages), and specifc to this feature, variants for specific
-DC Description Type terms i.e. formats such as Audio, Video etc. so that different formats
-can dsiplay node listings in different ways.
+Provides taxonomy term override using Page Manager/Panels which contains variants for
+category pages (i.e. sub-landing pages 'Root' variant) and default listing display
+('List' view) for terms in the DC Description Type vocabulary.
+
+Provides an additional custom page for taxonomy terms with a sub-path wildcard
+(taxonomy/term/%term/%mode) to capture the display mode. Thus allowing different display
+types e.g. gallery, index for term listings. By default the variants 'Gallery' and 'Index'
+have been added for the DC Description Type vocabulary.
+
+Provides a ctools content type (pane) that allows display mode links to be added to a
+panels page. By default the taxonomy term and taxonomy term display mode pages have display
+mode links for 'List' (default), 'Gallery' and 'Index'.
+
+Provides views panes for the different display modes, list, gallery and index. The term ID
+is passed in to the views contextual filters from the panel page so it would be possible to
+add more variants to the panels pages for specific terms or groups of terms if the view results
+needed to be different.
 
 
 How to get it working?
@@ -61,31 +74,22 @@ How to get it working?
 
 2. Enable this Feature at /admin/structure/features.
 
-3. Edit 'HPS Browse' View at /admin/structure/views.
+3. Enable 'HPS Browse' View at /admin/structure/views.
 
    By default there are a set of content panes configured to list 'DSpace Item' nodes that are
-   linked to specific terms in the 'DC Description Types' vocabulary. Each term has its own content
-   pane and uses a different view mode (teaser) or fields for its listing.
+   linked to terms in the 'DC Description Types' vocabulary. Each content pane represents a different
+   display mode for the node listing 'List' (default), 'Gallery' and 'Index'.
 
-   Edit the Filter Criteria of each content pane to select the term you want to list nodes for
-   e.g. for 'Articles' pane edit (or re-add) the 'Content: DC Description Type (= Articles)'
-   Filter Criteria to select the 'Articles' term from your vocabulary.
+4. Enable 'HPS Browse By' View at /admin/structure/views
 
-   Once you're done don't forget to enable the View and the individual content panes you want to use.
-
-4. Configure content type view modes (teasers) /admin/structure/types/manage/dspaced-entities-item/display.
-
-   By default the 'HPS Browse' View uses the render entity format with teaser view modes to display
-   DSpace Items in the browse by listings. Custom view modes e.g. 'Audio Teaser' are provided by the
-   'HPS Defaults' Feature. You can configure which DSpace Item fields should be shown in each teaser
-   mode using the DSpace Item content type display manager interface.
+   By default this view provides a content pane that lists a complete hierarchy of terms for a
+   single vocabulary. The vocabulary vid is passed to the view from the panel page.
 
 5. Edit the 'Taxonomy term template' in Page Manager /admin/structure/pages or Panels
    /admin/structure/panels.
 
    For each variant you want to use you will need to edit the 'Selection Rules' and reselect the
-   'DC Description Type' vocabulary and the specific term that variant is for e.g. for the 'Audio'
-   variant you'll need to reselect the 'Audio' term in the selection rule to update the vid and tid.
+   'DC Description Type' vocabulary to update the vid.
 
    The 'Root' variant is a special case and assumes you have manually added some root terms to your
    'DC Description Types' vocabulary that you want to use as category pages. This variant has two
@@ -100,10 +104,24 @@ How to get it working?
 
    Once you're done don't forget to enable the page and the variants you want to use.
 
-6. Create a 'HPS Browse By' node, choose the 'DC Description Types' vocabulary and create a menu item
+6. Edit the 'HPS Browse By... Alternative Display Modes' in Page Manager /admin/structure/pages
+   or Panels /admin/structure/panels.
+
+    For each variant you want to use you will need to edit the 'Selection Rules' and reselect the
+   'DC Description Type' vocabulary to update the vid. Note the additional selection rule for the
+   display mode, by default two alternative display variants are included 'Gallery' and 'Index'.
+
+   Note in the variant's content settings that there is an additional content pane 'Display Mode Links',
+   this is the custom content pane that takes the URL arguments as context and a manually set string
+   of links in the form [Link label](suffix) where suffix is the sub path, and converts these values
+   to a list of appropriate links for the available display modes.
+
+   Once you're done don't forget to enable the page and the variants you want to use.
+
+7. Create a 'HPS Browse By' node, choose the 'DC Description Types' vocabulary and create a menu item
    for the node.
 
-7. Configure the 'DC Description Types' vocabulary's Taxonomy Menu Settings to use the new node's menu
+8. Configure the 'DC Description Types' vocabulary's Taxonomy Menu Settings to use the new node's menu
    item as the parent menu item.
 
-8. Enable the Page Manager node override and Browse By variant /admin/structure/pages.
+9. Enable the Page Manager node override and 'Browse By' variant /admin/structure/pages.
