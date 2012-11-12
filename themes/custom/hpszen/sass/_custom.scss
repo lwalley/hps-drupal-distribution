@@ -58,9 +58,20 @@
   }
 }
 
-@mixin box-emboss($opacity: 0.8, $opacity2: 0.05) {
+// HPS Mixins
+@mixin hpszen-box-emboss($opacity: 0.2, $opacity2: 0.05) {
   @include box-shadow(rgba(white, $opacity) 0 1px 0, rgba(black, $opacity2) 0 1px 0 inset);
 }
-@mixin letterpress($opacity: 0.5) {
+@mixin hpszen-letterpress($opacity: 0.5) {
   @include text-shadow(rgba(white, $opacity) 0 1px 0);
 }
+@mixin hpszen-vertical-rule($side, $opacity: 0.2, $opacity2: 0.5) {
+  @include apply-side-rhythm-border($side, 1px, 0);
+  border-#{$side}-color: rgba(white, $opacity);
+  @if $side == left {
+    @include single-box-shadow(rgba(black, $opacity2), -1px, 0, 0);
+  } @else {
+    @include single-box-shadow(rgba(black, $opacity2), 1px, 0, 0);
+  }
+}
+

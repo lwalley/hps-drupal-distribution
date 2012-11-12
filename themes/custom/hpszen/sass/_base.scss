@@ -40,19 +40,20 @@ $legacy-support-for-ie8: true;
 $base-font-size:   14px; // The font size set on the root html element.
 $base-line-height: 21px; // This line-height determines the basic unit of vertical rhythm.
 
-$h1-font-size: 2.5  * $base-font-size;
-$h2-font-size: 1.5  * $base-font-size;
-$h3-font-size: 1.17 * $base-font-size;
-$h4-font-size: 1    * $base-font-size;
-$h5-font-size: 0.83 * $base-font-size;
-$h6-font-size: 0.75 * $base-font-size;
+$h1-font-size:     2.5  * $base-font-size;
+$h2-font-size:     1.5  * $base-font-size;
+$h3-font-size:     1.17 * $base-font-size;
+$h4-font-size:     1    * $base-font-size;
+$h5-font-size:     0.83 * $base-font-size;
+$h6-font-size:     0.75 * $base-font-size;
+$name-font-size:   2.5 * $base-font-size;
+$slogan-font-size: 1.5 * $base-font-size;
 
 // @note DejaVu and Nimbus Sans fonts are commonly available on Linux systems
 // @todo: Remove unused font stacks.
-//$times-new-roman: "Times New Roman", Times, Georgia, "DejaVu Serif", serif;
+$times-new-roman: "Times New Roman", Times, Georgia, "DejaVu Serif", serif;
 //$times:           Times, "Times New Roman", Georgia, "DejaVu Serif", serif;
 //$georgia:         Georgia, "Times New Roman", "DejaVu Serif", serif;
-$antiqua:         "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, "DejaVu Serif", serif;
 
 //$verdana:         Verdana, Tahoma, "DejaVu Sans", sans-serif;
 //$tahoma:          Tahoma, Verdana, "DejaVu Sans", sans-serif;
@@ -65,12 +66,30 @@ $courier:         "Courier New", "DejaVu Sans Mono", monospace, sans-serif;
 
 // Now create some variables for the font stacks we want to use on this site.
 $base-font-family: $arial;
-$font-heading:     $antiqua;
+$font-heading:     $times-new-roman;
 $font-body:        $arial;
 $font-monospace:   $courier;
 
 // Variables for default colors, shadows etc.
-$base-font-color: #000;
+$yellow:                             #ffd31f;
+$grey:                               #363636;
+
+$base-background-color:              white;
+$base-font-color:                    black;
+
+$default-box-shadow-color:           $grey;
+$default-box-shadow-h-offset:        2px; // Positive is to the right.
+$default-box-shadow-v-offset:        2px; // Positive is down.
+$default-box-shadow-blur:            5px;
+$default-box-shadow-spread:          false;
+$default-box-shadow-inset:           false;
+
+$navigation-default-background-color:        $grey;
+$navigation-default-font-color:              white;
+$navigation-active-background-color: $yellow;
+$navigation-active-font-color:       $grey;
+$navigation-hover-background-color:  lighten($grey, 20%);
+$navigation-hover-font-color:        white;
 
 // The amount lists, blockquotes and comments are indented.
 $indent-amount: 1em;
@@ -103,9 +122,10 @@ $zen-auto-include-item-base: false;
 @import "compass/utilities/sprites"; // See http://compass-style.org/help/tutorials/spriting/
 @import "compass/css3";     // Use one CSS3 mixin instead of multiple vendor prefixes.
 @import "compass/typography/vertical_rhythm"; // Helps set up a vertical rhythm.
-@import "compass/utilities/lists/horizontal-list";
+@import "compass/typography/lists/horizontal-list";
 @import "compass/typography/lists/inline-list";
 @import "compass/typography/lists/inline-block-list";
+@import "compass/typography/text/replacement";
 @import "zen";              // Add the Zen Grids responsive layout mixins.
 
 @import "custom";           // Import our custom mixins last.

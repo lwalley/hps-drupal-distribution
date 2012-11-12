@@ -13,10 +13,10 @@
 // @see templates/node--hps-featured-content.tpl.php
 
 @mixin slide-vertical-rhythm($slide-lines: 22, $image-lines: 13, $pager-lines: 4, $clear: false) {
-  .block.cycling {
+  .cycling {
     ul.slides {
       height: rhythm($slide-lines);
-      li.slide {
+      > li {
         .node .field-type-image {
           height: rhythm($image-lines);
         }
@@ -33,7 +33,7 @@
   }
 }
 
-.block.cycling { /* jQuery cycle is enabled. */
+.cycling { /* jQuery cycle is enabled. */
   position: relative;
   // For mobile first single column layout let slides stretch across gutter to fill screen width
   margin: 0 (-1 * $zen-gutter-width / 2);
@@ -44,7 +44,7 @@
     list-style: none;
     padding: 0;
     margin: 0;
-    li.slide {
+    > li {
       width: 100% !important;
       .node .field-type-image {
         // Fake crop for responsive images.
@@ -53,7 +53,7 @@
           margin: 0 auto;
         }
       }
-      // For single column add gutter to slide contents (since we are forcing block to stretch across gutter)
+      // For single column add gutter to slide contents (since we are forcing slide image to stretch across gutter)
       header,
       p {
         margin-left: $zen-gutter-width / 2;
@@ -91,11 +91,11 @@
 @include slide-vertical-rhythm();
 
 @media screen and (min-width: 480px) {
-  .block.cycling {
+  .cycling {
     // Return to use of gutter
     margin: 0;
     ul.slides {
-      li.slide {
+      > li {
         .node .field-type-image {
           // For multi-column layouts reset image width to include gutters.
           margin: 0;

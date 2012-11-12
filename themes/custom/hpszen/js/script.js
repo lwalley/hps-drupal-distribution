@@ -14,8 +14,65 @@
 
   Drupal.behaviors.hpszen = {
     attach: function (context, settings) {
-      $('.slides', context)
-      .once('hpszen', function() {
+
+      // Primary navigation menu
+      $('#navigation', context).once('hpszen', function () {
+
+        Drupal.theme.hpszenSubmenuToggle = function () {
+          return '<a href="#" class="submenu-toggle" title="' +
+                 Drupal.t('Javascript trigger to add or remove this items ' +
+                          'submenu from the visual display.') +
+                 '">&or;</a>';
+        };
+
+        Drupal.theme.hpszenToggleMenuTrigger = function () {
+          return '<a class="menu-toggle" href="#">' + Drupal.t('Menu') + '</a>';
+        };
+
+        $(this).find('ul').addClass('element-invisible');
+        $(this).find('li.expanded').each(function () {
+          var li = $(this);
+          li.prepend(Drupal.theme('hpszenSubmenuToggle'));
+          li.find('a.submenu-toggle').bind('click', { menu: $(this).find('> ul') }, toggleMenu);
+        });
+
+        $(this).once('adjustnavigation', function () {
+          var nav = $(this);
+          if (nav.width() < 600) {
+            // Convert navigation to vertical toggle menu
+            nav.addClass('toggle-menu');
+            nav.find('.block-menu').each(function () {
+
+              var menuBlock           = $(this),
+                  title               = menuBlock.find('> h2')[0],
+                  rootMenu            = menuBlock.find('> ul')[0],
+                  itemsWithSubmenus   = menuBlock.find('li.expanded');
+
+              // Add link to title and bind click event to it for main menu toggle
+              $(title).wrapInner('<a href="#" />')
+              .find('a').bind('click', {menu: rootMenu}, toggleMenu);
+
+            });
+          }
+          else {
+            // Show root menu
+            nav.find('.block-menu > ul').removeClass('element-invisible');
+          }
+        })
+
+        $(window).bind('load resize orientationchange', function () {
+          $('#navigation').trigger('adjustnavigation');
+        });
+
+        function toggleMenu(event) {
+          event.preventDefault();
+          event.stopPropagation();
+          $(event.data.menu).toggleClass('element-invisible');
+        }
+      });
+
+      // Slideshow
+      $('.slides', context).once('hpszen', function () {
 
         if ("cycle" in $.fn) {
 
@@ -30,10 +87,10 @@
             return '<a title="' + Drupal.t('Slide number @index.', { '@index': index + 1 }) + '" href="#"><img src="' + image.attr('src') + '" alt="' + alt + '"/></a>';
           };
 
-          // Assume slides are block content:
+          // Assumes slides are in .view-content:
           var slides = $(this),
               images = $(this).find('.field-type-image img');
-          slides.closest('.block').addClass('cycling');
+          slides.closest('.view-content').addClass('cycling');
 
           images.one('load', function () {
             positionImage(this);
@@ -63,7 +120,7 @@
 
           $(window).bind('resize', function () {
             slides.each(function () {
-              $(this).width($(this).closest('.block').width());
+              $(this).width($(this).closest('.view-content').width());
               positionImage($(this).find('.field-type-image img')[0]);
             });
           });

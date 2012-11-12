@@ -128,15 +128,21 @@ function hpszen_preprocess_maintenance_page(&$variables, $hook) {
  * @param $hook
  *   The name of the template being rendered ("html" in this case.)
  */
-/* -- Delete this line if you want to use this function
 function hpszen_preprocess_html(&$variables, $hook) {
-  $variables['sample_variable'] = t('Lorem ipsum.');
+  if ($variables['menu_item']) {
+    switch ($variables['menu_item']['page_callback']) {
+      case 'page_manager_page_execute':
+        // Add panels layout name to body class attribute.
+        $page = page_manager_get_current_page();
+        $variables['classes_array'][] = drupal_clean_css_identifier($page['handler']->conf['display']->layout);
+        break;
+    }
+  }
 
   // The body tag's classes are controlled by the $classes_array variable. To
   // remove a class from $classes_array, use array_diff().
   //$variables['classes_array'] = array_diff($variables['classes_array'], array('class-to-remove'));
 }
-// */
 
 /**
  * Override or insert variables into the page templates.
@@ -146,14 +152,8 @@ function hpszen_preprocess_html(&$variables, $hook) {
  * @param $hook
  *   The name of the template being rendered ("page" in this case.)
  */
-function hpszen_preprocess_page(&$variables, $hook) {
-  // Don't display the default Drupal content listing on the home page.
-  if (drupal_is_front_page()) {
-    if (isset($variables['page']['content']['system_main'])) {
-      unset($variables['page']['content']['system_main']);
-    }
-  }
-}
+//function hpszen_preprocess_page(&$variables, $hook) {
+//}
 
 /**
  * Override or insert variables into the node templates.
@@ -214,7 +214,7 @@ function hpszen_preprocess_region(&$variables, $hook) {
  * @param $hook
  *   The name of the template being rendered ("block" in this case.)
  */
-/* -- Delete this line if you want to use this function
+/* -- Delete this line to use this function
 function hpszen_preprocess_block(&$variables, $hook) {
   // Add a count to all the blocks in the region.
   // $variables['classes_array'][] = 'count-' . $variables['block_id'];
@@ -225,4 +225,50 @@ function hpszen_preprocess_block(&$variables, $hook) {
   //  $variables['theme_hook_suggestions'] = array_diff($variables['theme_hook_suggestions'], array('block__no_wrapper'));
   //}
 }
-// */
+//*/
+
+/**
+ * Implements hook_preprocess_field().
+ *
+ * Override or insert variables into a field template.
+ */
+function hpszen_preprocess_field(&$variables, $hook) {
+  if ($variables['element']['#field_name'] == 'dspace_bitstream_url') {
+    if (module_exists('libraries') && ($library_path = libraries_get_path('jwplayer'))) {
+      // Load JW Player, if its not already loaded.
+      $file_path = "$library_path/jwplayer.js";
+      if (file_exists($file_path)) {
+        // TODO: Check mime type needs JW Player before loading JS or player
+        // settings
+        drupal_add_js($file_path);
+        foreach ($variables['items'] as $delta => $item) {
+          $variables['items'][$delta]['#player_id'] = "player-" . $variables['element']['#object']->nid . "-" . $delta;
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_views_view().
+ *
+ * @param $variables
+ *   An array of variables to pass to the theme template.
+ * @param $hook
+ *   The name of the template being rendered ("views_view" in this case.)
+ */
+function hpszen_preprocess_views_view(&$variables, $hook) {
+  // Include jQuery Cycle Javascript plugin for slideshows
+  if ($variables['css_class'] == 'hps-slideshow' && module_exists('libraries')) {
+    if ($library_path = libraries_get_path('jquery.cycle')) {
+      foreach (array('jquery.cycle.all.min.js', 'jquery.cycle.all.js') as $file_name) {
+        $file_path = "$library_path/$file_name";
+        if (file_exists($file_path)) {
+          drupal_add_js($file_path);
+          break;
+        }
+      }
+    }
+  }
+}
+

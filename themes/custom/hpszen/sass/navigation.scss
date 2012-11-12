@@ -43,12 +43,6 @@ li a.active {
  * Navigation bar
  */
 #navigation {
-  ul {
-    a {
-      @include rhythm-borders(1px, 0.5);
-      text-decoration: none;
-    }
-  }
 }
 
 .region-navigation {
@@ -58,16 +52,11 @@ li a.active {
  * Main menu and Secondary menu links
  */
 #main-menu {
+  // Main menu is turned off so we can have expanded menu items,
+  // you could use #block-system-main-menu instead.
+  // @see #navigation
 }
-
 #secondary-menu {
-  ul {
-    li {
-      a {
-        padding: rhythm(0.5);
-      }
-    }
-  }
 }
 
 /*
@@ -85,4 +74,79 @@ li a.active {
  */
 
 .block-menu-block {
+}
+
+#navigation {
+  background: $navigation-default-background-color;
+  color: $navigation-default-font-color;
+  h2 {
+    a {
+      display: block;
+    }
+  }
+  ul {
+    padding: 0;
+    margin: 0;
+    background-color: $navigation-default-background-color;
+    @include adjust-leading-to(2);
+    ul {
+      background-color: lighten($navigation-default-background-color, 10%);
+      ul {
+        background-color: lighten($navigation-default-background-color, 20%)
+      }
+    }
+  }
+  a {
+    display: block;
+    text-decoration: none;
+    &:link,
+    &:visited,
+    &:hover,
+    &:active {
+      color: $navigation-default-font-color;
+    }
+  }
+  li {
+    padding: 0 0 0 rhythm(0.5);
+    list-style: none;
+    &.active-trail {
+      background-color: $navigation-active-background-color;
+      > a {
+        &:link,
+        &:visited,
+        &:active {
+          color: $navigation-active-font-color;
+        }
+      }
+    }
+    &.active-trail a,
+    a {
+      &:hover {
+        background-color: $navigation-hover-background-color;
+        color: $navigation-hover-font-color;
+      }
+    }
+    &.expanded {
+      position: relative;
+      > a {
+        margin-right: rhythm(2);
+        &.submenu-toggle {
+          margin-right: 0;
+          text-align: center;
+          width: rhythm(1);
+          position: absolute;
+          right: 0;
+          @include hpszen-vertical-rule(left);
+        }
+
+      }
+    }
+  }
+}
+
+// Style navigation as horizontal list with slide down
+@media all and (min-width: 600px) {
+  #navigation {
+
+  }
 }

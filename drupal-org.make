@@ -105,12 +105,17 @@ projects[geocoder][version] = 1.2
 
 ; Libraries
 libraries[ckeditor][download][type] = get
-libraries[ckeditor][download][url] = http://download.cksource.com/CKEditor/CKEditor/CKEditor%203.6.5/ckeditor_3.6.5.zip
+libraries[ckeditor][download][url]  = http://download.cksource.com/CKEditor/CKEditor/CKEditor%203.6.5/ckeditor_3.6.5.zip
 
 libraries[SolrPhpClient][download][type] = get
-libraries[SolrPhpClient][download][url] = http://solr-php-client.googlecode.com/files/SolrPhpClient.r60.2011-05-04.zip
+libraries[SolrPhpClient][download][url]  = http://solr-php-client.googlecode.com/files/SolrPhpClient.r60.2011-05-04.zip
 
 libraries[geoPHP][download][type] = get
-libraries[geoPHP][download][url] = https://github.com/phayes/geoPHP/archive/1.1.zip
+libraries[geoPHP][download][url]  = https://github.com/phayes/geoPHP/archive/1.1.zip
 
-; @todo jquery cycle
+libraries[jquery.cycle][download][type] = get
+libraries[jquery.cycle][download][url]  = http://malsup.github.com/jquery.cycle.all.js
+libraries[jquery.cycle][directory_name] = jquery.cycle
+
+libraries[jwplayer][download][type] = get
+libraries[jwplayer][download][url]  = http://www.longtailvideo.com/wp/jwplayer.zip

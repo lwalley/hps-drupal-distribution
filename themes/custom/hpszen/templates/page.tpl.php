@@ -113,26 +113,21 @@
   </header>
 
   <div id="main">
-
-    <div id="content" class="column" role="main">
-      <?php print render($page['highlighted']); ?>
-      <?php print $breadcrumb; ?>
-      <a id="main-content"></a>
-      <?php print render($title_prefix); ?>
-      <?php if ($title): ?>
-        <h1 class="title" id="page-title"><?php print $title; ?></h1>
-      <?php endif; ?>
-      <?php print render($title_suffix); ?>
-      <?php print $messages; ?>
-      <?php print render($tabs); ?>
-      <?php print render($page['help']); ?>
-      <?php if ($action_links): ?>
-        <ul class="action-links"><?php print render($action_links); ?></ul>
-      <?php endif; ?>
-      <?php print render($page['content']); ?>
-      <?php print $feed_icons; ?>
-    </div><!-- /#content -->
-
+    <?php
+      // Moved navigation back up above content. WebAIM on alternative reading
+      // orders:
+      // "Users who are accustomed to using 'skip navigation' links may not pay
+      // close enough attention to realize that the link will take them to the
+      // part of the page they're trying to skip. Links taking users to the
+      // navigation are unexpected, and can lead to some confusion. With or
+      // without 'skip to navigation' links, screen reader users who want to
+      // access the navigation may get lost in the page, wondering if there
+      // is any navigation... The concept is fine, but the current conventions
+      // of placing the links at the top almost dictates that developers should
+      // continue to place the links at the top, to ensure users do not get
+      // disoriented."
+      // @see http://webaim.org/techniques/skipnav/#altorders
+    ?>
     <div id="navigation">
 
       <?php if ($main_menu): ?>
@@ -159,6 +154,26 @@
       <?php print render($page['navigation']); ?>
 
     </div><!-- /#navigation -->
+
+
+    <div id="content" class="column" role="main">
+      <?php print render($page['highlighted']); ?>
+      <?php print $breadcrumb; ?>
+      <a id="main-content"></a>
+      <?php print render($title_prefix); ?>
+      <?php if ($title): ?>
+        <h1 class="title" id="page-title"><?php print $title; ?></h1>
+      <?php endif; ?>
+      <?php print render($title_suffix); ?>
+      <?php print $messages; ?>
+      <?php print render($tabs); ?>
+      <?php print render($page['help']); ?>
+      <?php if ($action_links): ?>
+        <ul class="action-links"><?php print render($action_links); ?></ul>
+      <?php endif; ?>
+      <?php print render($page['content']); ?>
+      <?php print $feed_icons; ?>
+    </div><!-- /#content -->
 
     <?php
       // Render the sidebars to see if there's anything in them.
