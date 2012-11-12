@@ -95,6 +95,9 @@ projects[taxonomy_menu][version] = 1.4
 projects[addressfield][version] = 1.0-beta3
 
 projects[geophp][version] = 1.7
+; includes the geoPHP library
+; recommends installing the GEOS PHP extension
+; @see https://github.com/phayes/geoPHP/wiki/GEOS
 
 projects[geofield][version] = 1.1
 
@@ -110,8 +113,9 @@ libraries[ckeditor][download][url]  = http://download.cksource.com/CKEditor/CKEd
 libraries[SolrPhpClient][download][type] = get
 libraries[SolrPhpClient][download][url]  = http://solr-php-client.googlecode.com/files/SolrPhpClient.r60.2011-05-04.zip
 
-libraries[geoPHP][download][type] = get
-libraries[geoPHP][download][url]  = https://github.com/phayes/geoPHP/archive/1.1.zip
+;libraries[geoPHP][download][type] = get
+;libraries[geoPHP][download][url]  = https://github.com/phayes/geoPHP/archive/1.1.zip
+; geoPHP library is bundled with the geophp module
 
 libraries[jquery.cycle][download][type] = get
 libraries[jquery.cycle][download][url]  = http://malsup.github.com/jquery.cycle.all.js
