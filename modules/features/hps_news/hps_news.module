@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the HPS News feature.
+ */
+
+include_once 'hps_news.features.inc';
