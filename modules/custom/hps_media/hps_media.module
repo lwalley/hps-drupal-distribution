@@ -1,0 +1,210 @@
+<?php
+
+/**
+ * @file
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function hps_media_theme($existing, $type, $theme, $path) {
+  return array(
+    'hps_media_player' => array(
+      'render element' => 'element',
+      'template' => 'themes/hps-media-player',
+      'pattern' => 'hps_media_player__',
+    ),
+  );
+}
+/**
+ * Implements hook_element_info().
+ */
+function hps_media_element_info() {
+  return array(
+    'hps_media_player' =>  array(
+      '#pre_render' => array('hps_media_pre_render_hps_media_player'),
+      '#theme' => 'hps_media_player',
+      '#player_library_info' => array(),
+    ),
+  );
+}
+
+/**
+ * Pre render callback for hps_media_player element.
+ */
+function hps_media_pre_render_hps_media_player($element) {
+  // @todo maybe delete this function if we're not using it.
+  return $element;
+}
+/**
+ * Implements hook_preprocess_field().
+ *
+ * Override or insert variables into a field template.
+ *
+ */
+function hps_media_preprocess_field(&$variables, $hook) {
+  if ($variables['element']['#field_type'] == 'link_field') {
+    // Use JW Player for supported audio and video URLs.
+    // Check JW Player is installed and get path for later use.
+    if ($player_library_info = _player_library_info()) {
+      foreach ($variables['element']['#items'] as $delta => $item) {
+        $mimetype = file_get_mimetype($item['url']);
+        if (!_is_mimetype_supported($mimetype)) continue;
+        $variables['players'][$delta] = array(
+          '#type' => 'hps_media_player',
+          '#url'  => $item['url'],
+          '#id'   => "hps-media-player-{$variables['element']['#object']->nid}-{$delta}",
+          '#player_library_info' => $player_library_info,
+          '#attached' => array('js' => $player_library_info['js']),
+          '#mimetype' => $mimetype,
+          '#is_audio' => _is_audio($mimetype),
+          '#is_video' => _is_video($mimetype),
+        );
+      }
+    }
+  }
+}
+
+/**
+ * Helper function to see if its an audio file.
+ */
+function _is_audio($mimetype) {
+  return in_array($mimetype, _supported_audio_mimetypes());
+}
+/**
+ * Helper function to see if its an audio file.
+ */
+function _is_video($mimetype) {
+  return in_array($mimetype, _supported_video_mimetypes());
+}
+/**
+ * Helper function to return attributes of the media player library.
+ */
+function _player_library_info() {
+  if (module_exists('libraries') && ($jwplayer_library_path = libraries_get_path('jwplayer'))) {
+    $jwplayer_file_path = "$jwplayer_library_path/jwplayer.js";
+    if (file_exists($jwplayer_file_path)) {
+      return array(
+        'library_path' => $jwplayer_library_path,
+        'js'           => array($jwplayer_file_path),
+        'name'         => 'jwplayer',
+      );
+    }
+  }
+  return NULL;
+}
+
+/**
+ * Helper function to return supported mimetypes.
+ *
+ * @see http://www.longtailvideo.com/support/jw-player/28836/media-format-support.
+ * @note Mimetypes are limited and adjusted to Drupal's mimetype mappings for convenience.
+ * @see file_default_mimetype_mapping()
+ * @note Additional mimetypes could be supported here if needed.
+ * @see hook_file_mimetype_mapping_alter()
+ */
+function _supported_mimetypes() {
+  return array_merge(_supported_audio_mimetypes(), _supported_video_mimetypes());
+}
+/**
+ * Helper function to return supported audio mimetypes.
+ */
+function _supported_audio_mimetypes() {
+  return array(
+    'audio/mp4',
+    'audio/mpeg',
+    'audio/ogg',
+  );
+}
+/**
+ * Helper function to return supported video mimetypes.
+ */
+function _supported_video_mimetypes() {
+  return array(
+    'video/mp4',
+    'video/x-flv'
+  );
+}
+
+/**
+ * Helper function to determine if a mimetype is supported by the default media
+ * player.
+ */
+function _is_mimetype_supported($mimetype) {
+  return in_array($mimetype, _supported_mimetypes());
+}
+
+/**
+ * Implements hook_image_effect_info().
+ */
+function hps_media_image_effect_info() {
+  $effects = array(
+    'hps_scale_and_crop' => array(
+      'label' => t('HPS Scale and Crop'),
+      'help' => t('Scales image so that one dimension fits and the other is larger than desired, then crops ' .
+                  'the remaining dimension. If the remainin dimension is width the crop will be even, if the ' .
+                  'remaining dimension is height then the top is favoured depending on how drastic the crop is.'),
+      'effect callback' => '_hps_scale_and_crop_effect',
+      'form callback' => 'image_resize_form',
+      'summary theme' => 'image_resize_summary',
+    ),
+    'hps_crop' => array(
+      'label' => t('HPS Crop'),
+      'help' => t('Crops width evenly but favours top of image when cropping height depending on how drastic the crop is.'),
+      'effect callback' => '_hps_crop_effect',
+      'form callback' => 'image_resize_form',
+      'summary theme' => 'image_resize_summary',
+    ),
+  );
+  return $effects;
+}
+
+/**
+ * Callback for HPS Scale and Crop image effect.
+ *
+ * @param $image
+ *   An image object returned by image_load().
+ * @param $data
+ *   An array of attributes to use when performing the scale effect with the
+ *   following items:
+ *   - "width": An integer representing the desired width in pixels.
+ *   - "height": An integer representing the desired height in pixels.
+ *
+ * @return
+ *   TRUE on success. FALSE on failure to crop image.
+ */
+function _hps_scale_and_crop_effect(&$image, $data) {
+
+  module_load_include('inc', 'hps_media', 'image.gd');
+
+  if (!image_toolkit_invoke('hps_scale_and_crop', $image, $data)) {
+    watchdog('image', 'HPS Scale and Crop failed using the %toolkit toolkit on %path (%mimetype, %dimensions)', array('%toolkit' => $image->toolkit, '%path' => $image->source, '%mimetype' => $image->info['mime_type'], '%dimensions' => $image->info['height'] . 'x' . $image->info['height']), WATCHDOG_ERROR);
+    return FALSE;
+  }
+  return TRUE;
+}
+
+/**
+ * Callback for HPS Crop image effect.
+ *
+ * @param $image
+ *   An image object returned by image_load().
+ * @param $data
+ *   An array of attributes to use when performing the scale effect with the
+ *   following items:
+ *   - "width": An integer representing the desired width in pixels.
+ *   - "height": An integer representing the desired height in pixels.
+ *
+ * @return
+ *   TRUE on success. FALSE on failure to crop image.
+ */
+function _hps_crop_effect(&$image, $data) {
+
+  module_load_include('inc', 'hps_media', 'image.gd');
+
+  if (!image_toolkit_invoke('hps_crop', $image, $data)) {
+    watchdog('image', 'HPS Crop failed using the %toolkit toolkit on %path (%mimetype, %dimensions)', array('%toolkit' => $image->toolkit, '%path' => $image->source, '%mimetype' => $image->info['mime_type'], '%dimensions' => $image->info['height'] . 'x' . $image->info['height']), WATCHDOG_ERROR);
+    return FALSE;
+  }
+  return TRUE;
+}

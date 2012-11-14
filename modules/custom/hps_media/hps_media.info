@@ -1,0 +1,4 @@
+name = HPS Media
+description = Provides useful functions for manipulating and themeing images, audio and video.
+core = 7.x
+dependencies[] = image
