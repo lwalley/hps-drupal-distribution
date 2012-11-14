@@ -99,6 +99,14 @@
  *   For more information on preprocess functions and theme hook suggestions,
  *   please visit the Theme Developer's Guide on Drupal.org:
  *   http://drupal.org/node/223440 and http://drupal.org/node/1089656
+ *
+ *
+ *   @note Preprocess functions for theme suggestions do not work. You have to
+ *         either declare the theme in hook_theme or call a preprocess
+ *         suggestion function from a generic preprocess function i.e. generate
+ *         function name from $variables properties and then call it
+ *         dynamically.
+ *   @see http://drupal.org/node/939462
  */
 
 
@@ -232,22 +240,10 @@ function hpszen_preprocess_block(&$variables, $hook) {
  *
  * Override or insert variables into a field template.
  */
+/* -- Delete this line to use this function
 function hpszen_preprocess_field(&$variables, $hook) {
-  if ($variables['element']['#field_name'] == 'dspace_bitstream_url') {
-    if (module_exists('libraries') && ($library_path = libraries_get_path('jwplayer'))) {
-      // Load JW Player, if its not already loaded.
-      $file_path = "$library_path/jwplayer.js";
-      if (file_exists($file_path)) {
-        // TODO: Check mime type needs JW Player before loading JS or player
-        // settings
-        drupal_add_js($file_path);
-        foreach ($variables['items'] as $delta => $item) {
-          $variables['items'][$delta]['#player_id'] = "player-" . $variables['element']['#object']->nid . "-" . $delta;
-        }
-      }
-    }
-  }
 }
+//*/
 
 /**
  * Implements hook_preprocess_views_view().

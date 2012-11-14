@@ -1,13 +1,13 @@
 <?php
 
 /**
- * @file field.tpl.php
- * Default template implementation to display the value of a field.
+ * @file field--dspace-bitstream-url--dspaced-entities-item.tpl.php
  *
- * This file is not used and is here as a starting point for customization only.
- * @see theme_field()
+ * Overrides field.tpl.php to render media player for supported dspace bitstreams.
  *
  * Available variables:
+ * - $players: An array of media player values. Use render() to output them.
+ *   @see theme_hps_media_player()
  * - $items: An array of field values. Use render() to output them.
  * - $label: The item label.
  * - $label_hidden: Whether the label display is set to 'hidden'.
@@ -48,29 +48,8 @@
   <?php endif; ?>
   <div class="field-items"<?php print $content_attributes; ?>>
     <?php foreach ($items as $delta => $item): ?>
-      <div id="<?php print $item['#player_id'];  ?>" class="field-item <?php print $delta % 2 ? 'odd' : 'even'; ?>"<?php print $item_attributes[$delta]; ?>></div>
-<?php if ($element['#view_mode'] == 'dspaced_audio_teaser') { ?>
-      <script type="text/javascript">
-        jwplayer('<?php print $item['#player_id'];  ?>').setup({
-        'flashplayer': '<?php print '/' . drupal_get_path('theme', 'hpszen') . '/js/jwplayer/player.swf' ?>',
-          'id': '<?php print $item['#player_id'] . '_id';  ?>',
-          'width': '560',
-          'height': '24',
-          'file': '<?php print render($item); ?>',
-          'controlbar': 'bottom'
-        });
-    </script>
-<?php } else { ?>
-    <script type='text/javascript'>
-    jwplayer('<?php print $item['#player_id'];  ?>').setup({
-      'flashplayer': '<?php print '/' . drupal_get_path('theme', 'hpszen') . '/js/jwplayer/player.swf' ?>',
-      'width': '400',
-      'height': '300',
-      'file': '<?php print render($item); ?>'
-    });
-  </script>
-  <br/>
-<?php } ?>
+      <?php if (isset($players[$delta])) print render($players[$delta]); ?>
+      <?php print render($item); ?>
     <?php endforeach; ?>
   </div>
 </div>

@@ -66,16 +66,15 @@ dependencies[] = geophp
 dependencies[] = geofield
 dependencies[] = geocoder
 
-; Custom modules and features are unversioned and included with the hps profile
+; Custom modules/features are unversioned and included with the hps profile
 dependencies[] = views_job_scheduler
 dependencies[] = dspaced_entities
 dependencies[] = dspaced
 dependencies[] = dspaced_ui
-
-; Custom features
+dependencies[] = hps_media
 dependencies[] = hps_roles
 dependencies[] = hps_defaults
-; Optional custom features
+; Optional custom modules/features
 dependencies[] = hps_featured_content
 dependencies[] = hps_news
 dependencies[] = hps_search
