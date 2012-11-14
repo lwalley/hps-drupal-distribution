@@ -30,6 +30,7 @@ dependencies[] = advanced_help
 dependencies[] = administerusersbyrole
 dependencies[] = token
 dependencies[] = pathauto
+dependencies[] = subpathauto
 dependencies[] = date
 dependencies[] = link
 dependencies[] = field_group

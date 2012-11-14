@@ -24,6 +24,8 @@ projects[token][version] = 1.4
 
 projects[pathauto][version] = 1.2
 
+projects[subpathauto][version] = 1.3
+
 projects[date][version] = 2.6
 ; includes date_views
 
