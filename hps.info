@@ -75,11 +75,11 @@ dependencies[] = dspaced_ui
 dependencies[] = hps_media
 dependencies[] = hps_roles
 dependencies[] = hps_defaults
-; Optional custom modules/features
-dependencies[] = hps_featured_content
-dependencies[] = hps_news
-dependencies[] = hps_search
-dependencies[] = hps_browse
+; Optional custom modules/features disabled on install, enable in Features.
+;dependencies[] = hps_featured_content
+;dependencies[] = hps_news
+;dependencies[] = hps_search
+;dependencies[] = hps_browse
 
 ; Include files
 files[] = hps.profile
