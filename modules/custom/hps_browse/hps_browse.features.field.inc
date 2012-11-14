@@ -99,11 +99,11 @@ function hps_browse_field_default_fields() {
       'entity_types' => array(),
       'field_name' => 'field_vocabulary',
       'foreign keys' => array(
-        'node' => array(
+        'taxonomy_vocabulary' => array(
           'columns' => array(
-            'target_id' => 'nid',
+            'target_id' => 'vid',
           ),
-          'table' => 'node',
+          'table' => 'taxonomy_vocabulary',
         ),
       ),
       'indexes' => array(

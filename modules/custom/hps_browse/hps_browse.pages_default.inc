@@ -29,9 +29,9 @@ function hps_browse_default_page_manager_handlers() {
     'contexts' => array(),
     'relationships' => array(
       0 => array(
-        'identifier' => 'Vocabulary from Node (on Node: Vocabulary [field_vocabulary])',
-        'keyword' => 'vocabulary',
-        'name' => 'entity_from_field:field_vocabulary-node-node',
+        'identifier' => 'Taxonomy vocabulary from Node (on Node: Vocabulary [field_vocabulary])',
+        'keyword' => 'taxonomy_vocabulary',
+        'name' => 'entity_from_field:field_vocabulary-node-taxonomy_vocabulary',
         'delta' => 0,
         'context' => 'argument_entity_id:node_1',
         'id' => 1,
@@ -99,7 +99,7 @@ function hps_browse_default_page_manager_handlers() {
     $pane->access = array();
     $pane->configuration = array(
       'context' => array(
-        0 => 'relationship_entity_from_field:field_vocabulary-node-node_1',
+        0 => 'relationship_entity_from_field:field_vocabulary-node-taxonomy_vocabulary_1',
       ),
     );
     $pane->cache = array();

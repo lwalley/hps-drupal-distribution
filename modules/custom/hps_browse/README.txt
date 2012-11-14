@@ -34,24 +34,32 @@ Provides a custom content type 'HPS Browse By' that:
   feature provides all of this configuration for the 'DC Description Type' vocabulary
   imported from DSpace.
 
-Provides a node override using Page Manager/Panels which renders the vocabulary terms
-automatically [2] on the browse by node landing page.
 
-[2] Passing the vocabulary vid as a context argument from Panels to Views is a little quirky
+Provides a node override using Page Manager/Panels which renders the vocabulary terms
+automatically on the browse by node landing page. It does this by passing the vocabulary
+referenced in the current browse by node through a Choas Tools context relationship [2]
+configured in Panels/Page Manager, to the Views content pane.
+
+[2] Passing the vocabulary vid as a context argument from Panels to Views is problematic
+    due to core bug with foreign keys. Temporarily solved with entityreference patch.
     @see http://drupal.org/node/1831872
+
 
 Provides taxonomy term override using Page Manager/Panels which contains variants for
 category pages (i.e. sub-landing pages 'Root' variant) and default listing display
 ('List' view) for terms in the DC Description Type vocabulary.
+
 
 Provides an additional custom page for taxonomy terms with a sub-path wildcard
 (taxonomy/term/%term/%mode) to capture the display mode. Thus allowing different display
 types e.g. gallery, index for term listings. By default the variants 'Gallery' and 'Index'
 have been added for the DC Description Type vocabulary.
 
+
 Provides a ctools content type (pane) that allows display mode links to be added to a
 panels page. By default the taxonomy term and taxonomy term display mode pages have display
 mode links for 'List' (default), 'Gallery' and 'Index'.
+
 
 Provides views panes for the different display modes, list, gallery and index. The term ID
 is passed in to the views contextual filters from the panel page so it would be possible to
@@ -83,7 +91,8 @@ How to get it working?
 4. Enable 'HPS Browse By' View at /admin/structure/views
 
    By default this view provides a content pane that lists a complete hierarchy of terms for a
-   single vocabulary. The vocabulary vid is passed to the view from the panel page.
+   single vocabulary. The vocabulary vid is passed to the view from the panel page with a ctools
+   context relationship configured in page manager/panels.
 
 5. Edit the 'Taxonomy term template' in Page Manager /admin/structure/pages or Panels
    /admin/structure/panels.
