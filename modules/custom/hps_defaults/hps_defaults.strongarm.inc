@@ -108,7 +108,17 @@ function hps_defaults_strongarm() {
       'extensions' => 'gif png jpg jpeg',
       'dimensions' => '0',
       'filenum' => '1',
-      'directories' => array(),
+      'directories' => array(
+        0 => array(
+          'name' => 'hps',
+          'subnav' => 1,
+          'browse' => 1,
+          'upload' => 1,
+          'thumb' => 0,
+          'delete' => 1,
+          'resize' => 0,
+        ),
+      ),
       'thumbnails' => array(),
     ),
   );

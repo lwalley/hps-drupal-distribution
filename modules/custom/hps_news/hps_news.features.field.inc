@@ -147,11 +147,11 @@ function hps_news_field_default_fields() {
       'settings' => array(
         'alt_field' => 1,
         'default_image' => 0,
-        'file_directory' => 'hps_news',
+        'file_directory' => 'hps/news',
         'file_extensions' => 'png gif jpg jpeg',
         'max_filesize' => '',
         'max_resolution' => '',
-        'min_resolution' => '700x433',
+        'min_resolution' => '700x700',
         'title_field' => 0,
         'user_register_form' => FALSE,
       ),
@@ -201,7 +201,7 @@ function hps_news_field_default_fields() {
       'bundle' => 'hps_news',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => '',
+      'description' => '(Optional) This text will be displayed with the image when viewing the full news item.',
       'display' => array(
         'default' => array(
           'label' => 'hidden',

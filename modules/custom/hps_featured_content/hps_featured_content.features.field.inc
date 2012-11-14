@@ -118,7 +118,7 @@ function hps_featured_content_field_default_fields() {
     'field_instance' => array(
       'bundle' => 'hps_featured_content',
       'deleted' => '0',
-      'description' => 'Add an alternative image if the featured entity does not have an image, or you would like to use a different image, than the one associated with the entity, to represent the content.',
+      'description' => '(Optional) Use this field to add an alternative image to represent the featured content. If you upload an alternative image it will override the featured content\'s image. If the featured content does not have its own image and you do not provide an alternative, then the featured content may not appear in some contexts, e.g. featured content without images will not appear in slide shows.',
       'display' => array(
         'default' => array(
           'label' => 'above',
@@ -145,11 +145,11 @@ function hps_featured_content_field_default_fields() {
       'settings' => array(
         'alt_field' => 1,
         'default_image' => 0,
-        'file_directory' => 'hps',
+        'file_directory' => 'hps/featured',
         'file_extensions' => 'png gif jpg jpeg',
         'max_filesize' => '',
         'max_resolution' => '',
-        'min_resolution' => '480x350',
+        'min_resolution' => '700x700',
         'title_field' => 0,
         'user_register_form' => FALSE,
       ),
@@ -157,7 +157,7 @@ function hps_featured_content_field_default_fields() {
         'active' => 1,
         'module' => 'image',
         'settings' => array(
-          'preview_image_style' => 'thumbnail',
+          'preview_image_style' => 'hps_thumbnail',
           'progress_indicator' => 'throbber',
         ),
         'type' => 'image_image',

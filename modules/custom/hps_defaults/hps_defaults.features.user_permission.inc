@@ -113,6 +113,15 @@ function hps_defaults_user_default_permissions() {
     'module' => 'system',
   );
 
+  // Exported permission: administer advanced pane settings.
+  $permissions['administer advanced pane settings'] = array(
+    'name' => 'administer advanced pane settings',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'panels',
+  );
+
   // Exported permission: administer blocks.
   $permissions['administer blocks'] = array(
     'name' => 'administer blocks',
@@ -167,6 +176,15 @@ function hps_defaults_user_default_permissions() {
     'module' => 'feeds',
   );
 
+  // Exported permission: administer fieldgroups.
+  $permissions['administer fieldgroups'] = array(
+    'name' => 'administer fieldgroups',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'field_group',
+  );
+
   // Exported permission: administer filters.
   $permissions['administer filters'] = array(
     'name' => 'administer filters',
@@ -219,6 +237,42 @@ function hps_defaults_user_default_permissions() {
       0 => 'administrator',
     ),
     'module' => 'node',
+  );
+
+  // Exported permission: administer page manager.
+  $permissions['administer page manager'] = array(
+    'name' => 'administer page manager',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'page_manager',
+  );
+
+  // Exported permission: administer pane access.
+  $permissions['administer pane access'] = array(
+    'name' => 'administer pane access',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'panels',
+  );
+
+  // Exported permission: administer panels layouts.
+  $permissions['administer panels layouts'] = array(
+    'name' => 'administer panels layouts',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'panels',
+  );
+
+  // Exported permission: administer panels styles.
+  $permissions['administer panels styles'] = array(
+    'name' => 'administer panels styles',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'panels',
   );
 
   // Exported permission: administer pathauto.
@@ -449,6 +503,15 @@ function hps_defaults_user_default_permissions() {
       0 => 'administrator',
     ),
     'module' => 'administerusersbyrole',
+  );
+
+  // Exported permission: change layouts in place editing.
+  $permissions['change layouts in place editing'] = array(
+    'name' => 'change layouts in place editing',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'panels',
   );
 
   // Exported permission: change own username.
@@ -924,6 +987,105 @@ function hps_defaults_user_default_permissions() {
     'module' => 'administerusersbyrole',
   );
 
+  // Exported permission: geocoder_service_all_handlers.
+  $permissions['geocoder_service_all_handlers'] = array(
+    'name' => 'geocoder_service_all_handlers',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'geocoder',
+  );
+
+  // Exported permission: geocoder_service_handler_exif.
+  $permissions['geocoder_service_handler_exif'] = array(
+    'name' => 'geocoder_service_handler_exif',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'geocoder',
+  );
+
+  // Exported permission: geocoder_service_handler_google.
+  $permissions['geocoder_service_handler_google'] = array(
+    'name' => 'geocoder_service_handler_google',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'geocoder',
+  );
+
+  // Exported permission: geocoder_service_handler_gpx.
+  $permissions['geocoder_service_handler_gpx'] = array(
+    'name' => 'geocoder_service_handler_gpx',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'geocoder',
+  );
+
+  // Exported permission: geocoder_service_handler_json.
+  $permissions['geocoder_service_handler_json'] = array(
+    'name' => 'geocoder_service_handler_json',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'geocoder',
+  );
+
+  // Exported permission: geocoder_service_handler_kml.
+  $permissions['geocoder_service_handler_kml'] = array(
+    'name' => 'geocoder_service_handler_kml',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'geocoder',
+  );
+
+  // Exported permission: geocoder_service_handler_latlon.
+  $permissions['geocoder_service_handler_latlon'] = array(
+    'name' => 'geocoder_service_handler_latlon',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'geocoder',
+  );
+
+  // Exported permission: geocoder_service_handler_mapquest_nominatim.
+  $permissions['geocoder_service_handler_mapquest_nominatim'] = array(
+    'name' => 'geocoder_service_handler_mapquest_nominatim',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'geocoder',
+  );
+
+  // Exported permission: geocoder_service_handler_wkt.
+  $permissions['geocoder_service_handler_wkt'] = array(
+    'name' => 'geocoder_service_handler_wkt',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'geocoder',
+  );
+
+  // Exported permission: geocoder_service_handler_yahoo.
+  $permissions['geocoder_service_handler_yahoo'] = array(
+    'name' => 'geocoder_service_handler_yahoo',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'geocoder',
+  );
+
+  // Exported permission: geocoder_service_handler_yandex.
+  $permissions['geocoder_service_handler_yandex'] = array(
+    'name' => 'geocoder_service_handler_yandex',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'geocoder',
+  );
+
   // Exported permission: manage features.
   $permissions['manage features'] = array(
     'name' => 'manage features',
@@ -959,6 +1121,51 @@ function hps_defaults_user_default_permissions() {
       0 => 'administrator',
     ),
     'module' => 'user',
+  );
+
+  // Exported permission: use page manager.
+  $permissions['use page manager'] = array(
+    'name' => 'use page manager',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'page_manager',
+  );
+
+  // Exported permission: use panels caching features.
+  $permissions['use panels caching features'] = array(
+    'name' => 'use panels caching features',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'panels',
+  );
+
+  // Exported permission: use panels dashboard.
+  $permissions['use panels dashboard'] = array(
+    'name' => 'use panels dashboard',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'panels',
+  );
+
+  // Exported permission: use panels in place editing.
+  $permissions['use panels in place editing'] = array(
+    'name' => 'use panels in place editing',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'panels',
+  );
+
+  // Exported permission: use panels locks.
+  $permissions['use panels locks'] = array(
+    'name' => 'use panels locks',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'panels',
   );
 
   // Exported permission: use text format filtered_html.
@@ -1024,6 +1231,15 @@ function hps_defaults_user_default_permissions() {
       1 => 'editor',
     ),
     'module' => 'node',
+  );
+
+  // Exported permission: view pane admin links.
+  $permissions['view pane admin links'] = array(
+    'name' => 'view pane admin links',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'panels',
   );
 
   // Exported permission: view post access counter.

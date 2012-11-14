@@ -43,7 +43,7 @@ function hps_featured_content_views_default_views() {
   $handler->display->display_options['fields']['dspace_image']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['dspace_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['dspace_image']['settings'] = array(
-    'image_style' => 'thumbnail',
+    'image_style' => 'hps_thumbnail',
     'image_link' => '',
   );
   /* Field: Content: Title */
@@ -96,11 +96,11 @@ function hps_featured_content_views_default_views() {
   $handler->display->display_options['fields']['dspace_image']['label'] = '';
   $handler->display->display_options['fields']['dspace_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['dspace_image']['element_default_classes'] = FALSE;
-  $handler->display->display_options['fields']['dspace_image']['empty'] = '[no image]';
+  $handler->display->display_options['fields']['dspace_image']['empty'] = '[No image]';
   $handler->display->display_options['fields']['dspace_image']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['dspace_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['dspace_image']['settings'] = array(
-    'image_style' => 'thumbnail',
+    'image_style' => 'hps_thumbnail',
     'image_link' => '',
   );
   /* Field: Content: Title */
@@ -110,13 +110,37 @@ function hps_featured_content_views_default_views() {
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: DC Description Type */
+  $handler->display->display_options['fields']['dc_description_type']['id'] = 'dc_description_type';
+  $handler->display->display_options['fields']['dc_description_type']['table'] = 'field_data_dc_description_type';
+  $handler->display->display_options['fields']['dc_description_type']['field'] = 'dc_description_type';
+  $handler->display->display_options['fields']['dc_description_type']['label'] = '';
+  $handler->display->display_options['fields']['dc_description_type']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['dc_description_type']['alter']['text'] = '(Format: [dc_description_type])';
+  $handler->display->display_options['fields']['dc_description_type']['alter']['trim_whitespace'] = TRUE;
+  $handler->display->display_options['fields']['dc_description_type']['alter']['strip_tags'] = TRUE;
+  $handler->display->display_options['fields']['dc_description_type']['element_type'] = '0';
+  $handler->display->display_options['fields']['dc_description_type']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['dc_description_type']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['dc_description_type']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['dc_description_type']['empty'] = '(Format: unknown)';
+  $handler->display->display_options['fields']['dc_description_type']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['dc_description_type']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['dc_description_type']['field_api_classes'] = TRUE;
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Content: Title */
+  $handler->display->display_options['sorts']['title']['id'] = 'title';
+  $handler->display->display_options['sorts']['title']['table'] = 'node';
+  $handler->display->display_options['sorts']['title']['field'] = 'title';
 
   /* Display: Featured Content Slides */
   $handler = $view->new_display('panel_pane', 'Featured Content Slides', 'panel_pane_featured_content_slides');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['css_class'] = 'hps-slideshow';
-  $handler->display->display_options['display_description'] = 'Lists limited number of featured content nodes with \'hps-slideshow\' and \'slides\' CSS classes added to convert list to slideshow in HPS Zen theme.';
+  $handler->display->display_options['display_description'] = 'Lists limited number of featured content nodes with \'hps-slideshow\' and \'slides\' CSS class added to convert list to slideshow in theme.';
   $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'list';
@@ -201,7 +225,6 @@ function hps_featured_content_views_default_views() {
   $handler->display->display_options['filters']['promote']['field'] = 'promote';
   $handler->display->display_options['filters']['promote']['value'] = '1';
   $handler->display->display_options['inherit_panels_path'] = '0';
-
   $export['hps_featured_content'] = $view;
 
   return $export;
