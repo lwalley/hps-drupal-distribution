@@ -34,6 +34,12 @@ projects[field_group][version] = 1.1
 projects[entity][version] = 1.0-rc3
 
 projects[entityreference][version] = 1.0-rc5
+; Foregin key information defaulting to node on field create and not being
+; udpated. This is a core bug but for now patching entityreference until core
+; fixed.
+; @see http://drupal.org/node/1340748#comment-5806046
+; @see http://drupal.org/node/1416506
+projects[entityreference][patch][1340748] = http://drupal.org/files/entity_reference-add-cTools-relationship-1340748-33.patch
 
 projects[jquery_update][version] = 2.2
 
@@ -122,4 +128,4 @@ libraries[jquery.cycle][download][url]  = http://malsup.github.com/jquery.cycle.
 libraries[jquery.cycle][directory_name] = jquery.cycle
 
 libraries[jwplayer][download][type] = get
-libraries[jwplayer][download][url]  = http://www.longtailvideo.com/wp/jwplayer.zip
+libraries[jwplayer][download][url]  = http://www.longtailvideo.com/download/jwplayer-free-6-0-2813.zip
