@@ -48,6 +48,7 @@ dependencies[] = panels
 dependencies[] = page_manager
 dependencies[] = job_scheduler
 dependencies[] = feeds
+dependencies[] = feeds_ui
 dependencies[] = feeds_xpathparser
 dependencies[] = feeds_selfnode_processor
 dependencies[] = views
