@@ -31,6 +31,7 @@ dependencies[] = administerusersbyrole
 dependencies[] = token
 dependencies[] = pathauto
 dependencies[] = subpathauto
+dependencies[] = redirect
 dependencies[] = date
 dependencies[] = link
 dependencies[] = field_group
