@@ -14,7 +14,7 @@ projects[transliteration][version] = 3.1
 
 projects[ctools][version] = 1.2
 
-projects[diff][version] = 2.0
+projects[diff][version] = 3.2
 
 projects[advanced_help][version] = 1.0
 
@@ -49,7 +49,7 @@ projects[adaptive_image][version] = 1.4
 
 projects[wysiwyg][version] = 2.2
 
-projects[imce][version] = 1.5
+projects[imce][version] = 1.6
 
 projects[imce_wysiwyg][version] = 1.0
 
