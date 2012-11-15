@@ -30,8 +30,8 @@ function hps_featured_content_node_info() {
       'name' => t('Featured Content'),
       'base' => 'node_content',
       'description' => 'Use <em>featured content</em> to select and describe existing entities, such as DSpace items, that you would like to promote.',
-      'has_title' => '0',
-      'title_label' => '',
+      'has_title' => '1',
+      'title_label' => 'Title',
       'help' => '',
     ),
   );
