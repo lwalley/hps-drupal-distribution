@@ -178,8 +178,8 @@ function hps_browse_default_page_manager_handlers() {
         1 => 'empty',
       ),
       'display_modes' => '[List](),[Gallery](gallery),[Index](index)',
-      'form_build_id' => 'form-tIfelq7vYUdPcT5nlrxnkZfNVJXAYgJLj8Hgd1S5ql8',
-      'form_token' => 'r61k2iwilloTdqldx95v1pKA5d1J2RO7WP-mI3gEFZg',
+      'form_build_id' => 'form-jOJmbsc2r0iE97dIIJW8xIsNT1pV_vRSr0aqJslFfKM',
+      'form_token' => 'jD84-ba_4A5_8uQ8eyUMjTX_wXuT2faX2lKE546KzvQ',
       'form_id' => '_display_mode_links_content_type_edit_form',
       'override_title' => 0,
       'override_title_text' => '',
@@ -270,6 +270,7 @@ function hps_browse_default_page_manager_handlers() {
     'style_settings' => array(
       'default' => NULL,
       'middle' => NULL,
+      'row-1-1' => NULL,
     ),
   );
   $display->cache = array();
@@ -301,18 +302,14 @@ function hps_browse_default_page_manager_handlers() {
     $pane = new stdClass();
     $pane->pid = 'new-6';
     $pane->panel = 'row-1-1';
-    $pane->type = 'term_list';
-    $pane->subtype = 'term_list';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'hps_browse_by-panel_pane_child_terms';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'title' => NULL,
-      'type' => 'child',
-      'list_type' => 'ul',
-      'path' => 'taxonomy/term',
-      'context' => 'argument_term_1',
-      'override_title' => 1,
-      'override_title_text' => '',
+      'context' => array(
+        0 => 'argument_term_1',
+      ),
     );
     $pane->cache = array();
     $pane->style = array(
@@ -365,7 +362,7 @@ function hps_browse_default_page_manager_pages() {
       'settings' => array(
         'input_form' => 'tid',
         'vids' => array(
-          1 => 0,
+          1 => '1',
           2 => 0,
           3 => 0,
           4 => 0,
@@ -383,7 +380,7 @@ function hps_browse_default_page_manager_pages() {
       'identifier' => 'Display Mode',
       'name' => 'string',
       'settings' => array(
-        'use_tail' => 1,
+        'use_tail' => 0,
       ),
     ),
   );
@@ -401,7 +398,7 @@ function hps_browse_default_page_manager_pages() {
   $handler->weight = -29;
   $handler->conf = array(
     'title' => 'Gallery',
-    'no_blocks' => 1,
+    'no_blocks' => 0,
     'pipeline' => 'standard',
     'body_classes_to_remove' => '',
     'body_classes_to_add' => '',
@@ -465,8 +462,8 @@ function hps_browse_default_page_manager_pages() {
     $pane->access = array();
     $pane->configuration = array(
       'display_modes' => '[List](),[Gallery](gallery),[Index](index)',
-      'form_build_id' => 'form-FUnRMkYHQeTZ7_4FLPiXkwwi1_mRoJLpcrZKnUoMKGU',
-      'form_token' => 'r61k2iwilloTdqldx95v1pKA5d1J2RO7WP-mI3gEFZg',
+      'form_build_id' => 'form-Alh_rg3w0ixK2RU0IXe-Tfh-39Dgef9YzRVvas_Mc8Q',
+      'form_token' => 'jD84-ba_4A5_8uQ8eyUMjTX_wXuT2faX2lKE546KzvQ',
       'form_id' => '_display_mode_links_content_type_edit_form',
       'override_title' => 1,
       'override_title_text' => '',
@@ -588,8 +585,8 @@ function hps_browse_default_page_manager_pages() {
     $pane->access = array();
     $pane->configuration = array(
       'display_modes' => '[List](),[Gallery](gallery),[Index](index)',
-      'form_build_id' => 'form-M6knRaWLKd1Oq8K1GIJkBteSgBfv9tdr7WR8AUBIMAE',
-      'form_token' => 'r61k2iwilloTdqldx95v1pKA5d1J2RO7WP-mI3gEFZg',
+      'form_build_id' => 'form-xeta15N9BgCjc7l9tQOVvCggsS9QP3YXyIw5pTjnPCI',
+      'form_token' => 'jD84-ba_4A5_8uQ8eyUMjTX_wXuT2faX2lKE546KzvQ',
       'form_id' => '_display_mode_links_content_type_edit_form',
       'override_title' => 1,
       'override_title_text' => '',

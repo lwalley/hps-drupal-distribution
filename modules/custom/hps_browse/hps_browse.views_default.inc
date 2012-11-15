@@ -756,8 +756,30 @@ function hps_browse_views_default_views() {
   $handler->display->display_options['fields']['name']['label'] = '';
   $handler->display->display_options['fields']['name']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['name']['element_type'] = '0';
+  $handler->display->display_options['fields']['name']['element_label_type'] = '0';
   $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['name']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['name']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['name']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['name']['link_to_taxonomy'] = TRUE;
+  /* Field: Taxonomy term: Term description */
+  $handler->display->display_options['fields']['description']['id'] = 'description';
+  $handler->display->display_options['fields']['description']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['fields']['description']['field'] = 'description';
+  $handler->display->display_options['fields']['description']['label'] = '';
+  $handler->display->display_options['fields']['description']['alter']['strip_tags'] = TRUE;
+  $handler->display->display_options['fields']['description']['alter']['preserve_tags'] = '<em> <strong> <b> <i> <a>';
+  $handler->display->display_options['fields']['description']['element_type'] = '0';
+  $handler->display->display_options['fields']['description']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['description']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['description']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['description']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['description']['hide_empty'] = TRUE;
+  /* Sort criterion: Taxonomy term: Weight */
+  $handler->display->display_options['sorts']['weight']['id'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['sorts']['weight']['field'] = 'weight';
   /* Contextual filter: Taxonomy vocabulary: Vocabulary ID */
   $handler->display->display_options['arguments']['vid']['id'] = 'vid';
   $handler->display->display_options['arguments']['vid']['table'] = 'taxonomy_vocabulary';
@@ -788,6 +810,66 @@ function hps_browse_views_default_views() {
       'panel' => '0',
       'fixed' => '',
       'label' => 'Taxonomy vocabulary: Vocabulary ID',
+    ),
+  );
+
+  /* Display: Children of the root */
+  $handler = $view->new_display('panel_pane', 'Children of the root', 'panel_pane_child_terms');
+  $handler->display->display_options['display_description'] = 'Display a list of children for a root term.';
+  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Taxonomy term: Name */
+  $handler->display->display_options['fields']['name']['id'] = 'name';
+  $handler->display->display_options['fields']['name']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['label'] = '';
+  $handler->display->display_options['fields']['name']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['name']['element_type'] = '0';
+  $handler->display->display_options['fields']['name']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['name']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['name']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['name']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['name']['link_to_taxonomy'] = TRUE;
+  /* Field: Taxonomy term: Term description */
+  $handler->display->display_options['fields']['description']['id'] = 'description';
+  $handler->display->display_options['fields']['description']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['fields']['description']['field'] = 'description';
+  $handler->display->display_options['fields']['description']['label'] = '';
+  $handler->display->display_options['fields']['description']['alter']['strip_tags'] = TRUE;
+  $handler->display->display_options['fields']['description']['alter']['preserve_tags'] = '<em> <strong> <b> <i> <a>';
+  $handler->display->display_options['fields']['description']['element_type'] = '0';
+  $handler->display->display_options['fields']['description']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['description']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['description']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['description']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['description']['hide_empty'] = TRUE;
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Taxonomy term: Parent term */
+  $handler->display->display_options['arguments']['parent']['id'] = 'parent';
+  $handler->display->display_options['arguments']['parent']['table'] = 'taxonomy_term_hierarchy';
+  $handler->display->display_options['arguments']['parent']['field'] = 'parent';
+  $handler->display->display_options['arguments']['parent']['default_action'] = 'not found';
+  $handler->display->display_options['arguments']['parent']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['parent']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['parent']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['parent']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['parent']['specify_validation'] = TRUE;
+  $handler->display->display_options['arguments']['parent']['validate']['type'] = 'taxonomy_term';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  $handler->display->display_options['pane_category']['name'] = 'HPS Browse Panes';
+  $handler->display->display_options['pane_category']['weight'] = '0';
+  $handler->display->display_options['argument_input'] = array(
+    'parent' => array(
+      'type' => 'context',
+      'context' => 'entity:taxonomy_term.tid',
+      'context_optional' => 0,
+      'panel' => '0',
+      'fixed' => '',
+      'label' => 'Taxonomy term: Parent term',
     ),
   );
   $export['hps_browse_by'] = $view;
