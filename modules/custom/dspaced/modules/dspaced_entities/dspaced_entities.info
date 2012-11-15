@@ -1,5 +1,6 @@
 name = DSpaced Entities
 description = Defines bundles, fields and field instances that match DSpace entities and properties
+package = DSpaced
 core = 7.x
 
 dependencies[] = image

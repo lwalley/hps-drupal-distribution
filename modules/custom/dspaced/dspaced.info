@@ -1,5 +1,6 @@
 name = DSpaced
 description = Imports DSpace communities and their items
+package = DSpaced
 core = 7.x
 configure = admin/config/dspaced/settings
 

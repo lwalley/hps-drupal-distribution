@@ -1,5 +1,6 @@
 name = DSpaced User Interface
 description = User interface for monitoring DSpace feed imports scheduled by the DSpaced module.
+package = DSpaced
 core = 7.x
 
 dependencies[] = dspaced
