@@ -17,13 +17,7 @@ function hps_home_default_page_manager_pages() {
   $page->admin_description = 'Default configuration for a HPS home page.';
   $page->path = 'home';
   $page->access = array(
-    'plugins' => array(
-      0 => array(
-        'name' => 'front',
-        'settings' => NULL,
-        'not' => FALSE,
-      ),
-    ),
+    'plugins' => array(),
     'logic' => 'and',
   );
   $page->menu = array(
