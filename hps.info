@@ -20,6 +20,7 @@ dependencies[] = file
 dependencies[] = rdf
 dependencies[] = statistics
 dependencies[] = syslog
+dependencies[] = contact
 
 ; Contributed modules
 dependencies[] = libraries
