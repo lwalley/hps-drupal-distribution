@@ -67,18 +67,18 @@ function hps_home_default_page_manager_pages() {
     ),
   );
   $display = new panels_display();
-  $display->layout = 'hpszen_row_1_2';
+  $display->layout = 'hpszen_primary_aside_boxes';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
       'default' => NULL,
-      'row-1-1' => NULL,
-      'row-1-2' => NULL,
+      'primary-box' => NULL,
+      'aside-box' => NULL,
     ),
-    'row-1-1' => array(
+    'primary-box' => array(
       'style' => 'naked',
     ),
-    'row-1-2' => array(
+    'aside-box' => array(
       'style' => 'naked',
     ),
   );
@@ -88,7 +88,7 @@ function hps_home_default_page_manager_pages() {
   $display->panels = array();
     $pane = new stdClass();
     $pane->pid = 'new-1';
-    $pane->panel = 'row-1-1';
+    $pane->panel = 'primary-box';
     $pane->type = 'views_panes';
     $pane->subtype = 'hps_featured_content-panel_pane_featured_content_slides';
     $pane->shown = TRUE;
@@ -103,10 +103,10 @@ function hps_home_default_page_manager_pages() {
     $pane->position = 0;
     $pane->locks = array();
     $display->content['new-1'] = $pane;
-    $display->panels['row-1-1'][0] = 'new-1';
+    $display->panels['primary-box'][0] = 'new-1';
     $pane = new stdClass();
     $pane->pid = 'new-2';
-    $pane->panel = 'row-1-2';
+    $pane->panel = 'aside-box';
     $pane->type = 'views_panes';
     $pane->subtype = 'hps_news-panel_pane_front_page_news';
     $pane->shown = TRUE;
@@ -121,10 +121,10 @@ function hps_home_default_page_manager_pages() {
     $pane->position = 0;
     $pane->locks = array();
     $display->content['new-2'] = $pane;
-    $display->panels['row-1-2'][0] = 'new-2';
+    $display->panels['aside-box'][0] = 'new-2';
     $pane = new stdClass();
     $pane->pid = 'new-3';
-    $pane->panel = 'row-1-2';
+    $pane->panel = 'aside-box';
     $pane->type = 'views_panes';
     $pane->subtype = 'hps_events-panel_pane_upcoming_events';
     $pane->shown = TRUE;
@@ -139,7 +139,7 @@ function hps_home_default_page_manager_pages() {
     $pane->position = 1;
     $pane->locks = array();
     $display->content['new-3'] = $pane;
-    $display->panels['row-1-2'][1] = 'new-3';
+    $display->panels['aside-box'][1] = 'new-3';
   $display->hide_title = PANELS_TITLE_NONE;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;

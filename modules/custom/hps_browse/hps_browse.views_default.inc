@@ -293,7 +293,7 @@ function hps_browse_views_default_views() {
   $handler->display->display_options['style_options']['row_class_special'] = FALSE;
   $handler->display->display_options['style_options']['columns'] = array(
     'title' => 'title',
-    'dc_creator' => 'title',
+    'dc_creator' => 'dc_creator',
     'dc_description' => 'dc_description',
     'dc_description_abstract' => 'dc_description',
     'dc_date_created' => 'dc_date_created',
@@ -309,7 +309,7 @@ function hps_browse_views_default_views() {
       'empty_column' => 0,
     ),
     'dc_creator' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -374,7 +374,7 @@ function hps_browse_views_default_views() {
   $handler->display->display_options['fields']['dc_description']['id'] = 'dc_description';
   $handler->display->display_options['fields']['dc_description']['table'] = 'field_data_dc_description';
   $handler->display->display_options['fields']['dc_description']['field'] = 'dc_description';
-  $handler->display->display_options['fields']['dc_description']['label'] = '';
+  $handler->display->display_options['fields']['dc_description']['label'] = 'Description';
   $handler->display->display_options['fields']['dc_description']['alter']['trim_whitespace'] = TRUE;
   $handler->display->display_options['fields']['dc_description']['alter']['strip_tags'] = TRUE;
   $handler->display->display_options['fields']['dc_description']['element_type'] = 'p';
@@ -457,12 +457,15 @@ function hps_browse_views_default_views() {
   $handler->display->display_options['sorts']['title']['id'] = 'title';
   $handler->display->display_options['sorts']['title']['table'] = 'node';
   $handler->display->display_options['sorts']['title']['field'] = 'title';
-  $handler->display->display_options['sorts']['title']['expose']['label'] = 'Title';
+  /* Sort criterion: Content: DC Creator (dc_creator) */
+  $handler->display->display_options['sorts']['dc_creator_value']['id'] = 'dc_creator_value';
+  $handler->display->display_options['sorts']['dc_creator_value']['table'] = 'field_data_dc_creator';
+  $handler->display->display_options['sorts']['dc_creator_value']['field'] = 'dc_creator_value';
   /* Sort criterion: Content: DC Date Created (dc_date_created) */
   $handler->display->display_options['sorts']['dc_date_created_value']['id'] = 'dc_date_created_value';
   $handler->display->display_options['sorts']['dc_date_created_value']['table'] = 'field_data_dc_date_created';
   $handler->display->display_options['sorts']['dc_date_created_value']['field'] = 'dc_date_created_value';
-  $handler->display->display_options['sorts']['dc_date_created_value']['expose']['label'] = 'Created';
+  $handler->display->display_options['sorts']['dc_date_created_value']['order'] = 'DESC';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */

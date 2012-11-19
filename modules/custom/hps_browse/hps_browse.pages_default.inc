@@ -54,13 +54,13 @@ function hps_browse_default_page_manager_handlers() {
     ),
   );
   $display = new panels_display();
-  $display->layout = 'hpszen_row_1_1';
+  $display->layout = 'hpszen_primary_box';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
       'default' => NULL,
       'middle' => NULL,
-      'row-1-1' => NULL,
+      'primary-box' => NULL,
     ),
   );
   $display->cache = array();
@@ -69,7 +69,7 @@ function hps_browse_default_page_manager_handlers() {
   $display->panels = array();
     $pane = new stdClass();
     $pane->pid = 'new-1';
-    $pane->panel = 'row-1-1';
+    $pane->panel = 'primary-box';
     $pane->type = 'entity_view';
     $pane->subtype = 'node';
     $pane->shown = TRUE;
@@ -89,10 +89,10 @@ function hps_browse_default_page_manager_handlers() {
     $pane->position = 0;
     $pane->locks = array();
     $display->content['new-1'] = $pane;
-    $display->panels['row-1-1'][0] = 'new-1';
+    $display->panels['primary-box'][0] = 'new-1';
     $pane = new stdClass();
     $pane->pid = 'new-2';
-    $pane->panel = 'row-1-1';
+    $pane->panel = 'primary-box';
     $pane->type = 'views_panes';
     $pane->subtype = 'hps_browse_by-panel_pane_browse_by';
     $pane->shown = TRUE;
@@ -111,7 +111,7 @@ function hps_browse_default_page_manager_handlers() {
     $pane->position = 1;
     $pane->locks = array();
     $display->content['new-2'] = $pane;
-    $display->panels['row-1-1'][1] = 'new-2';
+    $display->panels['primary-box'][1] = 'new-2';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = 'new-1';
   $handler->conf['display'] = $display;
@@ -152,13 +152,13 @@ function hps_browse_default_page_manager_handlers() {
     ),
   );
   $display = new panels_display();
-  $display->layout = 'hpszen_row_1_1';
+  $display->layout = 'hpszen_primary_box';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
       'default' => NULL,
       'middle' => NULL,
-      'row-1-1' => NULL,
+      'primary-box' => NULL,
     ),
   );
   $display->cache = array();
@@ -167,7 +167,7 @@ function hps_browse_default_page_manager_handlers() {
   $display->panels = array();
     $pane = new stdClass();
     $pane->pid = 'new-3';
-    $pane->panel = 'row-1-1';
+    $pane->panel = 'primary-box';
     $pane->type = 'display_mode_links_content_type';
     $pane->subtype = 'display_mode_links_content_type';
     $pane->shown = TRUE;
@@ -193,10 +193,10 @@ function hps_browse_default_page_manager_handlers() {
     $pane->position = 0;
     $pane->locks = array();
     $display->content['new-3'] = $pane;
-    $display->panels['row-1-1'][0] = 'new-3';
+    $display->panels['primary-box'][0] = 'new-3';
     $pane = new stdClass();
     $pane->pid = 'new-4';
-    $pane->panel = 'row-1-1';
+    $pane->panel = 'primary-box';
     $pane->type = 'views_panes';
     $pane->subtype = 'hps_browse-panel_pane_list';
     $pane->shown = TRUE;
@@ -215,7 +215,7 @@ function hps_browse_default_page_manager_handlers() {
     $pane->position = 1;
     $pane->locks = array();
     $display->content['new-4'] = $pane;
-    $display->panels['row-1-1'][1] = 'new-4';
+    $display->panels['primary-box'][1] = 'new-4';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
@@ -264,13 +264,13 @@ function hps_browse_default_page_manager_handlers() {
     ),
   );
   $display = new panels_display();
-  $display->layout = 'hpszen_row_1_1';
+  $display->layout = 'hpszen_primary_box';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
       'default' => NULL,
       'middle' => NULL,
-      'row-1-1' => NULL,
+      'primary-box' => NULL,
     ),
   );
   $display->cache = array();
@@ -279,7 +279,7 @@ function hps_browse_default_page_manager_handlers() {
   $display->panels = array();
     $pane = new stdClass();
     $pane->pid = 'new-5';
-    $pane->panel = 'row-1-1';
+    $pane->panel = 'primary-box';
     $pane->type = 'term_description';
     $pane->subtype = 'term_description';
     $pane->shown = TRUE;
@@ -298,10 +298,10 @@ function hps_browse_default_page_manager_handlers() {
     $pane->position = 0;
     $pane->locks = array();
     $display->content['new-5'] = $pane;
-    $display->panels['row-1-1'][0] = 'new-5';
+    $display->panels['primary-box'][0] = 'new-5';
     $pane = new stdClass();
     $pane->pid = 'new-6';
-    $pane->panel = 'row-1-1';
+    $pane->panel = 'primary-box';
     $pane->type = 'views_panes';
     $pane->subtype = 'hps_browse_by-panel_pane_child_terms';
     $pane->shown = TRUE;
@@ -320,7 +320,7 @@ function hps_browse_default_page_manager_handlers() {
     $pane->position = 1;
     $pane->locks = array();
     $display->content['new-6'] = $pane;
-    $display->panels['row-1-1'][1] = 'new-6';
+    $display->panels['primary-box'][1] = 'new-6';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
@@ -433,14 +433,14 @@ function hps_browse_default_page_manager_pages() {
     ),
   );
   $display = new panels_display();
-  $display->layout = 'hpszen_row_1_1';
+  $display->layout = 'hpszen_primary_box';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
       'default' => NULL,
       'center' => NULL,
       'middle' => NULL,
-      'row-1-1' => NULL,
+      'primary-box' => NULL,
     ),
     'center' => array(
       'style' => 'naked',
@@ -455,7 +455,7 @@ function hps_browse_default_page_manager_pages() {
   $display->panels = array();
     $pane = new stdClass();
     $pane->pid = 'new-1';
-    $pane->panel = 'row-1-1';
+    $pane->panel = 'primary-box';
     $pane->type = 'display_mode_links_content_type';
     $pane->subtype = 'display_mode_links_content_type';
     $pane->shown = TRUE;
@@ -484,10 +484,10 @@ function hps_browse_default_page_manager_pages() {
     $pane->position = 0;
     $pane->locks = array();
     $display->content['new-1'] = $pane;
-    $display->panels['row-1-1'][0] = 'new-1';
+    $display->panels['primary-box'][0] = 'new-1';
     $pane = new stdClass();
     $pane->pid = 'new-2';
-    $pane->panel = 'row-1-1';
+    $pane->panel = 'primary-box';
     $pane->type = 'views_panes';
     $pane->subtype = 'hps_browse-panel_pane_gallery';
     $pane->shown = TRUE;
@@ -506,7 +506,7 @@ function hps_browse_default_page_manager_pages() {
     $pane->position = 1;
     $pane->locks = array();
     $display->content['new-2'] = $pane;
-    $display->panels['row-1-1'][1] = 'new-2';
+    $display->panels['primary-box'][1] = 'new-2';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
@@ -556,14 +556,14 @@ function hps_browse_default_page_manager_pages() {
     ),
   );
   $display = new panels_display();
-  $display->layout = 'hpszen_row_1_1';
+  $display->layout = 'hpszen_primary_box';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
       'default' => NULL,
       'center' => NULL,
       'middle' => NULL,
-      'row-1-1' => NULL,
+      'primary-box' => NULL,
     ),
     'center' => array(
       'style' => 'naked',
@@ -578,7 +578,7 @@ function hps_browse_default_page_manager_pages() {
   $display->panels = array();
     $pane = new stdClass();
     $pane->pid = 'new-3';
-    $pane->panel = 'row-1-1';
+    $pane->panel = 'primary-box';
     $pane->type = 'display_mode_links_content_type';
     $pane->subtype = 'display_mode_links_content_type';
     $pane->shown = TRUE;
@@ -607,10 +607,10 @@ function hps_browse_default_page_manager_pages() {
     $pane->position = 0;
     $pane->locks = array();
     $display->content['new-3'] = $pane;
-    $display->panels['row-1-1'][0] = 'new-3';
+    $display->panels['primary-box'][0] = 'new-3';
     $pane = new stdClass();
     $pane->pid = 'new-4';
-    $pane->panel = 'row-1-1';
+    $pane->panel = 'primary-box';
     $pane->type = 'views_panes';
     $pane->subtype = 'hps_browse-panel_pane_index';
     $pane->shown = TRUE;
@@ -629,7 +629,7 @@ function hps_browse_default_page_manager_pages() {
     $pane->position = 1;
     $pane->locks = array();
     $display->content['new-4'] = $pane;
-    $display->panels['row-1-1'][1] = 'new-4';
+    $display->panels['primary-box'][1] = 'new-4';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;

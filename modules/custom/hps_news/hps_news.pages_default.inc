@@ -50,13 +50,13 @@ function hps_news_default_page_manager_pages() {
     'relationships' => array(),
   );
   $display = new panels_display();
-  $display->layout = 'hpszen_row_1_2';
+  $display->layout = 'hpszen_primary_aside_boxes';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
       'default' => NULL,
-      'row-1-1' => NULL,
-      'row-1-2' => NULL,
+      'primary-box' => NULL,
+      'aside-box' => NULL,
     ),
   );
   $display->cache = array();
@@ -65,7 +65,7 @@ function hps_news_default_page_manager_pages() {
   $display->panels = array();
     $pane = new stdClass();
     $pane->pid = 'new-1';
-    $pane->panel = 'row-1-1';
+    $pane->panel = 'primary-box';
     $pane->type = 'views_exposed';
     $pane->subtype = 'views_exposed';
     $pane->shown = TRUE;
@@ -84,10 +84,10 @@ function hps_news_default_page_manager_pages() {
     $pane->position = 0;
     $pane->locks = array();
     $display->content['new-1'] = $pane;
-    $display->panels['row-1-1'][0] = 'new-1';
+    $display->panels['primary-box'][0] = 'new-1';
     $pane = new stdClass();
     $pane->pid = 'new-2';
-    $pane->panel = 'row-1-1';
+    $pane->panel = 'primary-box';
     $pane->type = 'views_pager';
     $pane->subtype = 'views_pager';
     $pane->shown = TRUE;
@@ -106,10 +106,10 @@ function hps_news_default_page_manager_pages() {
     $pane->position = 1;
     $pane->locks = array();
     $display->content['new-2'] = $pane;
-    $display->panels['row-1-1'][1] = 'new-2';
+    $display->panels['primary-box'][1] = 'new-2';
     $pane = new stdClass();
     $pane->pid = 'new-3';
-    $pane->panel = 'row-1-1';
+    $pane->panel = 'primary-box';
     $pane->type = 'views_empty';
     $pane->subtype = 'views_empty';
     $pane->shown = TRUE;
@@ -128,10 +128,10 @@ function hps_news_default_page_manager_pages() {
     $pane->position = 2;
     $pane->locks = array();
     $display->content['new-3'] = $pane;
-    $display->panels['row-1-1'][2] = 'new-3';
+    $display->panels['primary-box'][2] = 'new-3';
     $pane = new stdClass();
     $pane->pid = 'new-4';
-    $pane->panel = 'row-1-1';
+    $pane->panel = 'primary-box';
     $pane->type = 'views_row';
     $pane->subtype = 'views_row';
     $pane->shown = TRUE;
@@ -153,7 +153,7 @@ function hps_news_default_page_manager_pages() {
     $pane->position = 3;
     $pane->locks = array();
     $display->content['new-4'] = $pane;
-    $display->panels['row-1-1'][3] = 'new-4';
+    $display->panels['primary-box'][3] = 'new-4';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
