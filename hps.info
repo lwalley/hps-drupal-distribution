@@ -83,6 +83,7 @@ dependencies[] = hps_defaults
 ;dependencies[] = hps_news
 ;dependencies[] = hps_search
 ;dependencies[] = hps_browse
+;dependencies[] = hps_organisations
 
 ; Include files
 files[] = hps.profile

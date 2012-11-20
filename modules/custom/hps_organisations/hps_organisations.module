@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the HPS Organisations feature.
+ */
+
+include_once 'hps_organisations.features.inc';
