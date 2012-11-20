@@ -155,8 +155,75 @@ function hps_media_image_effect_info() {
       'form callback' => 'image_resize_form',
       'summary theme' => 'image_resize_summary',
     ),
+    'hps_relative_scale' => array(
+      'label' => t('HPS Relative Scale'),
+      'help' => t('Scales image to a percentage of its existing dimensions. Relative scaling will maintain the aspect-ratio ' .
+                  'of the original image. If only a single dimension is specified, the other dimension will be calculated. ' .
+                  'If both dimensions are specified then the dimension used is the one that would not be calculated, when ' .
+                  'maintaining aspect ratio, to be bigger than its target. If a minimum dimension is provided it will be used ' .
+                  'to adjust the target dimension, as needed, prior to scaling. If both dimensions are provided then one of ' .
+                  'the dimensions may be smaller than its minimum value.'),
+      'effect callback' => '_hps_relative_scale_effect',
+      'form callback' => '_hps_relative_scale_form',
+      'summary theme' => 'image_resize_summary',
+    ),
   );
   return $effects;
+}
+
+/**
+ * Form structure for the HPS Relative scale form.
+ *
+ * Note that this is not a complete form, it only contains the portion of the
+ * form for configuring the scale options. Therefore it does not not need to
+ * include metadata about the effect, nor a submit button.
+ *
+ * @param $data
+ *   The current configuration for this scale effect.
+ */
+function _hps_relative_scale_form($data) {
+  $form = image_resize_form($data);
+  $form['#element_validate'] = array('_hps_relative_scale_validate');
+  $form['width']['#required'] = FALSE;
+  $form['width']['#field_suffix'] = ' ' . t('% of the current width e.g. 50%');
+  $form['height']['#required'] = FALSE;
+  $form['height']['#field_suffix'] = ' ' . t('% of the current width e.g. 50%');
+  $form['minimum_width'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Minimum Width'),
+    '#description' => t('If set, the target width will not be set below this value.'),
+    '#default_value' => isset($data['minimu_width']) ? $data['minimum_width'] : '',
+    '#field_suffix' => ' ' . t('pixels'),
+    '#required' => FALSE,
+    '#size' => 10,
+    '#element_validate' => array('image_effect_integer_validate'),
+  );
+  $form['minimum_height'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Minimum Height'),
+    '#description' => t('If set, the target height will not be set below this value.'),
+    '#default_value' => isset($data['minimum_height']) ? $data['minimum_height'] : '',
+    '#field_suffix' => ' ' . t('pixels'),
+    '#required' => FALSE,
+    '#size' => 10,
+    '#element_validate' => array('image_effect_integer_validate'),
+  );
+  return $form;
+}
+/**
+ * Element validate handler to ensure that either a height or a width is
+ * specified.
+ */
+function _hps_relative_scale_validate($element, &$form_state) {
+  if (empty($element['width']['#value']) && empty($element['height']['#value'])) {
+    form_error($element, t('Width and height can not both be blank.'));
+  }
+  if ($element['width']['#value'] >= 100) {
+    form_error($element, t('Sorry, you can only scale down, relative width must be less than 100%'));
+  }
+  if ($element['height']['#value'] >= 100) {
+    form_error($element, t('Sorry, you can only scale down, relative height must be less than 100%'));
+  }
 }
 
 /**
@@ -204,6 +271,44 @@ function _hps_crop_effect(&$image, $data) {
 
   if (!image_toolkit_invoke('hps_crop', $image, $data)) {
     watchdog('image', 'HPS Crop failed using the %toolkit toolkit on %path (%mimetype, %dimensions)', array('%toolkit' => $image->toolkit, '%path' => $image->source, '%mimetype' => $image->info['mime_type'], '%dimensions' => $image->info['height'] . 'x' . $image->info['height']), WATCHDOG_ERROR);
+    return FALSE;
+  }
+  return TRUE;
+}
+
+/**
+ * Callback for HPS Relative Sale image effect.
+ *
+ * @param $image
+ *   An image object returned by image_load().
+ * @param $data
+ *   An array of attributes to use when performing the scale effect with the
+ *   following items:
+ *   - "width": An integer representing the desired width as a ratio of the
+ *     existing width.
+ *   - "height": An integer representing the desired height as a ratio of the
+ *     existing height.
+ *   - "upscale": A boolean indicating that the image should be upscaled if the
+ *     dimensions are larger than the original image.
+ *
+ * @return
+ *   TRUE on success. FALSE on failure to scale image.
+ *
+ * @see image_gd_hp_relative_scale
+ */
+function _hps_relative_scale_effect(&$image, $data) {
+
+  // Set sane default values.
+  $data += array(
+    'width' => NULL,
+    'height' => NULL,
+    'upscale' => FALSE,
+  );
+
+  module_load_include('inc', 'hps_media', 'image.gd');
+
+  if (!image_toolkit_invoke('hps_relative_scale', $image, $data)) {
+    watchdog('image', 'HPS Relative Scale failed using the %toolkit toolkit on %path (%mimetype, %dimensions)', array('%toolkit' => $image->toolkit, '%path' => $image->source, '%mimetype' => $image->info['mime_type'], '%dimensions' => $image->info['height'] . 'x' . $image->info['height']), WATCHDOG_ERROR);
     return FALSE;
   }
   return TRUE;

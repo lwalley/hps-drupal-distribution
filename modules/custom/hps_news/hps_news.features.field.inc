@@ -123,7 +123,7 @@ function hps_news_field_default_fields() {
           'module' => 'image',
           'settings' => array(
             'image_link' => '',
-            'image_style' => 'hps_large_adaptive',
+            'image_style' => 'hps_principal',
           ),
           'type' => 'image',
           'weight' => '2',
@@ -133,7 +133,7 @@ function hps_news_field_default_fields() {
           'module' => 'image',
           'settings' => array(
             'image_link' => 'content',
-            'image_style' => 'hps_thumbnail',
+            'image_style' => 'hps_minor',
           ),
           'type' => 'image',
           'weight' => '0',
@@ -159,7 +159,7 @@ function hps_news_field_default_fields() {
         'active' => 1,
         'module' => 'image',
         'settings' => array(
-          'preview_image_style' => 'hps_thumbnail',
+          'preview_image_style' => 'hps_minor',
           'progress_indicator' => 'throbber',
         ),
         'type' => 'image_image',

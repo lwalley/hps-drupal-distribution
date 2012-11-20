@@ -75,6 +75,64 @@ function image_gd_hps_crop(stdClass $image, $width, $height) {
 }
 
 /**
+ * Relatively scales an image while maintaining aspect ratio.
+ *
+ * The resulting image can be smaller for one or both target dimensions.
+ *
+ * @param $image
+ *   An image object returned by image_load().
+ * @param $width
+ *   The target width, as a percentage integer of the existing width. If this
+ *   value is omitted then the scaling will based only on the height value.
+ * @param $height
+ *   The target height, as a percentage integer of the existing height. If this
+ *   value is omitted then the scaling will based only on the width value.
+ * @param $minimum_width
+ *   Minimum target width, in pixels. Width will not be scaled less than this
+ *   value. If value is omitted then the scaling will not be restricted.
+ * @param $minimum_height
+ *   Minimum target height, in pixels. Height will not be scaled less than this
+ *   value. If value is omitted then the scaling will not be restricted.
+ *
+ * @return
+ *   TRUE on success, FALSE on failure.
+ *
+ * @see image_dimensions_scale()
+ * @see image_load()
+ * @see image_scale_and_crop()
+ */
+function image_gd_hps_relative_scale(stdClass $image, $width = NULL, $height = NULL, $minimum_width = NULL, $minimum_height = NULL) {
+  // Form validation ensures we have width and height values between and
+  // including 1 and 99 so no need to check here.
+  // @see _hps_relative_scale_validate()
+
+  $dimensions = $image->info;
+
+  $target_width = NULL;
+  if ($width) {
+    $target_width = $dimensions['width'] * ($width / 100);
+    if ($target_width < $minimum_width) {
+      $target_width = $minimum_width;
+    }
+  }
+
+  $target_height = NULL;
+  if ($height) {
+    $target_height = $dimensions['height'] * ($height / 100);
+    if ($target_height < $minimum_height) {
+      $target_height = $minimum_height;
+    }
+  }
+
+  // Scale the dimensions - if they don't change then just return success.
+  if (!image_dimensions_scale($dimensions, $target_width, $target_height)) {
+    return TRUE;
+  }
+
+  return image_resize($image, $dimensions['width'], $dimensions['height']);
+}
+
+/**
  * Helper function to determine the x coordinate point for top left crop
  * area.
  *

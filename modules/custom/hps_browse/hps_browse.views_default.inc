@@ -133,7 +133,7 @@ function hps_browse_views_default_views() {
   $handler->display->display_options['fields']['dspace_image']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['dspace_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['dspace_image']['settings'] = array(
-    'image_style' => 'hps_thumbnail',
+    'image_style' => 'hps_minor',
     'image_link' => 'content',
   );
   /* Field: Content: Bitstreams */
@@ -549,7 +549,7 @@ function hps_browse_views_default_views() {
   $handler->display->display_options['fields']['dspace_image']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['dspace_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['dspace_image']['settings'] = array(
-    'image_style' => 'hps_thumbnail',
+    'image_style' => 'hps_minor',
     'image_link' => 'content',
   );
   /* Field: Content: Bitstreams */

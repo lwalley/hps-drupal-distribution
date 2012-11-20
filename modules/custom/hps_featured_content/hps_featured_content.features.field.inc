@@ -157,7 +157,7 @@ function hps_featured_content_field_default_fields() {
         'active' => 1,
         'module' => 'image',
         'settings' => array(
-          'preview_image_style' => 'hps_thumbnail',
+          'preview_image_style' => 'hps_minor',
           'progress_indicator' => 'throbber',
         ),
         'type' => 'image_image',

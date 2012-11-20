@@ -43,7 +43,7 @@ function hps_featured_content_views_default_views() {
   $handler->display->display_options['fields']['dspace_image']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['dspace_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['dspace_image']['settings'] = array(
-    'image_style' => 'hps_thumbnail',
+    'image_style' => 'hps_minor',
     'image_link' => '',
   );
   /* Field: Content: Title */
@@ -100,7 +100,7 @@ function hps_featured_content_views_default_views() {
   $handler->display->display_options['fields']['dspace_image']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['dspace_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['dspace_image']['settings'] = array(
-    'image_style' => 'hps_thumbnail',
+    'image_style' => 'hps_minor',
     'image_link' => '',
   );
   /* Field: Content: Title */
@@ -183,7 +183,7 @@ function hps_featured_content_views_default_views() {
   $handler->display->display_options['fields']['field_hps_featured_content_image']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_hps_featured_content_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_hps_featured_content_image']['settings'] = array(
-    'image_style' => 'hps_large_adaptive',
+    'image_style' => 'hps_principal',
     'image_link' => '',
   );
   /* Field: Content: Body */
