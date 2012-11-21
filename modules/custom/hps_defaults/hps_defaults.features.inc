@@ -53,7 +53,7 @@ function hps_defaults_image_default_styles() {
         'data' => array(
           'width' => '30',
           'height' => '',
-          'minimum_width' => '100',
+          'minimum_width' => '200',
           'minimum_height' => '',
         ),
         'weight' => '2',
@@ -118,7 +118,9 @@ function hps_defaults_image_default_styles() {
         'name' => 'hps_relative_scale',
         'data' => array(
           'width' => '80',
-          'height' => '80',
+          'height' => '',
+          'minimum_width' => '200',
+          'minimum_height' => '',
         ),
         'weight' => '2',
       ),
