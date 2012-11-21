@@ -4,7 +4,7 @@ api = 2
 core = 7.x
 
 ;includes[] = drupal-org-core.make
-includes[] = https://github.com/mbl-cli/hps-drupal-distribution/blob/master/drupal-org-core.make
+includes[] = https://raw.github.com/mbl-cli/hps-drupal-distribution/master/drupal-org-core.make
 
 ; Install profile
 projects[hps][type] = profile
