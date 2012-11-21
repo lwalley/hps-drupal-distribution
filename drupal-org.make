@@ -18,7 +18,14 @@ projects[diff][version] = 3.2
 
 projects[advanced_help][version] = 1.0
 
-projects[administerusersbyrole][version] = 1.0-beta1
+projects[administerusersbyrole][version] = 1.x-dev
+projects[administerusersbyrole][download][type] = git
+projects[administerusersbyrole][download][url] = http://git.drupal.org/project/administerusersbyrole.git
+projects[administerusersbyrole][download][revision] = f8671526da1e97ef7740368f7a0ad25474d4d9a9
+; http://drupalcode.org/project/administerusersbyrole.git/commit/f867152
+; Addresses install error "You do not have permission to unblock <uid 1>" which
+; breaks Aegir site install.
+; @see http://drupal.org/node/923882
 
 projects[token][version] = 1.4
 
