@@ -3,11 +3,13 @@
 api = 2
 core = 7.x
 
-includes[] = drupal-org-core.make
+;includes[] = drupal-org-core.make
+includes[] = https://github.com/mbl-cli/hps-drupal-distribution/blob/master/drupal-org-core.make
 
 ; Install profile
 projects[hps][type] = profile
-projects[hps][download][type] = file
-projects[hps][download][url] = ../hps.tar.gz
+projects[hps][download][type] = git
+projects[hps][download][url] = git@github.com:mbl-cli/hps-drupal-distribution.git
+projects[hps][download][branch] = master
 
 
