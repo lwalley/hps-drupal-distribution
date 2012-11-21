@@ -140,6 +140,7 @@ function hpszen_preprocess_html(&$variables, $hook) {
   if ($variables['menu_item']) {
     switch ($variables['menu_item']['page_callback']) {
       case 'page_manager_page_execute':
+      case 'page_manager_term_view_page':
         // Add panels layout name to body class attribute.
         $page = page_manager_get_current_page();
         $variables['classes_array'][] = drupal_clean_css_identifier($page['handler']->conf['display']->layout);

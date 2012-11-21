@@ -107,7 +107,6 @@ li a.active {
     }
   }
   li {
-    padding: 0 0 0 rhythm(0.5);
     list-style: none;
     &.active-trail {
       background-color: $navigation-active-background-color;
@@ -119,7 +118,12 @@ li a.active {
         }
       }
     }
-    &.active-trail a,
+    &.active-trail a {
+      &:hover {
+        background-color: $navigation-active-hover-background-color;
+        color: $navigation-active-hover-font-color;
+      }
+    }
     a {
       &:hover {
         background-color: $navigation-hover-background-color;
@@ -141,12 +145,5 @@ li a.active {
 
       }
     }
-  }
-}
-
-// Style navigation as horizontal list with slide down
-@media all and (min-width: 600px) {
-  #navigation {
-
   }
 }

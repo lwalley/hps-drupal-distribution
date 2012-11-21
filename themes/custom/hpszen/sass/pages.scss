@@ -9,7 +9,6 @@
 
 @import "base";
 
-
 /*
  * Body
  */
@@ -96,6 +95,9 @@ body {
  * Content
  */
 #content {
+  background-color: white;
+  @include border-radius();
+  @include box-shadow();
 }
 
 .region-highlighted {
@@ -225,6 +227,9 @@ span.field-label { /* The inline field label used by the Fences module */
  */
 
 #footer {
+  background-color: rgba(white, 0.7);
+  margin-top: rhythm(2);
+  @include box-shadow();
 }
 
 /*

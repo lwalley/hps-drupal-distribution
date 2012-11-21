@@ -33,19 +33,27 @@
 #header,
 #navigation,
 #content,
-.panel-hpszen-row-1-1,
+.panel-hpszen-primary-box,
 .region-sidebar-first,
 .region-sidebar-second,
 #footer {
   @include zen-grid-item-base();
 }
 
+#content {
+  // Needs some room
+  padding: 3%;
+}
+
 // When we have HPS Zen panels #content turns into container so we need to add base
 // styles to child elements
-.hpszen-row-1-1 {
+.hpszen-primary-box {
   #content {
     .breadcrumb,
-    .messages {
+    .messages,
+    > h1,
+    > h2,
+    > .tabs {
       @include zen-grid-item-base();
       @include zen-clear();
     }
@@ -57,7 +65,7 @@
 #content,
 #footer,
 #secondary-menu,
-.panel-hpszen-row-1-1 {
+.panel-hpszen-primary-box {
   @include zen-clear();
 }
 
@@ -86,11 +94,10 @@
   }
 }
 
-// Position navigation bar above content for screens wide enough to handle it.
-// By default it is below content.
 @media all and (min-width: 600px) {
   $name-font-size: 3.5  * $base-font-size;
   #name-and-slogan {
+    float: left;
     h1 {
       @include adjust-font-size-to($name-font-size);
       @include leader(1, $h1-font-size);
@@ -133,6 +140,7 @@
         > li {
           float: left;
           list-style-position: inside;
+          margin-right: $zen-gutter-width / 2;
         }
       }
       ul {
@@ -178,15 +186,34 @@
   }
   // With HPS Zen panel layouts #content is a nested container with $zen-column-count columns
   // So we need to make all child containers, including panels, grid items.
-  .hpszen-row-1-1 {
+  .hpszen-primary-box {
     #content {
       .breadcrumb,
       .messages,
-      .panel-hpszen-row-1-1 {
+      > h1,
+      > h2,
+      > .tabs,
+      .panel-hpszen-primary-box {
         @include zen-grid-item(2, 1);
       }
     }
   }
+
+  // Two column footer
+  .region-footer {
+    @include zen-nested-container();
+    .block {
+      @include zen-grid-item-base();
+    }
+    .block:nth-child(2n+1) {
+      @include zen-grid-item(1, 1);
+      @include zen-clear(); /* Start a new row */
+    }
+    .block:nth-child(2n) {
+      @include zen-grid-item(1, 2);
+    }
+  }
+
 }
 
 // Screen sizes that can handle one extra column adjacent to content, rest underneath.
@@ -238,13 +265,35 @@
       }
     }
   }
+
+  // Three column footer
+  .region-footer {
+    @include zen-nested-container();
+    .block {
+      @include zen-grid-item-base();
+    }
+    .block:nth-child(3n+1) {
+      @include zen-grid-item(1, 1);
+      @include zen-clear(); /* Start a new row */
+    }
+    .block:nth-child(3n+2) {
+      @include zen-grid-item(1, 2);
+    }
+    .block:nth-child(3n) {
+      @include zen-grid-item(1, 3);
+    }
+  }
+
   // With HPS Zen panel layouts #content is a nested container with $zen-column-count columns
   // So we need to make all child containers, including panels, grid items.
-  .hpszen-row-1-1 {
+  .hpszen-primary-box {
     #content {
       .breadcrumb,
       .messages,
-      .panel-hpszen-row-1-1 {
+      > h1,
+      > h2,
+      > .tabs,
+      .panel-hpszen-primary-box {
         @include zen-grid-item(3, 1);
       }
     }
@@ -301,13 +350,35 @@
     }
   }
 
+  // Three column footer
+  .region-footer {
+    @include zen-nested-container();
+    .block {
+      @include zen-grid-item-base();
+    }
+    .block:nth-child(3n+1) {
+      @include zen-grid-item(7, 1);
+      @include zen-clear(); /* Start a new row */
+    }
+    .block:nth-child(3n+2) {
+      @include zen-grid-item(8, 9);
+    }
+    .block:nth-child(3n) {
+      @include zen-grid-item(7, 18);
+    }
+  }
+
+
   // With HPS Zen panel layouts #content is a nested container with $zen-column-count columns
   // So we need to make all child containers, including panels, grid items.
-  .hpszen-row-1-1 {
+  .hpszen-primary-box {
     #content {
       .breadcrumb,
       .messages,
-      .panel-hpszen-row-1-1 {
+      > h1,
+      > h2,
+      > .tabs,
+      .panel-hpszen-primary-box {
         @include zen-grid-item(24, 1);
       }
     }
@@ -346,13 +417,35 @@
       @include zen-grid-item(3, 21);
     }
   }
+
+  // Three column footer
+  .region-footer {
+    @include zen-nested-container();
+    .block {
+      @include zen-grid-item-base();
+    }
+    .block:nth-child(3n+1) {
+      @include zen-grid-item(11, 5);
+      @include zen-clear(); /* Start a new row */
+    }
+    .block:nth-child(3n+2) {
+      @include zen-grid-item(4, 17);
+    }
+    .block:nth-child(3n) {
+      @include zen-grid-item(3, 21);
+    }
+  }
+
   // With HPS Zen panel layouts #content is a nested container with $zen-column-count columns
   // So we need to make all child containers, including panels, grid items.
-  .hpszen-row-1-1 {
+  .hpszen-primary-box {
     #content {
       .breadcrumb,
       .messages,
-      .panel-hpszen-row-1-1 {
+      > h1,
+      > h2,
+      > .tabs,
+      .panel-hpszen-primary-box {
         @include zen-grid-item(27, 1);
       }
     }
@@ -362,9 +455,11 @@
 // When we have HPS Zen panel layouts make #content a nested container.
 // This must be applied after #content receives grid_item
 // @see hpszen_preprocess_html().
-.hpszen-row-1-1 {
+.hpszen-primary-box {
   #content {
     @include zen-nested-container();
+    // Put padding back... might mess up grids?
+    padding: 3%;
   }
 }
 

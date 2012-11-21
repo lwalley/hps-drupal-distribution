@@ -20,8 +20,8 @@
 
         Drupal.theme.hpszenSubmenuToggle = function () {
           return '<a href="#" class="submenu-toggle" title="' +
-                 Drupal.t('Javascript trigger to add or remove this items ' +
-                          'submenu from the visual display.') +
+                 Drupal.t("Javascript trigger to add or remove this item's " +
+                          "submenu from the visual display.") +
                  '">&or;</a>';
         };
 

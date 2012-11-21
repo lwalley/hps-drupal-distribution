@@ -53,8 +53,7 @@ $slogan-font-size: 1.5 * $base-font-size;
 // @todo: Remove unused font stacks.
 $times-new-roman: "Times New Roman", Times, Georgia, "DejaVu Serif", serif;
 //$times:           Times, "Times New Roman", Georgia, "DejaVu Serif", serif;
-//$georgia:         Georgia, "Times New Roman", "DejaVu Serif", serif;
-
+$georgia:         Georgia, Times, "Times New Roman", "DejaVu Serif", serif;
 //$verdana:         Verdana, Tahoma, "DejaVu Sans", sans-serif;
 //$tahoma:          Tahoma, Verdana, "DejaVu Sans", sans-serif;
 //$helvetica:       Helvetica, Arial, "Nimbus Sans L", sans-serif;
@@ -65,9 +64,9 @@ $arial:           Arial, Helvetica, "Nimbus Sans L", sans-serif;
 $courier:         "Courier New", "DejaVu Sans Mono", monospace, sans-serif;
 
 // Now create some variables for the font stacks we want to use on this site.
-$base-font-family: $arial;
-$font-heading:     $times-new-roman;
-$font-body:        $arial;
+$base-font-family: $georgia;
+$font-heading:     $georgia;
+$font-body:        $georgia;
 $font-monospace:   $courier;
 
 // Variables for default colors, shadows etc.
@@ -84,12 +83,14 @@ $default-box-shadow-blur:            5px;
 $default-box-shadow-spread:          false;
 $default-box-shadow-inset:           false;
 
-$navigation-default-background-color:        $grey;
-$navigation-default-font-color:              white;
-$navigation-active-background-color: $yellow;
-$navigation-active-font-color:       $grey;
-$navigation-hover-background-color:  lighten($grey, 20%);
-$navigation-hover-font-color:        white;
+$navigation-default-background-color:       $grey;
+$navigation-default-font-color:             white;
+$navigation-hover-background-color:         lighten($grey, 20%);
+$navigation-hover-font-color:               white;
+$navigation-active-background-color:        $yellow;
+$navigation-active-font-color:              $grey;
+$navigation-active-hover-background-color:  lighten($yellow, 20%);
+$navigation-active-hover-font-color:        $grey;
 
 // The amount lists, blockquotes and comments are indented.
 $indent-amount: 1em;

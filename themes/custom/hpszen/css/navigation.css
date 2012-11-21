@@ -77,32 +77,35 @@ ul li.leaf {
 }
 /* line 109, ../sass/navigation.scss */
 #navigation li {
-  padding: 0 0 0 0.75em;
   list-style: none;
 }
-/* line 112, ../sass/navigation.scss */
+/* line 111, ../sass/navigation.scss */
 #navigation li.active-trail {
   background-color: #ffd31f;
 }
-/* line 117, ../sass/navigation.scss */
+/* line 116, ../sass/navigation.scss */
 #navigation li.active-trail > a:link, #navigation li.active-trail > a:visited, #navigation li.active-trail > a:active {
   color: #363636;
 }
-/* line 124, ../sass/navigation.scss */
-#navigation li.active-trail a:hover,
+/* line 122, ../sass/navigation.scss */
+#navigation li.active-trail a:hover {
+  background-color: #ffe785;
+  color: #363636;
+}
+/* line 128, ../sass/navigation.scss */
 #navigation li a:hover {
   background-color: dimgrey;
   color: white;
 }
-/* line 129, ../sass/navigation.scss */
+/* line 133, ../sass/navigation.scss */
 #navigation li.expanded {
   position: relative;
 }
-/* line 131, ../sass/navigation.scss */
+/* line 135, ../sass/navigation.scss */
 #navigation li.expanded > a {
   margin-right: 3em;
 }
-/* line 133, ../sass/navigation.scss */
+/* line 137, ../sass/navigation.scss */
 #navigation li.expanded > a.submenu-toggle {
   margin-right: 0;
   text-align: center;
