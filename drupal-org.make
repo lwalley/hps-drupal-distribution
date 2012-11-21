@@ -43,7 +43,8 @@ projects[entityreference][version] = 1.0-rc5
 ; fixed.
 ; @see http://drupal.org/node/1340748#comment-5806046
 ; @see http://drupal.org/node/1416506
-projects[entityreference][patch][1340748] = http://drupal.org/files/entity_reference-add-cTools-relationship-1340748-33.patch
+;projects[entityreference][patch][1340748] = http://drupal.org/files/entity_reference-add-cTools-relationship-1340748-33.patch
+projects[entityreference][patch][1340748] = https://github.com/downloads/mbl-cli/hps-drupal-distribution/entity_reference-add-cTools-relationship-1340748.patch
 
 projects[jquery_update][version] = 2.2
 
