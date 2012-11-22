@@ -109,7 +109,6 @@
  *   @see http://drupal.org/node/939462
  */
 
-
 /**
  * Override or insert variables into the maintenance page template.
  *
@@ -137,6 +136,7 @@ function hpszen_preprocess_maintenance_page(&$variables, $hook) {
  *   The name of the template being rendered ("html" in this case.)
  */
 function hpszen_preprocess_html(&$variables, $hook) {
+
   if ($variables['menu_item']) {
     switch ($variables['menu_item']['page_callback']) {
       case 'page_manager_page_execute':
@@ -146,6 +146,10 @@ function hpszen_preprocess_html(&$variables, $hook) {
         $variables['classes_array'][] = drupal_clean_css_identifier($page['handler']->conf['display']->layout);
         break;
     }
+  }
+  // Strip html from head title
+  if ($variables['head_title']) {
+    $variables['head_title'] = strip_tags(htmlspecialchars_decode($variables['head_title']));
   }
 
   // The body tag's classes are controlled by the $classes_array variable. To
@@ -161,8 +165,15 @@ function hpszen_preprocess_html(&$variables, $hook) {
  * @param $hook
  *   The name of the template being rendered ("page" in this case.)
  */
-//function hpszen_preprocess_page(&$variables, $hook) {
-//}
+function hpszen_preprocess_page(&$variables, $hook) {
+  // Add log in menu item to secondary menu for anonymous users.
+  if (!user_is_logged_in()) {
+    $variables['secondary_menu']['menu-login'] = array(
+      'href' => 'user/login',
+      'title' => t('Log in'),
+    );
+  }
+}
 
 /**
  * Override or insert variables into the node templates.
@@ -268,4 +279,3 @@ function hpszen_preprocess_views_view(&$variables, $hook) {
     }
   }
 }
-
