@@ -16,3 +16,23 @@ function hps_featured_content_entity_info_alter(&$entity_info) {
   );
 }
 
+/**
+ * Implements hook_views_pre_render().
+ *
+ * @note Hack to remove duplicates from featured content.
+ * @todo Figure out a long term solution to duplicate featured content issue.
+ */
+function hps_featured_content_views_pre_render(&$view) {
+   switch ($view->name) {
+    case 'hps_featured_content':
+      $nids = array();
+      foreach ($view->result as $i => $row) {
+        if (in_array($row->nid, $nids)) {
+          unset($view->result[$i]);
+        } else {
+          $nids[] = $row->nid;
+        }
+      }
+      break;
+  }
+}
