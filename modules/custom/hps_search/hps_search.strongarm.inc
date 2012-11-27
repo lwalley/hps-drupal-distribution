@@ -26,7 +26,7 @@ function hps_search_strongarm() {
       'search_api_views:hps_search:page' => 'search_api_views:hps_search:page',
       'search_api_views:hps_search:panel_pane_1' => 'search_api_views:hps_search:panel_pane_1',
       'search_api_views:hps_search:search_api_views_facets_block_1' => 'search_api_views:hps_search:search_api_views_facets_block_1',
-      'search_api_views:hps_search:ctools_context_1' => 'search_api_views:hps_search:ctools_context_1',
+      'search_api_views:hps_search:ctools_context_search' => 'search_api_views:hps_search:ctools_context_search',
     ),
   );
   $export['search_api_facets_search_ids'] = $strongarm;

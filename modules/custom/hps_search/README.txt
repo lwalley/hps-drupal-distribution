@@ -49,7 +49,21 @@ Assumes you have imported DSpace Items, see DSpaced module.
    custom 'Search Results' node view (display) mode e.g.
    /admin/structure/types/manage/dspaced-entities-item/display/hps_search_results
 
-6. Enable the 'HPS Search' View and context display /admin/structure/views.
+6. Enable the 'HPS Search' View and 'Search Context' display /admin/structure/views.
+
+   IMPORTANT: Leave the 'Simple Search Block' display disabled.
+
+   Note: The 'Simple Search Block' is a disabled page display that is used purely
+         to get a simple exposed filter form (simple keyword search) into a block
+         for use across the site. The page display should be kept in synch with the
+         context display so that the exposed form action points to the right path and
+         that it's filtering on the correct field. The reason for the page is that you
+         can't exposed filter forms from context displays in blocks
+         (see http://drupal.org/node/1168088).
+
+         This is a bit of a hack but it was a quick solution to allow two search
+         forms to exist on the same page (/search) with different IDs and different
+         form elements.
 
 7. Enable the 'HPS Search' Page /admin/structure/pages and 'Search' variant.
 

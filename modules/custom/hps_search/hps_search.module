@@ -15,3 +15,12 @@ function hps_search_entity_info_alter(&$entity_info) {
     'custom settings' => FALSE
   );
 }
+
+/**
+ * Implements hook_form_views_exposed_form_alter().
+ */
+function hps_search_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+  if ($form['#id'] == 'views-exposed-form-hps-search-page-search') {
+    $form['text']['#attributes'] = array('placeholder' => t('Search...'));
+  }
+}
