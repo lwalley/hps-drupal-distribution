@@ -41,6 +41,9 @@ function hps_media_pre_render_hps_media_player($element) {
  *
  * Override or insert variables into a field template.
  *
+ * @todo Investigate remote stream wrapper module to use instead of link field
+ *       for DSpace items.
+ *
  */
 function hps_media_preprocess_field(&$variables, $hook) {
   if ($variables['element']['#field_type'] == 'link_field') {
