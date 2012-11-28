@@ -231,7 +231,7 @@ function hps_featured_content_views_default_views() {
   $handler->display->display_options['fields']['field_hps_featured_content_image']['field'] = 'field_hps_featured_content_image';
   $handler->display->display_options['fields']['field_hps_featured_content_image']['label'] = '';
   $handler->display->display_options['fields']['field_hps_featured_content_image']['alter']['path'] = '[hps_featured_entity]';
-  $handler->display->display_options['fields']['field_hps_featured_content_image']['element_type'] = 'span';
+  $handler->display->display_options['fields']['field_hps_featured_content_image']['element_type'] = '0';
   $handler->display->display_options['fields']['field_hps_featured_content_image']['element_label_type'] = '0';
   $handler->display->display_options['fields']['field_hps_featured_content_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_hps_featured_content_image']['element_wrapper_type'] = '0';
