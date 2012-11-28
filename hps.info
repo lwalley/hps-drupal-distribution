@@ -69,6 +69,8 @@ dependencies[] = addressfield
 dependencies[] = geophp
 dependencies[] = geofield
 dependencies[] = geocoder
+;dependencies[] = sharethis
+;dependencies[] = google_analytics
 
 ; Custom modules/features are unversioned and included with the hps profile
 dependencies[] = views_job_scheduler

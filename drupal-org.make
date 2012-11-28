@@ -53,7 +53,9 @@ projects[entityreference][version] = 1.0-rc5
 ;projects[entityreference][patch][1340748] = http://drupal.org/files/entity_reference-add-cTools-relationship-1340748-33.patch
 projects[entityreference][patch][1340748] = https://github.com/downloads/mbl-cli/hps-drupal-distribution/entity_reference-add-cTools-relationship-1340748.patch
 
-projects[jquery_update][version] = 2.2
+projects[jquery_update][version] = 2.3-alpha1
+; Latest version of jQuery not available on recommended 2.2 release.
+; @see http://drupal.org/node/1819558
 
 projects[adaptive_image][version] = 1.4
 
@@ -121,8 +123,11 @@ projects[geofield][version] = 1.1
 
 projects[geocoder][version] = 1.2
 
+projects[google_analytics][version] = 1.3
 
-; @note Custom unversioned modules are included in profile tar.gz
+projects[sharethis][version] = 2.5
+
+; @note Custom unversioned modules are included with this profile
 
 ; Libraries
 libraries[ckeditor][download][type] = get
