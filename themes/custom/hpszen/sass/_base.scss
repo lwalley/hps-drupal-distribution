@@ -37,20 +37,19 @@ $legacy-support-for-ie8: true;
 // use in the normalize.scss file.
 // @see http://compass-style.org/reference/compass/typography/vertical_rhythm/
 
-$base-font-size:   14px; // The font size set on the root html element.
-$base-line-height: 21px; // This line-height determines the basic unit of vertical rhythm.
+$base-font-size:   12px; // The font size set on the root html element.
+$base-line-height: 1.5 * $base-font-size; // This line-height determines the basic unit of vertical rhythm.
 
-$h1-font-size:     2.5  * $base-font-size;
-$h2-font-size:     1.5  * $base-font-size;
-$h3-font-size:     1.17 * $base-font-size;
-$h4-font-size:     1    * $base-font-size;
-$h5-font-size:     0.83 * $base-font-size;
-$h6-font-size:     0.75 * $base-font-size;
-$name-font-size:   2.5 * $base-font-size;
-$slogan-font-size: 1.5 * $base-font-size;
+$h1-font-size:     2   * $base-font-size;
+$h2-font-size:     1.5 * $base-font-size;
+$h3-font-size:     1.1 * $base-font-size;
+$h4-font-size:     1   * $base-font-size;
+$h5-font-size:     1   * $base-font-size;
+$h6-font-size:     1   * $base-font-size;
+$name-font-size:   2   * $base-font-size;
+$slogan-font-size: 1   * $base-font-size;
 
 // @note DejaVu and Nimbus Sans fonts are commonly available on Linux systems
-// @todo: Remove unused font stacks.
 $times-new-roman: "Times New Roman", Times, Georgia, "DejaVu Serif", serif;
 //$times:           Times, "Times New Roman", Georgia, "DejaVu Serif", serif;
 $georgia:         Georgia, Times, "Times New Roman", "DejaVu Serif", serif;
@@ -76,7 +75,15 @@ $grey:                               #363636;
 $base-background-color:              white;
 $base-font-color:                    black;
 
-$default-box-shadow-color:           $grey;
+$default-text-shadow-color:          rgba(black, 0.5);
+$default-text-shadow-h-offset:       1px;
+$default-text-shadow-v-offset:       1px;
+$default-text-shadow-blur:           1px;
+$default-text-shadow-spread:         false;
+
+$default-border-radius:              2px;
+
+$default-box-shadow-color:           rgba(black, 0.5);
 $default-box-shadow-h-offset:        2px; // Positive is to the right.
 $default-box-shadow-v-offset:        2px; // Positive is down.
 $default-box-shadow-blur:            5px;
@@ -95,9 +102,8 @@ $navigation-active-hover-font-color:        $grey;
 // The amount lists, blockquotes and comments are indented.
 $indent-amount: 1em;
 
-// Default Zen Grids settings.
-// @note Using columns as gutter to give us more control across multiple devices.
-$zen-column-count:  1;
+// Default Zen Grids settings, mobile first.
+$zen-column-count:  12;
 $zen-gutter-width:  $base-line-height * 2;
 // IE6-7 don't support box-sizing: border-box. We can fix this in 1 of 3 ways:
 // - Drop support for IE 6/7. :-) In the _base.scss, set $legacy-support-for-ie6

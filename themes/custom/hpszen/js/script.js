@@ -29,6 +29,12 @@
           return '<a class="menu-toggle" href="#">' + Drupal.t('Menu') + '</a>';
         };
 
+        function toggleMenu(event) {
+          event.preventDefault();
+          event.stopPropagation();
+          $(event.data.menu).toggleClass('element-invisible');
+        }
+
         $(this).find('ul').addClass('element-invisible');
         $(this).find('li.expanded').each(function () {
           var li = $(this);
@@ -38,7 +44,9 @@
 
         $(this).once('adjustnavigation', function () {
           var nav = $(this);
-          if (nav.width() < 600) {
+          // Conditional must match the media query threshold for horizontal menu in CSS
+          // @see sass/layouts/responsive.scss
+          if ($(document).width() < 699) {
             // Convert navigation to vertical toggle menu
             nav.addClass('toggle-menu');
             nav.find('.block-menu').each(function () {
@@ -52,6 +60,8 @@
               $(title).wrapInner('<a href="#" />')
               .find('a').bind('click', {menu: rootMenu}, toggleMenu);
 
+              $(rootMenu).addClass('element-invisible');
+
             });
           }
           else {
@@ -64,11 +74,6 @@
           $('#navigation').trigger('adjustnavigation');
         });
 
-        function toggleMenu(event) {
-          event.preventDefault();
-          event.stopPropagation();
-          $(event.data.menu).toggleClass('element-invisible');
-        }
       });
 
       // Slideshow
@@ -82,52 +87,18 @@
 
           Drupal.theme.hpszenCyclingPagerItem = function (index, slide) {
             var slide = $(slide),
-                alt = slide.find('h2').text() || '',
-                image = slide.find('.field-type-image img');
+                alt = slide.find('> p').text() || '',
+                image = slide.find('> span img');
             return '<a title="' + Drupal.t('Slide number @index.', { '@index': index + 1 }) + '" href="#"><img src="' + image.attr('src') + '" alt="' + alt + '"/></a>';
           };
-
-          // Assumes slides are in .view-content:
-          var slides = $(this),
-              images = $(this).find('.field-type-image img');
-          slides.closest('.view-content').addClass('cycling');
-
-          images.one('load', function () {
-            positionImage(this);
-          }).each(function () {
-            if (this.complete) $(this).load();
-          });
-
-          slides.parent().append(Drupal.theme('hpszenCyclingPager'));
-
-          slides.cycle({
-            pager:  '.pager',
-            pagerAnchorBuilder: pagerItem,
-            pause: 1,
-            speed: 1000,
-            fastOnEvent: 200,
-            delay: -2000,
-            timeout: 15000,
-            fx: 'scrollLeft',
-            after: function () {
-              positionImage($(this).find('.field-type-image img')[0]);
-            }
-          });
 
           function pagerItem(index, slide) {
             return Drupal.theme('hpszenCyclingPagerItem', index, slide);
           }
 
-          $(window).bind('resize', function () {
-            slides.each(function () {
-              $(this).width($(this).closest('.view-content').width());
-              positionImage($(this).find('.field-type-image img')[0]);
-            });
-          });
-
           // Called on image load, window resize and after slide transition.
           function positionImage(image) {
-            var container = $(image).closest('.field-type-image'),
+            var container = $(image).closest('span'),
                 showing = (container.height() / image.height),
                 margin  = 0;
             if (!container.width() > 0 || !image.width > 0) return; // Stop if slide hidden
@@ -149,6 +120,40 @@
             }
             $(image).css('margin-top', Math.floor(margin) + 'px');
           }
+
+          // Assumes slides are in .view-content:
+          var slides = $(this),
+              images = $(this).find('> span img');
+          slides.closest('.view-content').addClass('cycling');
+
+          images.one('load', function () {
+            positionImage(this);
+          }).each(function () {
+            if (this.complete) $(this).load();
+          });
+
+          slides.parent().append(Drupal.theme('hpszenCyclingPager'));
+
+          slides.cycle({
+            pager:  '.pager',
+            pagerAnchorBuilder: pagerItem,
+            pause: 1,
+            speed: 1000,
+            fastOnEvent: 200,
+            delay: -2000,
+            timeout: 15000,
+            fx: 'scrollLeft',
+            after: function () {
+              positionImage($(this).find('> span img')[0]);
+            }
+          });
+
+          $(window).bind('resize', function () {
+            slides.each(function () {
+              $(this).width($(this).closest('.view-content').width());
+              positionImage($(this).find('> span img')[0]);
+            });
+          });
         }
       });
     }

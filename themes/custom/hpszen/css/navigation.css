@@ -47,65 +47,66 @@ ul li.leaf {
   background: #363636;
   color: white;
 }
-/* line 83, ../sass/navigation.scss */
-#navigation h2 a {
+/* line 82, ../sass/navigation.scss */
+#navigation a {
   display: block;
+  text-decoration: none;
+  padding: 0 0.75em;
 }
-/* line 87, ../sass/navigation.scss */
+/* line 89, ../sass/navigation.scss */
+#navigation a:link, #navigation a:visited, #navigation a:hover, #navigation a:active {
+  color: white;
+}
+/* line 94, ../sass/navigation.scss */
+#navigation h2 a {
+  padding: 0;
+}
+/* line 98, ../sass/navigation.scss */
 #navigation ul {
   padding: 0;
   margin: 0;
   background-color: #363636;
   line-height: 3em;
 }
-/* line 92, ../sass/navigation.scss */
+/* line 103, ../sass/navigation.scss */
 #navigation ul ul {
   background-color: #505050;
 }
-/* line 94, ../sass/navigation.scss */
+/* line 105, ../sass/navigation.scss */
 #navigation ul ul ul {
   background-color: dimgrey;
 }
-/* line 99, ../sass/navigation.scss */
-#navigation a {
-  display: block;
-  text-decoration: none;
-}
-/* line 105, ../sass/navigation.scss */
-#navigation a:link, #navigation a:visited, #navigation a:hover, #navigation a:active {
-  color: white;
-}
-/* line 109, ../sass/navigation.scss */
+/* line 110, ../sass/navigation.scss */
 #navigation li {
   list-style: none;
 }
-/* line 111, ../sass/navigation.scss */
+/* line 112, ../sass/navigation.scss */
 #navigation li.active-trail {
   background-color: #ffd31f;
 }
-/* line 116, ../sass/navigation.scss */
+/* line 117, ../sass/navigation.scss */
 #navigation li.active-trail > a:link, #navigation li.active-trail > a:visited, #navigation li.active-trail > a:active {
   color: #363636;
 }
-/* line 122, ../sass/navigation.scss */
+/* line 123, ../sass/navigation.scss */
 #navigation li.active-trail a:hover {
   background-color: #ffe785;
   color: #363636;
 }
-/* line 128, ../sass/navigation.scss */
+/* line 129, ../sass/navigation.scss */
 #navigation li a:hover {
   background-color: dimgrey;
   color: white;
 }
-/* line 133, ../sass/navigation.scss */
+/* line 134, ../sass/navigation.scss */
 #navigation li.expanded {
   position: relative;
 }
-/* line 135, ../sass/navigation.scss */
+/* line 136, ../sass/navigation.scss */
 #navigation li.expanded > a {
   margin-right: 3em;
 }
-/* line 137, ../sass/navigation.scss */
+/* line 138, ../sass/navigation.scss */
 #navigation li.expanded > a.submenu-toggle {
   margin-right: 0;
   text-align: center;
@@ -113,8 +114,8 @@ ul li.leaf {
   position: absolute;
   right: 0;
   border-left-style: solid;
-  border-left-width: 0.07143em;
-  padding-left: -0.07143em;
+  border-left-width: 0.08333em;
+  padding-left: -0.08333em;
   border-left-color: rgba(255, 255, 255, 0.2);
   -webkit-box-shadow: -1px 0 0 rgba(0, 0, 0, 0.5);
   -moz-box-shadow: -1px 0 0 rgba(0, 0, 0, 0.5);

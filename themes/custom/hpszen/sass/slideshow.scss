@@ -6,24 +6,31 @@
 @import "base";
 
 // @note Assumes .slides and .slide classes have been added to HTML list display settings on a View.
+//       Assumes slide image is wrapped in span @see hpszen-responsive image styles.
 //       When Javascript is disabled we render default View HTML list.
 //       With Javascript enabled we make a slideshow.
 //       Assumes using slideshow in content area.
 // @see Drupal.behaviors.hpszen
 // @see templates/node--hps-featured-content.tpl.php
 
-@mixin slide-vertical-rhythm($slide-lines: 22, $image-lines: 13, $pager-lines: 4, $clear: false) {
+// @todo Investigate auto zoom and pan for larger slides
+
+@mixin slide-vertical-rhythm($slide-lines: 28, $image-lines: 13, $pager-lines: 4, $clear: false) {
   .cycling {
     ul.slides {
       height: rhythm($slide-lines);
       > li {
-        .node .field-type-image {
+        > span {
+          // Override default width from hpzen-responsive image styles
+          width: 100%;
+          display: block;
           height: rhythm($image-lines);
+          @include padding-trailer($pager-lines);
         }
       }
     }
     .pager {
-      top: rhythm($image-lines - $pager-lines);
+      top: rhythm($image-lines);
     }
     @if $clear {
       &:after {
@@ -33,29 +40,37 @@
   }
 }
 
+// Prevent slides from growing too big
+ul.slides,
+.pager {
+  max-width: 1em / 12 * 900;
+}
+
 .cycling { /* jQuery cycle is enabled. */
   position: relative;
-  // For mobile first single column layout let slides stretch across gutter to fill screen width
-  margin: 0 (-1 * $zen-gutter-width / 2);
   h1, h2, h3 {
     @include adjust-font-size-to($base-font-size);
   }
+  // For mobile first single column layout let slides stretch across gutter to fill screen width
+  margin: 0 (-1 * $zen-gutter-width / 2);
   ul.slides {
     list-style: none;
     padding: 0;
     margin: 0;
     > li {
       width: 100% !important;
-      .node .field-type-image {
+      > span {
+        background-color: #000;
         // Fake crop for responsive images.
+        max-height: 100%;
         overflow: hidden;
         img {
           margin: 0 auto;
         }
       }
-      // For single column add gutter to slide contents (since we are forcing slide image to stretch across gutter)
-      header,
-      p {
+      // For single column add gutter to slide contents (since we are forcing slide image to stretch across gutter
+      p,
+      > a {
         margin-left: $zen-gutter-width / 2;
         margin-right: $zen-gutter-width / 2;
       }
@@ -90,18 +105,18 @@
 // Establish default vertical rhythm for slides in mobile first single layout.
 @include slide-vertical-rhythm();
 
-@media screen and (min-width: 480px) {
+@media screen and (min-width: 1em / 16 * 480) {
   .cycling {
     // Return to use of gutter
     margin: 0;
     ul.slides {
       > li {
-        .node .field-type-image {
+        span {
           // For multi-column layouts reset image width to include gutters.
           margin: 0;
         }
-        header,
-        p {
+        p,
+        a {
           margin-left: 0;
           margin-right: 0;
         }
@@ -114,18 +129,14 @@
   }
 }
 
-@media screen and (min-width: 480px) and (max-width: 599px) {
-  @include slide-vertical-rhythm(27, 18);
+@media screen and (min-width: 1em / 16 * 480) and (max-width: 1em / 16 * 599) {
+  @include slide-vertical-rhythm(29, 18);
 }
 
-@media screen and (min-width: 600px) and (max-width: 959px) {
-  @include slide-vertical-rhythm(28, 20);
+@media screen and (min-width: 1em / 16 * 600) and (max-width: 1em / 16 * 959) {
+  @include slide-vertical-rhythm(32, 20);
 }
 
-@media screen and (min-width: 960px) and (max-width: 1599px) {
-  @include slide-vertical-rhythm(29, 21);
-}
-
-@media screen and (min-width: 1600px) {
-  @include slide-vertical-rhythm(33, 26);
+@media screen and (min-width: 1em / 16 * 960) {
+  @include slide-vertical-rhythm(33, 21);
 }

@@ -5,6 +5,15 @@
 
 @import "base";
 
+input {
+  &[type="text"],
+  &[type="password"] {
+    @include hpszen-input();
+  }
+  &[type="submit"] {
+    @include hpszen-button();
+  }
+}
 
 .form-item { /* Wrapper for a form element (or group of form elements) and its label */
   margin: 1.5em 0;
@@ -68,9 +77,31 @@ a.button { /* Buttons used by contrib modules like Media */
 /*
  * Search (search-block-form.tpl.php)
  */
-
-#block-search-form { /* Wrapper for the search form */
+#block-search-form { /* Wrapper for the default search form */
 }
+// Custom hps_search block.
+#block-views-exp-hps-search-page-search {
+  @include rhythm(0, 1, 0.5, 0);
+  overflow: hidden;
+  form {
+    float: right;
+  }
+  input.error {
+    color: $base-font-color;
+    // Don't show error border color on search form.
+    border-color: #ddd - #111;
+  }
+  // Hide labels
+  label,
+  .description {
+    @include element-invisible();
+  }
+  input[type="submit"] {
+    margin: 0;
+  }
+}
+
+
 
 /*
  * Drupal's default login form block

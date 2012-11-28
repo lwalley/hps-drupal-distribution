@@ -2,42 +2,50 @@
  * @file
  * HPS Zen theme's slideshow styles.
  */
-/* line 36, ../sass/slideshow.scss */
+/* line 45, ../sass/slideshow.scss */
+ul.slides,
+.pager {
+  max-width: 75em;
+}
+
+/* line 49, ../sass/slideshow.scss */
 .cycling {
   /* jQuery cycle is enabled. */
   position: relative;
-  margin: 0 -21px;
+  margin: 0 -18px;
 }
-/* line 40, ../sass/slideshow.scss */
+/* line 51, ../sass/slideshow.scss */
 .cycling h1, .cycling h2, .cycling h3 {
   font-size: 1em;
   line-height: 1.5em;
 }
-/* line 43, ../sass/slideshow.scss */
+/* line 56, ../sass/slideshow.scss */
 .cycling ul.slides {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-/* line 47, ../sass/slideshow.scss */
+/* line 60, ../sass/slideshow.scss */
 .cycling ul.slides > li {
   width: 100% !important;
 }
-/* line 49, ../sass/slideshow.scss */
-.cycling ul.slides > li .node .field-type-image {
+/* line 62, ../sass/slideshow.scss */
+.cycling ul.slides > li > span {
+  background-color: #000;
+  max-height: 100%;
   overflow: hidden;
 }
-/* line 52, ../sass/slideshow.scss */
-.cycling ul.slides > li .node .field-type-image img {
+/* line 67, ../sass/slideshow.scss */
+.cycling ul.slides > li > span img {
   margin: 0 auto;
 }
-/* line 58, ../sass/slideshow.scss */
-.cycling ul.slides > li header,
-.cycling ul.slides > li p {
-  margin-left: 21px;
-  margin-right: 21px;
+/* line 73, ../sass/slideshow.scss */
+.cycling ul.slides > li p,
+.cycling ul.slides > li > a {
+  margin-left: 18px;
+  margin-right: 18px;
 }
-/* line 64, ../sass/slideshow.scss */
+/* line 79, ../sass/slideshow.scss */
 .cycling .pager {
   position: absolute;
   width: 100%;
@@ -46,113 +54,111 @@
   overflow-x: auto;
   white-space: nowrap;
 }
-/* line 71, ../sass/slideshow.scss */
+/* line 86, ../sass/slideshow.scss */
 .cycling .pager > a {
   line-height: 6em;
 }
-/* line 73, ../sass/slideshow.scss */
+/* line 88, ../sass/slideshow.scss */
 .cycling .pager > a > img {
   height: 6em;
   margin-right: 2px;
 }
-/* line 77, ../sass/slideshow.scss */
+/* line 92, ../sass/slideshow.scss */
 .cycling .pager > a.activeSlide > img {
   border-bottom: 4px solid orange;
   margin-top: -4px;
 }
-/* line 83, ../sass/slideshow.scss */
+/* line 98, ../sass/slideshow.scss */
 .cycling:after {
   content: "";
   display: block;
   visibility: hidden;
 }
 
-/* line 17, ../sass/slideshow.scss */
-.cycling ul.slides {
-  height: 33em;
-}
 /* line 20, ../sass/slideshow.scss */
-.cycling ul.slides > li .node .field-type-image {
-  height: 19.5em;
+.cycling ul.slides {
+  height: 42em;
 }
-/* line 25, ../sass/slideshow.scss */
+/* line 23, ../sass/slideshow.scss */
+.cycling ul.slides > li > span {
+  width: 100%;
+  display: block;
+  height: 19.5em;
+  padding-bottom: 6em;
+}
+/* line 32, ../sass/slideshow.scss */
 .cycling .pager {
-  top: 13.5em;
+  top: 19.5em;
 }
 
-@media screen and (min-width: 480px) {
-  /* line 94, ../sass/slideshow.scss */
+@media screen and (min-width: 30em) {
+  /* line 109, ../sass/slideshow.scss */
   .cycling {
     margin: 0;
   }
-  /* line 99, ../sass/slideshow.scss */
-  .cycling ul.slides > li .node .field-type-image {
+  /* line 114, ../sass/slideshow.scss */
+  .cycling ul.slides > li span {
     margin: 0;
   }
-  /* line 104, ../sass/slideshow.scss */
-  .cycling ul.slides > li header,
-  .cycling ul.slides > li p {
+  /* line 119, ../sass/slideshow.scss */
+  .cycling ul.slides > li p,
+  .cycling ul.slides > li a {
     margin-left: 0;
     margin-right: 0;
   }
-  /* line 110, ../sass/slideshow.scss */
+  /* line 125, ../sass/slideshow.scss */
   .cycling .pager {
     margin: 0;
   }
 }
-@media screen and (min-width: 480px) and (max-width: 599px) {
-  /* line 17, ../sass/slideshow.scss */
-  .cycling ul.slides {
-    height: 40.5em;
-  }
+@media screen and (min-width: 30em) and (max-width: 37.4375em) {
   /* line 20, ../sass/slideshow.scss */
-  .cycling ul.slides > li .node .field-type-image {
-    height: 27em;
-  }
-  /* line 25, ../sass/slideshow.scss */
-  .cycling .pager {
-    top: 21em;
-  }
-}
-@media screen and (min-width: 600px) and (max-width: 959px) {
-  /* line 17, ../sass/slideshow.scss */
-  .cycling ul.slides {
-    height: 42em;
-  }
-  /* line 20, ../sass/slideshow.scss */
-  .cycling ul.slides > li .node .field-type-image {
-    height: 30em;
-  }
-  /* line 25, ../sass/slideshow.scss */
-  .cycling .pager {
-    top: 24em;
-  }
-}
-@media screen and (min-width: 960px) and (max-width: 1599px) {
-  /* line 17, ../sass/slideshow.scss */
   .cycling ul.slides {
     height: 43.5em;
   }
-  /* line 20, ../sass/slideshow.scss */
-  .cycling ul.slides > li .node .field-type-image {
-    height: 31.5em;
+  /* line 23, ../sass/slideshow.scss */
+  .cycling ul.slides > li > span {
+    width: 100%;
+    display: block;
+    height: 27em;
+    padding-bottom: 6em;
   }
-  /* line 25, ../sass/slideshow.scss */
+  /* line 32, ../sass/slideshow.scss */
   .cycling .pager {
-    top: 25.5em;
+    top: 27em;
   }
 }
-@media screen and (min-width: 1600px) {
-  /* line 17, ../sass/slideshow.scss */
+@media screen and (min-width: 37.5em) and (max-width: 59.9375em) {
+  /* line 20, ../sass/slideshow.scss */
+  .cycling ul.slides {
+    height: 48em;
+  }
+  /* line 23, ../sass/slideshow.scss */
+  .cycling ul.slides > li > span {
+    width: 100%;
+    display: block;
+    height: 30em;
+    padding-bottom: 6em;
+  }
+  /* line 32, ../sass/slideshow.scss */
+  .cycling .pager {
+    top: 30em;
+  }
+}
+@media screen and (min-width: 60em) {
+  /* line 20, ../sass/slideshow.scss */
   .cycling ul.slides {
     height: 49.5em;
   }
-  /* line 20, ../sass/slideshow.scss */
-  .cycling ul.slides > li .node .field-type-image {
-    height: 39em;
+  /* line 23, ../sass/slideshow.scss */
+  .cycling ul.slides > li > span {
+    width: 100%;
+    display: block;
+    height: 31.5em;
+    padding-bottom: 6em;
   }
-  /* line 25, ../sass/slideshow.scss */
+  /* line 32, ../sass/slideshow.scss */
   .cycling .pager {
-    top: 33em;
+    top: 31.5em;
   }
 }

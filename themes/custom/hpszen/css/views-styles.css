@@ -57,8 +57,8 @@
 /* line 51, ../sass/views-styles.scss */
 .view-display-id-panel_pane_gallery .view-content > div {
   border-top-style: solid;
-  border-top-width: 0.07143em;
-  padding-top: 1.42857em;
+  border-top-width: 0.08333em;
+  padding-top: 1.41667em;
   border-top-color: rgba(0, 0, 0, 0.5);
   margin-top: 1.5em;
 }
@@ -80,21 +80,21 @@
   line-height: 4.5em;
   list-style-type: none;
 }
-/* line 5, ../../../../../../../../../.rvm/gems/ruby-1.9.3-p194@hps/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_inline-list.scss */
+/* line 5, ../../../../../../../.rvm/gems/ruby-1.9.3-p194@hps/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_inline-list.scss */
 .pane-display-mode-links-content-type ul.display-modes, .pane-display-mode-links-content-type ul.display-modes li {
   margin: 0px;
   padding: 0px;
   display: inline;
 }
-/* line 29, ../../../../../../../../../.rvm/gems/ruby-1.9.3-p194@hps/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_inline-list.scss */
+/* line 29, ../../../../../../../.rvm/gems/ruby-1.9.3-p194@hps/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_inline-list.scss */
 .pane-display-mode-links-content-type ul.display-modes li:after {
   content: "|";
 }
-/* line 31, ../../../../../../../../../.rvm/gems/ruby-1.9.3-p194@hps/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_inline-list.scss */
+/* line 31, ../../../../../../../.rvm/gems/ruby-1.9.3-p194@hps/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_inline-list.scss */
 .pane-display-mode-links-content-type ul.display-modes li:last-child:after {
   content: "";
 }
-/* line 34, ../../../../../../../../../.rvm/gems/ruby-1.9.3-p194@hps/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_inline-list.scss */
+/* line 34, ../../../../../../../.rvm/gems/ruby-1.9.3-p194@hps/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_inline-list.scss */
 .pane-display-mode-links-content-type ul.display-modes li.last:after {
   content: "";
 }

@@ -79,9 +79,20 @@ li a.active {
 #navigation {
   background: $navigation-default-background-color;
   color: $navigation-default-font-color;
+  a {
+    display: block;
+    text-decoration: none;
+    padding: 0 rhythm(0.5);
+    &:link,
+    &:visited,
+    &:hover,
+    &:active {
+      color: $navigation-default-font-color;
+    }
+  }
   h2 {
     a {
-      display: block;
+      padding: 0;
     }
   }
   ul {
@@ -94,16 +105,6 @@ li a.active {
       ul {
         background-color: lighten($navigation-default-background-color, 20%)
       }
-    }
-  }
-  a {
-    display: block;
-    text-decoration: none;
-    &:link,
-    &:visited,
-    &:hover,
-    &:active {
-      color: $navigation-default-font-color;
     }
   }
   li {

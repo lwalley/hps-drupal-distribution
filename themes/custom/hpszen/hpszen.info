@@ -50,7 +50,7 @@ stylesheets[all][] = system.menus.css
 ; Then we add our own stylesheets.
 stylesheets[all][] = css/normalize.css
 stylesheets[all][] = css/wireframes.css
-stylesheets[all][] = css/layouts/responsive-sidebars.css
+stylesheets[all][] = css/layouts/responsive.css
 stylesheets[all][] = css/page-backgrounds.css
 stylesheets[all][] = css/tabs.css
 stylesheets[all][] = css/pages.css
@@ -133,7 +133,7 @@ features[] = secondary_menu
 
 ; Set the default values of settings on the theme-settings.php form.
 ;
-; In order to have exapnded main menu items we turn off main menu and use
+; In order to have expanded main menu items we turn off main menu and use
 ; menu block instead as recommended by Zen creators @see zen/templates/page.tpl.php
 settings[toggle_main_menu]         = 0
 settings[zen_breadcrumb]           = no

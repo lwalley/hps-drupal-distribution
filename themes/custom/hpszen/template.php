@@ -141,9 +141,13 @@ function hpszen_preprocess_html(&$variables, $hook) {
     switch ($variables['menu_item']['page_callback']) {
       case 'page_manager_page_execute':
       case 'page_manager_term_view_page':
+      case 'page_manager_node_view_page':
+      case 'page_manager_contact_site':
         // Add panels layout name to body class attribute.
         $page = page_manager_get_current_page();
-        $variables['classes_array'][] = drupal_clean_css_identifier($page['handler']->conf['display']->layout);
+        if (isset($page['handler'])) {
+          $variables['classes_array'][] = drupal_clean_css_identifier($page['handler']->conf['display']->layout);
+        }
         break;
     }
   }
@@ -279,3 +283,65 @@ function hpszen_preprocess_views_view(&$variables, $hook) {
     }
   }
 }
+
+/**
+ * Implements hook_preprocess_menu_link().
+ *
+ * @param $variables
+ *   An array of variables to pass to the theme template.
+ * @param $hook
+ *   The name of the template being rendered ("menu_link" in this case.)
+ */
+function hpszen_preprocess_menu_link(&$variables, $hook) {
+  if (!empty($variables['element']['#below'])) {
+    // For expanded menu items replace theme wrapper for submenu tree.
+    // @see hpszen_menu_tree__main_menu__submenu().
+    $custom_theme_wrapper = "menu_tree";
+    if (isset($variables['element']['#original_link'])) {
+      $menu_name = strtr($variables['element']['#original_link']['menu_name'], array('-' => '_'));
+      $custom_theme_wrapper .= "__{$menu_name}";
+    }
+    $custom_theme_wrapper .= "__submenu";
+    $variables['element']['#below']['#theme_wrappers'] = array($custom_theme_wrapper);
+  }
+}
+
+/**
+ * Implements hook_menu_tree__main_menu__submenu().
+ *
+ * Custom theme wrapper for main menu's expanded submenus.
+ *
+ * @note Unfortunately we have very little context to go on with the menu_tree
+ *       theme, so we added a custom theme wrapper in menu_link preprocess, to
+ *       target just the submenus.
+ */
+function hpszen_menu_tree__main_menu__submenu($variables) {
+  return '<ul class="menu element-invisible">' . $variables['tree'] . '</ul>';
+}
+
+/**
+ * Overrides theme_image().
+ *
+ * Adds a wrapper to img element with style name for use with responsive layouts.
+ *
+ */
+function hpszen_image($variables) {
+  $attributes = $variables['attributes'];
+  $attributes['src'] = file_create_url($variables['path']);
+  foreach (array('width', 'height', 'alt', 'title') as $key) {
+    if (isset($variables[$key])) {
+      $attributes[$key] = $variables[$key];
+    }
+  }
+  $style_name_css = '';
+  if (isset($variables['style_name']) && !empty($variables['style_name'])) {
+    $style_name_css = ' ' . drupal_clean_css_identifier($variables['style_name']);
+  }
+  $element = array(
+    '#prefix' => '<span class="hpszen-responsive' . $style_name_css . '">',
+    '#markup' => '<img' . drupal_attributes($attributes) . ' />',
+    '#suffix' => '</span>',
+  );
+  return render($element);
+}
+

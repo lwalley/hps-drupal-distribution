@@ -103,7 +103,7 @@ audio:not([controls]) {
  */
 /* line 118, ../sass/normalize.scss */
 html {
-  font-size: 87.5%;
+  font-size: 75%;
   /* 1 */
   -webkit-text-size-adjust: 100%;
   /* 2 */
@@ -174,11 +174,11 @@ a:active {
 /* line 203, ../sass/normalize.scss */
 h1 {
   /* Sets the font-size and line-height while keeping a proper vertical rhythm. */
-  font-size: 2.5em;
-  line-height: 1.2em;
+  font-size: 2em;
+  line-height: 1.5em;
   /* Sets 1 unit of vertical rhythm on the top and bottom margins. */
-  margin-top: 0.6em;
-  margin-bottom: 0.6em;
+  margin-top: 0.75em;
+  margin-bottom: 0.75em;
 }
 
 /* line 212, ../sass/normalize.scss */
@@ -191,10 +191,10 @@ h2 {
 
 /* line 218, ../sass/normalize.scss */
 h3 {
-  font-size: 1.17em;
-  line-height: 1.28205em;
-  margin-top: 1.28205em;
-  margin-bottom: 1.28205em;
+  font-size: 1.1em;
+  line-height: 1.36364em;
+  margin-top: 1.36364em;
+  margin-bottom: 1.36364em;
 }
 
 /* line 224, ../sass/normalize.scss */
@@ -207,18 +207,18 @@ h4 {
 
 /* line 230, ../sass/normalize.scss */
 h5 {
-  font-size: 0.83em;
-  line-height: 1.80723em;
-  margin-top: 1.80723em;
-  margin-bottom: 1.80723em;
+  font-size: 1em;
+  line-height: 1.5em;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
 }
 
 /* line 236, ../sass/normalize.scss */
 h6 {
-  font-size: 0.75em;
-  line-height: 2em;
-  margin-top: 2em;
-  margin-bottom: 2em;
+  font-size: 1em;
+  line-height: 1.5em;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
 }
 
 /* Thematic break */
@@ -473,17 +473,17 @@ fieldset {
   margin: 0 2px;
   /* Apply borders and padding that keep the vertical rhythm. */
   border-top-style: solid;
-  border-top-width: 0.07143em;
-  padding-top: 0.45357em;
+  border-top-width: 0.08333em;
+  padding-top: 0.44167em;
   border-bottom-style: solid;
-  border-bottom-width: 0.07143em;
-  padding-bottom: 0.90357em;
+  border-bottom-width: 0.08333em;
+  padding-bottom: 0.89167em;
   border-left-style: solid;
-  border-left-width: 0.07143em;
-  padding-left: 0.90357em;
+  border-left-width: 0.08333em;
+  padding-left: 0.89167em;
   border-right-style: solid;
-  border-right-width: 0.07143em;
-  padding-right: 0.90357em;
+  border-right-width: 0.08333em;
+  padding-right: 0.89167em;
 }
 
 /*
