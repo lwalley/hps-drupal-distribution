@@ -72,6 +72,7 @@ span.hpszen-responsive {
 // Assign grids to children of #header
 // Excludes #logo we handle that separately
 #header {
+  position: relative;
   @include padding-leader(2);
   #name-and-slogan,
   #secondary-menu,
