@@ -69,6 +69,11 @@ dependencies[] = addressfield
 dependencies[] = geophp
 dependencies[] = geofield
 dependencies[] = geocoder
+;dependencies[] = lexicon
+;dependencies[] = taxonomy_csv
+;dependencies[] = print
+;dependencies[] = print_mail
+;dependencies[] = print_pdf
 ;dependencies[] = sharethis
 ;dependencies[] = google_analytics
 

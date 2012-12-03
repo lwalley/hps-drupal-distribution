@@ -123,9 +123,15 @@ projects[geofield][version] = 1.1
 
 projects[geocoder][version] = 1.2
 
-projects[google_analytics][version] = 1.3
+projects[lexicon][version] = 1.10
+
+projects[taxonomy_csv][version] = 5.10
+
+projects[print][version] = 1.2
 
 projects[sharethis][version] = 2.5
+
+projects[google_analytics][version] = 1.3
 
 ; @note Custom unversioned modules are included with this profile
 
@@ -146,3 +152,6 @@ libraries[jquery.cycle][directory_name] = jquery.cycle
 
 libraries[jwplayer][download][type] = get
 libraries[jwplayer][download][url]  = http://www.longtailvideo.com/download/jwplayer-free-6-0-2813.zip
+
+libraries[dompdf][download][type] = get
+libraries[dompdf][download][url]  = http://dompdf.googlecode.com/files/dompdf_0-6-0_beta3.zip
