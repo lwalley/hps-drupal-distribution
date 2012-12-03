@@ -102,3 +102,53 @@
   border: 1px solid darken($from, 10%);
   @include background-image(linear-gradient(left top, $from, $to));
 }
+@mixin hpszen-adjust-font-size-and-rhythm($adjustment) {
+  /* Sets the font-size and line-height while keeping a proper vertical rhythm. */
+  @include adjust-font-size-to($adjustment * $base-font-size);
+  /* Sets 1 unit of vertical rhythm on the top and bottom margins. */
+  @include leader(1, $adjustment * $base-font-size);
+  @include trailer(1, $adjustment * $base-font-size);
+}
+/*
+ * 1. Corrects text resizing oddly in IE6/7 when body font-size is set using em units
+ *    http://clagnut.com/blog/348/#c790
+ * 2. Prevents iOS text size adjust after orientation change, without disabling user zoom
+ *    www.456bereastreet.com/archive/201012/controlling_text_size_in_safari_for_ios_without_disabling_user_zoom/
+ */
+// @see normalize.scss
+// @see responsive.scss
+@mixin hpszen-increase-base-font-sizes($increase) {
+  html {
+    font-size: 100% * ($base-font-size * $increase / 16px); /* 1 */
+    -webkit-text-size-adjust: 100%; /* 2 */
+    -ms-text-size-adjust: 100%; /* 2 */
+    /* Establishes a vertical rhythm unit using $base-line-height. */
+    @include adjust-leading-to($increase);
+  }
+  /*
+   * Addresses font sizes and margins set differently in IE6/7
+   * Addresses font sizes within 'section' and 'article' in FF4+, Chrome, S5
+   */
+
+  h1 {
+    @include hpszen-adjust-font-size-and-rhythm($increase * 2);
+  }
+  h2 {
+    @include hpszen-adjust-font-size-and-rhythm($increase * 1.5);
+  }
+
+  h3 {
+    @include hpszen-adjust-font-size-and-rhythm($increase * 1.17);
+  }
+  h4, h5, h6 {
+    @include hpszen-adjust-font-size-and-rhythm($increase * 1);
+  }
+  pre,
+  code,
+  kbd,
+  samp,
+  tt,
+  var {
+    @include adjust-font-size-to( 1 * $increase * $base-font-size );
+  }
+}

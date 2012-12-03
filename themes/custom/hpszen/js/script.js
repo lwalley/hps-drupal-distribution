@@ -33,6 +33,9 @@
           event.preventDefault();
           event.stopPropagation();
           $(event.data.menu).toggleClass('element-invisible');
+          if (event.data.title) {
+            $(event.data.title).toggleClass('expanded');
+          };
         }
 
         $(this).find('ul').addClass('element-invisible');
@@ -58,7 +61,7 @@
 
               // Add link to title and bind click event to it for main menu toggle
               $(title).wrapInner('<a href="#" />')
-              .find('a').bind('click', {menu: rootMenu}, toggleMenu);
+              .find('a').bind('click', {menu: rootMenu, title: title}, toggleMenu);
 
               $(rootMenu).addClass('element-invisible');
 
@@ -83,6 +86,15 @@
 
           Drupal.theme.hpszenCyclingPager = function () {
             return '<div class="pager"></div>';
+          };
+          Drupal.theme.hpszenCyclingNav = function () {
+            // @todo Drupal.t
+            return '<div class="nav">' +
+                   '  <a href="#" title="Javascript trigger to display previous slide." id="hpszen-slide-previous">Previous</a>' +
+                   '  <a href="#" title="Javascript trigger to pause slideshow." id="hpszen-slides-pause">Pause</a>' +
+                   '  <a href="#" title="Javascript trigger to resume slideshow." id="hpszen-slides-resume">Resume</a>' +
+                   '  <a href="#" title="Javascript trigger to display next slide." id="hpszen-slide-next">Next</a>' +
+                   '</div>';
           };
 
           Drupal.theme.hpszenCyclingPagerItem = function (index, slide) {
@@ -132,20 +144,38 @@
             if (this.complete) $(this).load();
           });
 
-          slides.parent().append(Drupal.theme('hpszenCyclingPager'));
+          //slides.parent().append(Drupal.theme('hpszenCyclingPager'));
+          slides.parent().append(Drupal.theme('hpszenCyclingNav'));
 
           slides.cycle({
-            pager:  '.pager',
-            pagerAnchorBuilder: pagerItem,
+            //pager:  '.pager',
+            //pagerAnchorBuilder: pagerItem,
+            prev: '#hpszen-slide-previous',
+            next: '#hpszen-slide-next',
             pause: 1,
             speed: 1000,
             fastOnEvent: 200,
             delay: -2000,
             timeout: 15000,
-            fx: 'scrollLeft',
             after: function () {
               positionImage($(this).find('> span img')[0]);
             }
+          });
+
+          $('#hpszen-slides-pause').click(function() {
+            console.log(slides);
+            slides.cycle('pause');
+            slides.addClass('paused');
+            $(this).parent().addClass('paused');
+            event.preventDefault();
+            event.stopPropagation();
+          });
+          $('#hpszen-slides-resume').click(function() {
+            slides.removeClass('paused');
+            $(this).parent().removeClass('paused');
+            slides.cycle('resume');
+            event.preventDefault();
+            event.stopPropagation();
           });
 
           $(window).bind('resize', function () {

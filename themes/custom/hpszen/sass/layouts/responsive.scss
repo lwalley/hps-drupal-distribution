@@ -44,58 +44,55 @@ span.hpszen-responsive {
   }
 }
 
-
-// These are children of body and thus the containers for zen grids.
+// body: These are children of body and thus the containers for zen grids.
 #page,
 .region-bottom {
   @include zen-grid-container();
-  // Applying a max width until something better comes along
-  max-width: 1em / 16 * 1400;
-  margin-left: auto;
-  margin-right: auto;
 }
 
+// #page: Add children of #page to grid
 #page {
   @include padding-trailer(3);
-  // Children of #page span all columns and are nested containers.
-  #header,
-  #main,
-  #footer {
-    @include zen-grid-item-base();
-    @include zen-clear();
-    @include zen-grid-item($zen-column-count, 1);
-    // @note zen-nested-container() must come after zen-grid-item().
-    @include zen-nested-container();
-  }
+}
+// Children of #page span all columns and are nested containers.
+#header,
+#main,
+#footer {
+  @include zen-grid-item-base();
+  @include zen-clear();
+  @include zen-grid-item($zen-column-count, 1);
+  // @note zen-nested-container() must come after zen-grid-item().
+  @include zen-nested-container();
 }
 
-// Assign grids to children of #header
+// #header: Add children of #header
 // Excludes #logo we handle that separately
 #header {
   position: relative;
   @include padding-leader(2);
-  #name-and-slogan,
-  #secondary-menu,
-  .region-header {
-    @include zen-grid-item-base();
-  }
-  #name-and-slogan,
-  .region-header {
-    @include zen-grid-item(12, 1);
-  }
-  #secondary-menu {
-    @include zen-grid-item(8, 5);
-  }
-  .region-header {
-    @include zen-clear();
-  }
-  // #logo is a flow item
-  #logo {
-    @include zen-grid-flow-item(4, 12);
-  }
+}
+#name-and-slogan,
+#secondary-menu,
+.region-header {
+  @include zen-grid-item-base();
+}
+#name-and-slogan,
+.region-header {
+  @include zen-grid-item(12, 1);
+}
+#secondary-menu {
+  @include zen-grid-item(8, 5);
+}
+.region-header {
+  @include zen-clear();
+}
+// #logo is a flow item
+#logo {
+  @include zen-grid-flow-item(4, 12);
 }
 
-// Assign grids to children of #main
+
+// #main: Add children of #main to grid
 #navigation,
 #content,
 .sidebars {
@@ -107,16 +104,8 @@ span.hpszen-responsive {
   // Give content some top and bottom room
   @include rhythm(0, 1, 1, 0);
 }
-// Home: overrides
-.front {
-  #main {
-    #content {
-      padding-top: 0;
-    }
-  }
-}
 
-// Assign grids to children of #footer.
+// #footer: add children of footer to grid.
 #footer {
   @include zen-nested-container();
   // Give blocks some top and bottom room
@@ -154,53 +143,18 @@ span.hpszen-responsive {
       @include zen-clear();
       @include zen-grid-item(12, 1);
     }
-  }
-}
-
-
-// Header: positioning child elements
-#logo {
-  @include adjust-font-size-to($name-font-size);
-  height: rhythm(3);
-  display: block;
-  z-index: -1;
-  position: absolute;
-  top: 0;
-  left: 0;
-  img {
-    max-height: 100%;
-  }
-}
-#name-and-slogan {
-  h1 {
-    padding-left: rhythm(1);
-    @include adjust-font-size-to($name-font-size);
-    @include adjust-leading-to(1.75, $name-font-size);
-    @include rhythm(0.25, 0, 0, 0.25);
-  }
-  h2 {
-    @include zen-clear();
-    @include adjust-font-size-to($slogan-font-size);
-  }
-}
-#secondary-menu {
-  position: absolute;
-  top: 0;
-  left: 0;
-  text-align: right;
-  .block-menu .block-title,
-  .block-menu-block .block-title {
-    @include element-invisible;
-  }
-  ul {
-    @include delimited-list('|');
-    @include adjust-leading-to(3);
-    a {
-      padding: rhythm(1);
+    .panel-hpszen-primary-box,
+    .panel-hpszen-aside-box,
+    .panel-hpszen-upside-box {
+      @include zen-nested-container();
+      .panel-pane {
+        @include zen-grid-item-base();
+        @include zen-clear();
+        @include zen-grid-item(12, 1);
+      }
     }
   }
 }
-
 
 // Region: page-top toolbar
 // When logged admin toolbar needs some room.
@@ -209,10 +163,19 @@ span.hpszen-responsive {
 .toolbar {
   #page {
     position: relative;
-    @include padding-leader(1);
+    @include padding-leader(0.8);
   }
 }
 
+
+// Start of overrides for wider screens
+// Font: increase base font size as screens get wider
+@media all and (min-width: 1em / 16 * 481) and (max-width: 1em / 16 * 1023) {
+  @include hpszen-increase-base-font-sizes(1.3);
+}
+@media all and (min-width: 1em / 16 * 1024) {
+  @include hpszen-increase-base-font-sizes(1.4);
+}
 
 // Header: two columns
 @media all and (min-width: 1em / 16 * 768) {
@@ -220,11 +183,6 @@ span.hpszen-responsive {
     #logo,
     #name-and-slogan {
       @include zen-grid-item(6, 1);
-    }
-    #name-and-slogan {
-      h1 {
-        padding-left: 0;
-      }
     }
     .region-header,
     #secondary-menu {
@@ -235,35 +193,6 @@ span.hpszen-responsive {
     }
   }
 }
-// Fonts: bigger
-@media all and (min-width: 1em / 16 * 900) {
-  $base-font-size:   14px;
-  $base-line-height: 1.5 * $base-font-size;
-  html {
-    // @see normalize.scss
-    font-size: 100% * ($base-font-size / 16px);
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
-    // Establishes a vertical rhythm unit using $base-line-height.
-    @include adjust-leading-to(1);
-  }
-  $name-font-size: 3  * $base-font-size;
-  $slogan-font-size: 1 * $base-font-size;
-  #logo {
-    @include adjust-font-size-to($name-font-size);
-    height: rhythm(3);
-  }
-  #name-and-slogan {
-    h1 {
-      @include adjust-font-size-to($name-font-size);
-      @include adjust-leading-to(0.8);
-    }
-    h2 {
-      @include adjust-font-size-to($slogan-font-size);
-    }
-  }
-}
-
 
 // Navigation: switch to horizontal nav for wider screens.
 // Must match the js threshold for horizontal menu
@@ -279,31 +208,16 @@ span.hpszen-responsive {
     .block-menu {
       > ul {
         float: left;
-        padding: 0;
         > li {
           float: left;
           list-style-position: inside;
-          margin-right: $zen-gutter-width / 2;
         }
-      }
-      ul {
-        a {
-          padding: 0 rhythm(0.5);
-        }
-      }
-    }
-  }
-  // Re-apply top padding to content now nav has moved away.
-  .front {
-    #main {
-      #content {
-        @include padding-leader(1);
       }
     }
   }
 }
 
-// Content: asides two columns
+// Content: asides two columns, underneath content
 @media all and (min-width: 1em / 16 * 600) and (max-width: 1em / 16 * 799) {
   // Make aside nested container and assign grids to children
   #content {
@@ -382,409 +296,10 @@ span.hpszen-responsive {
   }
 }
 
+// Content: More whitespace needed for wider screens.
+// @todo it would be better if we could reset gutter width and reapply grid
 
-
-
-//@media all and (min-width: 600px) {
-//  $name-font-size: 3.5  * $base-font-size;
-//  #name-and-slogan {
-//    float: left;
-//    h1 {
-//      @include adjust-font-size-to($name-font-size);
-//      @include leader(1, $h1-font-size);
-//    }
-//    h2 {
-//      @include adjust-font-size-to($slogan-font-size);
-//    }
-//  }
-//  #logo {
-//    @include adjust-font-size-to($name-font-size);
-//    @include adjust-leading-to(3, $name-font-size);
-//    @include leader(1, $name-font-size);
-//    margin-right: rhythm(1, $name-font-size);
-//    img {
-//      max-height: rhythm(3, $name-font-size);
-//    }
-//  }
-//  // Convert primary and secondary navigation into horizontal
-//  // lists since screen width is large enough to accomadate them.
-//  #secondary-menu {
-//    float: right;
-//    clear: none;
-//    ul {
-//      @include adjust-leading-to(3);
-//      @include delimited-list('|');
-//    }
-//    a {
-//      padding: rhythm(0.5);
-//    }
-//  }
-//  #navigation {
-//    .block-menu .block-title,
-//    .block-menu-block .block-title {
-//      @include element-invisible;
-//    }
-//    .block-menu {
-//      > ul {
-//        float: left;
-//        padding: 0;
-//        > li {
-//          float: left;
-//          list-style-position: inside;
-//          margin-right: $zen-gutter-width / 2;
-//        }
-//      }
-//      ul {
-//        a {
-//          padding: 0 rhythm(0.5);
-//        }
-//      }
-//    }
-//  }
-//}
-//
-//// Start of media queries, taking layout beyond single column.
-//// @note Aim is to maintain golden ratio whilst preserving the readability of the content.
-////       We do this, depending on screen size, by:
-////         1. limiting the max width of all content (for readability don't want much more than ~15 words per line)
-////         2. filling extra space with (a) wider columns, and/or (b) more columns.
-//
-//
-//// Screen sizes that can handle two columns underneath main content.
-//@media all and (min-width: 600px) and (max-width: 719px) {
-//  $zen-column-count:  2;
-//  #header,
-//  #navigation,
-//  #footer,
-//  #content {
-//    @include zen-grid-item(2, 1);
-//  }
-//
-//  .one-sidebar {
-//    .region-sidebar-first,
-//    .region-sidebar-second {
-//      @include zen-grid-item(2, 1);
-//    }
-//  }
-//
-//  .two-sidebars {
-//    .region-sidebar-first {
-//      @include zen-grid-item(1, 1);
-//    }
-//    .region-sidebar-second {
-//      @include zen-grid-item(1, 2);
-//    }
-//  }
-//  // With HPS Zen panel layouts #content is a nested container with $zen-column-count columns
-//  // So we need to make all child containers, including panels, grid items.
-//  .hpszen-primary-box {
-//    #content {
-//      .breadcrumb,
-//      .messages,
-//      > h1,
-//      > h2,
-//      > .tabs,
-//      .panel-hpszen-primary-box {
-//        @include zen-grid-item(2, 1);
-//      }
-//    }
-//  }
-//
-//  // Two column footer
-//  .region-footer {
-//    @include zen-nested-container();
-//    .block {
-//      @include zen-grid-item-base();
-//    }
-//    .block:nth-child(2n+1) {
-//      @include zen-grid-item(1, 1);
-//      @include zen-clear(); /* Start a new row */
-//    }
-//    .block:nth-child(2n) {
-//      @include zen-grid-item(1, 2);
-//    }
-//  }
-//
-//}
-//
-//// Screen sizes that can handle one extra column adjacent to content, rest underneath, e.g. iPad
-//@media all and (min-width: 720px) and (max-width: 1199px) {
-//  $zen-column-count:  3;
-//  #header,
-//  #navigation,
-//  #footer,
-//  .no-sidebars #content {
-//    @include zen-grid-item(3, 1);
-//  }
-//
-//  #header {
-//    background-color: red;
-//    @include zen-nested-container();
-//    #name-and-slogan {
-//      @include zen-grid-item-base();
-//      @include zen-grid-item(2, 1);
-//    }
-//    #secondary-menu,
-//    .region-header {
-//      @include zen-grid-item-base();
-//      @include zen-grid-item(1, 3);
-//    }
-//  }
-//
-//  // Golden ratio layout when we have content and one sidebar (first or second).
-//  .one-sidebar {
-//    #content {
-//      @include zen-grid-item(2, 1);
-//    }
-//    .region-sidebar-first,
-//    .region-sidebar-second {
-//      @include zen-grid-item(1, 3);
-//    }
-//  }
-//  // Golden ratio layout when we have content and two sidebars, with second sidebar underneath.
-//  .two-sidebars {
-//    #content {
-//      @include zen-grid-item(2, 1);
-//    }
-//    .region-sidebar-first {
-//      @include zen-grid-item(1, 3);
-//    }
-//    // Span all columns with the second sidebar, and grid the descendent .block containers instead.
-//    .region-sidebar-second {
-//      @include zen-grid-item(3, 1);
-//      @include zen-nested-container();
-//      @include zen-clear(); /* Start new row */
-//
-//      .block {
-//        @include zen-grid-item-base();
-//      }
-//      .block:nth-child(3n+1) {
-//        @include zen-grid-item(1, 1);
-//        @include zen-clear(); /* Start a new row */
-//      }
-//      .block:nth-child(3n+2) {
-//        @include zen-grid-item(1, 2);
-//      }
-//      .block:nth-child(3n) {
-//        @include zen-grid-item(1, 3);
-//      }
-//    }
-//  }
-//
-//  // Three column footer
-//  .region-footer {
-//    @include zen-nested-container();
-//    .block {
-//      @include zen-grid-item-base();
-//    }
-//    .block:nth-child(3n+1) {
-//      @include zen-grid-item(1, 1);
-//      @include zen-clear(); /* Start a new row */
-//    }
-//    .block:nth-child(3n+2) {
-//      @include zen-grid-item(1, 2);
-//    }
-//    .block:nth-child(3n) {
-//      @include zen-grid-item(1, 3);
-//    }
-//  }
-//
-//  // With HPS Zen panel layouts #content is a nested container with $zen-column-count columns
-//  // So we need to make all child containers, including panels, grid items.
-//  .hpszen-primary-box {
-//    #content {
-//      .breadcrumb,
-//      .messages,
-//      > h1,
-//      > h2,
-//      > .tabs,
-//      .panel-hpszen-primary-box {
-//        @include zen-grid-item(3, 1);
-//      }
-//    }
-//  }
-//}
-//// Still with one extra column but we use columns in addition to gutters for more fluid whitespace.
-//@media all and (min-width: 1200px) and (max-width: 1999px) {
-//  $zen-column-count:  24;
-//  #header,
-//  #navigation,
-//  #footer,
-//  .no-sidebars #content {
-//    @include zen-grid-item(20, 3);
-//  }
-//
-//  #header {
-//    @include zen-nested-container();
-//    #name-and-slogan {
-//      @include zen-grid-item-base();
-//      @include zen-grid-item(12, 3);
-//    }
-//    #secondary-menu,
-//    .region-header {
-//      @include zen-grid-item-base();
-//      @include zen-grid-item(7, 16);
-//    }
-//  }
-//
-//
-//  // Golden ratio (ish) layout when we have content and one sidebar (first or second).
-//  .one-sidebar {
-//    #content {
-//      @include zen-grid-item(12, 3);
-//    }
-//    .region-sidebar-first,
-//    .region-sidebar-second {
-//      @include zen-grid-item(7, 16);
-//    }
-//  }
-//
-//  // Golden ratio layout when we have content and two sidebars, with second sidebar underneath.
-//  .two-sidebars {
-//    #content {
-//      @include zen-grid-item(12, 3);
-//    }
-//    .region-sidebar-first {
-//      @include zen-grid-item(7, 16);
-//    }
-//    // Span all columns with the second sidebar, and grid the descendent .block containers instead.
-//    .region-sidebar-second {
-//      @include zen-grid-item(20, 3);
-//      @include zen-nested-container();
-//      @include zen-clear(); /* Start new row */
-//
-//      .block {
-//        @include zen-grid-item-base();
-//      }
-//      .block:nth-child(3n+1) {
-//        @include zen-grid-item(7, 1);
-//        @include zen-clear(); /* Start a new row */
-//      }
-//      .block:nth-child(3n+2) {
-//        @include zen-grid-item(8, 9);
-//      }
-//      .block:nth-child(3n) {
-//        @include zen-grid-item(7, 18);
-//      }
-//    }
-//  }
-//
-//  // Three column footer
-//  .region-footer {
-//    @include zen-nested-container();
-//    .block {
-//      @include zen-grid-item-base();
-//    }
-//    .block:nth-child(3n+1) {
-//      @include zen-grid-item(7, 1);
-//      @include zen-clear(); /* Start a new row */
-//    }
-//    .block:nth-child(3n+2) {
-//      @include zen-grid-item(8, 9);
-//    }
-//    .block:nth-child(3n) {
-//      @include zen-grid-item(7, 18);
-//    }
-//  }
-//
-//
-//  // With HPS Zen panel layouts #content is a nested container with $zen-column-count columns
-//  // So we need to make all child containers, including panels, grid items.
-//  .hpszen-primary-box {
-//    #content {
-//      .breadcrumb,
-//      .messages,
-//      > h1,
-//      > h2,
-//      > .tabs,
-//      .panel-hpszen-primary-box {
-//        @include zen-grid-item(24, 1);
-//      }
-//    }
-//  }
-//}
-//
-//// Screen sizes that can handle two extra columns.
-//// We use columns in addition to gutters for whitespace between columns.
-//@media all and (min-width: 2000px) {
-//  $zen-column-count:  27;
-//  #header,
-//  #navigation,
-//  #footer,
-//  .no-sidebars #content {
-//    @include zen-grid-item(19, 5);
-//  }
-//
-//  #header {
-//    @include zen-nested-container();
-//    #name-and-slogan {
-//      @include zen-grid-item-base();
-//      @include zen-grid-item(11, 5);
-//    }
-//    #secondary-menu,
-//    .region-header {
-//      @include zen-grid-item-base();
-//      @include zen-grid-item(4, 17);
-//    }
-//  }
-//
-//  .one-sidebar {
-//    #content {
-//      @include zen-grid-item(11, 5);
-//    }
-//    .region-sidebar-first,
-//    .region-sidebar-second {
-//      @include zen-grid-item(4, 17);
-//    }
-//  }
-//
-//  .two-sidebars {
-//    #content {
-//      @include zen-grid-item(11, 5);
-//    }
-//    .region-sidebar-first {
-//      @include zen-grid-item(4, 17);
-//    }
-//    .region-sidebar-second {
-//      @include zen-grid-item(3, 21);
-//    }
-//  }
-//
-//  // Three column footer
-//  .region-footer {
-//    @include zen-nested-container();
-//    .block {
-//      @include zen-grid-item-base();
-//    }
-//    .block:nth-child(3n+1) {
-//      @include zen-grid-item(11, 5);
-//      @include zen-clear(); /* Start a new row */
-//    }
-//    .block:nth-child(3n+2) {
-//      @include zen-grid-item(4, 17);
-//    }
-//    .block:nth-child(3n) {
-//      @include zen-grid-item(3, 21);
-//    }
-//  }
-//
-//  // With HPS Zen panel layouts #content is a nested container with $zen-column-count columns
-//  // So we need to make all child containers, including panels, grid items.
-//  .hpszen-primary-box {
-//    #content {
-//      .breadcrumb,
-//      .messages,
-//      > h1,
-//      > h2,
-//      > .tabs,
-//      .panel-hpszen-primary-box {
-//        @include zen-grid-item(27, 1);
-//      }
-//    }
-//  }
-//}
-
-// Content: Messages icons need some room, so we override grid padding
+Messages icons need some room, so we override grid padding
 #content {
   .messages {
     padding-left: 50px !important;
