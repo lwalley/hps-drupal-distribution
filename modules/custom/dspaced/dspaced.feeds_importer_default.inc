@@ -16,8 +16,6 @@
  */
 function dspaced_feeds_importer_default() {
 
-  // TODO: import xhtml bitstream content as entity body
-
   module_load_include('inc', 'dspaced_entities', 'dspaced_entities.dspaced_entities_info');
 
   $importers = array();
