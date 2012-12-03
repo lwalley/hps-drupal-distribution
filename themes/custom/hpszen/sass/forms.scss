@@ -73,7 +73,13 @@ a.button { /* Buttons used by contrib modules like Media */
 .confirm-parent {
   margin: 0;
 }
-
+.views-exposed-form {
+  .views-exposed-widget {
+    .form-submit {
+      margin-top: rhythm(1.5);
+    }
+  }
+}
 /*
  * Search (search-block-form.tpl.php)
  */

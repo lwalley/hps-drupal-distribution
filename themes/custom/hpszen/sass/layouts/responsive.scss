@@ -239,19 +239,25 @@ span.hpszen-responsive {
 }
 // Content: asides adjacent to content
 @media all and (min-width: 1em / 16 * 800) {
-  .hpszen-primary-box,
-  .hpszen-primary-aside-boxes,
+  .hpszen-primary-aside-boxes {
+    #content {
+      .panel-hpszen-primary-box {
+        @include zen-grid-item(8, 1);
+      }
+      .panel-hpszen-aside-box {
+        @include zen-grid-item(4, 9);
+        clear: none;
+      }
+    }
+  }
   .hpszen-primary-upside-boxes {
-    #main {
-      #content {
-        .panel-hpszen-primary-box {
-          @include zen-grid-item(8, 1);
-        }
-        .panel-hpszen-upside-box,
-        .panel-hpszen-aside-box {
-          clear: none;
-          @include zen-grid-item(4, 9);
-        }
+    #content {
+      .panel-hpszen-primary-box {
+        @include zen-grid-item(8, 1);
+        clear: none;
+      }
+      .panel-hpszen-upside-box {
+        @include zen-grid-item(4, 9);
       }
     }
   }

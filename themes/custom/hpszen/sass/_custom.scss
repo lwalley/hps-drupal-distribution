@@ -99,6 +99,7 @@
   @include background-image(linear-gradient($from, $to));
 }
 @mixin hpszen-textarea($width: rhythm(10), $from: #ddd, $to:  #fff) {
+  width: $width;
   border: 1px solid darken($from, 10%);
   @include background-image(linear-gradient(left top, $from, $to));
 }
