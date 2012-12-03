@@ -85,7 +85,9 @@ function dspaced_admin_settings() {
       '#title' => t('Import source'),
       '#default_value' => _dspaced_selected_community_dspace_entity_ids(),
       '#options' => $community_ids_options,
-      '#description' => t('Select which communities items should be imported from.'),
+      '#description' => t('Select which communities items should be imported from. ' .
+                          'Please note that if you deselect a community, all data ' .
+                          'imported from that community, including images, will be deleted.'),
     );
     $form['#submit'][] = 'dspaced_admin_settings_submit';
   }
@@ -95,7 +97,6 @@ function dspaced_admin_settings() {
  * Validation callback for /admin/config/dspaced/settings.
  */
 function dspaced_admin_settings_validate($form, &$form_state) {
-  // TODO: add confirmation step
 }
 
 /**
@@ -117,6 +118,13 @@ function dspaced_admin_settings_submit($form, &$form_state) {
     _dspaced_import_communities($import);
   }
   if ($clear) {
-    _dspaced_clear_communities($clear);
+    drupal_set_message(t('Hey, why are you trying to delete stuff? I totally ' .
+                         'commented out the delete functionality because I haven\'t ' .
+                         'added a confirmation step to the form yet. If you really want ' .
+                         'to delete it go to the dspaced.admin.inc file and uncomment the ' .
+                         'function call to _dspaced_clear_communities().'), 'warning');
+    // @todo commented delete out needs a confirmation step... yikes
+    // @see http://drupal.org/node/470834
+    //_dspaced_clear_communities($clear);
   }
 }
