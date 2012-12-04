@@ -256,15 +256,10 @@ function hpszen_preprocess_block(&$variables, $hook) {
  *
  * Override or insert variables into a field template.
  */
+/* -- Delete this line to use this function
 function hpszen_preprocess_field(&$variables, $hook) {
-  if ($variables['element']['#field_name'] == 'dspace_bitstream_url') {
-    // Hide bitstream URLs... @todo do this properly, maybe with custom views
-    // field?
-    foreach ($variables['items'] as $delta => $item) {
-      $variables['items'][$delta]['#access'] = FALSE;
-    }
-  }
 }
+//*/
 
 
 /**

@@ -124,7 +124,8 @@ span.hpszen-responsive {
 // @todo add page title prefix and suffix elements to grid?
 .hpszen-primary-box,
 .hpszen-primary-aside-boxes,
-.hpszen-primary-upside-boxes {
+.hpszen-primary-upside-boxes,
+.hpszen-primary-downsides-boxes {
   #content {
     @include zen-nested-container();
     @include padding-trailer(2);
@@ -138,14 +139,16 @@ span.hpszen-responsive {
     > .block,
     .panel-hpszen-primary-box,
     .panel-hpszen-aside-box,
-    .panel-hpszen-upside-box {
+    .panel-hpszen-upside-box,
+    .panel-hpszen-downside-box {
       @include zen-grid-item-base();
       @include zen-clear();
       @include zen-grid-item(12, 1);
     }
     .panel-hpszen-primary-box,
     .panel-hpszen-aside-box,
-    .panel-hpszen-upside-box {
+    .panel-hpszen-upside-box,
+    .panel-hpszen-downside-box {
       @include zen-nested-container();
       .panel-pane {
         @include zen-grid-item-base();
@@ -221,6 +224,7 @@ span.hpszen-responsive {
 @media all and (min-width: 1em / 16 * 600) and (max-width: 1em / 16 * 799) {
   // Make aside nested container and assign grids to children
   #content {
+    .panel-hpszen-downside-box,
     .panel-hpszen-aside-box {
       @include zen-nested-container();
       .panel-pane {
@@ -232,6 +236,7 @@ span.hpszen-responsive {
         }
         &:nth-child(2n) {
           @include zen-grid-item(6, 7);
+          clear: none;
         }
       }
     }
@@ -239,7 +244,8 @@ span.hpszen-responsive {
 }
 // Content: asides adjacent to content
 @media all and (min-width: 1em / 16 * 800) {
-  .hpszen-primary-aside-boxes {
+  .hpszen-primary-aside-boxes,
+  .hpszen-primary-downsides-boxes {
     #content {
       .panel-hpszen-primary-box {
         @include zen-grid-item(8, 1);
@@ -247,6 +253,26 @@ span.hpszen-responsive {
       .panel-hpszen-aside-box {
         @include zen-grid-item(4, 9);
         clear: none;
+      }
+      .panel-hpszen-downside-box {
+        // Three rows
+        @include zen-nested-container();
+        .panel-pane {
+          @include zen-grid-item-base();
+          &:nth-child(3n+1) {
+            // New row
+            @include zen-grid-item(4, 1);
+            @include zen-clear();
+          }
+          &:nth-child(2n) {
+            @include zen-grid-item(4, 5);
+            clear: none;
+          }
+          &:nth-child(3n) {
+            @include zen-grid-item(4, 9);
+            clear: none;
+          }
+        }
       }
     }
   }
