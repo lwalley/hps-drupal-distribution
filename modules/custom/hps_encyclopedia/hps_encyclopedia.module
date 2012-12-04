@@ -14,11 +14,14 @@ function hps_encyclopedia_views_pre_render(&$view) {
   foreach ($view->result as $delta => $row) {
     // Manipulate Bitstreams
     if (property_exists($row, 'field_dspace_bitstream_url')) {
-      // Hide body field if bitsream was PDF
-      if (property_exists($row, 'field_body')) {
-        foreach ($row->field_dspace_bitstream_url as $field) {
+      foreach ($row->field_dspace_bitstream_url as $field) {
+        // Hide body field if bitsream was PDF
+        // @todo move PDF text to different field
+        if (property_exists($row, 'field_body')) {
           if (preg_match('/\.pdf\.txt/', $field['rendered'])) {
-            $view->result[$delta]->field_body[0]['rendered']['#access'] = FALSE;
+            if (isset($view->result[$delta]->field_body[0])) {
+              $view->result[$delta]->field_body[0]['rendered']['#access'] = FALSE;
+            }
           }
         }
       }
@@ -26,8 +29,10 @@ function hps_encyclopedia_views_pre_render(&$view) {
 
     // Alter creator string
     if (property_exists($row, 'field_dc_creator')) {
-      $creator = explode(', ', $row->field_dc_creator[0]['raw']['value']);
-      $view->result[$delta]->field_dc_creator[0]['rendered']['#markup'] =  "{$creator[1]} {$creator[0]}";
+      if (isset($row->field_dc_creator[0])) {
+        $creator = explode(', ', $row->field_dc_creator[0]['raw']['value']);
+        $view->result[$delta]->field_dc_creator[0]['rendered']['#markup'] =  "{$creator[1]} {$creator[0]}";
+      }
     }
   }
 }
