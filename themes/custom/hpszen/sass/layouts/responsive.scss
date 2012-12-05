@@ -27,22 +27,27 @@ span.hpszen-responsive {
       max-width: 100%;
     }
   }
-  &.hps-original {
-    width: 20em;
-  }
-  &.hps-principal {
-    width: 20em;
-  }
-  &.hps-supplemental {
-    width: 10em;
-  }
-  &.hps-minor {
-    width: 10em;
-  }
-  &.hps-uniform {
-    width: 20em;
+}
+@mixin hpszen-adjust-responsive-images($adjustment, $base: 12) {
+  span.hpszen-responsive {
+    &.hps-original {
+      width: (1em / $base) * 350 * $adjustment;
+    }
+    &.hps-principal {
+      width: (1em / $base) * 350 * $adjustment;
+    }
+    &.hps-supplemental {
+      width: (1em / $base) * 200 * $adjustment;
+    }
+    &.hps-minor {
+      width: (1em / $base) * 100 * $adjustment;
+    }
+    &.hps-uniform {
+      width: (1em / $base) * 200 * $adjustment;
+    }
   }
 }
+@include hpszen-adjust-responsive-images(1);
 
 // body: These are children of body and thus the containers for zen grids.
 #page,
@@ -92,17 +97,30 @@ span.hpszen-responsive {
 }
 
 
-// #main: Add children of #main to grid
-#navigation,
-#content,
-.sidebars {
+// Navigation: Add #navigation to grid
+#navigation {
   @include zen-grid-item-base();
   @include zen-clear();
   @include zen-grid-item(12, 1);
 }
+
+// Content: Apply base grid and gutters
+@include hpszen-adjust-base-gutter(1);
+// Content: give content some leading and trailing padding
 #content {
-  // Give content some top and bottom room
-  @include rhythm(0, 1, 1, 0);
+  @include padding-leader(1);
+  @include padding-trailer(1);
+}
+
+// Region: page-top toolbar
+// When logged admin toolbar needs some room.
+// @todo toolbar can vary in height, this is the max it needs but will look rubbish with shorter toolbar
+//       fix it with different styles, or maybe switch to single /admin menu item.
+.toolbar {
+  #page {
+    position: relative;
+    @include padding-leader(0.8);
+  }
 }
 
 // #footer: add children of footer to grid.
@@ -117,67 +135,19 @@ span.hpszen-responsive {
   }
 }
 
-// When we're using panels, make #content nested and assign grids to children.
-// @note we use panels inside #content rather than sidebars, so we have
-// more support for panels layouts than sidebar regions.
-// @todo add in support for responsive sidebar regions.
-// @todo add page title prefix and suffix elements to grid?
-.hpszen-primary-box,
-.hpszen-primary-aside-boxes,
-.hpszen-primary-upside-boxes,
-.hpszen-primary-downsides-boxes {
-  #content {
-    @include zen-nested-container();
-    @include padding-trailer(2);
-    .region-highlighted,
-    > h1#page-title,
-    .breadcrumb,
-    .messages,
-    > ul.tabs,
-    .region-help,
-    > ul.action-links,
-    > .block,
-    .panel-hpszen-primary-box,
-    .panel-hpszen-aside-box,
-    .panel-hpszen-upside-box,
-    .panel-hpszen-downside-box {
-      @include zen-grid-item-base();
-      @include zen-clear();
-      @include zen-grid-item(12, 1);
-    }
-    .panel-hpszen-primary-box,
-    .panel-hpszen-aside-box,
-    .panel-hpszen-upside-box,
-    .panel-hpszen-downside-box {
-      @include zen-nested-container();
-      .panel-pane {
-        @include zen-grid-item-base();
-        @include zen-clear();
-        @include zen-grid-item(12, 1);
-      }
-    }
-  }
-}
-
-// Region: page-top toolbar
-// When logged admin toolbar needs some room.
-// @todo toolbar can vary in height, this is the max it needs but will look rubbish with shorter toolbar
-//       fix it with different styles, or maybe switch to single /admin menu item.
-.toolbar {
-  #page {
-    position: relative;
-    @include padding-leader(0.8);
-  }
-}
-
 
 // Start of overrides for wider screens
 // Font: increase base font size as screens get wider
+// Content increase base grid and gutters
 @media all and (min-width: 1em / 16 * 481) and (max-width: 1em / 16 * 1023) {
+  @include hpszen-adjust-base-gutter(2);
   @include hpszen-increase-base-font-sizes(1.3);
+  @include hpszen-adjust-responsive-images(1.5, 13);
 }
 @media all and (min-width: 1em / 16 * 1024) {
+  @include hpszen-adjust-base-gutter(3);
   @include hpszen-increase-base-font-sizes(1.4);
+  @include hpszen-adjust-responsive-images(2, 13);
 }
 
 // Header: two columns

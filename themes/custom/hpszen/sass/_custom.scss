@@ -108,7 +108,7 @@
   @include adjust-font-size-to($adjustment * $base-font-size);
   /* Sets 1 unit of vertical rhythm on the top and bottom margins. */
   @include leader(1, $adjustment * $base-font-size);
-  @include trailer(1, $adjustment * $base-font-size);
+  @include trailer(0.5, $adjustment * $base-font-size);
 }
 /*
  * 1. Corrects text resizing oddly in IE6/7 when body font-size is set using em units
@@ -132,7 +132,7 @@
    */
 
   h1 {
-    @include hpszen-adjust-font-size-and-rhythm($increase * 2);
+    @include hpszen-adjust-font-size-and-rhythm($increase * 1.8);
   }
   h2 {
     @include hpszen-adjust-font-size-and-rhythm($increase * 1.5);
@@ -151,5 +151,56 @@
   tt,
   var {
     @include adjust-font-size-to( 1 * $increase * $base-font-size );
+  }
+}
+// Content: Set/reset base grid with adjusted gutter
+@mixin hpszen-adjust-base-gutter($adjustment) {
+  #content,
+  .sidebars {
+    @include zen-grid-item-base($zen-gutter-width * $adjustment);
+    @include zen-clear();
+    @include zen-grid-item(12, 1);
+  }
+
+  // When we're using panels, make #content nested and assign grids to children.
+  // @note we use panels inside #content rather than sidebars, so we have
+  // more support for panels layouts than sidebar regions.
+  // @todo add in support for responsive sidebar regions.
+  // @todo add page title prefix and suffix elements to grid?
+  .hpszen-primary-box,
+  .hpszen-primary-aside-boxes,
+  .hpszen-primary-upside-boxes,
+  .hpszen-primary-downsides-boxes {
+    #content {
+      @include zen-nested-container();
+      @include padding-trailer(2);
+      .region-highlighted,
+      > h1#page-title,
+      .breadcrumb,
+      .messages,
+      > ul.tabs,
+      .region-help,
+      > ul.action-links,
+      > .block,
+      .panel-hpszen-primary-box,
+      .panel-hpszen-aside-box,
+      .panel-hpszen-upside-box,
+      .panel-hpszen-downside-box {
+        @include zen-grid-item-base($zen-gutter-width * $adjustment);
+        @include zen-clear();
+        @include zen-grid-item(12, 1);
+      }
+      .panel-hpszen-primary-box,
+      .panel-hpszen-aside-box,
+      .panel-hpszen-upside-box,
+      .panel-hpszen-downside-box {
+        @include zen-nested-container();
+        .panel-pane {
+          @include zen-grid-item-base($zen-gutter-width * $adjustment);
+          @include zen-clear();
+          @include zen-grid-item(12, 1);
+        }
+      }
+    }
   }
 }

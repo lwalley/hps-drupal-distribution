@@ -285,6 +285,21 @@ function hpszen_preprocess_views_view(&$variables, $hook) {
   }
 }
 
+function hpszen_preprocess_views_view_field(&$variables) {
+  if ($variables['view']->name == 'hps_browse') {
+    if ($variables['field']->field == 'dspace_bitstream_url') {
+      // @todo This is a total hack, preferably do this pre-render or with theme
+      // suggestion if we can figure out how to get the context
+      $pattern = "/'width':.*?,/";
+      $replace = "'width': 230,";
+      $variables['output'] = preg_replace($pattern, $replace, $variables['output']);
+      $pattern = "/'height':.*?,/";
+      $replace = "'height': 130,";
+      $variables['output'] = preg_replace($pattern, $replace, $variables['output']);
+    }
+  }
+}
+
 /**
  * Implements hook_preprocess_menu_link().
  *

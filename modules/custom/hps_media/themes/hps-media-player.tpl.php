@@ -13,6 +13,8 @@
 <div id="<?php print $element['#id']; ?>" class="<?php print $classes ?>"></div>
 <script type="text/javascript">
   jwplayer('<?php print $element['#id']; ?>').setup({
-    'file': '<?php print $element['#url']; ?>',
+    'file':   '<?php print $element['#url']; ?>',
+    'height': '270',
+    'width':  '480',
   });
 </script>
