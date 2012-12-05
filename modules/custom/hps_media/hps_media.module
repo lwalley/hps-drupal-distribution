@@ -52,7 +52,7 @@ function hps_media_preprocess_field(&$variables, $hook) {
     if ($player_library_info = _player_library_info()) {
       foreach ($variables['element']['#items'] as $delta => $item) {
         $mimetype = file_get_mimetype($item['url']);
-        if (!_is_mimetype_supported($mimetype)) continue;
+        if (!hps_media_is_mimetype_supported($mimetype)) continue;
         $variables['players'][$delta] = array(
           '#type' => 'hps_media_player',
           '#url'  => $item['url'],
@@ -87,9 +87,11 @@ function _player_library_info() {
   if (module_exists('libraries') && ($jwplayer_library_path = libraries_get_path('jwplayer'))) {
     $jwplayer_file_path = "$jwplayer_library_path/jwplayer.js";
     if (file_exists($jwplayer_file_path)) {
+      // Exclude JW Player from JS aggregation ('preprocess' => FALSE), otherwise
+      // bad things happen.
       return array(
         'library_path' => $jwplayer_library_path,
-        'js'           => array($jwplayer_file_path),
+        'js'           => array($jwplayer_file_path => array('preprocess' => FALSE)),
         'name'         => 'jwplayer',
       );
     }
@@ -132,8 +134,9 @@ function _supported_video_mimetypes() {
 /**
  * Helper function to determine if a mimetype is supported by the default media
  * player.
+ *
  */
-function _is_mimetype_supported($mimetype) {
+function hps_media_is_mimetype_supported($mimetype) {
   return in_array($mimetype, _supported_mimetypes());
 }
 

@@ -12,27 +12,85 @@ include_once 'hps_encyclopedia.features.inc';
 function hps_encyclopedia_views_pre_render(&$view) {
 
   foreach ($view->result as $delta => $row) {
-    // Manipulate Bitstreams
+
+    // Manipulate row based on bitstream values
     if (property_exists($row, 'field_dspace_bitstream_url')) {
-      foreach ($row->field_dspace_bitstream_url as $field) {
-        // Hide body field if bitsream was PDF
-        // @todo move PDF text to different field
-        if (property_exists($row, 'field_body')) {
-          if (preg_match('/\.pdf\.txt/', $field['rendered'])) {
-            if (isset($view->result[$delta]->field_body[0])) {
-              $view->result[$delta]->field_body[0]['rendered']['#access'] = FALSE;
+
+      // Get the raw values from the original entity
+      // see views_handler_field_field::get_value()
+      $bitstreams = $view->field['dspace_bitstream_url']->get_value($row);
+
+      foreach ($bitstreams as $bitstream_i => $bitstream) {
+        // We expect a link field type array
+        if (!isset($bitstream['url'])) continue;
+
+        $mimetype = file_get_mimetype($bitstream['url']);
+
+        // Hide body field if bitsream was PDF. All displays.
+        // @todo move PDF text to different field so we don't have to have
+        //       conditional on body, see DSpaced module.
+        if (property_exists($row, 'field_body') && _is_pdf($mimetype)) {
+          foreach ($view->result[$delta]->field_body as $i => $field_body_item) {
+            // If the Views field style setting 'Use field template' is TRUE
+            // then we get a rendered string, otherwise we get a generic render
+            // #markup element. Convert rendered string into render element for
+            // consistency, then hide.
+            if (is_string($field_body_item['rendered'])) {
+              $view->result[$delta]->field_body[$i]['rendered'] = array(
+                '#markup' => $field_body_item['rendered'],
+              );
             }
+            $view->result[$delta]->field_body[$i]['rendered']['#access'] = FALSE;
+          }
+        }
+
+        // Hide bistream field results if they are included and not supported by
+        // hps_media player.
+        if (!$view->field['dspace_bitstream_url']->options['exclude'] &&
+            !hps_media_is_mimetype_supported($mimetype) &&
+            isset($row->field_dspace_bitstream_url[$bitstream_i]) &&
+            ($bitstream_views_field = $row->field_dspace_bitstream_url[$bitstream_i]) &&
+            isset($bitstream_views_field['rendered'])) {
+
+          if (is_string($bitstream_views_field['rendered'])) {
+            $view->result[$delta]->field_dspace_bitstream_url[$bitstream_i]['rendered'] = array(
+              '#markup' => $bitstream_views_field['rendered'],
+            );
+            $view->result[$delta]->field_dspace_bitstream_url[$bitstream_i]['rendered']['#access'] = FALSE;
           }
         }
       }
     }
 
-    // Alter creator string
+    // Alter rendered creator string.
     if (property_exists($row, 'field_dc_creator')) {
-      if (isset($row->field_dc_creator[0])) {
-        $creator = explode(', ', $row->field_dc_creator[0]['raw']['value']);
-        $view->result[$delta]->field_dc_creator[0]['rendered']['#markup'] =  "{$creator[1]} {$creator[0]}";
+      // Get the raw values from the original entity
+      // see views_handler_field_field::get_value()
+      $creators = $view->field['dc_creator']->get_value($row);
+      foreach ($creators as $i => $creator) {
+        // It's a multivalue field so we expect an array with a value index and
+        // matching rendered values
+        if (!isset($creator['value']) || !isset($row->field_dc_creator[$i]['rendered'])) continue;
+
+        $creator_parts = explode(', ', $creator['value']);
+        // If the Views field style setting 'Use field template' is TRUE
+        // then we get a rendered string, otherwise we get a generic render
+        // #markup element. Convert rendered string into render element for
+        // consistency, then insert new value.
+        if (is_string($row->field_dc_creator[$i]['rendered'])) {
+          $view->result[$delta]->field_dc_creator[$i]['rendered'] = array();
+        }
+        $view->result[$delta]->field_dc_creator[$i]['rendered']['#markup'] = "{$creator_parts[1]} {$creator_parts[0]}";
       }
     }
   }
 }
+
+
+/**
+ * Helper function to determine if the bistream is a PDF
+ */
+function _is_pdf($mimetype) {
+  return in_array($mimetype, array('text/plain', 'application/pdf'));
+}
+

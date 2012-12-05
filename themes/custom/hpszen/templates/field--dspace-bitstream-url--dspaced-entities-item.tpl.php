@@ -48,8 +48,7 @@
   <?php endif; ?>
   <div class="field-items"<?php print $content_attributes; ?>>
     <?php foreach ($items as $delta => $item): ?>
-      <?php if (isset($players[$delta])) print render($players[$delta]); ?>
-      <?php print render($item); ?>
+      <?php if (isset($players[$delta])): print render($players[$delta]); else: print render($item); endif; ?>
     <?php endforeach; ?>
   </div>
 </div>
