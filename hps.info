@@ -76,6 +76,8 @@ dependencies[] = geocoder
 ;dependencies[] = print_pdf
 ;dependencies[] = sharethis
 ;dependencies[] = google_analytics
+;dependencies[] = views_rss
+;dependencies[] = views_rss_core
 
 ; Custom modules/features are unversioned and included with the hps profile
 dependencies[] = views_job_scheduler
