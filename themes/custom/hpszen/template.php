@@ -286,7 +286,7 @@ function hpszen_preprocess_views_view(&$variables, $hook) {
 }
 
 function hpszen_preprocess_views_view_field(&$variables) {
-  if ($variables['view']->name == 'hps_browse') {
+  if ($variables['view']->name == 'hps_browse' && $variables['view']->current_display == 'panel_pane_gallery') {
     if ($variables['field']->field == 'dspace_bitstream_url') {
       // @todo This is a total hack, preferably do this pre-render or with theme
       // suggestion if we can figure out how to get the context
