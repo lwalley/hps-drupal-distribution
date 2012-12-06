@@ -65,6 +65,8 @@ projects[imce][version] = 1.6
 
 projects[imce_wysiwyg][version] = 1.0
 
+projects[wysiwyg_filter][version] = 1.6-rc2
+
 projects[fences][version] = 1.0
 
 projects[features][version] = 1.0
@@ -154,6 +156,9 @@ libraries[jquery.cycle][directory_name] = jquery.cycle
 
 libraries[jwplayer][download][type] = get
 libraries[jwplayer][download][url]  = http://www.longtailvideo.com/download/jwplayer-free-6-0-2813.zip
+
+;libraries[jquery.jplayer][download][type] = get
+;libraries[jquery.jplayer][download][url]  = http://www.jplayer.org/latest/jQuery.jPlayer.2.2.0.zip
 
 libraries[dompdf][download][type] = get
 libraries[dompdf][download][url]  = http://dompdf.googlecode.com/files/dompdf_0-6-0_beta3.zip

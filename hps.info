@@ -43,6 +43,7 @@ dependencies[] = adaptive_image
 dependencies[] = wysiwyg
 dependencies[] = imce
 dependencies[] = imce_wysiwyg
+dependencies[] = wysiwyg_filter
 dependencies[] = fences
 dependencies[] = features
 dependencies[] = strongarm
