@@ -361,8 +361,8 @@ function _dspaced_item_feeds_importer() {
     'guid' => array('xpath' => 'concat("items/", entityId)'),
     'title' => array('xpath' => 'name'),
     'body' => array('xpath' => 'bitstreams/bitstreamentity' .
-      '[((mimeType = "text/xhtml" or mimeType = "application/octet-stream") ' .
-      'and contains(name, ".xhtml")) or (mimeType = "text/plain" and contains(name, ".pdf.txt"))]/name'),
+      '[(mimeType = "text/xhtml" or mimeType = "application/octet-stream") ' .
+      'and contains(name, ".xhtml")]/name'),
     'status' => array('xpath' => 1), // Publish items on import of full data
     'feeds_source' => array('xpath' => 'concat("/items/", entityId, ".xml")'),
     'url' => array('xpath' => 'concat("/items/", entityId, ".xml")'),
@@ -387,7 +387,7 @@ function _dspaced_item_feeds_importer() {
     // Add custom subfield to body. Target value is altered later.
     // @see dspaced_feeds_processor_target_alter().
     // @see _dspaced_body_set_target().
-    if ($target == 'body') {
+    if ($target == 'body' || $target == 'dspace_pdf_text') {
       $target .= ':dspaced';
     }
     if (array_key_exists('type', $fields[$field_name])) {

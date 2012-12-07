@@ -79,11 +79,11 @@ function dspaced_feeds_after_clear($source) {
 function dspaced_feeds_processor_targets_alter(&$targets, $entity_type, $bundle_name) {
   foreach (field_info_instances($entity_type, $bundle_name) as $name => $instance) {
     // Add custom target for downloading XHTML
-    // @see _dspaced_body_set_target
-    if ($name == 'body') {
+    // @see _dspaced_bitstream_get_contents_set_target
+    if ($name == 'body' || $name == 'dspace_pdf_text') {
       $targets[$name . ':dspaced'] = array(
         'name' => 'DSpaced ' . check_plain($instance['label']),
-        'callback' => '_dspaced_body_set_target',
+        'callback' => '_dspaced_bitstream_get_contents_set_target',
         'description' => t('The DSpaced @label field of the node.',
                            array('@label' => $instance['label'])),
         'real_target' => $name,
@@ -106,16 +106,17 @@ function dspaced_feeds_processor_targets_alter(&$targets, $entity_type, $bundle_
 }
 
 /**
- * Set custom body field target for :dspaced suffix.
+ * Set custom bitstream contents field target for :dspaced suffix.
  *
  * Callback for dspaced_feeds_processor_targets_alter().
  *
  * In default dspaced_item Feeds importer the body field target is set to a
  * conditional xpath of a bitstream URL e.g. to the first bitstream URL with
  * mimeType text/xhtml or application/octet-stream with file extension .xhtml,
- * or the first bitstream with mimeType text/plain with file extension .pdf.txt.
+ * and the dspace_pdf_text field is set to the first bitstream with mimeType
+ * text/plain with file extension .pdf.txt.
  *
- * The following callback replaces the body value (the bistream URL) with the
+ * The following callback replaces the parsed value (the bistream URL) with the
  * actual contents of the bitstream.
  *
  * @note Based on files_feeds_set_target and link_feeds_set_target from
@@ -128,7 +129,7 @@ function dspaced_feeds_processor_targets_alter(&$targets, $entity_type, $bundle_
  * @see link_feeds_set_target()
  *
  */
-function _dspaced_body_set_target($source, $entity, $target, $value) {
+function _dspaced_bitstream_get_contents_set_target($source, $entity, $target, $value) {
 
   if (empty($value)) {
     return;
@@ -165,7 +166,7 @@ function _dspaced_body_set_target($source, $entity, $target, $value) {
     if ($info['cardinality'] == $i) {
       break;
     }
-    $body_text = '';
+    $field_value = '';
     try {
       if (($content = $v->getContent()) && ($mime_type = $v->getMimeType())) {
         switch ($mime_type) {
@@ -173,13 +174,13 @@ function _dspaced_body_set_target($source, $entity, $target, $value) {
           case 'application/xhtml+xml':
             $xhtml = simplexml_load_string($content);
             if ($xhtml && !preg_match('/not found/', $xhtml->head->title)) {
-              $body_text = check_markup((string) $xhtml->body->asXML(), 'full_html');
+              $field_value = check_markup((string) $xhtml->body->asXML(), 'full_html');
             }
             break;
           case 'text/plain':
             // Applies to pdf.txt files
             // @see default _dspaced_item_feeds_importer() definition
-            $body_text = check_plain($content);
+            $field_value = check_plain($content);
             break;
         }
       }
@@ -187,9 +188,9 @@ function _dspaced_body_set_target($source, $entity, $target, $value) {
     catch (Exception $e) {
       watchdog_exception('Feeds', $e, nl2br(check_plain($e)));
     }
-    if ($body_text) {
+    if ($field_value) {
       $field['und'][$i] = array(
-        'value' => $body_text,
+        'value' => $field_value,
         'format' => 'full_html',
       );
       $i++;

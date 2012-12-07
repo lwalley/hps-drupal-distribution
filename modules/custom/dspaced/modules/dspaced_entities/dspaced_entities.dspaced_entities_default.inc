@@ -784,8 +784,15 @@ function _dspaced_entities_fields() {
       'settings' => array('max_length' => 255),
       'xpath' => _dspaced_metadata_xpath('dc', 'title', 'alternative'),
     ),
+    'dspace_pdf_text' => array(
+      'field_name' => 'dspace_pdf_text',
+      'label' => t('PDF Text'),
+      'cardinality' => 1,
+      'type' => 'text_long',
+      'xpath' => 'bitstreams/bitstreamentity' .
+        '[(mimeType = "text/plain" and contains(name, ".pdf.txt"))]/name'),
+    ),
   );
-
 }
 
 /**
