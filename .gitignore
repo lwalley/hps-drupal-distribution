@@ -1,2 +1,5 @@
 # Ignore SASS cache files.
 .sass-cache/
+
+# Ignore make files intended for local development use
+*.local.make
