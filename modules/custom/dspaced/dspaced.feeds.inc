@@ -175,25 +175,31 @@ function _dspaced_bitstream_get_contents_set_target($source, $entity, $target, $
             $xhtml = simplexml_load_string($content);
             if ($xhtml && !preg_match('/not found/', $xhtml->head->title)) {
               $field_value = check_markup((string) $xhtml->body->asXML(), 'full_html');
+              if ($field_value) {
+                $field['und'][$i] = array(
+                  'value' => trim($field_value),
+                  'format' => 'full_html',
+                );
+                $i++;
+              }
             }
             break;
           case 'text/plain':
             // Applies to pdf.txt files
             // @see default _dspaced_item_feeds_importer() definition
             $field_value = check_plain($content);
+            if ($field_value) {
+              $field['und'][$i] = array(
+                'value' => trim($field_value),
+              );
+              $i++;
+            }
             break;
         }
       }
     }
     catch (Exception $e) {
       watchdog_exception('Feeds', $e, nl2br(check_plain($e)));
-    }
-    if ($field_value) {
-      $field['und'][$i] = array(
-        'value' => $field_value,
-        'format' => 'full_html',
-      );
-      $i++;
     }
   }
   $entity->$field_name = $field;
