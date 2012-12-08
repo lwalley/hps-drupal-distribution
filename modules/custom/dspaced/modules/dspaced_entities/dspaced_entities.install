@@ -52,3 +52,24 @@ function dspaced_entities_uninstall() {
 
   field_purge_batch(1000);
 }
+
+/**
+ * Hook update that creates the DSpace PDF Text field and adds it to
+ * DSpace Entity Item bundle.
+ */
+function dspaced_entities_update_7001() {
+  // Load module and includes to get access to helper functions and hooks.
+  drupal_load('module', 'dspaced_entities');
+  module_load_include('inc', 'dspaced_entities', 'dspaced_entities.dspaced_entities_default');
+  try {
+    $entities = module_invoke('dspaced_entities', 'dspaced_entities_default');
+    $field_dspace_pdf_text = $entities['fields']['dspace_pdf_text'];
+    field_create_field($field_dspace_pdf_text);
+    $field_dspace_pdf_text['entity_type'] = 'node';
+    $field_dspace_pdf_text['bundle'] = 'dspaced_entities_item';
+    field_create_instance($field_dspace_pdf_text);
+  }
+  catch (Exception $e) {
+    throw new DrupalUpdateException($e->getMessage());
+  }
+}

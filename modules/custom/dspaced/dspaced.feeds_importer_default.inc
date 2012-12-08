@@ -462,7 +462,7 @@ function _dspaced_item_feeds_importer() {
     ),
     'content_type' => 'dspaced_entities_item',
     'update' => 0,
-    'import_period' => '86400',
+    'import_period' => '0',
     'expire_period' => 3600,
     'import_on_create' => 1,
     'process_in_background' => 1,

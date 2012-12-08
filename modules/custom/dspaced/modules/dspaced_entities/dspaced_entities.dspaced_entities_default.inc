@@ -148,7 +148,7 @@ function _dspaced_entities_fields() {
       'label' => t('Image'),
       'cardinality' => 1,
       'type' => 'image',
-      'xpath' => 'bitstreams/bitstreamentity[not(contains(description, "Thumbnail")) and contains(name, ".web.j")]/name',
+      'xpath' => 'bitstreams/bitstreamentity[not(contains(description, "Thumbnail")) and contains(name, ".jpg")]/name',
       'settings' => array(
         'file_extensions' => 'png gif jpg jpeg',
         'file_directory' => 'dspaced',
@@ -790,7 +790,7 @@ function _dspaced_entities_fields() {
       'cardinality' => 1,
       'type' => 'text_long',
       'xpath' => 'bitstreams/bitstreamentity' .
-        '[(mimeType = "text/plain" and contains(name, ".pdf.txt"))]/name'),
+        '[(mimeType = "text/plain" and contains(name, ".pdf.txt"))]/name',
     ),
   );
 }
