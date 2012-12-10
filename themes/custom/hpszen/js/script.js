@@ -25,6 +25,14 @@
                  '">&or;</a>';
         };
 
+        Drupal.theme.hpszenSubmenuToggleClosed = function () {
+          return '&or;'
+        }
+
+        Drupal.theme.hpszenSubmenuToggleOpen = function () {
+          return '&and;'
+        }
+
         Drupal.theme.hpszenToggleMenuTrigger = function () {
           return '<a class="menu-toggle" href="#">' + Drupal.t('Menu') + '</a>';
         };
@@ -32,7 +40,22 @@
         function toggleMenu(event) {
           event.preventDefault();
           event.stopPropagation();
-          $(event.data.menu).toggleClass('element-invisible');
+          var toggle = this,
+              menu   = event.data.menu[0],
+              ul     = $(toggle).closest('ul');
+
+          $(menu).toggleClass('element-invisible');
+          // @todo: it seems like there should be a better way to architect this
+          //        'now more complex than just a toggle' toggle...
+          if ($(menu).hasClass('element-invisible')) {
+            $(toggle).html(Drupal.theme('hpszenSubmenuToggleClosed'));
+          } else {
+            $(toggle).html(Drupal.theme('hpszenSubmenuToggleOpen'));
+            // If we just opened the submenu of a root item then close any of its siblings' open menus
+            if ($(ul).parent().get(0).tagName != 'LI') {
+              $(menu).closest('li').siblings().find('> ul:not(.element-invisible)').siblings('a.submenu-toggle').trigger('click');
+            }
+          }
           if (event.data.title) {
             $(event.data.title).toggleClass('expanded');
           };
