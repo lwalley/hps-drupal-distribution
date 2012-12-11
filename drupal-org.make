@@ -51,6 +51,7 @@ projects[entityreference][version] = 1.0-rc5
 ; @see http://drupal.org/node/1340748#comment-5806046
 ; @see http://drupal.org/node/1416506
 ;projects[entityreference][patch][1340748] = http://drupal.org/files/entity_reference-add-cTools-relationship-1340748-33.patch
+; Patch provided could not be applied, re-rolled for HPS
 projects[entityreference][patch][1340748] = https://github.com/downloads/mbl-cli/hps-drupal-distribution/entity_reference-add-cTools-relationship-1340748.patch
 
 projects[jquery_update][version] = 2.3-alpha1
@@ -60,6 +61,10 @@ projects[jquery_update][version] = 2.3-alpha1
 projects[adaptive_image][version] = 1.4
 
 projects[wysiwyg][version] = 2.2
+; HPSR-158 Patch to remove file_create_url and prevent absolute URLs being used
+; with drupal_add_js instead of relative paths.
+; @see http://drupal.org/node/1802394
+projects[wysiwyg][patch][1802394] = http://drupal.org/files/wysiwyg-1802394-4.patch
 
 projects[imce][version] = 1.6
 
