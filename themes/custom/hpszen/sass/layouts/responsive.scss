@@ -191,7 +191,7 @@ span.hpszen-responsive {
 }
 
 // Content: asides two columns, underneath content
-@media all and (min-width: 1em / 16 * 600) and (max-width: 1em / 16 * 799) {
+@media all and (min-width: 1em / 16 * 600) and (max-width: 1em / 16 * 767) {
   // Make aside nested container and assign grids to children
   #content {
     .panel-hpszen-downside-box,
@@ -213,7 +213,7 @@ span.hpszen-responsive {
   }
 }
 // Content: asides adjacent to content
-@media all and (min-width: 1em / 16 * 800) {
+@media all and (min-width: 1em / 16 * 768) {
   .hpszen-primary-aside-boxes,
   .hpszen-primary-downsides-boxes {
     #content {
