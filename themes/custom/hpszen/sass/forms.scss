@@ -51,6 +51,12 @@ input {
 .form-submit { /* The submit button */
 }
 
+.form-actions {
+  .form-submit {
+    margin-right: rhythm(0.5);
+  }
+}
+
 .container-inline {
   div,
   label { /* Inline labels and form divs */
