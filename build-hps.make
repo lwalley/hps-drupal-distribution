@@ -3,13 +3,13 @@
 api = 2
 core = 7.x
 
-;includes[] = drupal-org-core.make
-includes[] = https://raw.github.com/mbl-cli/hps-drupal-distribution/master/drupal-org-core.make
+; Download Drupal core using the release branch core make file
+includes[] = https://raw.github.com/mbl-cli/hps-drupal-distribution/<replaceme:branchname>/drupal-org-core.make
 
-; Install profile
+; Download HPS profile from the current release branch, using drupal make file
 projects[hps][type] = profile
 projects[hps][download][type] = git
 projects[hps][download][url] = git://github.com/mbl-cli/hps-drupal-distribution.git
-projects[hps][download][branch] = master
+projects[hps][download][branch] = <replaceme:branchname>
 
 
