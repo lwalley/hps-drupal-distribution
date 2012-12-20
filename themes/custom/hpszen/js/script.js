@@ -41,19 +41,24 @@
           event.preventDefault();
           event.stopPropagation();
           var toggle = this,
-              menu   = event.data.menu[0],
-              ul     = $(toggle).closest('ul');
+              menu   = (event.data.menu instanceof Array) ? event.data.menu[0] : event.data.menu;
 
           $(menu).toggleClass('element-invisible');
           // @todo: it seems like there should be a better way to architect this
           //        'now more complex than just a toggle' toggle...
-          if ($(menu).hasClass('element-invisible')) {
-            $(toggle).html(Drupal.theme('hpszenSubmenuToggleClosed'));
-          } else {
-            $(toggle).html(Drupal.theme('hpszenSubmenuToggleOpen'));
-            // If we just opened the submenu of a root item then close any of its siblings' open menus
-            if ($(ul).parent().get(0).tagName != 'LI') {
-              $(menu).closest('li').siblings().find('> ul:not(.element-invisible)').siblings('a.submenu-toggle').trigger('click');
+
+          // If toggling a list item (instead of h2) then alter toggle icon
+          if ($(this).parent().get(0).tagName == 'LI') {
+            var ul     = $(toggle).closest('ul');
+
+            if ($(menu).hasClass('element-invisible')) {
+              $(toggle).html(Drupal.theme('hpszenSubmenuToggleClosed'));
+            } else {
+              $(toggle).html(Drupal.theme('hpszenSubmenuToggleOpen'));
+              // If we just opened the submenu of a root item then close any of its siblings' open menus
+              if ($(ul).parent().get(0).tagName != 'LI') {
+                $(menu).closest('li').siblings().find('> ul:not(.element-invisible)').siblings('a.submenu-toggle').trigger('click');
+              }
             }
           }
           if (event.data.title) {
@@ -186,7 +191,6 @@
           });
 
           $('#hpszen-slides-pause').click(function() {
-            console.log(slides);
             slides.cycle('pause');
             slides.addClass('paused');
             $(this).parent().addClass('paused');
