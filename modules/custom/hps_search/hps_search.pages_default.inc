@@ -61,7 +61,7 @@ function hps_search_default_page_manager_pages() {
     'relationships' => array(),
   );
   $display = new panels_display();
-  $display->layout = 'hpszen_primary_aside_boxes';
+  $display->layout = 'hpszen_primary_upside_boxes';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
@@ -69,6 +69,7 @@ function hps_search_default_page_manager_pages() {
       'middle' => NULL,
       'primary-box' => NULL,
       'aside-box' => NULL,
+      'upside-box' => NULL,
     ),
   );
   $display->cache = array();
@@ -99,28 +100,6 @@ function hps_search_default_page_manager_pages() {
     $display->panels['primary-box'][0] = 'new-1';
     $pane = new stdClass();
     $pane->pid = 'new-2';
-    $pane->panel = 'aside-box';
-    $pane->type = 'block';
-    $pane->subtype = 'facetapi-zNHH1T3M1CzVpuC6vlwerGf9FA7PtAp2';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array(
-      'context' => 'context_view:hps_search-ctools_context_search_1',
-      'override_title' => 1,
-      'override_title_text' => 'Filter by Format',
-    );
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 0;
-    $pane->locks = array();
-    $display->content['new-2'] = $pane;
-    $display->panels['aside-box'][0] = 'new-2';
-    $pane = new stdClass();
-    $pane->pid = 'new-3';
     $pane->panel = 'primary-box';
     $pane->type = 'views_header';
     $pane->subtype = 'views_header';
@@ -139,10 +118,10 @@ function hps_search_default_page_manager_pages() {
     $pane->extras = array();
     $pane->position = 1;
     $pane->locks = array();
-    $display->content['new-3'] = $pane;
-    $display->panels['primary-box'][1] = 'new-3';
+    $display->content['new-2'] = $pane;
+    $display->panels['primary-box'][1] = 'new-2';
     $pane = new stdClass();
-    $pane->pid = 'new-4';
+    $pane->pid = 'new-3';
     $pane->panel = 'primary-box';
     $pane->type = 'views_pager';
     $pane->subtype = 'views_pager';
@@ -161,10 +140,10 @@ function hps_search_default_page_manager_pages() {
     $pane->extras = array();
     $pane->position = 2;
     $pane->locks = array();
-    $display->content['new-4'] = $pane;
-    $display->panels['primary-box'][2] = 'new-4';
+    $display->content['new-3'] = $pane;
+    $display->panels['primary-box'][2] = 'new-3';
     $pane = new stdClass();
-    $pane->pid = 'new-5';
+    $pane->pid = 'new-4';
     $pane->panel = 'primary-box';
     $pane->type = 'views_empty';
     $pane->subtype = 'views_empty';
@@ -183,10 +162,10 @@ function hps_search_default_page_manager_pages() {
     $pane->extras = array();
     $pane->position = 3;
     $pane->locks = array();
-    $display->content['new-5'] = $pane;
-    $display->panels['primary-box'][3] = 'new-5';
+    $display->content['new-4'] = $pane;
+    $display->panels['primary-box'][3] = 'new-4';
     $pane = new stdClass();
-    $pane->pid = 'new-6';
+    $pane->pid = 'new-5';
     $pane->panel = 'primary-box';
     $pane->type = 'views_row';
     $pane->subtype = 'views_row';
@@ -208,10 +187,10 @@ function hps_search_default_page_manager_pages() {
     $pane->extras = array();
     $pane->position = 4;
     $pane->locks = array();
-    $display->content['new-6'] = $pane;
-    $display->panels['primary-box'][4] = 'new-6';
+    $display->content['new-5'] = $pane;
+    $display->panels['primary-box'][4] = 'new-5';
     $pane = new stdClass();
-    $pane->pid = 'new-7';
+    $pane->pid = 'new-6';
     $pane->panel = 'primary-box';
     $pane->type = 'views_pager';
     $pane->subtype = 'views_pager';
@@ -230,10 +209,10 @@ function hps_search_default_page_manager_pages() {
     $pane->extras = array();
     $pane->position = 5;
     $pane->locks = array();
-    $display->content['new-7'] = $pane;
-    $display->panels['primary-box'][5] = 'new-7';
+    $display->content['new-6'] = $pane;
+    $display->panels['primary-box'][5] = 'new-6';
     $pane = new stdClass();
-    $pane->pid = 'new-8';
+    $pane->pid = 'new-7';
     $pane->panel = 'primary-box';
     $pane->type = 'views_footer';
     $pane->subtype = 'views_footer';
@@ -252,8 +231,30 @@ function hps_search_default_page_manager_pages() {
     $pane->extras = array();
     $pane->position = 6;
     $pane->locks = array();
+    $display->content['new-7'] = $pane;
+    $display->panels['primary-box'][6] = 'new-7';
+    $pane = new stdClass();
+    $pane->pid = 'new-8';
+    $pane->panel = 'upside-box';
+    $pane->type = 'block';
+    $pane->subtype = 'facetapi-zNHH1T3M1CzVpuC6vlwerGf9FA7PtAp2';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'context' => 'context_view:hps_search-ctools_context_search_1',
+      'override_title' => 1,
+      'override_title_text' => 'Filter by Format',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
     $display->content['new-8'] = $pane;
-    $display->panels['primary-box'][6] = 'new-8';
+    $display->panels['upside-box'][0] = 'new-8';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = 'new-1';
   $handler->conf['display'] = $display;
