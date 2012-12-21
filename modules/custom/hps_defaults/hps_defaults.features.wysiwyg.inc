@@ -44,6 +44,7 @@ function hps_defaults_wysiwyg_default_profiles() {
           'ShowBlocks' => 1,
           'RemoveFormat' => 1,
           'SpecialChar' => 1,
+          'Format' => 1,
           'Table' => 1,
           'SelectAll' => 1,
           'Replace' => 1,
