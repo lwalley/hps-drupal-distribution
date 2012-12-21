@@ -286,7 +286,7 @@ function hps_browse_default_page_manager_handlers() {
     $pane->access = array();
     $pane->configuration = array(
       'context' => 'argument_term_1',
-      'override_title' => 0,
+      'override_title' => 1,
       'override_title_text' => '',
     );
     $pane->cache = array();
@@ -450,7 +450,7 @@ function hps_browse_default_page_manager_pages() {
     ),
   );
   $display->cache = array();
-  $display->title = '%tid:name';
+  $display->title = '%taxonomy_term:name';
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();
@@ -573,7 +573,7 @@ function hps_browse_default_page_manager_pages() {
     ),
   );
   $display->cache = array();
-  $display->title = '%tid:name';
+  $display->title = '%taxonomy_term:name';
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();

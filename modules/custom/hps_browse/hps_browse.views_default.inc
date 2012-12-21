@@ -27,6 +27,8 @@ function hps_browse_views_default_views() {
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Ascending';
+  $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'Descending';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '50';
   $handler->display->display_options['pager']['options']['offset'] = '0';
@@ -102,7 +104,8 @@ function hps_browse_views_default_views() {
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['element_type'] = 'h3';
+  $handler->display->display_options['fields']['title']['element_type'] = 'h2';
+  $handler->display->display_options['fields']['title']['element_label_type'] = '0';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
@@ -133,7 +136,7 @@ function hps_browse_views_default_views() {
   $handler->display->display_options['fields']['dspace_image']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['dspace_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['dspace_image']['settings'] = array(
-    'image_style' => 'hps_minor',
+    'image_style' => 'hps_supplemental',
     'image_link' => 'content',
   );
   /* Field: Content: Bitstreams */
@@ -141,8 +144,8 @@ function hps_browse_views_default_views() {
   $handler->display->display_options['fields']['dspace_bitstream_url']['table'] = 'field_data_dspace_bitstream_url';
   $handler->display->display_options['fields']['dspace_bitstream_url']['field'] = 'dspace_bitstream_url';
   $handler->display->display_options['fields']['dspace_bitstream_url']['label'] = '';
-  $handler->display->display_options['fields']['dspace_bitstream_url']['exclude'] = TRUE;
   $handler->display->display_options['fields']['dspace_bitstream_url']['element_type'] = '0';
+  $handler->display->display_options['fields']['dspace_bitstream_url']['element_label_type'] = '0';
   $handler->display->display_options['fields']['dspace_bitstream_url']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['dspace_bitstream_url']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['dspace_bitstream_url']['element_default_classes'] = FALSE;
@@ -150,7 +153,8 @@ function hps_browse_views_default_views() {
   $handler->display->display_options['fields']['dspace_bitstream_url']['click_sort_column'] = 'url';
   $handler->display->display_options['fields']['dspace_bitstream_url']['type'] = 'link_plain';
   $handler->display->display_options['fields']['dspace_bitstream_url']['delta_offset'] = '0';
-  $handler->display->display_options['fields']['dspace_bitstream_url']['multi_type'] = 'ul';
+  $handler->display->display_options['fields']['dspace_bitstream_url']['separator'] = ' ';
+  $handler->display->display_options['fields']['dspace_bitstream_url']['field_api_classes'] = TRUE;
   /* Field: Content: DC Description */
   $handler->display->display_options['fields']['dc_description']['id'] = 'dc_description';
   $handler->display->display_options['fields']['dc_description']['table'] = 'field_data_dc_description';
@@ -227,6 +231,18 @@ function hps_browse_views_default_views() {
     'interval' => '2',
     'interval_display' => 'time ago',
   );
+  /* Field: Content: DC Description Type */
+  $handler->display->display_options['fields']['dc_description_type']['id'] = 'dc_description_type';
+  $handler->display->display_options['fields']['dc_description_type']['table'] = 'field_data_dc_description_type';
+  $handler->display->display_options['fields']['dc_description_type']['field'] = 'dc_description_type';
+  $handler->display->display_options['fields']['dc_description_type']['label'] = 'Format';
+  $handler->display->display_options['fields']['dc_description_type']['alter']['trim_whitespace'] = TRUE;
+  $handler->display->display_options['fields']['dc_description_type']['element_type'] = '0';
+  $handler->display->display_options['fields']['dc_description_type']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['dc_description_type']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['dc_description_type']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['dc_description_type']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['dc_description_type']['delta_offset'] = '0';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Content: Last Modified (dspace_lastmodified) */
   $handler->display->display_options['sorts']['dspace_lastmodified_value']['id'] = 'dspace_lastmodified_value';
@@ -290,7 +306,6 @@ function hps_browse_views_default_views() {
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['default_row_class'] = FALSE;
-  $handler->display->display_options['style_options']['row_class_special'] = FALSE;
   $handler->display->display_options['style_options']['columns'] = array(
     'title' => 'title',
     'dc_creator' => 'dc_creator',
@@ -351,7 +366,8 @@ function hps_browse_views_default_views() {
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['element_type'] = 'h3';
+  $handler->display->display_options['fields']['title']['element_type'] = '0';
+  $handler->display->display_options['fields']['title']['element_label_type'] = '0';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
@@ -362,10 +378,10 @@ function hps_browse_views_default_views() {
   $handler->display->display_options['fields']['dc_creator']['label'] = 'By';
   $handler->display->display_options['fields']['dc_creator']['alter']['trim_whitespace'] = TRUE;
   $handler->display->display_options['fields']['dc_creator']['alter']['strip_tags'] = TRUE;
-  $handler->display->display_options['fields']['dc_creator']['element_type'] = 'em';
-  $handler->display->display_options['fields']['dc_creator']['element_label_type'] = 'span';
+  $handler->display->display_options['fields']['dc_creator']['element_type'] = '0';
+  $handler->display->display_options['fields']['dc_creator']['element_label_type'] = '0';
   $handler->display->display_options['fields']['dc_creator']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['dc_creator']['element_wrapper_type'] = 'p';
+  $handler->display->display_options['fields']['dc_creator']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['dc_creator']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['dc_creator']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['dc_creator']['empty_zero'] = TRUE;
@@ -377,7 +393,8 @@ function hps_browse_views_default_views() {
   $handler->display->display_options['fields']['dc_description']['label'] = 'Description';
   $handler->display->display_options['fields']['dc_description']['alter']['trim_whitespace'] = TRUE;
   $handler->display->display_options['fields']['dc_description']['alter']['strip_tags'] = TRUE;
-  $handler->display->display_options['fields']['dc_description']['element_type'] = 'p';
+  $handler->display->display_options['fields']['dc_description']['element_type'] = '0';
+  $handler->display->display_options['fields']['dc_description']['element_label_type'] = '0';
   $handler->display->display_options['fields']['dc_description']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['dc_description']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['dc_description']['element_default_classes'] = FALSE;
@@ -396,8 +413,8 @@ function hps_browse_views_default_views() {
   $handler->display->display_options['fields']['dc_description_abstract']['label'] = '';
   $handler->display->display_options['fields']['dc_description_abstract']['alter']['trim_whitespace'] = TRUE;
   $handler->display->display_options['fields']['dc_description_abstract']['alter']['strip_tags'] = TRUE;
-  $handler->display->display_options['fields']['dc_description_abstract']['element_type'] = 'p';
-  $handler->display->display_options['fields']['dc_description_abstract']['element_label_type'] = 'h4';
+  $handler->display->display_options['fields']['dc_description_abstract']['element_type'] = '0';
+  $handler->display->display_options['fields']['dc_description_abstract']['element_label_type'] = '0';
   $handler->display->display_options['fields']['dc_description_abstract']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['dc_description_abstract']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['dc_description_abstract']['element_default_classes'] = FALSE;
@@ -415,10 +432,10 @@ function hps_browse_views_default_views() {
   $handler->display->display_options['fields']['dc_date_created']['field'] = 'dc_date_created';
   $handler->display->display_options['fields']['dc_date_created']['label'] = 'Created';
   $handler->display->display_options['fields']['dc_date_created']['alter']['trim_whitespace'] = TRUE;
-  $handler->display->display_options['fields']['dc_date_created']['element_type'] = 'em';
-  $handler->display->display_options['fields']['dc_date_created']['element_label_type'] = 'span';
+  $handler->display->display_options['fields']['dc_date_created']['element_type'] = '0';
+  $handler->display->display_options['fields']['dc_date_created']['element_label_type'] = '0';
   $handler->display->display_options['fields']['dc_date_created']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['dc_date_created']['element_wrapper_type'] = 'p';
+  $handler->display->display_options['fields']['dc_date_created']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['dc_date_created']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['dc_date_created']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['dc_date_created']['empty_zero'] = TRUE;
@@ -434,17 +451,19 @@ function hps_browse_views_default_views() {
   $handler->display->display_options['fields']['dspace_lastmodified']['table'] = 'field_data_dspace_lastmodified';
   $handler->display->display_options['fields']['dspace_lastmodified']['field'] = 'dspace_lastmodified';
   $handler->display->display_options['fields']['dspace_lastmodified']['label'] = 'Last modified';
-  $handler->display->display_options['fields']['dspace_lastmodified']['element_type'] = 'em';
-  $handler->display->display_options['fields']['dspace_lastmodified']['element_label_type'] = 'span';
+  $handler->display->display_options['fields']['dspace_lastmodified']['element_type'] = '0';
+  $handler->display->display_options['fields']['dspace_lastmodified']['element_label_type'] = '0';
   $handler->display->display_options['fields']['dspace_lastmodified']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['dspace_lastmodified']['element_wrapper_type'] = 'p';
+  $handler->display->display_options['fields']['dspace_lastmodified']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['dspace_lastmodified']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['dspace_lastmodified']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['dspace_lastmodified']['empty_zero'] = TRUE;
-  $handler->display->display_options['fields']['dspace_lastmodified']['type'] = 'format_interval';
   $handler->display->display_options['fields']['dspace_lastmodified']['settings'] = array(
-    'interval' => '2',
-    'interval_display' => 'time ago',
+    'format_type' => 'short',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
   );
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Content: Last Modified (dspace_lastmodified) */
@@ -518,7 +537,8 @@ function hps_browse_views_default_views() {
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['element_type'] = 'h3';
+  $handler->display->display_options['fields']['title']['element_type'] = 'h2';
+  $handler->display->display_options['fields']['title']['element_label_type'] = '0';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
@@ -537,28 +557,13 @@ function hps_browse_views_default_views() {
   $handler->display->display_options['fields']['dc_creator']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['dc_creator']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['dc_creator']['type'] = 'text_plain';
-  /* Field: Content: Image */
-  $handler->display->display_options['fields']['dspace_image']['id'] = 'dspace_image';
-  $handler->display->display_options['fields']['dspace_image']['table'] = 'field_data_dspace_image';
-  $handler->display->display_options['fields']['dspace_image']['field'] = 'dspace_image';
-  $handler->display->display_options['fields']['dspace_image']['label'] = '';
-  $handler->display->display_options['fields']['dspace_image']['element_type'] = '0';
-  $handler->display->display_options['fields']['dspace_image']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['dspace_image']['element_wrapper_type'] = '0';
-  $handler->display->display_options['fields']['dspace_image']['element_default_classes'] = FALSE;
-  $handler->display->display_options['fields']['dspace_image']['hide_empty'] = TRUE;
-  $handler->display->display_options['fields']['dspace_image']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['dspace_image']['settings'] = array(
-    'image_style' => 'hps_minor',
-    'image_link' => 'content',
-  );
   /* Field: Content: Bitstreams */
   $handler->display->display_options['fields']['dspace_bitstream_url']['id'] = 'dspace_bitstream_url';
   $handler->display->display_options['fields']['dspace_bitstream_url']['table'] = 'field_data_dspace_bitstream_url';
   $handler->display->display_options['fields']['dspace_bitstream_url']['field'] = 'dspace_bitstream_url';
   $handler->display->display_options['fields']['dspace_bitstream_url']['label'] = '';
-  $handler->display->display_options['fields']['dspace_bitstream_url']['exclude'] = TRUE;
   $handler->display->display_options['fields']['dspace_bitstream_url']['element_type'] = '0';
+  $handler->display->display_options['fields']['dspace_bitstream_url']['element_label_type'] = '0';
   $handler->display->display_options['fields']['dspace_bitstream_url']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['dspace_bitstream_url']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['dspace_bitstream_url']['element_default_classes'] = FALSE;
@@ -566,56 +571,94 @@ function hps_browse_views_default_views() {
   $handler->display->display_options['fields']['dspace_bitstream_url']['click_sort_column'] = 'url';
   $handler->display->display_options['fields']['dspace_bitstream_url']['type'] = 'link_plain';
   $handler->display->display_options['fields']['dspace_bitstream_url']['delta_offset'] = '0';
-  $handler->display->display_options['fields']['dspace_bitstream_url']['multi_type'] = 'ul';
+  $handler->display->display_options['fields']['dspace_bitstream_url']['separator'] = ' ';
+  $handler->display->display_options['fields']['dspace_bitstream_url']['field_api_classes'] = TRUE;
+  /* Field: Content: Body */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  $handler->display->display_options['fields']['body']['label'] = '';
+  $handler->display->display_options['fields']['body']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['body']['alter']['trim_whitespace'] = TRUE;
+  $handler->display->display_options['fields']['body']['element_type'] = '0';
+  $handler->display->display_options['fields']['body']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['body']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['body']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['body']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['body']['type'] = 'text_summary_or_trimmed';
+  $handler->display->display_options['fields']['body']['settings'] = array(
+    'trim_length' => '300',
+  );
   /* Field: Content: DC Description */
   $handler->display->display_options['fields']['dc_description']['id'] = 'dc_description';
   $handler->display->display_options['fields']['dc_description']['table'] = 'field_data_dc_description';
   $handler->display->display_options['fields']['dc_description']['field'] = 'dc_description';
   $handler->display->display_options['fields']['dc_description']['label'] = '';
+  $handler->display->display_options['fields']['dc_description']['exclude'] = TRUE;
   $handler->display->display_options['fields']['dc_description']['alter']['trim_whitespace'] = TRUE;
-  $handler->display->display_options['fields']['dc_description']['alter']['strip_tags'] = TRUE;
-  $handler->display->display_options['fields']['dc_description']['element_type'] = 'p';
+  $handler->display->display_options['fields']['dc_description']['element_type'] = '0';
+  $handler->display->display_options['fields']['dc_description']['element_label_type'] = '0';
   $handler->display->display_options['fields']['dc_description']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['dc_description']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['dc_description']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['dc_description']['empty'] = '[body]';
   $handler->display->display_options['fields']['dc_description']['hide_empty'] = TRUE;
-  $handler->display->display_options['fields']['dc_description']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['dc_description']['type'] = 'text_trimmed';
   $handler->display->display_options['fields']['dc_description']['settings'] = array(
-    'trim_length' => '600',
+    'trim_length' => '300',
   );
   $handler->display->display_options['fields']['dc_description']['delta_offset'] = '0';
-  $handler->display->display_options['fields']['dc_description']['separator'] = '';
+  $handler->display->display_options['fields']['dc_description']['separator'] = '  ';
   /* Field: Content: DC Description Abstract */
   $handler->display->display_options['fields']['dc_description_abstract']['id'] = 'dc_description_abstract';
   $handler->display->display_options['fields']['dc_description_abstract']['table'] = 'field_data_dc_description_abstract';
   $handler->display->display_options['fields']['dc_description_abstract']['field'] = 'dc_description_abstract';
   $handler->display->display_options['fields']['dc_description_abstract']['label'] = '';
+  $handler->display->display_options['fields']['dc_description_abstract']['exclude'] = TRUE;
   $handler->display->display_options['fields']['dc_description_abstract']['alter']['trim_whitespace'] = TRUE;
-  $handler->display->display_options['fields']['dc_description_abstract']['alter']['strip_tags'] = TRUE;
-  $handler->display->display_options['fields']['dc_description_abstract']['element_type'] = 'p';
-  $handler->display->display_options['fields']['dc_description_abstract']['element_label_type'] = 'h4';
+  $handler->display->display_options['fields']['dc_description_abstract']['element_type'] = '0';
+  $handler->display->display_options['fields']['dc_description_abstract']['element_label_type'] = '0';
   $handler->display->display_options['fields']['dc_description_abstract']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['dc_description_abstract']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['dc_description_abstract']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['dc_description_abstract']['empty'] = '[dc_description]';
   $handler->display->display_options['fields']['dc_description_abstract']['hide_empty'] = TRUE;
-  $handler->display->display_options['fields']['dc_description_abstract']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['dc_description_abstract']['type'] = 'text_trimmed';
   $handler->display->display_options['fields']['dc_description_abstract']['settings'] = array(
-    'trim_length' => '600',
+    'trim_length' => '300',
   );
   $handler->display->display_options['fields']['dc_description_abstract']['delta_offset'] = '0';
-  $handler->display->display_options['fields']['dc_description_abstract']['separator'] = '';
+  $handler->display->display_options['fields']['dc_description_abstract']['separator'] = '  ';
+  /* Field: Content: Image */
+  $handler->display->display_options['fields']['dspace_image']['id'] = 'dspace_image';
+  $handler->display->display_options['fields']['dspace_image']['table'] = 'field_data_dspace_image';
+  $handler->display->display_options['fields']['dspace_image']['field'] = 'dspace_image';
+  $handler->display->display_options['fields']['dspace_image']['label'] = '';
+  $handler->display->display_options['fields']['dspace_image']['element_type'] = '0';
+  $handler->display->display_options['fields']['dspace_image']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['dspace_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['dspace_image']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['dspace_image']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['dspace_image']['empty'] = '[dc_description_abstract]';
+  $handler->display->display_options['fields']['dspace_image']['hide_alter_empty'] = FALSE;
+  $handler->display->display_options['fields']['dspace_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['dspace_image']['settings'] = array(
+    'image_style' => 'hps_uniform',
+    'image_link' => 'content',
+  );
   /* Field: Content: DC Date Created */
   $handler->display->display_options['fields']['dc_date_created']['id'] = 'dc_date_created';
   $handler->display->display_options['fields']['dc_date_created']['table'] = 'field_data_dc_date_created';
   $handler->display->display_options['fields']['dc_date_created']['field'] = 'dc_date_created';
   $handler->display->display_options['fields']['dc_date_created']['label'] = 'Created';
+  $handler->display->display_options['fields']['dc_date_created']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['dc_date_created']['alter']['text'] = '[dc_date_created].';
   $handler->display->display_options['fields']['dc_date_created']['alter']['trim_whitespace'] = TRUE;
   $handler->display->display_options['fields']['dc_date_created']['element_type'] = 'em';
-  $handler->display->display_options['fields']['dc_date_created']['element_label_type'] = 'span';
+  $handler->display->display_options['fields']['dc_date_created']['element_label_type'] = '0';
   $handler->display->display_options['fields']['dc_date_created']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['dc_date_created']['element_wrapper_type'] = 'p';
+  $handler->display->display_options['fields']['dc_date_created']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['dc_date_created']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['dc_date_created']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['dc_date_created']['empty_zero'] = TRUE;
@@ -630,17 +673,19 @@ function hps_browse_views_default_views() {
   $handler->display->display_options['fields']['dspace_lastmodified']['id'] = 'dspace_lastmodified';
   $handler->display->display_options['fields']['dspace_lastmodified']['table'] = 'field_data_dspace_lastmodified';
   $handler->display->display_options['fields']['dspace_lastmodified']['field'] = 'dspace_lastmodified';
-  $handler->display->display_options['fields']['dspace_lastmodified']['label'] = 'Last modified';
+  $handler->display->display_options['fields']['dspace_lastmodified']['label'] = 'Modified';
+  $handler->display->display_options['fields']['dspace_lastmodified']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['dspace_lastmodified']['alter']['text'] = '[dspace_lastmodified].';
+  $handler->display->display_options['fields']['dspace_lastmodified']['alter']['trim_whitespace'] = TRUE;
   $handler->display->display_options['fields']['dspace_lastmodified']['element_type'] = 'em';
-  $handler->display->display_options['fields']['dspace_lastmodified']['element_label_type'] = 'span';
+  $handler->display->display_options['fields']['dspace_lastmodified']['element_label_type'] = '0';
   $handler->display->display_options['fields']['dspace_lastmodified']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['dspace_lastmodified']['element_wrapper_type'] = 'p';
   $handler->display->display_options['fields']['dspace_lastmodified']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['dspace_lastmodified']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['dspace_lastmodified']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['dspace_lastmodified']['type'] = 'format_interval';
   $handler->display->display_options['fields']['dspace_lastmodified']['settings'] = array(
-    'interval' => '2',
+    'interval' => '1',
     'interval_display' => 'time ago',
   );
   $handler->display->display_options['defaults']['sorts'] = FALSE;
