@@ -76,6 +76,17 @@ function hps_defaults_user_default_permissions() {
     'module' => 'system',
   );
 
+  // Exported permission: access site-wide contact form.
+  $permissions['access site-wide contact form'] = array(
+    'name' => 'access site-wide contact form',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'anonymous user',
+      2 => 'authenticated user',
+    ),
+    'module' => 'contact',
+  );
+
   // Exported permission: access statistics.
   $permissions['access statistics'] = array(
     'name' => 'access statistics',
@@ -93,6 +104,15 @@ function hps_defaults_user_default_permissions() {
       1 => 'authenticated user',
     ),
     'module' => 'toolbar',
+  );
+
+  // Exported permission: access user contact forms.
+  $permissions['access user contact forms'] = array(
+    'name' => 'access user contact forms',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'contact',
   );
 
   // Exported permission: access user profiles.
@@ -129,6 +149,16 @@ function hps_defaults_user_default_permissions() {
       0 => 'administrator',
     ),
     'module' => 'block',
+  );
+
+  // Exported permission: administer contact forms.
+  $permissions['administer contact forms'] = array(
+    'name' => 'administer contact forms',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'manager',
+    ),
+    'module' => 'contact',
   );
 
   // Exported permission: administer content types.
@@ -291,6 +321,15 @@ function hps_defaults_user_default_permissions() {
       0 => 'administrator',
     ),
     'module' => 'user',
+  );
+
+  // Exported permission: administer redirects.
+  $permissions['administer redirects'] = array(
+    'name' => 'administer redirects',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'redirect',
   );
 
   // Exported permission: administer search_api.
