@@ -60,7 +60,7 @@ function hps_news_default_page_manager_pages() {
     ),
   );
   $display->cache = array();
-  $display->title = 'News';
+  $display->title = 'Newsroom';
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();

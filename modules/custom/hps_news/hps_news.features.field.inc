@@ -240,6 +240,7 @@ function hps_news_field_default_fields() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('(Optional) This text will be displayed with the image when viewing the full news item.');
   t('Body');
   t('Image');
   t('Image caption');
