@@ -54,13 +54,19 @@ function hps_encyclopedia_default_page_manager_handlers() {
     ),
   );
   $display = new panels_display();
-  $display->layout = 'hpszen_primary_aside_boxes';
+  $display->layout = 'hpszen_primary_box';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
       'default' => NULL,
       'primary-box' => NULL,
       'aside-box' => NULL,
+    ),
+    'primary-box' => array(
+      'style' => 'naked',
+    ),
+    'aside-box' => array(
+      'style' => 'naked',
     ),
   );
   $display->cache = array();
@@ -92,6 +98,27 @@ function hps_encyclopedia_default_page_manager_handlers() {
     $pane->locks = array();
     $display->content['new-1'] = $pane;
     $display->panels['primary-box'][0] = 'new-1';
+    $pane = new stdClass();
+    $pane->pid = 'new-2';
+    $pane->panel = 'primary-box';
+    $pane->type = 'block';
+    $pane->subtype = 'print-print-links';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 0,
+      'override_title_text' => '',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $display->content['new-2'] = $pane;
+    $display->panels['primary-box'][1] = 'new-2';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
