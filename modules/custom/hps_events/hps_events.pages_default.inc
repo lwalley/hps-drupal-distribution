@@ -58,6 +58,9 @@ function hps_events_default_page_manager_pages() {
       'primary-box' => NULL,
       'aside-box' => NULL,
     ),
+    'primary-box' => array(
+      'style' => 'naked',
+    ),
   );
   $display->cache = array();
   $display->title = 'Events';

@@ -44,13 +44,6 @@ function hps_events_views_default_views() {
   $handler->display->display_options['empty']['area_text_custom']['label'] = 'No results message';
   $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
   $handler->display->display_options['empty']['area_text_custom']['content'] = 'No events found.';
-  /* Sort criterion: Broken/missing handler */
-  $handler->display->display_options['sorts']['field_hps_events_date_value']['id'] = 'field_hps_events_date_value';
-  $handler->display->display_options['sorts']['field_hps_events_date_value']['table'] = 'field_data_field_hps_events_date';
-  $handler->display->display_options['sorts']['field_hps_events_date_value']['field'] = 'field_hps_events_date_value';
-  $handler->display->display_options['sorts']['field_hps_events_date_value']['order'] = 'DESC';
-  $handler->display->display_options['sorts']['field_hps_events_date_value']['exposed'] = TRUE;
-  $handler->display->display_options['sorts']['field_hps_events_date_value']['expose']['label'] = 'Date -  start date (field_hps_events_date)';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -79,9 +72,10 @@ function hps_events_views_default_views() {
   $handler->display->display_options['defaults']['use_more'] = FALSE;
   $handler->display->display_options['use_more'] = TRUE;
   $handler->display->display_options['defaults']['use_more_always'] = FALSE;
-  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['defaults']['use_more_always'] = FALSE;
+  $handler->display->display_options['use_more_always'] = TRUE;
   $handler->display->display_options['defaults']['use_more_text'] = FALSE;
-  $handler->display->display_options['use_more_text'] = 'More events';
+  $handler->display->display_options['use_more_text'] = 'All Events';
   $handler->display->display_options['defaults']['link_display'] = FALSE;
   $handler->display->display_options['link_display'] = 'custom_url';
   $handler->display->display_options['link_url'] = 'events';
@@ -153,6 +147,7 @@ function hps_events_views_default_views() {
   $handler->display->display_options['fields']['field_hps_event_date']['id'] = 'field_hps_event_date';
   $handler->display->display_options['fields']['field_hps_event_date']['table'] = 'field_data_field_hps_event_date';
   $handler->display->display_options['fields']['field_hps_event_date']['field'] = 'field_hps_event_date';
+  $handler->display->display_options['fields']['field_hps_event_date']['label'] = 'Event Date';
   $handler->display->display_options['fields']['field_hps_event_date']['element_type'] = '0';
   $handler->display->display_options['fields']['field_hps_event_date']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_hps_event_date']['element_wrapper_type'] = '0';
@@ -225,9 +220,9 @@ function hps_events_views_default_views() {
   $handler->display->display_options['use_more'] = TRUE;
   $handler->display->display_options['defaults']['use_more_always'] = FALSE;
   $handler->display->display_options['defaults']['use_more_always'] = FALSE;
-  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['use_more_always'] = TRUE;
   $handler->display->display_options['defaults']['use_more_text'] = FALSE;
-  $handler->display->display_options['use_more_text'] = 'More events';
+  $handler->display->display_options['use_more_text'] = 'All Events';
   $handler->display->display_options['defaults']['link_display'] = FALSE;
   $handler->display->display_options['link_display'] = 'custom_url';
   $handler->display->display_options['link_url'] = 'events';
@@ -250,7 +245,7 @@ function hps_events_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
-  $handler->display->display_options['fields']['title']['element_type'] = 'h3';
+  $handler->display->display_options['fields']['title']['element_type'] = '0';
   $handler->display->display_options['fields']['title']['element_label_type'] = '0';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['element_wrapper_type'] = '0';
@@ -261,6 +256,7 @@ function hps_events_views_default_views() {
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
   $handler->display->display_options['fields']['body']['label'] = '';
+  $handler->display->display_options['fields']['body']['exclude'] = TRUE;
   $handler->display->display_options['fields']['body']['element_type'] = '0';
   $handler->display->display_options['fields']['body']['element_label_type'] = '0';
   $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
@@ -276,6 +272,7 @@ function hps_events_views_default_views() {
   $handler->display->display_options['fields']['field_hps_event_date']['id'] = 'field_hps_event_date';
   $handler->display->display_options['fields']['field_hps_event_date']['table'] = 'field_data_field_hps_event_date';
   $handler->display->display_options['fields']['field_hps_event_date']['field'] = 'field_hps_event_date';
+  $handler->display->display_options['fields']['field_hps_event_date']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_hps_event_date']['element_type'] = '0';
   $handler->display->display_options['fields']['field_hps_event_date']['element_label_type'] = 'h4';
   $handler->display->display_options['fields']['field_hps_event_date']['element_wrapper_type'] = 'p';
@@ -293,6 +290,7 @@ function hps_events_views_default_views() {
   $handler->display->display_options['fields']['field_hps_event_location']['id'] = 'field_hps_event_location';
   $handler->display->display_options['fields']['field_hps_event_location']['table'] = 'field_data_field_hps_event_location';
   $handler->display->display_options['fields']['field_hps_event_location']['field'] = 'field_hps_event_location';
+  $handler->display->display_options['fields']['field_hps_event_location']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_hps_event_location']['element_type'] = 'p';
   $handler->display->display_options['fields']['field_hps_event_location']['element_label_type'] = 'h4';
   $handler->display->display_options['fields']['field_hps_event_location']['element_wrapper_type'] = 'div';
@@ -345,6 +343,149 @@ function hps_events_views_default_views() {
   $handler->display->display_options['filters']['field_hps_event_date_value_1']['default_to_date'] = 'today + 6 months';
   $handler->display->display_options['pane_category']['weight'] = '0';
 
+  /* Display: Feed */
+  $handler = $view->new_display('feed', 'Feed', 'feed_events');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Latest events';
+  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['style_plugin'] = 'rss_fields';
+  $handler->display->display_options['style_options']['channel'] = array(
+    'core' => array(
+      'views_rss_core' => array(
+        'description' => 'Latest events',
+        'language' => 'en',
+        'category' => 'events',
+        'image' => '',
+        'copyright' => 'Copyright',
+        'managingEditor' => '',
+        'webMaster' => '',
+        'generator' => '',
+        'docs' => '',
+        'cloud' => '',
+        'ttl' => '',
+        'skipHours' => '',
+        'skipDays' => '',
+      ),
+    ),
+  );
+  $handler->display->display_options['style_options']['item'] = array(
+    'core' => array(
+      'views_rss_core' => array(
+        'title' => 'title',
+        'link' => 'path',
+        'description' => 'body',
+        'author' => '',
+        'category' => '',
+        'comments' => '',
+        'enclosure' => '',
+        'guid' => '',
+        'pubDate' => 'created',
+      ),
+    ),
+  );
+  $handler->display->display_options['style_options']['feed_settings'] = array(
+    'absolute_paths' => 1,
+    'feed_in_links' => 1,
+  );
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['element_type'] = 'h2';
+  $handler->display->display_options['fields']['title']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['title']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Date */
+  $handler->display->display_options['fields']['field_hps_event_date']['id'] = 'field_hps_event_date';
+  $handler->display->display_options['fields']['field_hps_event_date']['table'] = 'field_data_field_hps_event_date';
+  $handler->display->display_options['fields']['field_hps_event_date']['field'] = 'field_hps_event_date';
+  $handler->display->display_options['fields']['field_hps_event_date']['label'] = '';
+  $handler->display->display_options['fields']['field_hps_event_date']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_hps_event_date']['element_type'] = '0';
+  $handler->display->display_options['fields']['field_hps_event_date']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['field_hps_event_date']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_hps_event_date']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['field_hps_event_date']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['field_hps_event_date']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['field_hps_event_date']['empty_zero'] = TRUE;
+  $handler->display->display_options['fields']['field_hps_event_date']['settings'] = array(
+    'format_type' => 'long',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+  );
+  /* Field: Content: Location */
+  $handler->display->display_options['fields']['field_hps_event_location']['id'] = 'field_hps_event_location';
+  $handler->display->display_options['fields']['field_hps_event_location']['table'] = 'field_data_field_hps_event_location';
+  $handler->display->display_options['fields']['field_hps_event_location']['field'] = 'field_hps_event_location';
+  $handler->display->display_options['fields']['field_hps_event_location']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_hps_event_location']['element_type'] = '0';
+  $handler->display->display_options['fields']['field_hps_event_location']['element_label_type'] = 'h4';
+  $handler->display->display_options['fields']['field_hps_event_location']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['field_hps_event_location']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['field_hps_event_location']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['field_hps_event_location']['click_sort_column'] = 'country';
+  $handler->display->display_options['fields']['field_hps_event_location']['settings'] = array(
+    'use_widget_handlers' => 1,
+    'format_handlers' => array(
+      'address' => 'address',
+    ),
+  );
+  /* Field: Content: Body */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  $handler->display->display_options['fields']['body']['label'] = '';
+  $handler->display->display_options['fields']['body']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['body']['alter']['text'] = '[field_hps_event_date] [body] [field_hps_event_location]';
+  $handler->display->display_options['fields']['body']['element_type'] = '0';
+  $handler->display->display_options['fields']['body']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['body']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['body']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['body']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['body']['settings'] = array(
+    'trim_length' => '600',
+  );
+  /* Field: Content: Path */
+  $handler->display->display_options['fields']['path']['id'] = 'path';
+  $handler->display->display_options['fields']['path']['table'] = 'node';
+  $handler->display->display_options['fields']['path']['field'] = 'path';
+  $handler->display->display_options['fields']['path']['label'] = '';
+  $handler->display->display_options['fields']['path']['element_type'] = '0';
+  $handler->display->display_options['fields']['path']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['path']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['path']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['path']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['path']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['path']['absolute'] = TRUE;
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = '';
+  $handler->display->display_options['fields']['created']['element_type'] = '0';
+  $handler->display->display_options['fields']['created']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['created']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['created']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['created']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['created']['date_format'] = 'short';
+  $handler->display->display_options['path'] = 'events/feed';
+  $handler->display->display_options['displays'] = array(
+    'ctools_context_events' => 'ctools_context_events',
+    'default' => 0,
+    'panel_pane_upcoming_events' => 0,
+    'panel_pane_upcoming_or_latest_events' => 0,
+  );
+  $handler->display->display_options['sitename_title'] = 0;
   $export['hps_events'] = $view;
 
   return $export;

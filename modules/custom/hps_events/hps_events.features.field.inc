@@ -148,9 +148,10 @@ function hps_events_field_default_fields() {
         ),
       ),
       'entity_type' => 'node',
+      'fences_wrapper' => 'div',
       'field_name' => 'field_hps_event_date',
       'label' => 'Date',
-      'required' => FALSE,
+      'required' => 0,
       'settings' => array(
         'default_value' => 'now',
         'default_value2' => 'same',
@@ -159,9 +160,11 @@ function hps_events_field_default_fields() {
         'user_register_form' => FALSE,
       ),
       'widget' => array(
+        'active' => 1,
         'module' => 'date',
         'settings' => array(
-          'increment' => 15,
+          'display_all_day' => 1,
+          'increment' => '15',
           'input_format' => 'Y-m-d H:i:s',
           'input_format_custom' => '',
           'label_position' => 'above',
