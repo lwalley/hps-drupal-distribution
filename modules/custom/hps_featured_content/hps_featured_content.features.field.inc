@@ -68,7 +68,7 @@ function hps_featured_content_field_default_fields() {
       'label' => 'Description',
       'required' => 0,
       'settings' => array(
-        'display_summary' => 0,
+        'display_summary' => 1,
         'text_processing' => '1',
         'user_register_form' => FALSE,
       ),
@@ -121,14 +121,10 @@ function hps_featured_content_field_default_fields() {
       'description' => '(Optional) Use this field to add an alternative image to represent the featured content. If you upload an alternative image it will override the featured content\'s image. If the featured content does not have its own image and you do not provide an alternative, then the featured content may not appear in some contexts, e.g. featured content without images will not appear in slide shows.',
       'display' => array(
         'default' => array(
-          'label' => 'above',
-          'module' => 'image',
-          'settings' => array(
-            'image_link' => '',
-            'image_style' => '',
-          ),
-          'type' => 'image',
-          'weight' => 2,
+          'label' => 'hidden',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '2',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -149,7 +145,7 @@ function hps_featured_content_field_default_fields() {
         'file_extensions' => 'png gif jpg jpeg',
         'max_filesize' => '',
         'max_resolution' => '',
-        'min_resolution' => '700x700',
+        'min_resolution' => '300x300',
         'title_field' => 0,
         'user_register_form' => FALSE,
       ),
@@ -216,9 +212,8 @@ function hps_featured_content_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'hidden',
-          'module' => 'entityreference',
           'settings' => array(),
-          'type' => 'entityreference_entity_id',
+          'type' => 'hidden',
           'weight' => '1',
         ),
         'teaser' => array(
@@ -233,7 +228,7 @@ function hps_featured_content_field_default_fields() {
       'fences_wrapper' => 'no_wrapper',
       'field_name' => 'hps_featured_entity',
       'label' => 'Featured entity',
-      'required' => 1,
+      'required' => 0,
       'settings' => array(
         'user_register_form' => FALSE,
       ),
@@ -253,7 +248,7 @@ function hps_featured_content_field_default_fields() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Add an alternative image if the featured entity does not have an image, or you would like to use a different image, than the one associated with the entity, to represent the content.');
+  t('(Optional) Use this field to add an alternative image to represent the featured content. If you upload an alternative image it will override the featured content\'s image. If the featured content does not have its own image and you do not provide an alternative, then the featured content may not appear in some contexts, e.g. featured content without images will not appear in slide shows.');
   t('Alternative image');
   t('Describe the featured entity.');
   t('Description');

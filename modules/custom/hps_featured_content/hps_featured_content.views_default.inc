@@ -9,6 +9,7 @@
  */
 function hps_featured_content_views_default_views() {
   $export = array();
+
   $view = new view();
   $view->name = 'hps_featured_content';
   $view->description = 'Entities to reference (defaults to DSpace items with images) and displays for featured content.';
@@ -187,7 +188,7 @@ function hps_featured_content_views_default_views() {
   $handler->display->display_options['fields']['dspace_image']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['dspace_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['dspace_image']['settings'] = array(
-    'image_style' => 'hps_principal',
+    'image_style' => 'hps_original',
     'image_link' => '',
   );
   $handler->display->display_options['fields']['dspace_image']['group_column'] = 'entity_id';
@@ -211,20 +212,6 @@ function hps_featured_content_views_default_views() {
   $handler->display->display_options['fields']['dc_description']['group_column'] = 'entity_id';
   $handler->display->display_options['fields']['dc_description']['group_rows'] = FALSE;
   $handler->display->display_options['fields']['dc_description']['delta_offset'] = '0';
-  /* Field: Content: Link */
-  $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
-  $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
-  $handler->display->display_options['fields']['view_node']['relationship'] = 'hps_featured_entity_target_id';
-  $handler->display->display_options['fields']['view_node']['label'] = '';
-  $handler->display->display_options['fields']['view_node']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['view_node']['element_type'] = '0';
-  $handler->display->display_options['fields']['view_node']['element_label_type'] = '0';
-  $handler->display->display_options['fields']['view_node']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['view_node']['element_wrapper_type'] = '0';
-  $handler->display->display_options['fields']['view_node']['element_default_classes'] = FALSE;
-  $handler->display->display_options['fields']['view_node']['hide_empty'] = TRUE;
-  $handler->display->display_options['fields']['view_node']['text'] = 'Read more';
   /* Field: Content: Alternative image */
   $handler->display->display_options['fields']['field_hps_featured_content_image']['id'] = 'field_hps_featured_content_image';
   $handler->display->display_options['fields']['field_hps_featured_content_image']['table'] = 'field_data_field_hps_featured_content_image';
@@ -240,10 +227,22 @@ function hps_featured_content_views_default_views() {
   $handler->display->display_options['fields']['field_hps_featured_content_image']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_hps_featured_content_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_hps_featured_content_image']['settings'] = array(
-    'image_style' => 'hps_principal',
+    'image_style' => 'hps_original',
     'image_link' => '',
   );
   $handler->display->display_options['fields']['field_hps_featured_content_image']['field_api_classes'] = TRUE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['element_type'] = 'h2';
+  $handler->display->display_options['fields']['title']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['title']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Body */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
@@ -251,7 +250,7 @@ function hps_featured_content_views_default_views() {
   $handler->display->display_options['fields']['body']['label'] = '';
   $handler->display->display_options['fields']['body']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['body']['alter']['strip_tags'] = TRUE;
-  $handler->display->display_options['fields']['body']['alter']['preserve_tags'] = '<em> <i> <strong> <b>';
+  $handler->display->display_options['fields']['body']['alter']['preserve_tags'] = '<em> <i> <strong> <b> <a>';
   $handler->display->display_options['fields']['body']['element_type'] = 'p';
   $handler->display->display_options['fields']['body']['element_label_type'] = '0';
   $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
@@ -268,13 +267,31 @@ function hps_featured_content_views_default_views() {
   $handler->display->display_options['fields']['view_node_1']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['view_node_1']['field'] = 'view_node';
   $handler->display->display_options['fields']['view_node_1']['label'] = '';
+  $handler->display->display_options['fields']['view_node_1']['exclude'] = TRUE;
   $handler->display->display_options['fields']['view_node_1']['element_type'] = '0';
   $handler->display->display_options['fields']['view_node_1']['element_label_type'] = '0';
   $handler->display->display_options['fields']['view_node_1']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['view_node_1']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['view_node_1']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['view_node_1']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['view_node_1']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['view_node_1']['text'] = 'Read more';
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid_1']['id'] = 'nid_1';
+  $handler->display->display_options['fields']['nid_1']['table'] = 'node';
+  $handler->display->display_options['fields']['nid_1']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid_1']['relationship'] = 'hps_featured_entity_target_id';
+  $handler->display->display_options['fields']['nid_1']['label'] = '';
+  $handler->display->display_options['fields']['nid_1']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['nid_1']['alter']['text'] = 'Read more';
+  $handler->display->display_options['fields']['nid_1']['element_type'] = '0';
+  $handler->display->display_options['fields']['nid_1']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['nid_1']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['nid_1']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['nid_1']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['nid_1']['empty'] = '[view_node_1]';
+  $handler->display->display_options['fields']['nid_1']['empty_zero'] = TRUE;
+  $handler->display->display_options['fields']['nid_1']['link_to_node'] = TRUE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Content: Updated date */
   $handler->display->display_options['sorts']['changed']['id'] = 'changed';
