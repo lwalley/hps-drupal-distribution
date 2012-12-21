@@ -65,8 +65,8 @@ function hps_sharing_strongarm() {
   $strongarm->name = 'print_html_link_pos';
   $strongarm->value = array(
     'link' => 'link',
+    'block' => 'block',
     'corner' => 0,
-    'block' => 0,
     'help' => 0,
   );
   $export['print_html_link_pos'] = $strongarm;
@@ -210,8 +210,8 @@ function hps_sharing_strongarm() {
   $strongarm->name = 'print_mail_link_pos';
   $strongarm->value = array(
     'link' => 'link',
+    'block' => 'block',
     'corner' => 0,
-    'block' => 0,
     'help' => 0,
   );
   $export['print_mail_link_pos'] = $strongarm;
@@ -383,8 +383,8 @@ function hps_sharing_strongarm() {
   $strongarm->name = 'print_pdf_link_pos';
   $strongarm->value = array(
     'link' => 'link',
+    'block' => 'block',
     'corner' => 0,
-    'block' => 0,
     'help' => 0,
   );
   $export['print_pdf_link_pos'] = $strongarm;
