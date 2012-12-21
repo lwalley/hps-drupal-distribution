@@ -67,18 +67,22 @@ function hps_home_default_page_manager_pages() {
     ),
   );
   $display = new panels_display();
-  $display->layout = 'hpszen_primary_aside_boxes';
+  $display->layout = 'hpszen_primary_downsides_boxes';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
       'default' => NULL,
       'primary-box' => NULL,
       'aside-box' => NULL,
+      'downside-box' => NULL,
     ),
     'primary-box' => array(
       'style' => 'naked',
     ),
     'aside-box' => array(
+      'style' => 'naked',
+    ),
+    'downside-box' => array(
       'style' => 'naked',
     ),
   );
@@ -88,24 +92,6 @@ function hps_home_default_page_manager_pages() {
   $display->panels = array();
     $pane = new stdClass();
     $pane->pid = 'new-1';
-    $pane->panel = 'primary-box';
-    $pane->type = 'views_panes';
-    $pane->subtype = 'hps_featured_content-panel_pane_featured_content_slides';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array();
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 0;
-    $pane->locks = array();
-    $display->content['new-1'] = $pane;
-    $display->panels['primary-box'][0] = 'new-1';
-    $pane = new stdClass();
-    $pane->pid = 'new-2';
     $pane->panel = 'aside-box';
     $pane->type = 'views_panes';
     $pane->subtype = 'hps_news-panel_pane_front_page_news';
@@ -120,13 +106,13 @@ function hps_home_default_page_manager_pages() {
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $display->content['new-2'] = $pane;
-    $display->panels['aside-box'][0] = 'new-2';
+    $display->content['new-1'] = $pane;
+    $display->panels['aside-box'][0] = 'new-1';
     $pane = new stdClass();
-    $pane->pid = 'new-3';
+    $pane->pid = 'new-2';
     $pane->panel = 'aside-box';
     $pane->type = 'views_panes';
-    $pane->subtype = 'hps_events-panel_pane_upcoming_events';
+    $pane->subtype = 'hps_events-panel_pane_upcoming_or_latest_events';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array();
@@ -138,8 +124,44 @@ function hps_home_default_page_manager_pages() {
     $pane->extras = array();
     $pane->position = 1;
     $pane->locks = array();
+    $display->content['new-2'] = $pane;
+    $display->panels['aside-box'][1] = 'new-2';
+    $pane = new stdClass();
+    $pane->pid = 'new-3';
+    $pane->panel = 'aside-box';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'hps_encyclopedia_items-panel_pane_encyclopedia_recent_items';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 2;
+    $pane->locks = array();
     $display->content['new-3'] = $pane;
-    $display->panels['aside-box'][1] = 'new-3';
+    $display->panels['aside-box'][2] = 'new-3';
+    $pane = new stdClass();
+    $pane->pid = 'new-4';
+    $pane->panel = 'primary-box';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'hps_featured_content-panel_pane_featured_content_slides';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $display->content['new-4'] = $pane;
+    $display->panels['primary-box'][0] = 'new-4';
   $display->hide_title = PANELS_TITLE_NONE;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
