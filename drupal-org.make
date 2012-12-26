@@ -142,8 +142,6 @@ projects[google_analytics][version] = 1.3
 
 projects[views_rss][version] = 2.0-rc3
 
-projects[disable_messages][version] = 1.1
-
 ; @note Custom unversioned modules are included with this profile
 
 ; Libraries
