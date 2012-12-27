@@ -80,7 +80,6 @@ function hps_encyclopedia_views_pre_render(&$view) {
         // matching rendered values
         if (!isset($creator['value']) || !isset($row->field_dc_creator[$i]['rendered'])) continue;
 
-        $creator_parts = explode(', ', $creator['value']);
         // If the Views field style setting 'Use field template' is TRUE
         // then we get a rendered string, otherwise we get a generic render
         // #markup element. Convert rendered string into render element for
@@ -88,7 +87,11 @@ function hps_encyclopedia_views_pre_render(&$view) {
         if (is_string($row->field_dc_creator[$i]['rendered'])) {
           $view->result[$delta]->field_dc_creator[$i]['rendered'] = array();
         }
-        $view->result[$delta]->field_dc_creator[$i]['rendered']['#markup'] = "{$creator_parts[1]} {$creator_parts[0]}";
+        // Reverse names if commas exist in creator, all parts reversed.
+        // @note An alternative option for multiple commas would be to just move
+        //       the first part to the end with a regular expression:
+        //       preg_replace('/^([^,]*),\s*(.*)$/', '$2 $1', $creator['value']);
+        $view->result[$delta]->field_dc_creator[$i]['rendered']['#markup'] = implode(' ', array_reverse(explode(', ', $creator['value'])));
       }
     }
   }
