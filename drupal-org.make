@@ -142,6 +142,8 @@ projects[google_analytics][version] = 1.3
 
 projects[views_rss][version] = 2.0-rc3
 
+projects[override_node_options][version] = 1.12
+
 ; @note Custom unversioned modules are included with this profile
 
 ; Libraries

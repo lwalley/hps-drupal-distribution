@@ -70,6 +70,7 @@ dependencies[] = addressfield
 dependencies[] = geophp
 dependencies[] = geofield
 dependencies[] = geocoder
+dependencies[] = override_node_options
 ;dependencies[] = lexicon
 ;dependencies[] = taxonomy_csv
 ;dependencies[] = print
