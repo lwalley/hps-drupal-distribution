@@ -87,11 +87,14 @@ function hps_encyclopedia_views_pre_render(&$view) {
         if (is_string($row->field_dc_creator[$i]['rendered'])) {
           $view->result[$delta]->field_dc_creator[$i]['rendered'] = array();
         }
-        // Reverse names if commas exist in creator, all parts reversed.
-        // @note An alternative option for multiple commas would be to just move
-        //       the first part to the end with a regular expression:
+        // Reverse names if commas exist in creator, first two parts reversed,
+        // remainder ignored.
+        // @note Alternative option for multiple commas:
+        //       Reverse all parts:
+        //       implode(' ', array_reverse(explode(', ', $creator['value'])));
+        //       Move the first part to the end with a regular expression:
         //       preg_replace('/^([^,]*),\s*(.*)$/', '$2 $1', $creator['value']);
-        $view->result[$delta]->field_dc_creator[$i]['rendered']['#markup'] = implode(' ', array_reverse(explode(', ', $creator['value'])));
+        $view->result[$delta]->field_dc_creator[$i]['rendered']['#markup'] = implode(' ', array_reverse(array_slice(explode(', ', $creator['value']), 0, 2, TRUE)));
       }
     }
   }
