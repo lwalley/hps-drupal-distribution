@@ -60,5 +60,72 @@ function hps_featured_content_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: enter hps_featured_content revision log entry.
+  $permissions['enter hps_featured_content revision log entry'] = array(
+    'name' => 'enter hps_featured_content revision log entry',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'override_node_options',
+  );
+
+  // Exported permission: override hps_featured_content authored by option.
+  $permissions['override hps_featured_content authored by option'] = array(
+    'name' => 'override hps_featured_content authored by option',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'editor',
+    ),
+    'module' => 'override_node_options',
+  );
+
+  // Exported permission: override hps_featured_content authored on option.
+  $permissions['override hps_featured_content authored on option'] = array(
+    'name' => 'override hps_featured_content authored on option',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'editor',
+    ),
+    'module' => 'override_node_options',
+  );
+
+  // Exported permission: override hps_featured_content promote to front page option.
+  $permissions['override hps_featured_content promote to front page option'] = array(
+    'name' => 'override hps_featured_content promote to front page option',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'editor',
+    ),
+    'module' => 'override_node_options',
+  );
+
+  // Exported permission: override hps_featured_content published option.
+  $permissions['override hps_featured_content published option'] = array(
+    'name' => 'override hps_featured_content published option',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'editor',
+    ),
+    'module' => 'override_node_options',
+  );
+
+  // Exported permission: override hps_featured_content revision option.
+  $permissions['override hps_featured_content revision option'] = array(
+    'name' => 'override hps_featured_content revision option',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'override_node_options',
+  );
+
+  // Exported permission: override hps_featured_content sticky option.
+  $permissions['override hps_featured_content sticky option'] = array(
+    'name' => 'override hps_featured_content sticky option',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'override_node_options',
+  );
+
   return $permissions;
 }
