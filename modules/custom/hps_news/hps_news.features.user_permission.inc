@@ -60,5 +60,72 @@ function hps_news_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: enter hps_news revision log entry.
+  $permissions['enter hps_news revision log entry'] = array(
+    'name' => 'enter hps_news revision log entry',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'override_node_options',
+  );
+
+  // Exported permission: override hps_news authored by option.
+  $permissions['override hps_news authored by option'] = array(
+    'name' => 'override hps_news authored by option',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'editor',
+    ),
+    'module' => 'override_node_options',
+  );
+
+  // Exported permission: override hps_news authored on option.
+  $permissions['override hps_news authored on option'] = array(
+    'name' => 'override hps_news authored on option',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'editor',
+    ),
+    'module' => 'override_node_options',
+  );
+
+  // Exported permission: override hps_news promote to front page option.
+  $permissions['override hps_news promote to front page option'] = array(
+    'name' => 'override hps_news promote to front page option',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'editor',
+    ),
+    'module' => 'override_node_options',
+  );
+
+  // Exported permission: override hps_news published option.
+  $permissions['override hps_news published option'] = array(
+    'name' => 'override hps_news published option',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'editor',
+    ),
+    'module' => 'override_node_options',
+  );
+
+  // Exported permission: override hps_news revision option.
+  $permissions['override hps_news revision option'] = array(
+    'name' => 'override hps_news revision option',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'override_node_options',
+  );
+
+  // Exported permission: override hps_news sticky option.
+  $permissions['override hps_news sticky option'] = array(
+    'name' => 'override hps_news sticky option',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'override_node_options',
+  );
+
   return $permissions;
 }

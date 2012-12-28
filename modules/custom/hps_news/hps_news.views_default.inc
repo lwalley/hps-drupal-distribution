@@ -350,6 +350,23 @@ function hps_news_views_default_views() {
   $handler->display->display_options['fields']['path']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['path']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['path']['absolute'] = TRUE;
+  /* Field: Content: Image */
+  $handler->display->display_options['fields']['field_hps_news_image']['id'] = 'field_hps_news_image';
+  $handler->display->display_options['fields']['field_hps_news_image']['table'] = 'field_data_field_hps_news_image';
+  $handler->display->display_options['fields']['field_hps_news_image']['field'] = 'field_hps_news_image';
+  $handler->display->display_options['fields']['field_hps_news_image']['label'] = '';
+  $handler->display->display_options['fields']['field_hps_news_image']['element_type'] = '0';
+  $handler->display->display_options['fields']['field_hps_news_image']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['field_hps_news_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_hps_news_image']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['field_hps_news_image']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['field_hps_news_image']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['field_hps_news_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_hps_news_image']['type'] = 'enclosure_image';
+  $handler->display->display_options['fields']['field_hps_news_image']['settings'] = array(
+    'image_style' => 'hps_minor',
+  );
+  $handler->display->display_options['fields']['field_hps_news_image']['field_api_classes'] = TRUE;
   $handler->display->display_options['path'] = 'news/feed';
   $handler->display->display_options['displays'] = array(
     'ctools_context_news' => 'ctools_context_news',
