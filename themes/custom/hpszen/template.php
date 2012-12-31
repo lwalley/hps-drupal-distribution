@@ -285,6 +285,20 @@ function hpszen_preprocess_views_view(&$variables, $hook) {
   }
 }
 
+/**
+ * Implements hook_preprocess_views_view_fields().
+ */
+function hpszen_preprocess_views_view_fields(&$variables) {
+  if ($variables['view']->name == 'hps_browse_by') {
+    // Re-render term description content without the container div element
+    // added by template_preprocess_views_view_fields.
+    // @see http://api.drupal.org/api/views/theme%21theme.inc/function/template_preprocess_views_view_fields/7
+    $variables['fields']['description']->content = $variables['view']->style_plugin->get_field($variables['view']->row_index, 'description');
+  }
+}
+/**
+ * Implements hook_preprocess_views_view_field().
+ */
 function hpszen_preprocess_views_view_field(&$variables) {
   if ($variables['view']->name == 'hps_browse' && $variables['view']->current_display == 'panel_pane_gallery') {
     if ($variables['field']->field == 'dspace_bitstream_url') {
