@@ -289,7 +289,7 @@ function hpszen_preprocess_views_view(&$variables, $hook) {
  * Implements hook_preprocess_views_view_fields().
  */
 function hpszen_preprocess_views_view_fields(&$variables) {
-  if ($variables['view']->name == 'hps_browse_by') {
+  if ($variables['view']->name == 'hps_browse_by' && array_key_exists('description', $variables['fields'])) {
     // Re-render term description content without the container div element
     // added by template_preprocess_views_view_fields.
     // @see http://api.drupal.org/api/views/theme%21theme.inc/function/template_preprocess_views_view_fields/7
