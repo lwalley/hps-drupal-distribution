@@ -54,8 +54,8 @@ function dspaced_entities_uninstall() {
 }
 
 /**
- * Hook update that creates the DSpace PDF Text field and adds it to
- * DSpace Entity Item bundle.
+ * Implements hook_update_N().
+ * Creates the DSpace PDF Text field and adds it to DSpace Entity Item bundle.
  */
 function dspaced_entities_update_7001() {
   // Load module and includes to get access to helper functions and hooks.
@@ -68,6 +68,91 @@ function dspaced_entities_update_7001() {
     $field_dspace_pdf_text['entity_type'] = 'node';
     $field_dspace_pdf_text['bundle'] = 'dspaced_entities_item';
     field_create_instance($field_dspace_pdf_text);
+  }
+  catch (Exception $e) {
+    throw new DrupalUpdateException($e->getMessage());
+  }
+}
+
+/**
+ * Implements hook_update_N().
+ * Deletes datetime fields and recreates them as date or text fields.
+ * @note This is destructive and will delete existing datetime fields and values.
+ * Assumes that date values will be automatically re-imported from DSpace
+ * afterwards. Assumes that fields are only used on dspaced_entities_item
+ * bundle.
+ */
+function dspaced_entities_update_7002() {
+  // Load module and includes to get access to helper functions and hooks.
+  drupal_load('module', 'dspaced_entities');
+  module_load_include('inc', 'dspaced_entities', 'dspaced_entities.dspaced_entities_default');
+  try {
+    $datefields = array(
+      'dspace_lastmodified',
+      'dc_date',
+      'dc_date_accessioned',
+      'dc_date_available',
+      'dc_date_created',
+      'dc_date_issued',
+    );
+
+    // Mark date fields for deletion
+    foreach ($datefields as $name) {
+      field_delete_field($name);
+    }
+    // @note When fields are marked for deletion the data is moved to new tables
+    //       field_deleted_data_N and field_deleted_revision_N. In order to
+    //       delete the data in these tables and the tables themselves
+    //       field_purge_batch($batch_size) should be used, and it is worth
+    //       noting:
+    //
+    //       It appears that field_purge_batch needs to be called at least
+    //       twice, first to delete the data and second to remove the
+    //       field_deleted_* tables.
+    //
+    //       $batch_size appears to equate to the number of rows in the
+    //       field_deleted_* tables that will be removed, and contrary to
+    //       thinking that all rows would be deleted a set batch number at a
+    //       time as interpreted from the Drupal API statement "... once each
+    //       batch is finished, it continues with the next batch until all have
+    //       completed." it seems that if you call e.g. field_purge_batch(10)
+    //       here then only 10 rows from each of the field_deleted_* tables will
+    //       be deleted. In order to delete all rows, the $batch_size should be
+    //       set to a number higher than the max number of rows from the
+    //       field_deleted_* tables.
+    // @see field_purge_batch()
+
+    // Count how many rows we need to purge.
+    // @todo Bit of a hack, is there a better way?
+    $instances = field_read_instances(array('deleted' => 1), array('include_deleted' => 1));
+    $counts = array();
+    foreach ($instances as $instance) {
+      $field = field_info_field_by_id($instance['field_id']);
+      $query = new EntityFieldQuery();
+      $counts[] = $query
+        ->fieldCondition($field)
+        ->entityCondition('bundle', $instance['bundle'])
+        ->deleted(TRUE)
+        ->count(TRUE)
+        ->execute();
+    }
+    // Remove field data from field_deleted_*
+    field_purge_batch(max($counts));
+    // Remove field_deleted_* tables
+    field_purge_batch(1);
+
+
+    // Recreate date fields and instances and include new date created standard
+    // field for capturing user entered date in standard W3C form
+    $datefields[] = 'dc_date_createdstandard';
+    $entities = module_invoke('dspaced_entities', 'dspaced_entities_default');
+    foreach ($datefields as $name) {
+      $field = $entities['fields'][$name];
+      field_create_field($field);
+      $field['entity_type'] = 'node';
+      $field['bundle'] = 'dspaced_entities_item';
+      field_create_instance($field);
+    }
   }
   catch (Exception $e) {
     throw new DrupalUpdateException($e->getMessage());

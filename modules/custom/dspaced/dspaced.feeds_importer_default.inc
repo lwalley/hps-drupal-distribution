@@ -385,7 +385,7 @@ function _dspaced_item_feeds_importer() {
   foreach(array_keys($fields) as $i => $field_name) {
     $target = $field_name;
     // Add custom subfield to body. Target value is altered later.
-    // @see dspaced_feeds_processor_target_alter().
+    // @see dspaced_feeds_processor_targets_alter().
     // @see _dspaced_body_set_target().
     if ($target == 'body' || $target == 'dspace_pdf_text') {
       $target .= ':dspaced';
@@ -395,14 +395,23 @@ function _dspaced_item_feeds_importer() {
       switch ($fields[$field_name]['type']) {
         case 'datetime':
           $target .= ":start";
-        break;
+          break;
         case 'link_field':
           $target .= ":url";
           break;
         case 'image':
+        case 'date':
           // Add custom subfield to image fields. Target value is altered later.
-          // @see dspaced_feeds_processor_target_alter().
+          // @see dspaced_feeds_processor_targets_alter().
           // @see _dspaced_image_set_target().
+
+          // Add custom subfield to ISO date fields. Target value is altered to
+          // $target:start with optional $target:end subfields later once
+          // we've filled in any blanks on partial dates and dealt with
+          // uncertainty qualifiers.
+          // @see dspaced_feeds_processor_targets_alter().
+          // @see _dspaced_date_set_target().
+
           $target .= ":dspaced";
           break;
       }

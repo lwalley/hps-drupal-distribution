@@ -182,16 +182,17 @@ function _dspaced_entities_fields() {
         ),
       ),
     ),
+    // lastModified is added by dSpace as e.g. 2012-11-13T13:17:54-05:00
     'dspace_lastmodified' => array(
       'field_name' => 'dspace_lastmodified',
       'label' => t('Last Modified'),
       'cardinality' => 1,
-      'type' => 'datetime',
+      'type' => 'date',
       'default_formatter' => 'date_plain',
       'default_token_formatter' => 'date_plain',
       'default_widget' => 'date_text',
       'settings' => array(
-        'granularity' => drupal_map_assoc(array('year', 'month', 'day', 'hour', 'minute', 'second')),
+        'granularity' => drupal_map_assoc(array('year', 'month', 'day', 'hour', 'minute', 'second', 'timezone')),
         'todate' => '',
         'tz_handling' => 'none',
         'timezone_db' => date_get_timezone_db('none'),
@@ -205,7 +206,7 @@ function _dspaced_entities_fields() {
           'input_format_custom' => DATE_FORMAT_ISO,
           'increment' => 0,
           'text_parts' => array(),
-          'year_range' => '-2:0',
+          'year_range' => '-10:0',
           'label_position' => 'none',
         ),
       ),
@@ -331,18 +332,22 @@ function _dspaced_entities_fields() {
       'settings' => array('max_length' => 255),
       'xpath' => _dspaced_metadata_xpath('dc', 'creator'),
     ),
+    // dc.date is user entered field. Since we don't know what format the date
+    // might be in we can only store as text string.
     'dc_date' => array(
       'field_name' => 'dc_date',
       'label' => t('DC Date'),
       'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-      'type' => 'datetime',
+      'type' => 'text',
+      'settings' => array('max_length' => 255),
       'xpath' => _dspaced_metadata_xpath('dc', 'date'),
     ),
+    // dc.date.accessioned is added by dSpace as e.g. 2012-11-13T13:17:54Z
     'dc_date_accessioned' => array(
       'field_name' => 'dc_date_accessioned',
       'label' => t('DC Date Accessioned'),
       'cardinality' => 1,
-      'type' => 'datetime',
+      'type' => 'date',
       'default_formatter' => 'date_plain',
       'default_token_formatter' => 'date_plain',
       'default_widget' => 'date_text',
@@ -367,11 +372,12 @@ function _dspaced_entities_fields() {
       ),
       'xpath' => _dspaced_metadata_xpath('dc', 'date', 'accessioned'),
     ),
+    // dc.date.available is added by dSpace as e.g. 2012-11-13T13:17:54Z
     'dc_date_available' => array(
       'field_name' => 'dc_date_available',
       'label' => t('DC Date Available'),
       'cardinality' => 1,
-      'type' => 'datetime',
+      'type' => 'date',
       'default_formatter' => 'date_plain',
       'default_token_formatter' => 'date_plain',
       'default_widget' => 'date_text',
@@ -396,17 +402,29 @@ function _dspaced_entities_fields() {
       ),
       'xpath' => _dspaced_metadata_xpath('dc', 'date', 'available'),
     ),
+    // dc.date.created is user entered field. Since we don't know what format
+    // the date string is in we can only store as text.
     'dc_date_created' => array(
       'field_name' => 'dc_date_created',
       'label' => t('DC Date Created'),
       'cardinality' => 1,
-      'type' => 'datetime',
+      'type' => 'text',
+      'settings' => array('max_length' => 255),
+      'xpath' => _dspaced_metadata_xpath('dc', 'date', 'created'),
+    ),
+    // dc.date.createdstandard is assumed to be a user entered field in
+    // standard ISO 8601 extended format adopted by W3C
+    'dc_date_createdstandard' => array(
+      'field_name' => 'dc_date_createdstandard',
+      'label' => t('DC Date Created Standard'),
+      'cardinality' => 1,
+      'type' => 'date',
       'default_formatter' => 'date_plain',
       'default_token_formatter' => 'date_plain',
       'default_widget' => 'date_text',
       'settings' => array(
         'granularity' => drupal_map_assoc(array('year', 'month', 'day', 'hour', 'minute', 'second')),
-        'todate' => '',
+        'todate' => 'optional',
         'tz_handling' => 'none',
         'timezone_db' => date_get_timezone_db('none'),
         'default_value' => 'blank',
@@ -423,18 +441,19 @@ function _dspaced_entities_fields() {
           'label_position' => 'none',
         ),
       ),
-      'xpath' => _dspaced_metadata_xpath('dc', 'date', 'created'),
+      'xpath' => _dspaced_metadata_xpath('dc', 'date', 'createdstandard'),
     ),
+    // dc.date.issued is added by dSpace as e.g. 2012-11-13
     'dc_date_issued' => array(
       'field_name' => 'dc_date_issued',
       'label' => t('DC Date Issued'),
       'cardinality' => 1,
-      'type' => 'datetime',
+      'type' => 'date',
       'default_formatter' => 'date_plain',
       'default_token_formatter' => 'date_plain',
       'default_widget' => 'date_text',
       'settings' => array(
-        'granularity' => drupal_map_assoc(array('year', 'month', 'day', 'hour', 'minute', 'second')),
+        'granularity' => drupal_map_assoc(array('year', 'month', 'day')),
         'todate' => '',
         'tz_handling' => 'none',
         'timezone_db' => date_get_timezone_db('none'),
@@ -445,7 +464,7 @@ function _dspaced_entities_fields() {
         'type' => 'date_text',
         'settings' => array(
           'input_format' => 'custom',
-          'input_format_custom' => DATE_FORMAT_ISO,
+          'input_format_custom' => 'Y-m-d',
           'increment' => 0,
           'text_parts' => array(),
           'year_range' => '',
