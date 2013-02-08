@@ -3,3 +3,7 @@
 
 # Ignore make files intended for local development use
 *.local.make
+
+# Ignore modules that are managed by other repositories
+modules/custom/dspaced/
+modules/custom/views_job_scheduler/
