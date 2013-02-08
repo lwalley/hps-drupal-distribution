@@ -66,7 +66,7 @@ projects[wysiwyg][version] = 2.2
 ; @see http://drupal.org/node/1802394
 projects[wysiwyg][patch][1802394] = http://drupal.org/files/wysiwyg-1802394-4.patch
 
-projects[imce][version] = 1.6
+projects[imce][version] = 1.7
 
 projects[imce_wysiwyg][version] = 1.0
 
@@ -85,7 +85,7 @@ projects[job_scheduler][version] = 2.0-alpha3
 ; @todo update to Feeds 2.0-alpha7
 ; Modules/patches will need to be tested/recreated for feeds,
 ; feeds_selfnode_processor and feeds_xpathparser
-projects[feeds][version] = 2.0-alpha6
+projects[feeds][version] = 2.0-alpha7
 projects[feeds][patch][1171114] = http://drupal.org/files/feeds-getfile_replace_behaviour_alter-1171114-19.patch
 
 projects[feeds_xpathparser][version] = 1.x-dev
@@ -112,7 +112,7 @@ projects[facetapi][version] = 1.2
 
 projects[facetapi_bonus][version] = 1.1
 
-projects[search_api][version] = 1.3
+projects[search_api][version] = 1.4
 ; includes search_facet_api
 
 projects[search_api_solr][version] = 1.0-rc2
@@ -144,7 +144,19 @@ projects[views_rss][version] = 2.0-rc3
 
 projects[override_node_options][version] = 1.12
 
-; @note Custom unversioned modules are included with this profile
+; @note some custom unversioned modules are included with this profile, others
+;       we download from sandbox
+projects[dspaced][type] = module
+projects[dspaced][subdir] = custom
+projects[dspaced][download][type] = git
+projects[dspaced][download][url] = http://git.drupal.org/sandbox/lwalley/1911858.git
+projects[dspaced][download][revision] = dfc48619c69979390d100c2c40e89d1307e1d82a
+
+projects[views_job_scheduler][type] = module
+projects[views_job_scheduler][subdir] = custom
+projects[views_job_scheduler][download][type] = git
+projects[views_job_scheduler][download][url] = http://git.drupal.org/sandbox/lwalley/1911890.git
+projects[views_job_scheduler][download][revision] = 4a4bc165735d6381169094125f666710365149de
 
 ; Libraries
 libraries[ckeditor][download][type] = get
@@ -157,8 +169,13 @@ libraries[SolrPhpClient][download][url]  = http://solr-php-client.googlecode.com
 ;libraries[geoPHP][download][url]  = https://github.com/phayes/geoPHP/archive/1.1.zip
 ; geoPHP library is bundled with the geophp module
 
+; Fixing jquery.cycle version to 2.9999.8 (26-OCT-2012) and downloading from
+; GitHub instead of http://malsup.github.com/jquery.cycle.all.js because
+; starting Version: 2.9999.81 (15-JAN-2013) jquery.cycle requires jquery 1.7.1
+; or above. We are currently using 1.5 because of Ctools and Views compatibility.
+; @see http://drupal.org/node/1494860
 libraries[jquery.cycle][download][type] = get
-libraries[jquery.cycle][download][url]  = http://malsup.github.com/jquery.cycle.all.js
+libraries[jquery.cycle][download][url]  = https://raw.github.com/malsup/cycle/4fffa1d366e964267ca433db9f8bfc83723f04a4/jquery.cycle.all.js
 libraries[jquery.cycle][directory_name] = jquery.cycle
 
 libraries[jwplayer][download][type] = get
