@@ -287,13 +287,7 @@ function hps_encyclopedia_views_default_views() {
   $handler->display->display_options['fields']['dc_date_created']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['dc_date_created']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['dc_date_created']['hide_empty'] = TRUE;
-  $handler->display->display_options['fields']['dc_date_created']['settings'] = array(
-    'format_type' => 'year',
-    'fromto' => 'both',
-    'multiple_number' => '',
-    'multiple_from' => '',
-    'multiple_to' => '',
-  );
+  $handler->display->display_options['fields']['dc_date_created']['type'] = 'text_plain';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';

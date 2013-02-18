@@ -207,13 +207,7 @@ function hps_browse_views_default_views() {
   $handler->display->display_options['fields']['dc_date_created']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['dc_date_created']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['dc_date_created']['empty_zero'] = TRUE;
-  $handler->display->display_options['fields']['dc_date_created']['settings'] = array(
-    'format_type' => 'long',
-    'fromto' => 'both',
-    'multiple_number' => '',
-    'multiple_from' => '',
-    'multiple_to' => '',
-  );
+  $handler->display->display_options['fields']['dc_date_created']['type'] = 'text_plain';
   /* Field: Content: Last Modified */
   $handler->display->display_options['fields']['dspace_lastmodified']['id'] = 'dspace_lastmodified';
   $handler->display->display_options['fields']['dspace_lastmodified']['table'] = 'field_data_dspace_lastmodified';
@@ -439,13 +433,7 @@ function hps_browse_views_default_views() {
   $handler->display->display_options['fields']['dc_date_created']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['dc_date_created']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['dc_date_created']['empty_zero'] = TRUE;
-  $handler->display->display_options['fields']['dc_date_created']['settings'] = array(
-    'format_type' => 'long',
-    'fromto' => 'both',
-    'multiple_number' => '',
-    'multiple_from' => '',
-    'multiple_to' => '',
-  );
+  $handler->display->display_options['fields']['dc_date_created']['type'] = 'text_plain';
   /* Field: Content: Last Modified */
   $handler->display->display_options['fields']['dspace_lastmodified']['id'] = 'dspace_lastmodified';
   $handler->display->display_options['fields']['dspace_lastmodified']['table'] = 'field_data_dspace_lastmodified';
@@ -662,13 +650,7 @@ function hps_browse_views_default_views() {
   $handler->display->display_options['fields']['dc_date_created']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['dc_date_created']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['dc_date_created']['empty_zero'] = TRUE;
-  $handler->display->display_options['fields']['dc_date_created']['settings'] = array(
-    'format_type' => 'long',
-    'fromto' => 'both',
-    'multiple_number' => '',
-    'multiple_from' => '',
-    'multiple_to' => '',
-  );
+  $handler->display->display_options['fields']['dc_date_created']['type'] = 'text_plain';
   /* Field: Content: Last Modified */
   $handler->display->display_options['fields']['dspace_lastmodified']['id'] = 'dspace_lastmodified';
   $handler->display->display_options['fields']['dspace_lastmodified']['table'] = 'field_data_dspace_lastmodified';
