@@ -85,7 +85,6 @@ dependencies[] = override_node_options
 dependencies[] = views_job_scheduler
 dependencies[] = dspaced_entities
 dependencies[] = dspaced
-dependencies[] = dspaced_ui
 dependencies[] = hps_media
 dependencies[] = hps_roles
 dependencies[] = hps_defaults
