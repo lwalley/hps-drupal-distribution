@@ -1,0 +1,39 @@
+diff --git a/Classes/PHPExcel/Reader/Excel2007.php b/Classes/PHPExcel/Reader/Excel2007.php
+index 8d45cc7..5a49259 100644
+--- a/Classes/PHPExcel/Reader/Excel2007.php
++++ b/Classes/PHPExcel/Reader/Excel2007.php
+@@ -480,7 +480,7 @@ class PHPExcel_Reader_Excel2007 implements PHPExcel_Reader_IReader
+ 	 * @param 	string 		$pFilename
+ 	 * @throws 	Exception
+ 	 */
+-	public function load($pFilename)
++	public function load($pFilename, $fixZoomScale = FALSE)
+ 	{
+ 		// Check if file exists
+ 		if (!file_exists($pFilename)) {
+@@ -767,11 +767,23 @@ class PHPExcel_Reader_Excel2007 implements PHPExcel_Reader_IReader
+ 
+ 							if (isset($xmlSheet->sheetViews) && isset($xmlSheet->sheetViews->sheetView)) {
+ 							    if (isset($xmlSheet->sheetViews->sheetView['zoomScale'])) {
+-								    $docSheet->getSheetView()->setZoomScale( intval($xmlSheet->sheetViews->sheetView['zoomScale']) );
++                    if ($fixZoomScale && intval($xmlSheet->sheetViews->sheetView['zoomScale'] == 0) {
++                      // @note Hack to prevent exception on load.
++                      $docSheet->getSheetView()->setZoomScale(1);
++                    }
++                    else {
++								      $docSheet->getSheetView()->setZoomScale( intval($xmlSheet->sheetViews->sheetView['zoomScale']) );
++                    }
+ 								}
+ 
+ 							    if (isset($xmlSheet->sheetViews->sheetView['zoomScaleNormal'])) {
+-								    $docSheet->getSheetView()->setZoomScaleNormal( intval($xmlSheet->sheetViews->sheetView['zoomScaleNormal']) );
++                    if ($fixZoomScale && intval($xmlSheet->sheetViews->sheetView['zoomScaleNormal'] == 0) {
++                      // @note Hack to prevent exception on load.
++                      $docSheet->getSheetView()->setZoomScaleNormal(1);
++                    }
++                    else {
++								      $docSheet->getSheetView()->setZoomScaleNormal( intval($xmlSheet->sheetViews->sheetView['zoomScaleNormal']) );
++                    }
+ 								}
+ 
+ 							    if (isset($xmlSheet->sheetViews->sheetView['view'])) {
