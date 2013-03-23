@@ -1,0 +1,21 @@
+diff --git a/entityreference.module b/entityreference.module
+index 5f03c5b..c8973c7 100644
+--- a/entityreference.module
++++ b/entityreference.module
+@@ -516,6 +516,16 @@ function _entityreference_field_settings_validate($form, &$form_state) {
+   if (isset($form_state['values']['field'])) {
+     $field['settings'] = $form_state['values']['field']['settings'];
+   }
++
++  // Update foreign keys, since field_create_field() function already stored "node"
++  // as default, which may be wrong and causes some troubles with other modules like
++  // cTools when looking for automatic relationships.
++  // @see issue #1340748
++  module_load_install($field['module']);
++  $schema = entityreference_field_schema($field);
++  $field['foreign keys'] = $schema['foreign keys'];
++  $form_state['values']['field']['foreign keys'] = $schema['foreign keys'];
++
+   $form_state['entityreference']['field'] = $field;
+ 
+   unset($form_state['values']['field']['settings']['handler_submit']);
