@@ -7,3 +7,4 @@
 # Ignore modules that are managed by other repositories and symbolically linked
 modules/custom/dspaced
 modules/custom/views_job_scheduler
+modules/custom/feeds_xlsx

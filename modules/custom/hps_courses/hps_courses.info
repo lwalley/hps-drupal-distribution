@@ -1,0 +1,8 @@
+name = HPS Courses
+description = Generates courses and related entities from DSpace archive items.
+core = 7.x
+package = HPS
+
+dependencies[] = dspaced_entities
+dependencies[] = feeds_xls
+dependencies[] = mblhistory_dspaced

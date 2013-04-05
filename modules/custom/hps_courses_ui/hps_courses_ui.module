@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the HPS Courses User Interface feature.
+ */
+
+include_once 'hps_courses_ui.features.inc';

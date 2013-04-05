@@ -42,7 +42,7 @@ projects[link][version] = 1.0
 
 projects[field_group][version] = 1.1
 
-projects[entity][version] = 1.0-rc3
+projects[entity][version] = 1.0
 
 projects[entityreference][version] = 1.0-rc5
 ; Foregin key information defaulting to node on field create and not being
@@ -52,7 +52,7 @@ projects[entityreference][version] = 1.0-rc5
 ; @see http://drupal.org/node/1416506
 ;projects[entityreference][patch][1340748] = http://drupal.org/files/entity_reference-add-cTools-relationship-1340748-33.patch
 ; Patch provided could not be applied, re-rolled for HPS
-projects[entityreference][patch][1340748] = https://github.com/downloads/mbl-cli/hps-drupal-distribution/entity_reference-add-cTools-relationship-1340748.patch
+projects[entityreference][patch][1340748] = https://raw.github.com/mbl-cli/hps-drupal-distribution/master/patches/entity_reference-add-cTools-relationship-1340748.patch
 
 projects[jquery_update][version] = 2.3-alpha1
 ; Latest version of jQuery not available on recommended 2.2 release.
@@ -144,6 +144,11 @@ projects[views_rss][version] = 2.0-rc3
 
 projects[override_node_options][version] = 1.12
 
+projects[field_collection][version] = 1.0-beta5
+projects[field_collection][patch][1063434] = http://drupal.org/files/field_collection-feeds_integration.patch
+
+projects[rules][version] = 2.2
+
 ; @note some custom unversioned modules are included with this profile, others
 ;       we download from sandbox
 projects[dspaced][type] = module
@@ -157,6 +162,12 @@ projects[views_job_scheduler][subdir] = custom
 projects[views_job_scheduler][download][type] = git
 projects[views_job_scheduler][download][url] = http://git.drupal.org/sandbox/lwalley/1911890.git
 projects[views_job_scheduler][download][revision] = 4a4bc165735d6381169094125f666710365149de
+
+projects[feeds_xlsx][type] = module
+projects[feeds_xlsx][subdir] = custom
+projects[feeds_xlsx][download][type] = git
+projects[feeds_xlsx][download][url] = http://git.drupal.org/sandbox/lwalley/1960440.git
+projects[feeds_xlsx][download][revision] = 80864fc6b05a509f99993e36e5fdbad5b369d8cb
 
 ; Libraries
 libraries[ckeditor][download][type] = get
@@ -186,3 +197,7 @@ libraries[jwplayer][download][url]  = http://www.longtailvideo.com/download/jwpl
 
 libraries[dompdf][download][type] = get
 libraries[dompdf][download][url]  = http://dompdf.googlecode.com/files/dompdf_0-6-0_beta3.zip
+
+libraries[PHPExcel][download][type] = get
+libraries[PHPExcel][download][url]  = https://github.com/PHPOffice/PHPExcel/archive/PHPExcel_1.7.8.zip
+libraries[PHPExcel][patch][1] = https://raw.github.com/mbl-cli/hps-drupal-distribution/master/patches/PHPExcel-zoomscale-fix.patch
