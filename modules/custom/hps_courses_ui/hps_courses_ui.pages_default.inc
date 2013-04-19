@@ -45,7 +45,7 @@ function hps_courses_ui_default_page_manager_handlers() {
     ),
   );
   $display = new panels_display();
-  $display->layout = 'hpszen_primary_downsides_boxes';
+  $display->layout = 'hpszen_basic';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
@@ -53,6 +53,7 @@ function hps_courses_ui_default_page_manager_handlers() {
       'primary-box' => NULL,
       'aside-box' => NULL,
       'downside-box' => NULL,
+      'content' => NULL,
     ),
     'primary-box' => array(
       'style' => 'naked',
@@ -63,6 +64,9 @@ function hps_courses_ui_default_page_manager_handlers() {
     'downside-box' => array(
       'style' => 'naked',
     ),
+    'content' => array(
+      'style' => 'naked',
+    ),
   );
   $display->cache = array();
   $display->title = '%node:title';
@@ -70,7 +74,7 @@ function hps_courses_ui_default_page_manager_handlers() {
   $display->panels = array();
     $pane = new stdClass();
     $pane->pid = 'new-1';
-    $pane->panel = 'primary-box';
+    $pane->panel = 'content';
     $pane->type = 'views_panes';
     $pane->subtype = 'hps_courses-panel_pane_course_photo';
     $pane->shown = TRUE;
@@ -85,10 +89,10 @@ function hps_courses_ui_default_page_manager_handlers() {
     $pane->position = 0;
     $pane->locks = array();
     $display->content['new-1'] = $pane;
-    $display->panels['primary-box'][0] = 'new-1';
+    $display->panels['content'][0] = 'new-1';
     $pane = new stdClass();
     $pane->pid = 'new-2';
-    $pane->panel = 'primary-box';
+    $pane->panel = 'content';
     $pane->type = 'views_panes';
     $pane->subtype = 'hps_courses-panel_pane_course_participants';
     $pane->shown = TRUE;
@@ -107,7 +111,7 @@ function hps_courses_ui_default_page_manager_handlers() {
     $pane->position = 1;
     $pane->locks = array();
     $display->content['new-2'] = $pane;
-    $display->panels['primary-box'][1] = 'new-2';
+    $display->panels['content'][1] = 'new-2';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;

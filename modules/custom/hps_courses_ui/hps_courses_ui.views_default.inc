@@ -12,7 +12,7 @@ function hps_courses_ui_views_default_views() {
 
   $view = new view();
   $view->name = 'hps_courses';
-  $view->description = 'Lists courses.';
+  $view->description = 'Courses lists and course page view panes.';
   $view->tag = 'default';
   $view->base_table = 'node';
   $view->human_name = 'HPS Courses';
@@ -160,6 +160,14 @@ function hps_courses_ui_views_default_views() {
   /* Display: Course photo */
   $handler = $view->new_display('panel_pane', 'Course photo', 'panel_pane_course_photo');
   $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['style_options']['default_row_class'] = FALSE;
+  $handler->display->display_options['style_options']['row_class_special'] = FALSE;
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Content: Items (hps_course_items) */
   $handler->display->display_options['relationships']['hps_course_items_value']['id'] = 'hps_course_items_value';
@@ -192,7 +200,6 @@ function hps_courses_ui_views_default_views() {
     'image_style' => 'hps_principal',
     'image_link' => '',
   );
-  $handler->display->display_options['fields']['dspace_image']['field_api_classes'] = TRUE;
   /* Field: Content: DC Description */
   $handler->display->display_options['fields']['dc_description']['id'] = 'dc_description';
   $handler->display->display_options['fields']['dc_description']['table'] = 'field_data_dc_description';
@@ -202,7 +209,7 @@ function hps_courses_ui_views_default_views() {
   $handler->display->display_options['fields']['dc_description']['element_type'] = '0';
   $handler->display->display_options['fields']['dc_description']['element_label_type'] = '0';
   $handler->display->display_options['fields']['dc_description']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['dc_description']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['dc_description']['element_wrapper_type'] = 'div';
   $handler->display->display_options['fields']['dc_description']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['dc_description']['type'] = 'text_plain';
   $handler->display->display_options['fields']['dc_description']['delta_offset'] = '0';
@@ -248,16 +255,17 @@ function hps_courses_ui_views_default_views() {
   $handler = $view->new_display('panel_pane', 'Course participants', 'panel_pane_course_participants');
   $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
-  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['style_plugin'] = 'list';
   $handler->display->display_options['style_options']['grouping'] = array(
     0 => array(
       'field' => 'hps_participant_role',
-      'rendered' => 1,
+      'rendered' => 0,
       'rendered_strip' => 0,
     ),
   );
   $handler->display->display_options['style_options']['default_row_class'] = FALSE;
   $handler->display->display_options['style_options']['row_class_special'] = FALSE;
+  $handler->display->display_options['style_options']['wrapper_class'] = 'group';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
@@ -306,7 +314,6 @@ function hps_courses_ui_views_default_views() {
   $handler->display->display_options['fields']['hps_participant_role']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['hps_participant_role']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['hps_participant_role']['type'] = 'taxonomy_term_reference_plain';
-  $handler->display->display_options['fields']['hps_participant_role']['field_api_classes'] = TRUE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Field collection item: Participant first name (hps_participant_first_name) */
   $handler->display->display_options['sorts']['hps_participant_first_name_value']['id'] = 'hps_participant_first_name_value';

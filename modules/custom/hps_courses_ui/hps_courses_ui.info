@@ -2,6 +2,7 @@ name = HPS Courses User Interface
 description = Course listings and pages.
 core = 7.x
 package = HPS
+php = 5.2.4
 version = 7.x-1.0-alpha1
 project = hps_courses_ui
 dependencies[] = ctools
