@@ -8,11 +8,11 @@ defaults[projects][subdir] = "contributed"
 projects[zen][version] = 5.1
 
 ; Contributed modules
-projects[libraries][version] = 2.0
+projects[libraries][version] = 2.1
 
 projects[transliteration][version] = 3.1
 
-projects[ctools][version] = 1.2
+projects[ctools][version] = 1.3
 
 projects[diff][version] = 3.2
 
@@ -27,7 +27,7 @@ projects[administerusersbyrole][download][revision] = f8671526da1e97ef7740368f7a
 ; breaks Aegir site install.
 ; @see http://drupal.org/node/923882
 
-projects[token][version] = 1.4
+projects[token][version] = 1.5
 
 projects[pathauto][version] = 1.2
 
@@ -38,7 +38,7 @@ projects[redirect][version] = 1.0-rc1
 projects[date][version] = 2.6
 ; includes date_views
 
-projects[link][version] = 1.0
+projects[link][version] = 1.1
 
 projects[field_group][version] = 1.1
 
@@ -54,9 +54,7 @@ projects[entityreference][version] = 1.0-rc5
 ; Patch provided could not be applied, re-rolled for HPS
 projects[entityreference][patch][1340748] = https://raw.github.com/mbl-cli/hps-drupal-distribution/master/patches/entity_reference-add-cTools-relationship-1340748.patch
 
-projects[jquery_update][version] = 2.3-alpha1
-; Latest version of jQuery not available on recommended 2.2 release.
-; @see http://drupal.org/node/1819558
+projects[jquery_update][version] = 2.3
 
 projects[adaptive_image][version] = 1.4
 
@@ -100,7 +98,7 @@ projects[feeds_selfnode_processor][download][url] = http://git.drupal.org/projec
 projects[feeds_selfnode_processor][download][revision] = 802826d2787e6547b505deb9da5d965fdb15875b
 projects[feeds_selfnode_processor][patch][1815768] = http://drupal.org/files/feeds_selfnode_processor-refactored_processor_to_include_feeds_hooks-1815768-1.patch
 
-projects[views][version] = 3.5
+projects[views][version] = 3.7
 ; includes view_ui
 
 projects[views_queue][version] = 1.x-dev
@@ -108,14 +106,14 @@ projects[views_queue][download][type] = git
 projects[views_queue][download][url] = http://git.drupal.org/project/views_queue.git
 projects[views_queue][download][revision] = 0d661bcd22f0cafdb0942c5efd612de7cc408d48
 
-projects[facetapi][version] = 1.2
+projects[facetapi][version] = 1.3
 
 projects[facetapi_bonus][version] = 1.1
 
 projects[search_api][version] = 1.4
 ; includes search_facet_api
 
-projects[search_api_solr][version] = 1.0-rc2
+projects[search_api_solr][version] = 1.0-rc3
 
 projects[taxonomy_menu][version] = 1.4
 
