@@ -197,5 +197,6 @@ libraries[dompdf][download][type] = get
 libraries[dompdf][download][url]  = http://dompdf.googlecode.com/files/dompdf_0-6-0_beta3.zip
 
 libraries[PHPExcel][download][type] = get
-libraries[PHPExcel][download][url]  = https://github.com/PHPOffice/PHPExcel/archive/PHPExcel_1.7.8.zip
+libraries[PHPExcel][download][url]  = https://github.com/PHPOffice/PHPExcel/archive/PHPExcel_1.7.8.tar.gz
+libraries[PHPExcel][directory_name] = PHPExcel
 libraries[PHPExcel][patch][1] = https://raw.github.com/mbl-cli/hps-drupal-distribution/master/patches/PHPExcel-zoomscale-fix.patch
