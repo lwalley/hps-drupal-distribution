@@ -39,6 +39,12 @@ $legacy-support-for-ie8: true;
 
 $base-font-size:   10px; // The font size set on the root html element.
 $base-line-height: 1.5 * $base-font-size; // This line-height determines the basic unit of vertical rhythm.
+$h1-font-size: 15px;
+$h2-font-size: 13px;
+$h3-font-size: 11px;
+$h4-font-size: 10px;
+$h5-font-size: 10px;
+$h6-font-size: 10px;
 
 // @note DejaVu and Nimbus Sans fonts are commonly available on Linux systems
 $times-new-roman: "Times New Roman", Times, Georgia, "DejaVu Serif", serif;

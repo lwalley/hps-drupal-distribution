@@ -132,9 +132,65 @@ span.hpszen-responsive {
     @include zen-grid-item-base();
     @include zen-clear();
     @include zen-grid-item(12, 1);
+    ul.menu {
+      margin: 0;
+      padding: 0;
+      @include margin-leader(0.5);
+      @include padding-trailer(0.5);
+      li {
+        display: inline;
+        a {
+          padding-right: rhythm(0.5);
+          padding-left: rhythm(0.5);
+        }
+        &:after {
+          content: "|";
+        }
+        &:last-child {
+          &:after {
+            content: "";
+          }
+        }
+        &:first-child {
+          a {
+            padding-left: 0;
+          }
+        }
+      }
+    }
+    &:last-child {
+      @include hpszen-adjust-font-size-and-rhythm(0.9);
+      margin: 0;
+      @include margin-leader(0.5);
+      p {
+        margin: 0;
+        + ul {
+          @include delimited-list('|');
+        }
+      }
+      address {
+        display: inline;
+        padding-right: rhythm(1);
+      }
+      li {
+        &:last-child {
+          padding-left: rhythm(1);
+        }
+      }
+    }
   }
 }
-
+.front {
+  #footer {
+    .block {
+      &:first-child {
+        li {
+          display: inline;
+        }
+      }
+    }
+  }
+}
 
 // Start of overrides for wider screens
 // Font: increase base font size as screens get wider
@@ -260,39 +316,23 @@ span.hpszen-responsive {
 }
 
 
-// Footer: two columns
+// Footer columns
 // Footer is already nested container so just re-assign grids to child blocks
-@media all and (min-width: 1em / 16 * 500) and (max-width: 1em / 16 * 699)  {
-  #footer {
-    .block {
-      clear: none;
-      &:nth-child(2n+1) {
-        // New row
-        @include zen-grid-item(6, 1);
-        @include zen-clear();
-      }
-      &:nth-child(2n) {
-        @include zen-grid-item(6, 7);
-      }
-    }
-  }
-}
-// Footer: three columns
-// Footer is already nested container so just re-assign grids to child blocks
-@media all and (min-width: 1em / 16 * 700) {
-  #footer {
-    .block {
-      clear: none;
-      &:nth-child(3n+1) {
-        // New row
-        @include zen-grid-item(4, 1);
-        @include zen-clear();
-      }
-      &:nth-child(3n) {
-        @include zen-grid-item(4, 5);
-      }
-      &:nth-child(2n) {
-        @include zen-grid-item(4, 9);
+@media all and (min-width: 1em / 16 * 500) {
+  .front {
+    #footer {
+      .block {
+        &:first-child {
+          @include zen-nested-container();
+          p {
+            @include zen-grid-item-base();
+            @include zen-grid-item(4, 1);
+          }
+          ul {
+            @include zen-grid-item-base();
+            @include zen-grid-item(8, 5);
+          }
+        }
       }
     }
   }
