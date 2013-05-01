@@ -5,13 +5,12 @@
  */
 
 $plugin = array(
-  'title' => t('Index page with facets'),
+  'title' => t('Basic page plus'),
   'category' => t('HPS Zen Responsive'),
-  'icon' => 'hpszen_index.png',
-  'theme' => 'hpszen_index',
+  'icon' => 'hpszen_basic_plus.png',
+  'theme' => 'hpszen_basic_plus',
   'regions' => array(
     'introduction' => t('Introduction'),
-    'operations' => t('Operations'),
-    'results' => t('Results')
+    'content' => t('Content')
   ),
 );
