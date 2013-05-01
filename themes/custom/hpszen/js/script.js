@@ -18,22 +18,22 @@
       // Primary navigation menu
       $('#navigation', context).once('hpszen', function () {
 
-        Drupal.theme.hpszenSubmenuToggle = function () {
+        Drupal.theme.prototype.hpszenSubmenuToggle = function () {
           return '<a href="#" class="submenu-toggle" title="' +
                  Drupal.t("Javascript trigger to add or remove this item's " +
                           "submenu from the visual display.") +
                  '">&or;</a>';
         };
 
-        Drupal.theme.hpszenSubmenuToggleClosed = function () {
+        Drupal.theme.prototype.hpszenSubmenuToggleClosed = function () {
           return '&or;'
         }
 
-        Drupal.theme.hpszenSubmenuToggleOpen = function () {
+        Drupal.theme.prototype.hpszenSubmenuToggleOpen = function () {
           return '&and;'
         }
 
-        Drupal.theme.hpszenToggleMenuTrigger = function () {
+        Drupal.theme.prototype.hpszenToggleMenuTrigger = function () {
           return '<a class="menu-toggle" href="#">' + Drupal.t('Menu') + '</a>';
         };
 
@@ -112,10 +112,10 @@
 
         if ("cycle" in $.fn) {
 
-          Drupal.theme.hpszenCyclingPager = function () {
+          Drupal.theme.prototype.hpszenCyclingPager = function () {
             return '<div class="pager"></div>';
           };
-          Drupal.theme.hpszenCyclingNav = function () {
+          Drupal.theme.prototype.hpszenCyclingNav = function () {
             // @todo Drupal.t
             return '<div class="nav">' +
                    '  <a href="#" title="Javascript trigger to display previous slide." id="hpszen-slide-previous">Previous</a>' +
@@ -125,7 +125,7 @@
                    '</div>';
           };
 
-          Drupal.theme.hpszenCyclingPagerItem = function (index, slide) {
+          Drupal.theme.prototype.hpszenCyclingPagerItem = function (index, slide) {
             var slide = $(slide),
                 alt = slide.find('> p').text() || '',
                 image = slide.find('> span img');

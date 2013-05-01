@@ -111,6 +111,7 @@ projects[facetapi][version] = 1.3
 projects[facetapi_bonus][version] = 1.1
 
 projects[search_api][version] = 1.4
+projects[search_api][patch][1925114] = http://drupal.org/files/search_api-views_panels_facets_compatibility-1925114-2.patch
 ; includes search_facet_api
 
 projects[search_api_solr][version] = 1.0-rc3
@@ -145,9 +146,13 @@ projects[override_node_options][version] = 1.12
 projects[field_collection][version] = 1.0-beta5
 projects[field_collection][patch][1063434] = http://drupal.org/files/field_collection-feeds_integration.patch
 
-projects[rules][version] = 2.2
+projects[rules][version] = 2.3
 
 projects[views_bulk_operations][version] = 3.1
+
+projects[field_validation][version] = 2.3
+
+projects[behavior_weights][version] = 1.0
 
 ; @note some custom unversioned modules are included with this profile, others
 ;       we download from sandbox
