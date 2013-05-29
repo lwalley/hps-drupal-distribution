@@ -80,11 +80,9 @@ projects[panels][version] = 3.3
 
 projects[job_scheduler][version] = 2.0-alpha3
 
-; @todo update to Feeds 2.0-alpha7
-; Modules/patches will need to be tested/recreated for feeds,
-; feeds_selfnode_processor and feeds_xpathparser
 projects[feeds][version] = 2.0-alpha7
 projects[feeds][patch][1171114] = http://drupal.org/files/feeds-getfile_replace_behaviour_alter-1171114-19.patch
+projects[feeds][patch][1233142] = http://drupal.org/files/feeds-existingEntityId_rewrite-1233142-1.patch
 
 projects[feeds_xpathparser][version] = 1.x-dev
 projects[feeds_xpathparser][download][type] = git
