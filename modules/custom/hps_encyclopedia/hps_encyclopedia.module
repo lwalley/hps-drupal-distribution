@@ -89,14 +89,23 @@ function hps_encyclopedia_views_pre_render(&$view) {
         if (is_string($row->field_dc_creator[$i]['rendered'])) {
           $view->result[$delta]->field_dc_creator[$i]['rendered'] = array();
         }
-        // Reverse names if commas exist in creator, first two parts reversed,
-        // remainder ignored.
+        // Reverse names if commas exist in creator. Ignore dates or anything
+        // after second comma. Examples
+        //     - Brode, Howard Stidham (1890-1958) => Howard Stidham Brode
+        //     - Huettner, Alfred F. (Alfred Francis), b. 1884 => Alfred F. (Alfred Francis) Huettner
+        //     - Coolidge, Baldwin, 1845-1948 => Baldwin Coolidge
         // @note Alternative option for multiple commas:
         //       Reverse all parts:
         //       implode(' ', array_reverse(explode(', ', $creator['value'])));
         //       Move the first part to the end with a regular expression:
         //       preg_replace('/^([^,]*),\s*(.*)$/', '$2 $1', $creator['value']);
-        $view->result[$delta]->field_dc_creator[$i]['rendered']['#markup'] = implode(' ', array_reverse(array_slice(explode(', ', $creator['value']), 0, 2, TRUE)));
+
+        // Reverse first two parts of comma seperated string
+        $parsed_creator = implode(' ', array_reverse(array_slice(explode(', ', $creator['value']), 0, 2, TRUE)));
+        // Remove dates from string
+        $parsed_creator = preg_replace('/\s[(]?\d{1,4}-?\d{1,4}[)]?/','', $parsed_creator);
+        $view->result[$delta]->field_dc_creator[$i]['rendered']['#markup'] = $parsed_creator;
+        unset($parsed_creator);
       }
     }
   }
