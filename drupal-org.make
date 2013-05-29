@@ -193,7 +193,7 @@ libraries[jquery.cycle][download][url]  = https://raw.github.com/malsup/cycle/4f
 libraries[jquery.cycle][directory_name] = jquery.cycle
 
 libraries[jwplayer][download][type] = get
-libraries[jwplayer][download][url]  = http://www.longtailvideo.com/download/jwplayer-free-6-0-2813.zip
+libraries[jwplayer][download][url]  = http://www.longtailvideo.com/download/jwplayer-3359.zip
 
 ;libraries[jquery.jplayer][download][type] = get
 ;libraries[jquery.jplayer][download][url]  = http://www.jplayer.org/latest/jQuery.jPlayer.2.2.0.zip
