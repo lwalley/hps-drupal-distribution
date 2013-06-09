@@ -1,14 +1,16 @@
 diff --git a/plugins/FeedsProcessor.inc b/plugins/FeedsProcessor.inc
-index c2b0af5..4c70493 100755
+index c2b0af5..1796c3a 100755
 --- a/plugins/FeedsProcessor.inc
 +++ b/plugins/FeedsProcessor.inc
-@@ -676,9 +676,6 @@ abstract class FeedsProcessor extends FeedsPlugin {
+@@ -675,10 +675,7 @@ abstract class FeedsProcessor extends FeedsPlugin {
+    */
    protected function existingEntityId(FeedsSource $source, FeedsParserResult $result) {
      $query = db_select('feeds_item')
-       ->fields('feeds_item', array('entity_id'))
+-      ->fields('feeds_item', array('entity_id'))
 -      ->condition('feed_nid', $source->feed_nid)
 -      ->condition('entity_type', $this->entityType())
 -      ->condition('id', $source->id);
++      ->fields('feeds_item', array('entity_id'));
  
      // Iterate through all unique targets and test whether they do already
      // exist in the database.
