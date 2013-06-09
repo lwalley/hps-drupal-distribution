@@ -42,9 +42,9 @@ projects[link][version] = 1.1
 
 projects[field_group][version] = 1.1
 
-projects[entity][version] = 1.0
+projects[entity][version] = 1.1
 
-projects[entityreference][version] = 1.0-rc5
+projects[entityreference][version] = 1.0
 ; Foregin key information defaulting to node on field create and not being
 ; udpated. This is a core bug but for now patching entityreference until core
 ; fixed.
@@ -80,7 +80,7 @@ projects[panels][version] = 3.3
 
 projects[job_scheduler][version] = 2.0-alpha3
 
-projects[feeds][version] = 2.0-alpha7
+projects[feeds][version] = 2.0-alpha8
 projects[feeds][patch][1171114] = http://drupal.org/files/feeds-getfile_replace_behaviour_alter-1171114-19.patch
 projects[feeds][patch][1233142] = http://drupal.org/files/feeds-existingEntityId_rewrite-1233142-1.patch
 
@@ -108,15 +108,15 @@ projects[facetapi][version] = 1.3
 
 projects[facetapi_bonus][version] = 1.1
 
-projects[search_api][version] = 1.4
+projects[search_api][version] = 1.6
 projects[search_api][patch][1925114] = http://drupal.org/files/search_api-views_panels_facets_compatibility-1925114-2.patch
 ; includes search_facet_api
 
-projects[search_api_solr][version] = 1.0-rc3
+projects[search_api_solr][version] = 1.0-rc5
 
 projects[taxonomy_menu][version] = 1.4
 
-projects[addressfield][version] = 1.0-beta3
+projects[addressfield][version] = 1.0-beta4
 
 projects[geophp][version] = 1.7
 ; includes the geoPHP library
@@ -158,7 +158,7 @@ projects[dspaced][type] = module
 projects[dspaced][subdir] = custom
 projects[dspaced][download][type] = git
 projects[dspaced][download][url] = http://git.drupal.org/sandbox/lwalley/1911858.git
-projects[dspaced][download][revision] = b6d545eaa1701e4a4a09f4922ffe2060fc6ffd5c
+projects[dspaced][download][revision] = a4c845c83eeb18e1e24390b43920480dc5d18cf2
 
 projects[views_job_scheduler][type] = module
 projects[views_job_scheduler][subdir] = custom
