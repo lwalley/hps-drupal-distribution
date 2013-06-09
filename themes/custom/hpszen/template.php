@@ -145,6 +145,9 @@ function hpszen_preprocess_html(&$variables, $hook) {
       case 'page_manager_contact_site':
         // Add panels layout name to body class attribute.
         $page = page_manager_get_current_page();
+        if (isset($page['name'])) {
+          $variables['classes_array'][] = drupal_clean_css_identifier($page['name']);
+        }
         if (isset($page['handler'])) {
           $variables['classes_array'][] = drupal_clean_css_identifier($page['handler']->conf['display']->layout);
         }
@@ -176,6 +179,15 @@ function hpszen_preprocess_page(&$variables, $hook) {
       'href' => 'user/login',
       'title' => t('Log in'),
     );
+  }
+  // URL Redirect module adds action link direct to $content, here we move it
+  // to $action_links
+  // @see templates/pages.tpl.php
+  if (isset($variables['page']['content']['system_main']['actions']) &&
+      $actions = $variables['page']['content']['system_main']['actions']) {
+    $variables['action_links'][] = $actions;
+    unset($variables['page']['content']['system_main']['actions']);
+    unset($actions);
   }
 }
 
@@ -374,4 +386,3 @@ function hpszen_image($variables) {
   );
   return render($element);
 }
-

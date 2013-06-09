@@ -23,7 +23,6 @@ core        = 7.x
 base theme  = zen
 
 
-
 ; This section controls the CSS files for your theme. There are 3 different
 ; things you can do with a "stylesheets" line:
 ; - Add a new stylesheet for your theme.
@@ -154,7 +153,9 @@ settings[zen_wireframes]           = 0
 
 ;settings[shortcut_module_link]    = 1
 
-; Panels layouts (which can also be used by Display Suite).
-; You can place multiple layouts under the "layouts" folder.
+; Panels layouts (which can also be used by Display Suite) and styles.
 ; @see http://drupal.org/node/495654
-plugins[panels][layouts] = layouts
+; @see http://drupal.org/node/1178086
+plugins[panels][layouts] = panels/layouts
+plugins[panels][styles] = panels/styles
+

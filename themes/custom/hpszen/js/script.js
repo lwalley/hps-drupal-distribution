@@ -108,32 +108,56 @@
       });
 
       // Slideshow
+      // @note To trigger slideshow behaviour add class 'slides' to Views HTML
+      //       list, with optional class 'with-pager' to trigger pager
       $('.slides', context).once('hpszen', function () {
 
         if ("cycle" in $.fn) {
 
-          Drupal.theme.prototype.hpszenCyclingPager = function () {
-            return '<div class="pager"></div>';
+          Drupal.theme.prototype.hpszenCyclingPagerMarkers = function () {
+            return '<div class="pager-markers"></div>';
+          };
+          Drupal.theme.prototype.hpszenCyclingPagerThumbnails = function () {
+            return '<div class="pager-thumbnails"></div>';
           };
           Drupal.theme.prototype.hpszenCyclingNav = function () {
-            // @todo Drupal.t
             return '<div class="nav">' +
-                   '  <a href="#" title="Javascript trigger to display previous slide." id="hpszen-slide-previous">Previous</a>' +
-                   '  <a href="#" title="Javascript trigger to pause slideshow." id="hpszen-slides-pause">Pause</a>' +
-                   '  <a href="#" title="Javascript trigger to resume slideshow." id="hpszen-slides-resume">Resume</a>' +
-                   '  <a href="#" title="Javascript trigger to display next slide." id="hpszen-slide-next">Next</a>' +
+                   '  <a href="#" title="' +
+                   Drupal.t("Javascript trigger to display previous slide.") +
+                   '" id="hpszen-slide-previous">' + Drupal.t('Previous slide') + '</a>' +
+                   '  <a href="#" title="' +
+                   Drupal.t("Javascript trigger to pause slideshow.") +
+                   '" id="hpszen-slides-pause">' + Drupal.t('Pause slideshow') + '</a>' +
+                   '  <a href="#" title="' +
+                   Drupal.t("Javascript trigger to resume slideshow.") +
+                   '" id="hpszen-slides-resume">' + Drupal.t('Resume slideshow') + '</a>' +
+                   '  <a href="#" title="' +
+                   Drupal.t("Javascript trigger to display next slide.") +
+                   '" id="hpszen-slide-next">' + Drupal.t('Next slide') + '</a>' +
                    '</div>';
           };
-
-          Drupal.theme.prototype.hpszenCyclingPagerItem = function (index, slide) {
+          Drupal.theme.prototype.hpszenCyclingPagerMarker = function (index, slide) {
+            var slide = $(slide),
+                slide_number = index + 1,
+                slide_title = slide.find('> h2').text();
+            return '<a title="'
+              + Drupal.t('Javascript trigger to visually display slide @slide_number.', {'@slide_number': slide_number})
+              + '" href="#">'
+              + Drupal.t('Slide: @slide_title_or_number', { '@slide_title_or_number': slide_title || slide_number })
+              + '</a>';
+          };
+          Drupal.theme.prototype.hpszenCyclingPagerThumbnail = function (index, slide) {
             var slide = $(slide),
                 alt = slide.find('> p').text() || '',
                 image = slide.find('> span img');
             return '<a title="' + Drupal.t('Slide number @index.', { '@index': index + 1 }) + '" href="#"><img src="' + image.attr('src') + '" alt="' + alt + '"/></a>';
           };
 
-          function pagerItem(index, slide) {
-            return Drupal.theme('hpszenCyclingPagerItem', index, slide);
+          function pagerMarker(index, slide) {
+            return Drupal.theme('hpszenCyclingPagerMarker', index, slide);
+          }
+          function pagerThumbnail(index, slide) {
+            return Drupal.theme('hpszenCyclingPagerThumbnail', index, slide);
           }
 
           // Called on image load, window resize and after slide transition.
@@ -172,23 +196,33 @@
             if (this.complete) $(this).load();
           });
 
-          //slides.parent().append(Drupal.theme('hpszenCyclingPager'));
-          slides.parent().append(Drupal.theme('hpszenCyclingNav'));
-
-          slides.cycle({
-            //pager:  '.pager',
-            //pagerAnchorBuilder: pagerItem,
+          cycle_options = {
             prev: '#hpszen-slide-previous',
             next: '#hpszen-slide-next',
             pause: 1,
             speed: 1000,
             fastOnEvent: 200,
-            delay: -2000,
+            delay: -3000,
             timeout: 15000,
             after: function () {
               positionImage($(this).find('> span img')[0]);
             }
-          });
+          }
+
+          slides.parent().append(Drupal.theme('hpszenCyclingNav'));
+
+          if (slides.hasClass('with-pager-markers')) {
+            slides.parent().append(Drupal.theme('hpszenCyclingPagerMarkers'));
+            cycle_options.pager = '.pager-markers';
+            cycle_options.pagerAnchorBuilder = pagerMarker;
+          }
+          if (slides.hasClass('with-pager-thumbnails')) {
+            slides.parent().append(Drupal.theme('hpszenCyclingPagerThumbnails'));
+            cycle_options.pager = '.pager-thumbnails';
+            cycle_options.pagerAnchorBuilder = pagerThumbnail;
+          }
+
+          slides.cycle(cycle_options);
 
           $('#hpszen-slides-pause').click(function() {
             slides.cycle('pause');
