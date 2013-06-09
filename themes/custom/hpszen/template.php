@@ -180,15 +180,6 @@ function hpszen_preprocess_page(&$variables, $hook) {
       'title' => t('Log in'),
     );
   }
-  // URL Redirect module adds action link direct to $content, here we move it
-  // to $action_links
-  // @see templates/pages.tpl.php
-  if (isset($variables['page']['content']['system_main']['actions']) &&
-      $actions = $variables['page']['content']['system_main']['actions']) {
-    $variables['action_links'][] = $actions;
-    unset($variables['page']['content']['system_main']['actions']);
-    unset($actions);
-  }
 }
 
 /**
