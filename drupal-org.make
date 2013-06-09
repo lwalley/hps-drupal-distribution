@@ -149,9 +149,13 @@ projects[rules][version] = 2.3
 
 projects[views_bulk_operations][version] = 3.1
 
+; @todo ensure handle field is unique on Feeds import - not yet implemented.
 projects[field_validation][version] = 2.3
 
 projects[behavior_weights][version] = 1.0
+
+; @todo finalise navigation architecture and check if this module is still needed
+projects[menu_position][version] = 1.1
 
 ; @note some custom unversioned modules are included with this profile, others
 ;       we download from sandbox
