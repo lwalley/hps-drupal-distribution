@@ -157,6 +157,8 @@ projects[behavior_weights][version] = 1.0
 ; @todo finalise navigation architecture and check if this module is still needed
 projects[menu_position][version] = 1.1
 
+projects[metatag][version] = 1.0-beta7
+
 ; @note some custom unversioned modules are included with this profile, others
 ;       we download from sandbox
 projects[dspaced][type] = module
