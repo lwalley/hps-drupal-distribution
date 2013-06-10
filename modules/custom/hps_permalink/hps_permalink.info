@@ -1,0 +1,4 @@
+name = HPS Permalink
+description = Creates a custom handle alias for DSpace archive items.
+core = 7.x
+package = HPS

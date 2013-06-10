@@ -1,0 +1,43 @@
+<?php
+/**
+ * @file
+ * hps_permalink.module
+ */
+
+/**
+ * Implements hook_boot().
+ */
+function hps_permalink_boot() {
+  // @note implementing hook_boot to ensure this module is loaded
+  //       when hook_url_inbound_alter is called.
+  // @see https://api.drupal.org/comment/48898#comment-48898
+}
+/**
+ * Implements hook_url_inbound_alter().
+ */
+function hps_permalink_url_inbound_alter(&$path, $original_path, $path_language) {
+  // Redirect from handle URL to dpsaced_entities_item node
+  if (preg_match('/^handle\/(?<handle>\d*?\/\d*?)\/?$/', $path, $matches)) {
+    $query = new EntityFieldQuery();
+    $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'dspaced_entities_item')
+      ->fieldCondition('dspace_handle', 'value', $matches['handle'], '=');
+    $result = $query->execute();
+    if (isset($result['node'])) {
+      $nids = array_keys($result['node']);
+      // Alias first node found.
+      $path = "node/{$nids[0]}";
+      // Do some housekeeping checks.
+      if (count($nids) > 1) {
+        $items = array();
+        foreach($nids as $nid) {
+          $items[] = l("node/{$nid}", "node/{$nid}");
+        }
+        watchdog('hps_permalink',
+          'Handle @handle found in multiple dspaced_entities_item nodes: !links.',
+          array('@handle' => $matches['handle'], '!links' => implode(', ', $items)),
+          WATCHDOG_ERROR);
+      }
+    }
+  }
+}
