@@ -83,7 +83,8 @@ projects[job_scheduler][version] = 2.0-alpha3
 projects[feeds][version] = 2.0-alpha8
 projects[feeds][patch][1171114] = http://drupal.org/files/feeds-getfile_replace_behaviour_alter-1171114-19.patch
 projects[feeds][patch][1233142] = https://raw.github.com/mbl-cli/hps-drupal-distribution/master/patches/feeds_prevent-duplicates-from-different-sources-1233142.patch
-;http://drupal.org/files/feeds-existingEntityId_rewrite-1233142-1.patch
+; @note Patch 1233142 is based on http://drupal.org/files/feeds-existingEntityId_rewrite-1233142-1.patch
+projects[feeds][patch][1231332] = https://raw.github.com/mbl-cli/hps-drupal-distribution/master/patches/feeds-increase-queue-processing-time-1231332.patch
 
 projects[feeds_xpathparser][version] = 1.x-dev
 projects[feeds_xpathparser][download][type] = git
