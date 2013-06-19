@@ -1,0 +1,28 @@
+diff --git a/feeds.module b/feeds.module
+index f581d3f..724be8d 100644
+--- a/feeds.module
++++ b/feeds.module
+@@ -91,19 +91,19 @@ function feeds_cron_queue_info() {
+   $queues = array();
+   $queues['feeds_source_import'] = array(
+     'worker callback' => 'feeds_source_import',
+-    'time' => 15,
++    'time' => 60,
+   );
+   $queues['feeds_source_clear'] = array(
+     'worker callback' => 'feeds_source_clear',
+-    'time' => 15,
++    'time' => 60,
+   );
+   $queues['feeds_importer_expire'] = array(
+     'worker callback' => 'feeds_importer_expire',
+-    'time' => 15,
++    'time' => 60,
+   );
+   $queues['feeds_push_unsubscribe'] = array(
+     'worker callback' => 'feeds_push_unsubscribe',
+-    'time' => 15,
++    'time' => 60,
+   );
+   return $queues;
+ }
