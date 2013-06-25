@@ -117,7 +117,7 @@ projects[search_api][version] = 1.6
 projects[search_api][patch][1925114] = http://drupal.org/files/search_api-views_panels_facets_compatibility-1925114-2.patch
 ; includes search_facet_api
 
-projects[search_api_solr][version] = 1.0-rc5
+projects[search_api_solr][version] = 1.0
 
 projects[taxonomy_menu][version] = 1.4
 
