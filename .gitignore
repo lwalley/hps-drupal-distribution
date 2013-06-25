@@ -8,3 +8,4 @@
 modules/custom/dspaced
 modules/custom/views_job_scheduler
 modules/custom/feeds_xlsx
+modules/custom/rules_book

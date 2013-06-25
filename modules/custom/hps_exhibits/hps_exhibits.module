@@ -1,0 +1,173 @@
+<?php
+
+/**
+ * @file
+ * hps_exhibits.module
+ */
+
+/**
+ * Implements hook_help().
+ */
+function hps_exhibits_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#hps_exhibits':
+      return t(''
+        . '<p>HPS Exhibits module uses a combination of <em>Book</em> and '
+        . '<em>Organic Groups</em> modules to create exhibit microsites. It '
+        . 'includes content types <em>Exhibit</em> and <em>Exhibit Narrative</em>. '
+        . 'It supplies and relies on custom <em>Rules</em> to automate book '
+        . 'creation for each exhibit.</p>'
+        . '<h3>Configuration</h3>'
+        . '<p>Editors require book permission <em>Add content and child '
+        . 'pages to books</em>. Adding narratives and information pages '
+        . 'requires the exhibit reference to be passed in the URL i.e. the'
+        . 'user must use the create content links provided on the '
+        . 'exhibit pages. Users can bypass this restriction if they have the '
+        . '<em>Administer HPS Exhibits</em> permission. The <em>Administer HPS '
+        . 'Exhibits</em> permission also allows users to move narratives and '
+        . 'information pages to different exhibits. Use of <em>Administer HPS '
+        . 'Exhibits</em> permission is discouraged as it could lead to orphaned '
+        . 'narratives if users are inexperienced in the use of <em>Organic '
+        . 'Groups</em> and <em>Book</em> modules.</p>'
+        . '<p>If using pathauto include exhibit path alias in patterns for '
+        . 'exhibit narratives and information pages e.g. '
+        . '<em>exhibits/[node:title]</em> for exhibits; '
+        . '<em>exhibits/[node:og-group-ref:title]/narrative/[node:title]</em> '
+        . 'for exhibit narratives, and; '
+        . '<em>exhibits/[node:og-group-ref:title]/info/[node:title]</em> for '
+        . 'exhibit information pages.</p>'
+        . '<h3>Troubleshooting configuration</h3>'
+        . '<p>If you see the message <em>...a configuration error is preventing '
+        . 'narrative creation...</em> then make sure that <em>Exhibit</em> and'
+        . '<em>Exhibit Narrative</em> content type is allowed in book outlines '
+        . 'in <a href="!book_settings_url">book settings</a>.</p>',
+        array('!book_settings_url' => '/admin/content/book/settings'));
+  }
+}
+/**
+ * Implements hook_permission().
+ */
+function hps_exhibits_permission() {
+  return array(
+    'administer hps exhibits' => array(
+      'title' => t('Administer HPS Exhibits'),
+      'description' => t('Perform administration tasks for HPS Exhibits.'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_node_view_alter().
+ *
+ * Adjusting book navigation and add child page links for exhibits
+ */
+function hps_exhibits_node_view_alter(&$build) {
+  // Hide book navigation and links for exhibit nodes.
+  switch($build['#node']->type) {
+    case 'hps_exhibit':
+    case 'hps_exhibit_narrative':
+      $build['book_navigation']['#access'] = FALSE;
+      $build['links']['book']['#access'] = FALSE;
+      break;
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter();
+ */
+function hps_exhibits_form_hps_exhibit_node_form_alter(&$form, &$form_state, $form_id) {
+  // Hide book outline on exhibit forms.
+  // Rules action, exhibit after create, auto creates the book
+  $form['book']['#access'] = user_access('administer hps exhibits');
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter();
+ */
+function hps_exhibits_form_hps_exhibit_narrative_node_form_alter(&$form, &$form_state, $form_id) {
+  // Disable book selection if book already selected
+  if (!isset($form['book'])) {
+    form_set_error('book', t('Sorry, a configuration error is preventing '
+      . 'narrative creation. Please contact your administrator.'));
+  }
+  $form['book']['#title'] = t('Narrative hierarchy');
+  $form['book']['bid']['#required'] = TRUE;
+  $form['book']['bid']['#title'] = t('Exhibit');
+  $form['book']['bid']['#description'] = t('The narrative belongs to this exhibit.');
+  $form['book']['plid']['#required'] = TRUE;
+  $form['book']['plid']['#description'] = t('The parent page in the narrative. '
+    . 'The maximum depth for the narrative hierarchy is 9. Some pages in the '
+    . 'narrative may not be available as parents if selecting them would exceed '
+    . 'this limit.');
+  if (!user_access('administer hps exhibits')
+    && $form['book']['bid']['#default_value'] > 0) {
+    $form['book']['bid']['#attributes']['disabled'] = 'disabled';
+  }
+
+}
+
+/**
+ * Implements hook_preprocess_HOOK();
+ */
+function hps_exhibits_preprocess_node_add_list(&$vars) {
+  // Don't allow users to add Exhibit Narrative outside of Exhibit context
+  // @note This hides the link in the admin interface, use
+  //       entityreference_prepopulate, with redirect, to actually prevent
+  //       access to the path without an og_group_ref parameter.
+  if (current_path() == 'node/add') {
+    foreach ($vars['content'] as $i => $item) {
+      switch ($item['path']) {
+        case 'node/add/hps-exhibit-narrative':
+        case 'node/add/hps-exhibit-information-page':
+          if (!user_access('administer hps exhibits')) {
+            unset($vars['content'][$i]);
+          }
+          break;
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function hps_exhibits_preprocess_link(&$vars) {
+  // Ensure node/add/hps-exhibit-narrative links contain og_group_ref and book
+  // parent query parameters
+  switch($vars['path']) {
+    case 'node/add/hps-exhibit-narrative':
+      if (_hps_exhibit_is_prepopulate_link($vars)
+        && !isset($vars['options']['query']['parent'])) {
+        // Assume OG (exhibit) context
+        if (($exhibit = node_load($vars['options']['query']['og_group_ref']))
+          && ($parent = $exhibit->book['mlid'])) {
+          // Set query parameter parent (book) to exhibit mlid
+          $vars['options']['query']['parent'] = $parent;
+          $vars['text'] = t('Add narrative page');
+        }
+      }
+      break;
+    case 'node/add/hps-exhibit-information-page':
+      if (_hps_exhibit_is_prepopulate_link($vars)) {
+        // Assume OG (exhibit) context
+        $vars['text'] = t('Add information page');
+      }
+      break;
+  }
+}
+
+/**
+ * Helper function to determine if an add content link element contains organic
+ * group reference and is therefore within an organic group (exhibit) context.
+ * @see entityreference_prepopulate_create_node_links
+ */
+function _hps_exhibit_is_prepopulate_link($vars) {
+  return (isset($vars['options']['query']['og_group_ref'])
+    && isset($vars['options']['query']['destination']));
+}
+
+/**
+ * This module is also a feature.
+ */
+include_once 'hps_exhibits.features.inc';
+

@@ -13,6 +13,9 @@ projects[libraries][version] = 2.1
 projects[transliteration][version] = 3.1
 
 projects[ctools][version] = 1.3
+projects[ctools][patch][640226] = https://drupal.org/files/ctools-book-navigation-menu-640226-41.patch
+; Patch to enable book menus in panels
+; @see https://drupal.org/node/640226
 
 projects[diff][version] = 3.2
 
@@ -160,6 +163,11 @@ projects[menu_position][version] = 1.1
 
 projects[metatag][version] = 1.0-beta7
 
+projects[og][version] = 7.x-2.2
+
+projects[entityreference_prepopulate][version] = 7.x-1.3
+
+
 ; @note some custom unversioned modules are included with this profile, others
 ;       we download from sandbox
 projects[dspaced][type] = module
@@ -179,6 +187,12 @@ projects[feeds_xlsx][subdir] = custom
 projects[feeds_xlsx][download][type] = git
 projects[feeds_xlsx][download][url] = http://git.drupal.org/sandbox/lwalley/1960440.git
 projects[feeds_xlsx][download][revision] = 80864fc6b05a509f99993e36e5fdbad5b369d8cb
+
+projects[rules_book][type] = module
+projects[rules_book][subdir] = custom
+projects[rules_book][download][type] = git
+projects[rules_book][download][url] = http://git.drupal.org/sandbox/lwalley/2028059.git
+projects[rules_book][download][revision] = ff42dc8239a3ff2e885af7b9c4a593c47e05fcb4
 
 ; Libraries
 libraries[ckeditor][download][type] = get
