@@ -6,6 +6,7 @@ version = 7.x-1.0-alpha1
 project = hps_exhibits
 dependencies[] = book
 dependencies[] = ctools
+dependencies[] = entityreference_prepopulate
 dependencies[] = features
 dependencies[] = image
 dependencies[] = og_ui
