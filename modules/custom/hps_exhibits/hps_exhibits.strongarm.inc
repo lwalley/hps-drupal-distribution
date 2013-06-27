@@ -249,21 +249,21 @@ function hps_exhibits_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_node_hps_exhibit_information_page_pattern';
-  $strongarm->value = 'explore/exhibits/[node:og-group-ref:title]/info/[node:title]';
+  $strongarm->value = 'exploring/exhibits/[node:og-group-ref:title]/info/[node:title]';
   $export['pathauto_node_hps_exhibit_information_page_pattern'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_node_hps_exhibit_narrative_pattern';
-  $strongarm->value = 'explore/exhibits/[node:og-group-ref:title]/narrative/[node:title]';
+  $strongarm->value = 'exploring/exhibits/[node:og-group-ref:title]/narrative/[node:title]';
   $export['pathauto_node_hps_exhibit_narrative_pattern'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_node_hps_exhibit_pattern';
-  $strongarm->value = 'explore/exhibits/[node:title]';
+  $strongarm->value = 'exploring/exhibits/[node:title]';
   $export['pathauto_node_hps_exhibit_pattern'] = $strongarm;
 
   $strongarm = new stdClass();

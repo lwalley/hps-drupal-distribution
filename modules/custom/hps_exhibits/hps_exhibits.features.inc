@@ -19,6 +19,13 @@ function hps_exhibits_ctools_plugin_api() {
 }
 
 /**
+ * Implements hook_views_api().
+ */
+function hps_exhibits_views_api() {
+  return array("version" => "3.0");
+}
+
+/**
  * Implements hook_node_info().
  */
 function hps_exhibits_node_info() {

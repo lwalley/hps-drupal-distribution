@@ -220,7 +220,7 @@ function hps_exhibits_field_default_fields() {
       'fences_wrapper' => 'no_wrapper',
       'field_name' => 'group_group',
       'label' => 'Group',
-      'required' => 0,
+      'required' => 1,
       'settings' => array(
         'user_register_form' => FALSE,
       ),
