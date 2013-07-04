@@ -138,3 +138,4 @@ features[variable][] = print_pdf_display_urllist_hps_exhibit
 features[variable][] = print_pdf_display_urllist_hps_exhibit_information_page
 features[variable][] = print_pdf_display_urllist_hps_exhibit_narrative
 features[views_view][] = hps_exhibits
+features[views_view][] = hps_exhibits_users

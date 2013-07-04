@@ -13,7 +13,7 @@ function hps_exhibits_default_rules_configuration() {
       "LABEL" : "HPS Exhibit After Create",
       "PLUGIN" : "reaction rule",
       "TAGS" : [ "HPS" ],
-      "REQUIRES" : [ "rules", "rules_book" ],
+      "REQUIRES" : [ "rules", "rules_book", "views_bulk_operations", "og" ],
       "ON" : [ "node_insert" ],
       "IF" : [
         { "node_is_of_type" : {
@@ -24,7 +24,20 @@ function hps_exhibits_default_rules_configuration() {
       ],
       "DO" : [
         { "rules_book_action_convert_node_to_book" : { "rules_book_parameter_node" : [ "node" ] } },
-        { "entity_save" : { "data" : [ "node" ] } }
+        { "entity_save" : { "data" : [ "node" ], "immediate" : 1 } },
+        { "views_bulk_operations_action_load_list" : {
+            "USING" : { "view" : "hps_exhibits_users|default" },
+            "PROVIDE" : { "entity_list" : { "users_list" : "Users list" } }
+          }
+        },
+        { "LOOP" : {
+            "USING" : { "list" : [ "users-list" ] },
+            "ITEM" : { "current_user_item" : "Current user item" },
+            "DO" : [
+              { "og_subcribe_user" : { "user" : [ "current-user-item" ], "group" : [ "node" ] } }
+            ]
+          }
+        }
       ]
     }
   }');
