@@ -166,7 +166,7 @@ projects[metatag][version] = 1.0-beta7
 projects[og][version] = 2.2
 projects[og_theme][version] = 2.0
 
-projects[entityreference_prepopulate][version] = 7.x-1.3
+projects[entityreference_prepopulate][version] = 1.3
 
 
 ; @note some custom unversioned modules are included with this profile, others
