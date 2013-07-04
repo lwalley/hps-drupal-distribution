@@ -62,7 +62,7 @@ function hps_exhibits_permission() {
 function hps_exhibits_menu_breadcrumb_alter(&$active_trail, $item) {
   if ($group = og_context()) {
     list($type, $object) = $item['map'];
-    if ($type == 'node') {
+    if ($type == 'node' && is_object($object)) {
       // @todo add book menu to active trail provided by position menu?
       switch ($object->type) {
         case 'hps_exhibit_narrative':
@@ -173,6 +173,13 @@ function hps_exhibits_preprocess_link(&$vars) {
       }
       break;
   }
+}
+
+/**
+ * Implements hook_user_view_alter().
+ */
+function hps_exhibits_user_view_alter(&$build) {
+  $build['og_user_node']['#access'] = user_access('administer hps exhibits');
 }
 
 /**
