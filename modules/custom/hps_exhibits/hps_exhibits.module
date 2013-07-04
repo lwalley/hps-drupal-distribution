@@ -57,6 +57,24 @@ function hps_exhibits_permission() {
 }
 
 /**
+ * Implements hook_menu_breadcrumb_alter().
+ */
+function hps_exhibits_menu_breadcrumb_alter(&$active_trail, $item) {
+  if ($group = og_context()) {
+    list($type, $object) = $item['map'];
+    if ($type == 'node') {
+      // @todo add book menu to active trail provided by position menu?
+      switch ($object->type) {
+        case 'hps_exhibit_narrative':
+        case 'hps_exhibit_information_page':
+          $active_trail[] = menu_get_item("{$group['group_type']}/{$group['gid']}");
+          break;
+      }
+    }
+  }
+}
+
+/**
  * Implements hook_node_view_alter().
  *
  * Adjusting book navigation and add child page links for exhibits
@@ -79,6 +97,7 @@ function hps_exhibits_form_hps_exhibit_node_form_alter(&$form, &$form_state, $fo
   // Hide book outline on exhibit forms.
   // Rules action, exhibit after create, auto creates the book
   $form['book']['#access'] = user_access('administer hps exhibits');
+  $form['group_theme']['#access'] = user_access('administer hps exhibits');
 }
 
 /**
