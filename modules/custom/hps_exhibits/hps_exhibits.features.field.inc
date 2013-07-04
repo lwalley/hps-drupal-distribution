@@ -144,7 +144,7 @@ function hps_exhibits_field_default_fields() {
       'required' => 0,
       'settings' => array(
         'alt_field' => 1,
-        'default_image' => '18179',
+        'default_image' => '28723',
         'file_directory' => 'hps/exhibits',
         'file_extensions' => 'png gif jpg jpeg',
         'max_filesize' => '',
@@ -163,6 +163,85 @@ function hps_exhibits_field_default_fields() {
         'type' => 'image_image',
         'weight' => '32',
       ),
+    ),
+  );
+
+  // Exported field: 'node-hps_exhibit-group_access'.
+  $fields['node-hps_exhibit-group_access'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'group_access',
+      'foreign keys' => array(),
+      'indexes' => array(
+        'value' => array(
+          0 => 'value',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'list',
+      'no_ui' => TRUE,
+      'settings' => array(
+        'allowed_values' => array(
+          0 => 'Public',
+          1 => 'Private',
+        ),
+        'allowed_values_function' => '',
+      ),
+      'translatable' => '0',
+      'type' => 'list_boolean',
+    ),
+    'field_instance' => array(
+      'bundle' => 'hps_exhibit',
+      'default_value' => array(
+        0 => array(
+          'value' => '1',
+        ),
+      ),
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'hidden',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '3',
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'fences_wrapper' => 'no_wrapper',
+      'field_name' => 'group_access',
+      'label' => 'Visibility',
+      'required' => 1,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'view modes' => array(
+        'full' => array(
+          'label' => 'above',
+          'type' => 'options_onoff',
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'type' => 'options_onoff',
+        ),
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_buttons',
+        'weight' => 41,
+      ),
+      'widget_type' => 'options_select',
     ),
   );
 
@@ -203,7 +282,7 @@ function hps_exhibits_field_default_fields() {
       'description' => 'Determine if this is an Organic Group.',
       'display' => array(
         'default' => array(
-          'label' => 'above',
+          'label' => 'hidden',
           'settings' => array(),
           'type' => 'hidden',
           'weight' => '2',
@@ -246,6 +325,82 @@ function hps_exhibits_field_default_fields() {
         'type' => 'options_onoff',
         'weight' => 0,
       ),
+    ),
+  );
+
+  // Exported field: 'node-hps_exhibit-group_theme'.
+  $fields['node-hps_exhibit-group_theme'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'group_theme',
+      'foreign keys' => array(),
+      'indexes' => array(
+        'value' => array(
+          0 => 'value',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'list',
+      'no_ui' => TRUE,
+      'settings' => array(
+        'allowed_values' => array(),
+        'allowed_values_function' => 'og_theme_field_allowed_values',
+      ),
+      'translatable' => '0',
+      'type' => 'list_text',
+    ),
+    'field_instance' => array(
+      'bundle' => 'hps_exhibit',
+      'default_value' => array(
+        0 => array(
+          'value' => 'mblmini',
+        ),
+      ),
+      'deleted' => '0',
+      'description' => 'Select a visual template for the exhibit.',
+      'display' => array(
+        'default' => array(
+          'label' => 'hidden',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '4',
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'fences_wrapper' => 'no_wrapper',
+      'field_name' => 'group_theme',
+      'label' => 'Theme',
+      'required' => 1,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'view modes' => array(
+        'full' => array(
+          'label' => 'above',
+          'type' => 'list_default',
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'type' => 'list_default',
+        ),
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_select',
+        'weight' => 42,
+      ),
+      'widget_type' => 'options_select',
     ),
   );
 
@@ -647,7 +802,10 @@ function hps_exhibits_field_default_fields() {
   t('Group');
   t('Include an exhibit poster with minimum dimensions 700 x 1000 px which will appear in featured exhibits listings alongside the exhibit summary. Different sizes of the poster will be created automatically which may include thumbnails that are too small for the text in the image to be legible so keep text to a minimum and ensure that important text is included either in the exhibit summary or in the image\'s alternative text. The poster may also be cropped to a square, so ensure that the primary visuals are in the middle to top part of the image.');
   t('Poster');
+  t('Select a visual template for the exhibit.');
   t('Select the <em>Exhibit</em> to which this narrative belongs.');
+  t('Theme');
+  t('Visibility');
 
   return $fields;
 }

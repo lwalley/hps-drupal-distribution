@@ -250,6 +250,7 @@ function hps_exhibits_user_default_permissions() {
     'name' => 'override hps_exhibit sticky option',
     'roles' => array(
       0 => 'administrator',
+      1 => 'editor',
     ),
     'module' => 'override_node_options',
   );
