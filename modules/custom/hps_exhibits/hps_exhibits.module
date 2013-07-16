@@ -179,7 +179,9 @@ function hps_exhibits_preprocess_link(&$vars) {
  * Implements hook_user_view_alter().
  */
 function hps_exhibits_user_view_alter(&$build) {
-  $build['og_user_node']['#access'] = user_access('administer hps exhibits');
+  if (isset($build['og_user_node'])) {
+    $build['og_user_node']['#access'] = user_access('administer hps exhibits');
+  }
 }
 
 /**
