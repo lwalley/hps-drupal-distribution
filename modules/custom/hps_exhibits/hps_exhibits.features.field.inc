@@ -10,6 +10,156 @@
 function hps_exhibits_field_default_fields() {
   $fields = array();
 
+  // Exported field: 'field_collection_item-field_hps_exhibits_related_items-field_hps_exhibits_item_title'.
+  $fields['field_collection_item-field_hps_exhibits_related_items-field_hps_exhibits_item_title'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_hps_exhibits_item_title',
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'text',
+      'settings' => array(
+        'max_length' => '255',
+      ),
+      'translatable' => '0',
+      'type' => 'text',
+    ),
+    'field_instance' => array(
+      'bundle' => 'field_hps_exhibits_related_items',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '(Optional) Enter an alternative title to replace the related item title in listings. Leave blank to use the related item title.',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => 1,
+        ),
+      ),
+      'entity_type' => 'field_collection_item',
+      'fences_wrapper' => 'no_wrapper',
+      'field_name' => 'field_hps_exhibits_item_title',
+      'label' => 'Alternative title',
+      'required' => 0,
+      'settings' => array(
+        'text_processing' => '0',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'size' => '80',
+        ),
+        'type' => 'text_textfield',
+        'weight' => '32',
+      ),
+    ),
+  );
+
+  // Exported field: 'field_collection_item-field_hps_exhibits_related_items-field_hps_exhibits_related_item'.
+  $fields['field_collection_item-field_hps_exhibits_related_items-field_hps_exhibits_related_item'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_hps_exhibits_related_item',
+      'foreign keys' => array(
+        'node' => array(
+          'columns' => array(
+            'target_id' => 'nid',
+          ),
+          'table' => 'node',
+        ),
+      ),
+      'indexes' => array(
+        'target_id' => array(
+          0 => 'target_id',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'entityreference',
+      'settings' => array(
+        'handler' => 'views',
+        'handler_settings' => array(
+          'behaviors' => array(
+            'views-select-list' => array(
+              'status' => 0,
+            ),
+          ),
+          'view' => array(
+            'args' => array(),
+            'display_name' => 'entityreference_exhibits_related_items',
+            'view_name' => 'hps_exhibits',
+          ),
+        ),
+        'target_type' => 'node',
+      ),
+      'translatable' => '0',
+      'type' => 'entityreference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'field_hps_exhibits_related_items',
+      'default_value' => NULL,
+      'default_value_function' => '',
+      'deleted' => '0',
+      'description' => 'Start typing the item title or handle to lookup the item you would like to select.',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'entityreference',
+          'settings' => array(
+            'link' => FALSE,
+          ),
+          'type' => 'entityreference_label',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'field_collection_item',
+      'fences_wrapper' => 'no_wrapper',
+      'field_name' => 'field_hps_exhibits_related_item',
+      'label' => 'Item',
+      'required' => 1,
+      'settings' => array(
+        'behaviors' => array(
+          'prepopulate' => array(
+            'status' => 0,
+          ),
+        ),
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'entityreference',
+        'settings' => array(
+          'match_operator' => 'STARTS_WITH',
+          'path' => '',
+          'size' => '80',
+        ),
+        'type' => 'entityreference_autocomplete',
+        'weight' => '31',
+      ),
+    ),
+  );
+
   // Exported field: 'node-hps_exhibit-body'.
   $fields['node-hps_exhibit-body'] = array(
     'field_config' => array(
@@ -239,7 +389,7 @@ function hps_exhibits_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => 41,
+        'weight' => '41',
       ),
       'widget_type' => 'options_select',
     ),
@@ -323,7 +473,7 @@ function hps_exhibits_field_default_fields() {
           'og_hide' => 1,
         ),
         'type' => 'options_onoff',
-        'weight' => 0,
+        'weight' => '0',
       ),
     ),
   );
@@ -398,7 +548,7 @@ function hps_exhibits_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => 42,
+        'weight' => '42',
       ),
       'widget_type' => 'options_select',
     ),
@@ -666,7 +816,66 @@ function hps_exhibits_field_default_fields() {
           'summary_rows' => 5,
         ),
         'type' => 'text_textarea_with_summary',
-        'weight' => 31,
+        'weight' => '31',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-hps_exhibit_narrative-field_hps_exhibits_related_items'.
+  $fields['node-hps_exhibit_narrative-field_hps_exhibits_related_items'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '-1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_hps_exhibits_related_items',
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'locked' => '0',
+      'module' => 'field_collection',
+      'settings' => array(
+        'hide_blank_items' => 1,
+        'path' => '',
+      ),
+      'translatable' => '0',
+      'type' => 'field_collection',
+    ),
+    'field_instance' => array(
+      'bundle' => 'hps_exhibit_narrative',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => 'Select DSpace items that you would like to associate with this narrative page. These items will appear in a related items section on the narrative page.',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'field_collection',
+          'settings' => array(
+            'view_mode' => 'full',
+          ),
+          'type' => 'field_collection_fields',
+          'weight' => 2,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'fences_wrapper' => 'no_wrapper',
+      'field_name' => 'field_hps_exhibits_related_items',
+      'label' => 'Related items',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'field_collection',
+        'settings' => array(),
+        'type' => 'field_collection_embed',
+        'weight' => '41',
       ),
     ),
   );
@@ -787,13 +996,15 @@ function hps_exhibits_field_default_fields() {
         'module' => 'og',
         'settings' => array(),
         'type' => 'og_complex',
-        'weight' => 0,
+        'weight' => '0',
       ),
     ),
   );
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('(Optional) Enter an alternative title to replace the related item title in listings. Leave blank to use the related item title.');
+  t('Alternative title');
   t('Body');
   t('Describe the exhibit using both summary text and a longer description. Summary text should be brief and will appear in exhibit listings across the site. The longer description may also appear in more detailed listings or on an exhibit overview page e.g. the exhibit home page or an about page describing the exhibit.');
   t('Description');
@@ -801,9 +1012,13 @@ function hps_exhibits_field_default_fields() {
   t('Exhibit');
   t('Group');
   t('Include an exhibit poster with minimum dimensions 700 x 1000 px which will appear in featured exhibits listings alongside the exhibit summary. Different sizes of the poster will be created automatically which may include thumbnails that are too small for the text in the image to be legible so keep text to a minimum and ensure that important text is included either in the exhibit summary or in the image\'s alternative text. The poster may also be cropped to a square, so ensure that the primary visuals are in the middle to top part of the image.');
+  t('Item');
   t('Poster');
+  t('Related items');
+  t('Select DSpace items that you would like to associate with this narrative page. These items will appear in a related items section on the narrative page.');
   t('Select a visual template for the exhibit.');
   t('Select the <em>Exhibit</em> to which this narrative belongs.');
+  t('Start typing the item title or handle to lookup the item you would like to select.');
   t('Theme');
   t('Visibility');
 
