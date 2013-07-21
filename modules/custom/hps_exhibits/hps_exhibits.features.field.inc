@@ -152,7 +152,7 @@ function hps_exhibits_field_default_fields() {
         'settings' => array(
           'match_operator' => 'STARTS_WITH',
           'path' => '',
-          'size' => '80',
+          'size' => '100',
         ),
         'type' => 'entityreference_autocomplete',
         'weight' => '31',
@@ -230,7 +230,7 @@ function hps_exhibits_field_default_fields() {
           'summary_rows' => 5,
         ),
         'type' => 'text_textarea_with_summary',
-        'weight' => '31',
+        'weight' => '4',
       ),
     ),
   );
@@ -311,7 +311,66 @@ function hps_exhibits_field_default_fields() {
           'progress_indicator' => 'throbber',
         ),
         'type' => 'image_image',
-        'weight' => '32',
+        'weight' => '5',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-hps_exhibit-field_hps_timeline'.
+  $fields['node-hps_exhibit-field_hps_timeline'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '-1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_hps_timeline',
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'locked' => '0',
+      'module' => 'field_collection',
+      'settings' => array(
+        'hide_blank_items' => 1,
+        'path' => '',
+      ),
+      'translatable' => '0',
+      'type' => 'field_collection',
+    ),
+    'field_instance' => array(
+      'bundle' => 'hps_exhibit',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '(Optional) Select events to appear in your exhibit timeline. Leave blank if you don\'t want a timeline.',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'field_collection',
+          'settings' => array(
+            'view_mode' => 'full',
+          ),
+          'type' => 'field_collection_fields',
+          'weight' => 6,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'fences_wrapper' => 'no_wrapper',
+      'field_name' => 'field_hps_timeline',
+      'label' => 'Timeline',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'field_collection',
+        'settings' => array(),
+        'type' => 'field_collection_embed',
+        'weight' => '6',
       ),
     ),
   );
@@ -389,7 +448,7 @@ function hps_exhibits_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '41',
+        'weight' => '8',
       ),
       'widget_type' => 'options_select',
     ),
@@ -473,7 +532,7 @@ function hps_exhibits_field_default_fields() {
           'og_hide' => 1,
         ),
         'type' => 'options_onoff',
-        'weight' => '0',
+        'weight' => '1',
       ),
     ),
   );
@@ -548,7 +607,7 @@ function hps_exhibits_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '42',
+        'weight' => '9',
       ),
       'widget_type' => 'options_select',
     ),
@@ -1004,6 +1063,7 @@ function hps_exhibits_field_default_fields() {
   // Translatables
   // Included for use with string extractors like potx.
   t('(Optional) Enter an alternative title to replace the related item title in listings. Leave blank to use the related item title.');
+  t('(Optional) Select events to appear in your exhibit timeline. Leave blank if you don\'t want a timeline.');
   t('Alternative title');
   t('Body');
   t('Describe the exhibit using both summary text and a longer description. Summary text should be brief and will appear in exhibit listings across the site. The longer description may also appear in more detailed listings or on an exhibit overview page e.g. the exhibit home page or an about page describing the exhibit.');
@@ -1020,6 +1080,7 @@ function hps_exhibits_field_default_fields() {
   t('Select the <em>Exhibit</em> to which this narrative belongs.');
   t('Start typing the item title or handle to lookup the item you would like to select.');
   t('Theme');
+  t('Timeline');
   t('Visibility');
 
   return $fields;

@@ -185,6 +185,36 @@ function hps_exhibits_user_view_alter(&$build) {
 }
 
 /**
+ * Implements hook_views_timelinejs_data_alter().
+ */
+function hps_exhibits_views_timelinejs_data_alter(&$rows, $view) {
+  if ($view->current_display == 'panel_pane_exhibits_timeline') {
+    // Add links to 'more' entity if it exists.
+    // @todo we are assuming more link is title_1 alias, we should try to make
+    //       this more robust.
+    foreach ($view->result as $i => $row) {
+      // @todo can't seem to render a single field with style options, the
+      //       following just returns the linked title, so for now we grab it
+      //       ourselves here - later we can see if there is a better solution
+      $more = $view->field['title_1']->theme($row);
+      if ($more) {
+        if ($label = $view->field['title_1']->options['label']) {
+          if ($view->field['title_1']->options['element_label_colon']) {
+            $label .= ':';
+          }
+          $more = "{$label} {$more}";
+        }
+        if ($wrapper = $view->field['title_1']->options['element_wrapper_type']) {
+          $more = "<{$wrapper}>{$more}</{$wrapper}>";
+        }
+        $rows[$i]['text'] .= $more;
+      }
+    }
+  }
+}
+
+
+/**
  * Helper function to determine if an add content link element contains organic
  * group reference and is therefore within an organic group (exhibit) context.
  * @see entityreference_prepopulate_create_node_links

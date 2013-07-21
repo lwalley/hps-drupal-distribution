@@ -73,6 +73,23 @@ function hps_exhibits_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'field_bundle_settings_field_collection_item__field_hps_exhibits_related_items';
+  $strongarm->value = array(
+    'view_modes' => array(),
+    'extra_fields' => array(
+      'form' => array(
+        'redirect' => array(
+          'weight' => '30',
+        ),
+      ),
+      'display' => array(),
+    ),
+  );
+  $export['field_bundle_settings_field_collection_item__field_hps_exhibits_related_items'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'field_bundle_settings_node__hps_exhibit';
   $strongarm->value = array(
     'view_modes' => array(
@@ -104,16 +121,16 @@ function hps_exhibits_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'title' => array(
-          'weight' => '-5',
+          'weight' => '0',
         ),
         'path' => array(
-          'weight' => '30',
+          'weight' => '3',
         ),
         'redirect' => array(
-          'weight' => '30',
+          'weight' => '2',
         ),
         'metatags' => array(
-          'weight' => '40',
+          'weight' => '7',
         ),
       ),
       'display' => array(),

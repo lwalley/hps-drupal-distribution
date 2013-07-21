@@ -277,6 +277,7 @@ function hps_exhibits_views_default_views() {
   $handler->display->display_options['style_options']['search_fields'] = array(
     'dspace_handle' => 'dspace_handle',
     'title' => 'title',
+    'dc_description_type' => 'dc_description_type',
   );
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
@@ -308,6 +309,18 @@ function hps_exhibits_views_default_views() {
   $handler->display->display_options['fields']['title']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Format */
+  $handler->display->display_options['fields']['dc_description_type']['id'] = 'dc_description_type';
+  $handler->display->display_options['fields']['dc_description_type']['table'] = 'field_data_dc_description_type';
+  $handler->display->display_options['fields']['dc_description_type']['field'] = 'dc_description_type';
+  $handler->display->display_options['fields']['dc_description_type']['label'] = '';
+  $handler->display->display_options['fields']['dc_description_type']['element_type'] = '0';
+  $handler->display->display_options['fields']['dc_description_type']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['dc_description_type']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['dc_description_type']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['dc_description_type']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['dc_description_type']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['dc_description_type']['delta_offset'] = '0';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Content: Title */
   $handler->display->display_options['sorts']['title']['id'] = 'title';
@@ -335,6 +348,15 @@ function hps_exhibits_views_default_views() {
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Related items';
   $handler->display->display_options['display_description'] = 'Lists items associated with a narrative page.';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'list';
+  $handler->display->display_options['style_options']['default_row_class'] = FALSE;
+  $handler->display->display_options['style_options']['row_class_special'] = FALSE;
+  $handler->display->display_options['style_options']['wrapper_class'] = '';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Content: Related items (field_hps_exhibits_related_items) */
   $handler->display->display_options['relationships']['field_hps_exhibits_related_items_value']['id'] = 'field_hps_exhibits_related_items_value';
@@ -349,6 +371,24 @@ function hps_exhibits_views_default_views() {
   $handler->display->display_options['relationships']['field_hps_exhibits_related_item_target_id']['relationship'] = 'field_hps_exhibits_related_items_value';
   $handler->display->display_options['relationships']['field_hps_exhibits_related_item_target_id']['required'] = TRUE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Image */
+  $handler->display->display_options['fields']['dspace_image']['id'] = 'dspace_image';
+  $handler->display->display_options['fields']['dspace_image']['table'] = 'field_data_dspace_image';
+  $handler->display->display_options['fields']['dspace_image']['field'] = 'dspace_image';
+  $handler->display->display_options['fields']['dspace_image']['relationship'] = 'field_hps_exhibits_related_item_target_id';
+  $handler->display->display_options['fields']['dspace_image']['label'] = '';
+  $handler->display->display_options['fields']['dspace_image']['element_type'] = '0';
+  $handler->display->display_options['fields']['dspace_image']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['dspace_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['dspace_image']['element_wrapper_type'] = 'div';
+  $handler->display->display_options['fields']['dspace_image']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['dspace_image']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['dspace_image']['empty_zero'] = TRUE;
+  $handler->display->display_options['fields']['dspace_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['dspace_image']['settings'] = array(
+    'image_style' => 'hps_uniform',
+    'image_link' => 'content',
+  );
   /* Field: Content: Path */
   $handler->display->display_options['fields']['path']['id'] = 'path';
   $handler->display->display_options['fields']['path']['table'] = 'node';
@@ -371,7 +411,7 @@ function hps_exhibits_views_default_views() {
   $handler->display->display_options['fields']['title']['element_type'] = '0';
   $handler->display->display_options['fields']['title']['element_label_type'] = '0';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['title']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['title']['element_wrapper_type'] = 'p';
   $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
   /* Field: Field collection item: Alternative title */
   $handler->display->display_options['fields']['field_hps_exhibits_related_item_title']['id'] = 'field_hps_exhibits_related_item_title';
@@ -392,6 +432,13 @@ function hps_exhibits_views_default_views() {
   $handler->display->display_options['fields']['field_hps_exhibits_related_item_title']['empty'] = '[title]';
   $handler->display->display_options['fields']['field_hps_exhibits_related_item_title']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_hps_exhibits_related_item_title']['type'] = 'text_plain';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Content: Image (dspace_image:fid) */
+  $handler->display->display_options['sorts']['dspace_image_fid']['id'] = 'dspace_image_fid';
+  $handler->display->display_options['sorts']['dspace_image_fid']['table'] = 'field_data_dspace_image';
+  $handler->display->display_options['sorts']['dspace_image_fid']['field'] = 'dspace_image_fid';
+  $handler->display->display_options['sorts']['dspace_image_fid']['relationship'] = 'field_hps_exhibits_related_item_target_id';
+  $handler->display->display_options['sorts']['dspace_image_fid']['order'] = 'DESC';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Nid */
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
@@ -410,6 +457,167 @@ function hps_exhibits_views_default_views() {
       'panel' => '0',
       'fixed' => '',
       'label' => 'Content: Nid',
+    ),
+  );
+
+  /* Display: Timeline */
+  $handler = $view->new_display('panel_pane', 'Timeline', 'panel_pane_exhibits_timeline');
+  $handler->display->display_options['display_description'] = 'Events associated with an exhibit, expects exhibit nid argument';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'timelinejs';
+  $handler->display->display_options['style_options']['timeline_theme'] = array(
+    'width' => '100',
+    'width_unit' => '1',
+    'height' => '500',
+    'height_unit' => '0',
+  );
+  $handler->display->display_options['style_options']['timeline_fields'] = array(
+    'headline' => 'title',
+    'bodytext' => 'body',
+    'date' => 'field_hps_timeline_event_date',
+    'media' => 'dspace_image',
+    'credit' => '0',
+    'caption' => '0',
+    'tag' => '0',
+  );
+  $handler->display->display_options['style_options']['timeline_config'] = array(
+    'link_to_entity' => 0,
+    'link_text_enabled' => 0,
+    'link_text' => '[path]',
+    'strip_tags' => '0',
+    'hash_bookmark' => '0',
+    'start_at_end' => '0',
+    'start_zoom_adjust' => '-9',
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Content: Timeline (field_hps_timeline) */
+  $handler->display->display_options['relationships']['field_hps_timeline_value']['id'] = 'field_hps_timeline_value';
+  $handler->display->display_options['relationships']['field_hps_timeline_value']['table'] = 'field_data_field_hps_timeline';
+  $handler->display->display_options['relationships']['field_hps_timeline_value']['field'] = 'field_hps_timeline_value';
+  $handler->display->display_options['relationships']['field_hps_timeline_value']['required'] = TRUE;
+  $handler->display->display_options['relationships']['field_hps_timeline_value']['delta'] = '-1';
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_hps_timeline_event_target_id']['id'] = 'field_hps_timeline_event_target_id';
+  $handler->display->display_options['relationships']['field_hps_timeline_event_target_id']['table'] = 'field_data_field_hps_timeline_event';
+  $handler->display->display_options['relationships']['field_hps_timeline_event_target_id']['field'] = 'field_hps_timeline_event_target_id';
+  $handler->display->display_options['relationships']['field_hps_timeline_event_target_id']['relationship'] = 'field_hps_timeline_value';
+  $handler->display->display_options['relationships']['field_hps_timeline_event_target_id']['required'] = TRUE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_hps_timeline_event_more_target_id']['id'] = 'field_hps_timeline_event_more_target_id';
+  $handler->display->display_options['relationships']['field_hps_timeline_event_more_target_id']['table'] = 'field_data_field_hps_timeline_event_more';
+  $handler->display->display_options['relationships']['field_hps_timeline_event_more_target_id']['field'] = 'field_hps_timeline_event_more_target_id';
+  $handler->display->display_options['relationships']['field_hps_timeline_event_more_target_id']['relationship'] = 'field_hps_timeline_value';
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_hps_timeline_event_media_target_id']['id'] = 'field_hps_timeline_event_media_target_id';
+  $handler->display->display_options['relationships']['field_hps_timeline_event_media_target_id']['table'] = 'field_data_field_hps_timeline_event_media';
+  $handler->display->display_options['relationships']['field_hps_timeline_event_media_target_id']['field'] = 'field_hps_timeline_event_media_target_id';
+  $handler->display->display_options['relationships']['field_hps_timeline_event_media_target_id']['relationship'] = 'field_hps_timeline_event_target_id';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['relationship'] = 'field_hps_timeline_event_target_id';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['title']['alter']['text'] = 'Booya.';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_type'] = '0';
+  $handler->display->display_options['fields']['title']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Date */
+  $handler->display->display_options['fields']['field_hps_timeline_event_date']['id'] = 'field_hps_timeline_event_date';
+  $handler->display->display_options['fields']['field_hps_timeline_event_date']['table'] = 'field_data_field_hps_timeline_event_date';
+  $handler->display->display_options['fields']['field_hps_timeline_event_date']['field'] = 'field_hps_timeline_event_date';
+  $handler->display->display_options['fields']['field_hps_timeline_event_date']['relationship'] = 'field_hps_timeline_event_target_id';
+  $handler->display->display_options['fields']['field_hps_timeline_event_date']['label'] = '';
+  $handler->display->display_options['fields']['field_hps_timeline_event_date']['element_type'] = '0';
+  $handler->display->display_options['fields']['field_hps_timeline_event_date']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['field_hps_timeline_event_date']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_hps_timeline_event_date']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['field_hps_timeline_event_date']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['field_hps_timeline_event_date']['settings'] = array(
+    'format_type' => 'short',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+  );
+  /* Field: Content: Body */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  $handler->display->display_options['fields']['body']['relationship'] = 'field_hps_timeline_event_target_id';
+  $handler->display->display_options['fields']['body']['label'] = '';
+  $handler->display->display_options['fields']['body']['element_type'] = '0';
+  $handler->display->display_options['fields']['body']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['body']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['body']['element_default_classes'] = FALSE;
+  /* Field: Content: Image */
+  $handler->display->display_options['fields']['dspace_image']['id'] = 'dspace_image';
+  $handler->display->display_options['fields']['dspace_image']['table'] = 'field_data_dspace_image';
+  $handler->display->display_options['fields']['dspace_image']['field'] = 'dspace_image';
+  $handler->display->display_options['fields']['dspace_image']['relationship'] = 'field_hps_timeline_event_media_target_id';
+  $handler->display->display_options['fields']['dspace_image']['label'] = '';
+  $handler->display->display_options['fields']['dspace_image']['element_type'] = '0';
+  $handler->display->display_options['fields']['dspace_image']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['dspace_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['dspace_image']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['dspace_image']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['dspace_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['dspace_image']['settings'] = array(
+    'image_style' => 'hps_supplemental',
+    'image_link' => '',
+  );
+  /* Field: more */
+  $handler->display->display_options['fields']['title_1']['id'] = 'title_1';
+  $handler->display->display_options['fields']['title_1']['table'] = 'node';
+  $handler->display->display_options['fields']['title_1']['field'] = 'title';
+  $handler->display->display_options['fields']['title_1']['relationship'] = 'field_hps_timeline_event_more_target_id';
+  $handler->display->display_options['fields']['title_1']['ui_name'] = 'more';
+  $handler->display->display_options['fields']['title_1']['label'] = 'Read more';
+  $handler->display->display_options['fields']['title_1']['element_type'] = '0';
+  $handler->display->display_options['fields']['title_1']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['title_1']['element_wrapper_type'] = 'p';
+  $handler->display->display_options['fields']['title_1']['element_default_classes'] = FALSE;
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['nid']['specify_validation'] = TRUE;
+  $handler->display->display_options['arguments']['nid']['validate']['type'] = 'node';
+  $handler->display->display_options['arguments']['nid']['validate_options']['types'] = array(
+    'hps_exhibit' => 'hps_exhibit',
+  );
+  $handler->display->display_options['argument_input'] = array(
+    'nid' => array(
+      'type' => 'context',
+      'context' => 'entity:node.nid',
+      'context_optional' => 0,
+      'panel' => '0',
+      'fixed' => '',
+      'label' => 'Content: Nid',
+    ),
+    'field_hps_timeline_value' => array(
+      'type' => 'context',
+      'context' => 'entity:node.field-hps-timeline',
+      'context_optional' => 0,
+      'panel' => '0',
+      'fixed' => '',
+      'label' => 'Content: Timeline (field_hps_timeline)',
     ),
   );
   $export['hps_exhibits'] = $view;

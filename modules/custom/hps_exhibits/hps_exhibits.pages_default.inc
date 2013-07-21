@@ -114,6 +114,7 @@ function hps_exhibits_default_page_manager_handlers() {
       'types' => array(
         'hps_exhibit_information_page' => 'hps_exhibit_information_page',
         'hps_exhibit_narrative' => 'hps_exhibit_narrative',
+        'hps_timeline' => 'hps_timeline',
       ),
       'field_name' => 'og_group_ref',
       'context' => 'argument_entity_id:node_1',
@@ -205,6 +206,28 @@ function hps_exhibits_default_page_manager_handlers() {
     $pane->locks = array();
     $display->content['new-5'] = $pane;
     $display->panels['f3'][0] = 'new-5';
+    $pane = new stdClass();
+    $pane->pid = 'new-6';
+    $pane->panel = 'i1';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'hps_exhibits-panel_pane_exhibits_timeline';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'context' => array(
+        0 => 'argument_entity_id:node_1',
+      ),
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $display->content['new-6'] = $pane;
+    $display->panels['i1'][0] = 'new-6';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
@@ -286,7 +309,7 @@ function hps_exhibits_default_page_manager_handlers() {
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();
-    $pane->pid = 'new-6';
+    $pane->pid = 'new-7';
     $pane->panel = 'b1';
     $pane->type = 'node_book_menu';
     $pane->subtype = 'node_book_menu';
@@ -305,10 +328,10 @@ function hps_exhibits_default_page_manager_handlers() {
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $display->content['new-6'] = $pane;
-    $display->panels['b1'][0] = 'new-6';
+    $display->content['new-7'] = $pane;
+    $display->panels['b1'][0] = 'new-7';
     $pane = new stdClass();
-    $pane->pid = 'new-7';
+    $pane->pid = 'new-8';
     $pane->panel = 'b2';
     $pane->type = 'entity_field';
     $pane->subtype = 'node:body';
@@ -333,10 +356,10 @@ function hps_exhibits_default_page_manager_handlers() {
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $display->content['new-7'] = $pane;
-    $display->panels['b2'][0] = 'new-7';
+    $display->content['new-8'] = $pane;
+    $display->panels['b2'][0] = 'new-8';
     $pane = new stdClass();
-    $pane->pid = 'new-8';
+    $pane->pid = 'new-9';
     $pane->panel = 'b2';
     $pane->type = 'node_book_nav';
     $pane->subtype = 'node_book_nav';
@@ -355,10 +378,10 @@ function hps_exhibits_default_page_manager_handlers() {
     $pane->extras = array();
     $pane->position = 1;
     $pane->locks = array();
-    $display->content['new-8'] = $pane;
-    $display->panels['b2'][1] = 'new-8';
+    $display->content['new-9'] = $pane;
+    $display->panels['b2'][1] = 'new-9';
     $pane = new stdClass();
-    $pane->pid = 'new-9';
+    $pane->pid = 'new-10';
     $pane->panel = 'b3';
     $pane->type = 'views_panes';
     $pane->subtype = 'hps_exhibits-panel_pane_exhibits_related_items';
@@ -373,8 +396,8 @@ function hps_exhibits_default_page_manager_handlers() {
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $display->content['new-9'] = $pane;
-    $display->panels['b3'][0] = 'new-9';
+    $display->content['new-10'] = $pane;
+    $display->panels['b3'][0] = 'new-10';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
@@ -456,7 +479,7 @@ function hps_exhibits_default_page_manager_handlers() {
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();
-    $pane->pid = 'new-10';
+    $pane->pid = 'new-11';
     $pane->panel = 'b1';
     $pane->type = 'node_book_menu';
     $pane->subtype = 'node_book_menu';
@@ -475,10 +498,10 @@ function hps_exhibits_default_page_manager_handlers() {
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $display->content['new-10'] = $pane;
-    $display->panels['b1'][0] = 'new-10';
+    $display->content['new-11'] = $pane;
+    $display->panels['b1'][0] = 'new-11';
     $pane = new stdClass();
-    $pane->pid = 'new-11';
+    $pane->pid = 'new-12';
     $pane->panel = 'b2';
     $pane->type = 'entity_field';
     $pane->subtype = 'node:body';
@@ -503,8 +526,8 @@ function hps_exhibits_default_page_manager_handlers() {
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $display->content['new-11'] = $pane;
-    $display->panels['b2'][0] = 'new-11';
+    $display->content['new-12'] = $pane;
+    $display->panels['b2'][0] = 'new-12';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;

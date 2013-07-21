@@ -168,6 +168,9 @@ projects[og_theme][version] = 2.0
 
 projects[entityreference_prepopulate][version] = 1.3
 
+projects[views_timelinejs][version] = 1.0-alpha1
+projects[views_timelinejs][patch][2046657] = https://drupal.org/files/views_timelinejs-check-field-data-is-set-for-alias-before-getting-value-2046657-1.patch
+
 
 ; @note some custom unversioned modules are included with this profile, others
 ;       we download from sandbox
@@ -228,3 +231,7 @@ libraries[PHPExcel][download][type] = get
 libraries[PHPExcel][download][url]  = https://github.com/PHPOffice/PHPExcel/archive/PHPExcel_1.7.8.tar.gz
 libraries[PHPExcel][directory_name] = PHPExcel
 libraries[PHPExcel][patch][1] = https://raw.github.com/mbl-cli/hps-drupal-distribution/master/patches/PHPExcel-zoomscale-fix.patch
+
+libraries[timeline][download][type] = get
+libraries[timeline][download][url] = https://github.com/VeriteCo/TimelineJS/archive/v2.24.zip
+libraries[timeline][directory_name] = timeline
