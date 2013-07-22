@@ -150,6 +150,7 @@ projects[field_collection][version] = 1.0-beta5
 projects[field_collection][patch][1063434] = http://drupal.org/files/field_collection-feeds_integration.patch
 
 projects[rules][version] = 2.3
+projects[rules][patch][1019646] = https://drupal.org/files/rules_exit.patch
 
 projects[views_bulk_operations][version] = 3.1
 
