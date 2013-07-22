@@ -10,14 +10,14 @@
 function hps_exhibits_field_default_fields() {
   $fields = array();
 
-  // Exported field: 'field_collection_item-field_hps_exhibits_related_items-field_hps_exhibits_related_item_title'.
-  $fields['field_collection_item-field_hps_exhibits_related_items-field_hps_exhibits_related_item_title'] = array(
+  // Exported field: 'field_collection_item-field_hps_exhibits_related_items-field_hps_exhibits_related_title'.
+  $fields['field_collection_item-field_hps_exhibits_related_items-field_hps_exhibits_related_title'] = array(
     'field_config' => array(
       'active' => '1',
       'cardinality' => '1',
       'deleted' => '0',
       'entity_types' => array(),
-      'field_name' => 'field_hps_exhibits_related_item_title',
+      'field_name' => 'field_hps_exhibits_related_title',
       'foreign keys' => array(
         'format' => array(
           'columns' => array(
@@ -55,7 +55,7 @@ function hps_exhibits_field_default_fields() {
       ),
       'entity_type' => 'field_collection_item',
       'fences_wrapper' => 'no_wrapper',
-      'field_name' => 'field_hps_exhibits_related_item_title',
+      'field_name' => 'field_hps_exhibits_related_title',
       'label' => 'Alternative title',
       'required' => 0,
       'settings' => array(
