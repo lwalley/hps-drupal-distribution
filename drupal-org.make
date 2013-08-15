@@ -5,7 +5,7 @@ core = 7.x
 defaults[projects][subdir] = "contributed"
 
 ; Themes
-projects[zen][version] = 5.3
+projects[zen][version] = 5.1
 
 ; Contributed modules
 projects[libraries][version] = 2.1
