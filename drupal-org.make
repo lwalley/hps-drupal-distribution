@@ -82,6 +82,7 @@ projects[strongarm][version] = 2.0
 projects[panels][version] = 3.3
 
 projects[job_scheduler][version] = 2.0-alpha3
+projects[job_scheduler][patch][2061647] = https://drupal.org/files/job_scheduler-increase-time-to-wait-for-stuck-jobs-2061647-1.patch
 
 projects[feeds][version] = 2.0-alpha8
 projects[feeds][patch][1171114] = http://drupal.org/files/feeds-getfile_replace_behaviour_alter-1171114-19.patch
@@ -172,6 +173,7 @@ projects[entityreference_prepopulate][version] = 1.3
 projects[views_timelinejs][version] = 1.0-alpha1
 projects[views_timelinejs][patch][2046657] = https://drupal.org/files/views_timelinejs-check-field-data-is-set-for-alias-before-getting-value-2046657-1.patch
 
+projects[elysia_cron][version] = 2.1
 
 ; @note some custom unversioned modules are included with this profile, others
 ;       we download from sandbox
