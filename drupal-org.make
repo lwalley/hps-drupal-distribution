@@ -5,7 +5,7 @@ core = 7.x
 defaults[projects][subdir] = "contributed"
 
 ; Themes
-projects[zen][version] = 5.1
+projects[zen][version] = 5.3
 
 ; Contributed modules
 projects[libraries][version] = 2.1
@@ -45,7 +45,7 @@ projects[link][version] = 1.1
 
 projects[field_group][version] = 1.1
 
-projects[entity][version] = 1.1
+projects[entity][version] = 1.2
 
 projects[entityreference][version] = 1.0
 ; Foregin key information defaulting to node on field create and not being
@@ -114,11 +114,11 @@ projects[facetapi][version] = 1.3
 
 projects[facetapi_bonus][version] = 1.1
 
-projects[search_api][version] = 1.6
+projects[search_api][version] = 1.7
 projects[search_api][patch][1925114] = http://drupal.org/files/search_api-views_panels_facets_compatibility-1925114-2.patch
 ; includes search_facet_api
 
-projects[search_api_solr][version] = 1.0
+projects[search_api_solr][version] = 1.1
 
 projects[taxonomy_menu][version] = 1.4
 
@@ -129,7 +129,7 @@ projects[geophp][version] = 1.7
 ; recommends installing the GEOS PHP extension
 ; @see https://github.com/phayes/geoPHP/wiki/GEOS
 
-projects[geofield][version] = 1.1
+projects[geofield][version] = 1.2
 
 projects[geocoder][version] = 1.2
 
@@ -165,7 +165,7 @@ projects[menu_position][version] = 1.1
 
 projects[metatag][version] = 1.0-beta7
 
-projects[og][version] = 2.2
+projects[og][version] = 2.3
 projects[og_theme][version] = 2.0
 
 projects[entityreference_prepopulate][version] = 1.3
