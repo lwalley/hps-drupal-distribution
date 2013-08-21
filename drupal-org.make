@@ -238,3 +238,7 @@ libraries[PHPExcel][patch][1] = https://raw.github.com/mbl-cli/hps-drupal-distri
 libraries[timeline][download][type] = get
 libraries[timeline][download][url] = https://github.com/VeriteCo/TimelineJS/archive/v2.24.zip
 libraries[timeline][directory_name] = timeline
+
+libraries[simplepie][download][type] = get
+libraries[simplepie][download][url] = http://simplepie.org/downloads/simplepie_1.3.1.mini.php
+libraries[simplepie][directory_name] = simplepie
