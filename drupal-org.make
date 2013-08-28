@@ -89,6 +89,8 @@ projects[feeds][patch][1171114] = http://drupal.org/files/feeds-getfile_replace_
 projects[feeds][patch][1233142] = https://raw.github.com/mbl-cli/hps-drupal-distribution/master/patches/feeds_prevent-duplicates-from-different-sources-1233142.patch
 ; @note Patch 1233142 is based on http://drupal.org/files/feeds-existingEntityId_rewrite-1233142-1.patch
 projects[feeds][patch][1231332] = https://raw.github.com/mbl-cli/hps-drupal-distribution/master/patches/feeds-increase-queue-processing-time-1231332.patch
+; @note Patch 1231332 is based on https://drupal.org/files/feeds-queue-1231332-23.patch
+projects[feeds][patch][2076065] = https://drupal.org/files/feeds-enclosure-get-content-timeout-2076065-1.patch
 
 projects[feeds_xpathparser][version] = 1.x-dev
 projects[feeds_xpathparser][download][type] = git
@@ -181,7 +183,7 @@ projects[dspaced][type] = module
 projects[dspaced][subdir] = custom
 projects[dspaced][download][type] = git
 projects[dspaced][download][url] = http://git.drupal.org/sandbox/lwalley/1911858.git
-projects[dspaced][download][revision] = cdb2692a11aebd0b53172c8df86b741591683234
+projects[dspaced][download][revision] = 6bfd98e8b79b47841693bb419fa1702e29e3278a
 
 projects[views_job_scheduler][type] = module
 projects[views_job_scheduler][subdir] = custom
