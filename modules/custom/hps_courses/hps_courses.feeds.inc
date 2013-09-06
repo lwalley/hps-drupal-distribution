@@ -265,16 +265,20 @@ function _hps_courses_get_xlsx_url($node) {
  */
 function _hps_courses_is_dataset($node, $dataset_type) {
   $language = (isset($node->language) || property_exists($node, $language)) ? $node->language : LANGUAGE_NONE;
-  $tids = array();
-  foreach (array('dc_type', 'dc_type_mblhistory') as $field) {
+  $tids = array(
+    'dc_type' => NULL,
+    'dc_type_mblhistory' => NULL
+  );
+  foreach (array_keys($tids) as $field) {
     if ($items = field_get_items('node', $node, $field, $language)) {
       $tids[$field] = $items[0]['tid'];
     }
   }
-  $terms = taxonomy_term_load_multiple($tids);
-  if ($terms[$tids['dc_type']]->name == 'Dataset' &&
-      $terms[$tids['dc_type_mblhistory']]->name == $dataset_type) {
-    return TRUE;
+  if ($tids['dc_type'] && $tids['dc_type_mblhistory']) {
+    $terms = taxonomy_term_load_multiple($tids);
+    if ($terms[$tids['dc_type']]->name == 'Dataset' && $terms[$tids['dc_type_mblhistory']]->name == $dataset_type) {
+      return TRUE;
+    }
   }
   return FALSE;
 }
