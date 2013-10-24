@@ -13,16 +13,16 @@ function hpszen_form_system_theme_settings_alter(&$form, &$form_state, $form_id 
     return;
   }
 
-  // Create the form using Forms API: http://api.drupal.org/api/7
-
-  /* -- Delete this line if you want to use this setting
-  $form['STARTERKIT_example'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('STARTERKIT sample setting'),
-    '#default_value' => theme_get_setting('STARTERKIT_example'),
-    '#description'   => t("This option doesn't do anything; it's just an example."),
+  $form['hpszen_behaviours'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Behaviours'),
   );
-  // */
+  $form['hpszen_behaviours']['hpszen_navigation_dropdown'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Use dropdown navigation'),
+    '#default_value' => theme_get_setting('hpszen_navigation_dropdown'),
+    '#description'   => t('Check here if you want the main navigation to use a drop-down design pattern for sub items.'),
+  );
 
   // Remove some of the base theme's settings.
   /* -- Delete this line if you want to turn off this setting.

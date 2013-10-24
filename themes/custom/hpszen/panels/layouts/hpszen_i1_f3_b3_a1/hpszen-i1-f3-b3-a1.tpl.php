@@ -14,42 +14,42 @@
  *   - b3
  */
 ?>
-<div id="introduction">
-  <div class="section">
-    <div id="panel-hpszen-i1" class="panel">
+<div id="introduction" class="introduction">
+  <div class="bucket introduction__bucket">
+    <div id="introduction__one" class="panel introduction__panel">
       <?php print $content['i1']; ?>
     </div>
   </div>
 </div>
-<div id="featured">
-  <div class="section">
-    <div id="panel-hpszen-f1" class="panel">
+<div id="featured" class="featured">
+  <div class="bucket featured__bucket">
+    <div id="featured__one" class="panel featured__panel">
       <?php print $content['f1']; ?>
     </div>
-    <div id="panel-hpszen-f2" class="panel">
+    <div id="featured__two" class="panel featured__panel">
       <?php print $content['f2']; ?>
     </div>
-    <div id="panel-hpszen-f3" class="panel">
+    <div id="featured__three" class="panel featured__panel">
       <?php print $content['f3']; ?>
     </div>
   </div>
 </div>
-<div id="basic">
-  <div class="section">
-    <div id="panel-hpszen-b1" class="panel">
+<div id="basic" class="basic">
+  <div class="bucket basic__bucket">
+    <div id="basic__one" class="panel basic__panel">
       <?php print $content['b1']; ?>
     </div>
-    <div id="panel-hpszen-b2" class="panel">
+    <div id="basic__two" class="panel basic__panel">
       <?php print $content['b2']; ?>
     </div>
-    <div id="panel-hpszen-b3" class="panel">
+    <div id="basic__three" class="panel basic__panel">
       <?php print $content['b3']; ?>
     </div>
   </div>
 </div>
-<div id="after">
-  <div class="section">
-    <div id="panel-hpszen-a1" class="panel">
+<div id="after" class="after">
+  <div class="bucket after__bucket">
+    <div id="after__one" class="panel after__panel">
       <?php print $content['a1']; ?>
     </div>
   </div>

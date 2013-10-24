@@ -1,9 +1,6 @@
-/**
- * @file
- * HPS Zen theme's slideshow styles.
- */
+// @file
+// HPS Zen theme's slideshow styles.
 
-@import "base";
 
 // @note Assumes .slides and .slide classes have been added to HTML list display settings on a View.
 //       Assumes slide image is wrapped in span @see hpszen-responsive image styles.
@@ -15,67 +12,85 @@
 
 // @todo Investigate auto zoom and pan for larger slides
 
-@mixin slide-vertical-rhythm($slide-lines: 28, $image-lines: 13, $pager-lines: 4, $clear: false) {
-  .cycling {
-    ul.slides {
+// @todo This and js should probably move to a slideshow module.
+
+@import "init";
+
+@mixin slide-vertical-rhythm($slide-lines: 36, $image-lines: 9, $pager-lines: 2, $clear: true) {
+  ul.slides {
+    height: rhythm($slide-lines);
+    > li {
       height: rhythm($slide-lines);
-      > li {
-        > span {
-          // Override default width from hpzen-responsive image styles
-          width: 100%;
-          display: block;
-          height: rhythm($image-lines);
-          @include padding-trailer($pager-lines);
-        }
+      > span {
+        height: rhythm($image-lines);
       }
     }
-    .pager {
-      top: rhythm($image-lines);
+  }
+  .slideshow--cycling {
+    .slideshow__pager {
+      top: rhythm($slide-lines);
+    }
+    .slideshow__navigation {
+      top: rhythm($slide-lines);
     }
     @if $clear {
       &:after {
-        height: rhythm($slide-lines);
+        height: rhythm($pager-lines);
       }
     }
   }
 }
 
-// Prevent slides from growing too big
-ul.slides,
-.pager {
-  max-width: 1em / 12 * 900;
-}
-
-.cycling { /* jQuery cycle is enabled. */
-  position: relative;
-  h1, h2, h3 {
-    @include adjust-font-size-to($base-font-size);
-  }
-  // For mobile first single column layout let slides stretch across gutter to fill screen width
-  margin: 0 (-1 * $zen-gutter-width / 2);
-  ul.slides {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    > li {
+ul.slides {
+  @include hipos-box-emboss();
+  padding: 0;
+  margin: 0;
+  overflow-y: auto;
+  list-style-type: none;
+  > li {
+    width: 100%;
+    overflow-y: auto;
+    @include padding-trailer(1);
+    @include hipos-color($slideshow--colors);
+    > span {
+      // Override default width from hpzen-responsive image styles
       width: 100% !important;
-      > span {
-        // Fake crop for responsive images.
-        max-height: 100%;
-        overflow: hidden;
-        img {
-          margin: 0 auto;
-        }
-      }
-      // For single column add gutter to slide contents (since we are forcing slide image to stretch across gutter
-      p,
-      > a {
-        margin-left: $zen-gutter-width / 2;
-        margin-right: $zen-gutter-width / 2;
+      display: block;
+      // Fake crop for responsive images.
+      max-height: 1em / 12 * 400;
+      overflow: hidden;
+      background-color: lighten(nth($slideshow--colors, 1), 10%);
+      img {
+        margin: 0 auto;
       }
     }
+    // For single column add gutter to slide contents (since we are forcing slide image to stretch across gutter
+    > h2, > p, > a {
+      display: block;
+      margin-left: rhythm(1);
+      margin-right: rhythm(1);
+    }
+    > h2 {
+      @include adjust-font-size-to(1.2 * $base-font-size);
+      font-weight: normal;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+    > p {
+      @include adjust-leading-to(1.2);
+    }
   }
-  .pager {
+  a,
+  a.lexicon-term {
+    border-color: white;
+  }
+}
+
+.slideshow--cycling { /* jQuery cycle is enabled. */
+  @include margin-leader();
+  @include margin-trailer();
+  position: relative;
+  .slideshow__pager--thumbnails {
     position: absolute;
     width: 100%;
     background: rgba(black, 0.5);
@@ -94,48 +109,126 @@ ul.slides,
       }
     }
   }
+  .slideshow__pager--markers {
+    padding-top: rhythm(0.5);
+    float: left;
+    overflow: hidden;
+    a {
+      text-indent: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      display: block;
+      float: left;
+      border: rhythm(0.4) solid lighten(nth($slideshow--colors, 1), 5%);
+      width: rhythm(0.5);
+      height: rhythm(0.5);
+      background-color: $teal-bright;
+      &.activeSlide {
+        background-color: white;
+      }
+    }
+  }
+  .slideshow__navigation {
+    padding-top: rhythm(0.3);
+    float: right;
+    overflow: hidden;
+    a {
+      text-indent: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      display: block;
+      float: left;
+      border: rhythm(0.5) solid lighten(nth($slideshow--colors, 1), 5%);
+      width: round(image-width(sprite-file($icons-small, slide-previous)) / 2);
+      height: round(image-height(sprite-file($icons-small, slide-previous)) / 2);
+      background: transparent $icons-small no-repeat;
+      background-size: round(image-width(sprite-file($icons-small, slide-previous)) / 2) auto;
+      &.slideshow__navigation__previous {
+        background-position: 0 round(nth(sprite-position($icons-small, slide-previous), 2) / 2);
+      }
+      &.slideshow__navigation__next {
+        background-position: 0 round(nth(sprite-position($icons-small, slide-next), 2) / 2);
+      }
+      &.slideshow__navigation__pause {
+        background-position: 0 round(nth(sprite-position($icons-small, slide-pause), 2) / 2);
+      }
+      &.slideshow__navigation__resume {
+        background-position: 0 round(nth(sprite-position($icons-small, slide-resume), 2) / 2);
+        display: none;
+      }
+    }
+    &.slideshow--paused {
+      a.slideshow__navigation__pause {
+        display: none;
+      }
+      a.slideshow__navigation__resume {
+        display: block;
+      }
+    }
+  }
   &:after {
     content: "";
     display: block;
     visibility: hidden;
   }
 }
-
-// Establish default vertical rhythm for slides in mobile first single layout.
-@include slide-vertical-rhythm();
-
-@media screen and (min-width: 1em / 16 * 481) {
-  .cycling {
-    // Return to use of gutter
-    margin: 0;
-    ul.slides {
-      > li {
-        span {
-          // For multi-column layouts reset image width to include gutters.
-          margin: 0;
-        }
-        p,
-        a {
-          margin-left: 0;
-          margin-right: 0;
-        }
-      }
-    }
-    .pager {
-      // For multi-column layouts reset controls width to include gutters.
-      margin: 0;
-    }
+// Prevent slides from growing wider than image width (700px)
+@media all and (min-width: 1em / 16 * 481) and (max-width: 1em / 16 * 1023) {
+  .slideshow--cycling,
+  .slides,
+  .slideshow__pager {
+    max-width: hipos-px-to-em(700, 13);
+  }
+}
+@media all and (min-width: 1em / 16 * 481) and (max-width: 1em / 16 * 1023) {
+  .slideshow--cycling,
+  .slides,
+  .slideshow__pager {
+    max-width: hipos-px-to-em(700, 14);
   }
 }
 
-@media screen and (min-width: 1em / 16 * 480) and (max-width: 1em / 16 * 599) {
-  @include slide-vertical-rhythm(29, 18);
+// Adjust image and slide heights for different screen widths, to avoid gaps between image and text
+@include slide-vertical-rhythm();
+@media screen and (min-width: 1em / 16 * 315) and (max-width: 1em / 16 * 349) {
+  @include slide-vertical-rhythm(24, 9);
 }
-
-@media screen and (min-width: 1em / 16 * 600) and (max-width: 1em / 16 * 959) {
-  @include slide-vertical-rhythm(32, 20);
+@media screen and (min-width: 1em / 16 * 345) and (max-width: 1em / 16 * 369) {
+  @include slide-vertical-rhythm(24, 10);
 }
-
-@media screen and (min-width: 1em / 16 * 960) {
-  @include slide-vertical-rhythm(33, 21);
+@media screen and (min-width: 1em / 16 * 370) and (max-width: 1em / 16 * 394) {
+  @include slide-vertical-rhythm(24, 11);
+}
+@media screen and (min-width: 1em / 16 * 395) and (max-width: 1em / 16 * 419) {
+  @include slide-vertical-rhythm(26, 11);
+}
+@media screen and (min-width: 1em / 16 * 420) and (max-width: 1em / 16 * 449) {
+  @include slide-vertical-rhythm(26, 13);
+}
+@media screen and (min-width: 1em / 16 * 450) and (max-width: 1em / 16 * 499) {
+  @include slide-vertical-rhythm(26, 14);
+}
+@media screen and (min-width: 1em / 16 * 500) and (max-width: 1em / 16 * 554) {
+  @include slide-vertical-rhythm(24, 11);
+}
+@media screen and (min-width: 1em / 16 * 555) and (max-width: 1em / 16 * 767) {
+  @include slide-vertical-rhythm(29, 16);
+}
+@media screen and (min-width: 1em / 16 * 768) and (max-width: 1em / 16 * 794) {
+  @include slide-vertical-rhythm(25, 13);
+}
+@media screen and (min-width: 1em / 16 * 795) and (max-width: 1em / 16 * 839) {
+  @include slide-vertical-rhythm(26, 14);
+}
+@media screen and (min-width: 1em / 16 * 840) and (max-width: 1em / 16 * 884) {
+  @include slide-vertical-rhythm(26, 15);
+}
+@media screen and (min-width: 1em / 16 * 885) and (max-width: 1em / 16 * 929) {
+  @include slide-vertical-rhythm(27, 16);
+}
+@media screen and (min-width: 1em / 16 * 930) and (max-width: 1em / 16 * 1023) {
+  @include slide-vertical-rhythm(29, 17);
+}
+@media screen and (min-width: 1em / 16 * 1024) {
+  @include slide-vertical-rhythm(29, 17);
 }

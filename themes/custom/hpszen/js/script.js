@@ -15,50 +15,64 @@
   Drupal.behaviors.hpszen = {
     attach: function (context, settings) {
 
-      // Primary navigation menu
+      if (Drupal.settings.hpszen === undefined) {
+        Drupal.settings.hpszen = {};
+      }
+
+      // Navigation behaviours include showing/hiding entire navigation on
+      // smaller screens and hiding/showing sub navigation menus.
       $('#navigation', context).once('hpszen', function () {
 
-        Drupal.theme.prototype.hpszenSubmenuToggle = function () {
-          return '<a href="#" class="submenu-toggle" title="' +
-                 Drupal.t("Javascript trigger to add or remove this item's " +
-                          "submenu from the visual display.") +
-                 '">&or;</a>';
-        };
-
-        Drupal.theme.prototype.hpszenSubmenuToggleClosed = function () {
-          return '&or;'
+        if (Drupal.settings.hpszen.navigationBreakpoint === undefined) {
+          Drupal.settings.hpszen.navigationBreakpoint = 699;
         }
 
-        Drupal.theme.prototype.hpszenSubmenuToggleOpen = function () {
-          return '&and;'
-        }
-
-        Drupal.theme.prototype.hpszenToggleMenuTrigger = function () {
-          return '<a class="menu-toggle" href="#">' + Drupal.t('Menu') + '</a>';
+        Drupal.theme.prototype.hpszenToggleSubnavigationClosed = function () {
+          return Drupal.t('Open');
         };
 
-        function toggleMenu(event) {
+        Drupal.theme.prototype.hpszenToggleSubnavigationOpen = function () {
+          return Drupal.t('Close');
+        };
+
+        Drupal.theme.prototype.hpszenToggleSubnavigationTrigger = function () {
+          return '<a href="#" class="subnavigation__toggle" title="' +
+                 Drupal.t("Javascript trigger to add or remove sub navigation from the visual display.") +
+                 '">' + Drupal.theme('hpszenToggleSubnavigationClosed') + '</a>';
+        };
+
+        Drupal.theme.prototype.hpszenToggleNavigationTrigger = function () {
+          return '<a class="navigation__toggle" href="#">' + Drupal.t("Menu") + '</a>';
+        };
+
+        function toggleNavigation(event) {
           event.preventDefault();
           event.stopPropagation();
           var toggle = this,
               menu   = (event.data.menu instanceof Array) ? event.data.menu[0] : event.data.menu;
-
           $(menu).toggleClass('element-invisible');
-          // @todo: it seems like there should be a better way to architect this
-          //        'now more complex than just a toggle' toggle...
 
-          // If toggling a list item (instead of h2) then alter toggle icon
-          if ($(this).parent().get(0).tagName == 'LI') {
-            var ul     = $(toggle).closest('ul');
+          if (event.data.title) {
+            $(event.data.title).toggleClass('expanded');
+          };
 
-            if ($(menu).hasClass('element-invisible')) {
-              $(toggle).html(Drupal.theme('hpszenSubmenuToggleClosed'));
-            } else {
-              $(toggle).html(Drupal.theme('hpszenSubmenuToggleOpen'));
-              // If we just opened the submenu of a root item then close any of its siblings' open menus
-              if ($(ul).parent().get(0).tagName != 'LI') {
-                $(menu).closest('li').siblings().find('> ul:not(.element-invisible)').siblings('a.submenu-toggle').trigger('click');
-              }
+        }
+
+        function toggleSubnavigation(event) {
+          event.preventDefault();
+          event.stopPropagation();
+          var toggle = this,
+              menu   = (event.data.menu instanceof Array) ? event.data.menu[0] : event.data.menu;
+              ul     = $(toggle).closest('ul');
+          $(menu).toggleClass('element-invisible');
+
+          if ($(menu).hasClass('element-invisible')) {
+            $(toggle).html(Drupal.theme('hpszenToggleSubnavigationClosed'));
+          } else {
+            $(toggle).html(Drupal.theme('hpszenToggleSubnavigationOpen'));
+            // If we just opened the submenu of a root item then close any of its siblings' open menus
+            if ($(ul).parent().get(0).tagName != 'LI') {
+              $(menu).closest('li').siblings().find('> ul:not(.element-invisible)').siblings('a.subnavigation__toggle').trigger('click');
             }
           }
           if (event.data.title) {
@@ -66,20 +80,24 @@
           };
         }
 
-        $(this).find('ul').addClass('element-invisible');
-        $(this).find('li.expanded').each(function () {
+        // Begin default behaviour on page load.
+        navigation = $(this);
+        // Show or hide sub navigation if dropdown behaviour is enabled.
+        navigation.find('.navigation__block--dropdown li.expanded').each(function () {
           var li = $(this);
-          li.prepend(Drupal.theme('hpszenSubmenuToggle'));
-          li.find('a.submenu-toggle').bind('click', { menu: $(this).find('> ul') }, toggleMenu);
+          // Add show/hide toggle trigger to all navigation items that have
+          // children. Includes nested items.
+          li.prepend(Drupal.theme('hpszenToggleSubnavigationTrigger'));
+          li.find('a.subnavigation__toggle').bind('click', { menu: $(this).find('> ul') }, toggleSubnavigation);
         });
 
-        $(this).once('adjustnavigation', function () {
+        // Hide navigation and show toggle for smaller screen widths.
+        navigation.once('adjustnavigation', function () {
           var nav = $(this);
           // Conditional must match the media query threshold for horizontal menu in CSS
-          // @see sass/layouts/responsive.scss
-          if ($(document).width() < 699) {
+          if ($(document).width() < Drupal.settings.hpszen.navigationBreakpoint) {
             // Convert navigation to vertical toggle menu
-            nav.addClass('toggle-menu');
+            nav.addClass('navigation__toggle');
             nav.find('.block-menu').each(function () {
 
               var menuBlock           = $(this),
@@ -87,20 +105,20 @@
                   rootMenu            = menuBlock.find('> ul')[0],
                   itemsWithSubmenus   = menuBlock.find('li.expanded');
 
-              // Add link to title and bind click event to it for main menu toggle
+              // Add link to navigation title and bind show hide toggle
               $(title).wrapInner('<a href="#" />')
-              .find('a').bind('click', {menu: rootMenu, title: title}, toggleMenu);
-
+              .find('a').bind('click', {menu: rootMenu, title: title}, toggleNavigation);
+              // Hide navigation on small screen widths.
               $(rootMenu).addClass('element-invisible');
-
             });
           }
           else {
-            // Show root menu
+            // Show navigation on larger screen widths.
             nav.find('.block-menu > ul').removeClass('element-invisible');
           }
         })
 
+        // Trigger navigation adjustment on load and if screen width changes
         $(window).bind('load resize orientationchange', function () {
           $('#navigation').trigger('adjustnavigation');
         });
@@ -112,28 +130,33 @@
       //       list, with optional class 'with-pager' to trigger pager
       $('.slides', context).once('hpszen', function () {
 
-        if ("cycle" in $.fn) {
+        // Only continue if jQuery cycle function is available.
+        if ('cycle' in $.fn) {
 
           Drupal.theme.prototype.hpszenCyclingPagerMarkers = function () {
-            return '<div class="pager-markers"></div>';
+            return '<div class="slideshow__pager--markers"></div>';
           };
           Drupal.theme.prototype.hpszenCyclingPagerThumbnails = function () {
-            return '<div class="pager-thumbnails"></div>';
+            return '<div class="slideshow__pager--thumbnails"></div>';
           };
-          Drupal.theme.prototype.hpszenCyclingNav = function () {
-            return '<div class="nav">' +
+          Drupal.theme.prototype.hpszenCyclingNavigation = function () {
+            return '<div class="slideshow__navigation">' +
                    '  <a href="#" title="' +
-                   Drupal.t("Javascript trigger to display previous slide.") +
-                   '" id="hpszen-slide-previous">' + Drupal.t('Previous slide') + '</a>' +
+                      Drupal.t("Visually display the previous slide.") +
+                      '" class="slideshow__navigation__previous">' +
+                      Drupal.t('Previous slide') + '</a>' +
                    '  <a href="#" title="' +
-                   Drupal.t("Javascript trigger to pause slideshow.") +
-                   '" id="hpszen-slides-pause">' + Drupal.t('Pause slideshow') + '</a>' +
+                      Drupal.t("Pause automated scrolling of slides.") +
+                      '" class="slideshow__navigation__pause">' +
+                      Drupal.t('Pause slide show') + '</a>' +
                    '  <a href="#" title="' +
-                   Drupal.t("Javascript trigger to resume slideshow.") +
-                   '" id="hpszen-slides-resume">' + Drupal.t('Resume slideshow') + '</a>' +
+                      Drupal.t("Resume automated scrolling of slides.") +
+                      '" class="slideshow__navigation__resume">' +
+                      Drupal.t('Resume slide show') + '</a>' +
                    '  <a href="#" title="' +
-                   Drupal.t("Javascript trigger to display next slide.") +
-                   '" id="hpszen-slide-next">' + Drupal.t('Next slide') + '</a>' +
+                      Drupal.t("Visually display the next slide.") +
+                      '" class="slideshow__navigation__next">' +
+                      Drupal.t('Next slide') + '</a>' +
                    '</div>';
           };
           Drupal.theme.prototype.hpszenCyclingPagerMarker = function (index, slide) {
@@ -141,7 +164,7 @@
                 slide_number = index + 1,
                 slide_title = slide.find('> h2').text();
             return '<a title="'
-              + Drupal.t('Javascript trigger to visually display slide @slide_number.', {'@slide_number': slide_number})
+              + Drupal.t('Visually display slide @slide_number.', {'@slide_number': slide_number})
               + '" href="#">'
               + Drupal.t('Slide: @slide_title_or_number', { '@slide_title_or_number': slide_title || slide_number })
               + '</a>';
@@ -162,6 +185,13 @@
 
           // Called on image load, window resize and after slide transition.
           function positionImage(image) {
+            return; // Do nothing because this looks rubbish and doesn't work properly.
+            // @todo Idea is to reposition image to show more of center content
+            //       on drastic crops. At the moment image widths are at 100%
+            //       and cropping is handled by CSS, so this incorrectly spans
+            //       up then down. It would be nicer if this could include a
+            //       diagonal transition with a zoom as an enhancement to the
+            //       CSS crop.
             var container = $(image).closest('span'),
                 showing = (container.height() / image.height),
                 margin  = 0;
@@ -182,13 +212,13 @@
               default:
                 // Most of the image is showing, do nothing
             }
-            $(image).css('margin-top', Math.floor(margin) + 'px');
+            $(image).animate({ 'margin-top': Math.floor(margin) + 'px'}, 10000);
           }
 
-          // Assumes slides are in .view-content:
           var slides = $(this),
-              images = $(this).find('> span img');
-          slides.closest('.view-content').addClass('cycling');
+              images = $(this).find('> li > span img');
+
+          slides.closest('div').addClass('slideshow--cycling');
 
           images.one('load', function () {
             positionImage(this);
@@ -197,8 +227,8 @@
           });
 
           cycle_options = {
-            prev: '#hpszen-slide-previous',
-            next: '#hpszen-slide-next',
+            prev: '.slideshow__navigation__previous',
+            next: '.slideshow__navigation__next',
             pause: 1,
             speed: 1000,
             fastOnEvent: 200,
@@ -209,31 +239,31 @@
             }
           }
 
-          slides.parent().append(Drupal.theme('hpszenCyclingNav'));
+          slides.parent().append(Drupal.theme('hpszenCyclingNavigation'));
 
           if (slides.hasClass('with-pager-markers')) {
             slides.parent().append(Drupal.theme('hpszenCyclingPagerMarkers'));
-            cycle_options.pager = '.pager-markers';
+            cycle_options.pager = '.slideshow__pager--markers';
             cycle_options.pagerAnchorBuilder = pagerMarker;
           }
           if (slides.hasClass('with-pager-thumbnails')) {
             slides.parent().append(Drupal.theme('hpszenCyclingPagerThumbnails'));
-            cycle_options.pager = '.pager-thumbnails';
+            cycle_options.pager = '.slideshow__pager--thumbnails';
             cycle_options.pagerAnchorBuilder = pagerThumbnail;
           }
 
           slides.cycle(cycle_options);
 
-          $('#hpszen-slides-pause').click(function() {
+          $('.slideshow__navigation__pause').click(function() {
             slides.cycle('pause');
-            slides.addClass('paused');
-            $(this).parent().addClass('paused');
+            slides.addClass('slideshow--paused');
+            $(this).parent().addClass('slideshow--paused');
             event.preventDefault();
             event.stopPropagation();
           });
-          $('#hpszen-slides-resume').click(function() {
-            slides.removeClass('paused');
-            $(this).parent().removeClass('paused');
+          $('.slideshow__navigation__resume').click(function() {
+            slides.removeClass('slideshow--paused');
+            $(this).parent().removeClass('slideshow--paused');
             slides.cycle('resume');
             event.preventDefault();
             event.stopPropagation();
@@ -241,7 +271,7 @@
 
           $(window).bind('resize', function () {
             slides.each(function () {
-              $(this).width($(this).closest('.view-content').width());
+              $(this).width($(this).closest('div').width());
               positionImage($(this).find('> span img')[0]);
             });
           });

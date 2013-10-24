@@ -11,19 +11,19 @@
  *   - r2
  */
 ?>
-<div id="introduction">
-  <div class="section">
-    <div id="panel-hpszen-i1" class="panel">
+<div id="introduction" class="introduction">
+  <div class="bucket introduction__bucket">
+    <div id="introduction__one" class="panel introduction__panel">
       <?php print $content['i1']; ?>
     </div>
   </div>
 </div>
-<div id="results">
-  <div class="section">
-    <div id="panel-hpszen-r1" class="panel">
+<div id="results" class="results">
+  <div class="bucket results__bucket">
+    <div id="results__one" class="panel panel__results">
       <?php print $content['r1']; ?>
     </div>
-    <div id="panel-hpszen-r2" class="panel">
+    <div id="results__two" class="panel panel__results">
       <?php print $content['r2']; ?>
     </div>
   </div>

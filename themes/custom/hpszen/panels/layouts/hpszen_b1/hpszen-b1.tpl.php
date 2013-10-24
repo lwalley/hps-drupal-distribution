@@ -9,9 +9,9 @@
  *   - b1
  */
 ?>
-<div id="basic">
-  <div class="section">
-    <div id="panel-hpszen-b1" class="panel">
+<div id="basic" class"basic">
+  <div class="bucket basic__bucket">
+    <div id="basic__one" class="panel basic__panel">
       <?php print $content['b1']; ?>
     </div>
   </div>

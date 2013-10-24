@@ -10,16 +10,16 @@
  *   - b1
  */
 ?>
-<div id="introduction">
-  <div class="section">
-    <div id="panel-hpszen-i1" class="panel">
+<div id="introduction" class="introduction">
+  <div class="bucket" class="introduction__bucket">
+    <div id="introduction__one" class="panel introduction__panel">
       <?php print $content['i1']; ?>
     </div>
   </div>
 </div>
-<div id="basic">
-  <div class="section">
-    <div id="panel-hpszen-b1" class="panel">
+<div id="basic" class="basic">
+  <div class="bucket basic__bucket">
+    <div id="basic__one" class="panel basic__panel">
       <?php print $content['b1']; ?>
     </div>
   </div>

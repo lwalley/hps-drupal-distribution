@@ -1,113 +1,22 @@
 <?php
+
 /**
  * @file
  * Contains the theme's functions to manipulate Drupal's default markup.
  *
- * A QUICK OVERVIEW OF DRUPAL THEMING
+ * Complete documentation for this file is available online.
+ * @see https://drupal.org/node/1728096
  *
- *   The default HTML for all of Drupal's markup is specified by its modules.
- *   For example, the comment.module provides the default HTML markup and CSS
- *   styling that is wrapped around each comment. Fortunately, each piece of
- *   markup can optionally be overridden by the theme.
- *
- *   Drupal deals with each chunk of content using a "theme hook". The raw
- *   content is placed in PHP variables and passed through the theme hook, which
- *   can either be a template file (which you should already be familiary with)
- *   or a theme function. For example, the "comment" theme hook is implemented
- *   with a comment.tpl.php template file, but the "breadcrumb" theme hooks is
- *   implemented with a theme_breadcrumb() theme function. Regardless if the
- *   theme hook uses a template file or theme function, the template or function
- *   does the same kind of work; it takes the PHP variables passed to it and
- *   wraps the raw content with the desired HTML markup.
- *
- *   Most theme hooks are implemented with template files. Theme hooks that use
- *   theme functions do so for performance reasons - theme_field() is faster
- *   than a field.tpl.php - or for legacy reasons - theme_breadcrumb() has "been
- *   that way forever."
- *
- *   The variables used by theme functions or template files come from a handful
- *   of sources:
- *   - the contents of other theme hooks that have already been rendered into
- *     HTML. For example, the HTML from theme_breadcrumb() is put into the
- *     $breadcrumb variable of the page.tpl.php template file.
- *   - raw data provided directly by a module (often pulled from a database)
- *   - a "render element" provided directly by a module. A render element is a
- *     nested PHP array which contains both content and meta data with hints on
- *     how the content should be rendered. If a variable in a template file is a
- *     render element, it needs to be rendered with the render() function and
- *     then printed using:
- *       <?php print render($variable); ?>
- *
- * ABOUT THE TEMPLATE.PHP FILE
- *
- *   The template.php file is one of the most useful files when creating or
- *   modifying Drupal themes. With this file you can do three things:
- *   - Modify any theme hooks variables or add your own variables, using
- *     preprocess or process functions.
- *   - Override any theme function. That is, replace a module's default theme
- *     function with one you write.
- *   - Call hook_*_alter() functions which allow you to alter various parts of
- *     Drupal's internals, including the render elements in forms. The most
- *     useful of which include hook_form_alter(), hook_form_FORM_ID_alter(),
- *     and hook_page_alter(). See api.drupal.org for more information about
- *     _alter functions.
- *
- * OVERRIDING THEME FUNCTIONS
- *
- *   If a theme hook uses a theme function, Drupal will use the default theme
- *   function unless your theme overrides it. To override a theme function, you
- *   have to first find the theme function that generates the output. (The
- *   api.drupal.org website is a good place to find which file contains which
- *   function.) Then you can copy the original function in its entirety and
- *   paste it in this template.php file, changing the prefix from theme_ to
- *   hpszen_. For example:
- *
- *     original, found in modules/field/field.module: theme_field()
- *     theme override, found in template.php: hpszen_field()
- *
- *   where hpszen is the name of your sub-theme. For example, the
- *   zen_classic theme would define a zen_classic_field() function.
- *
- *   Note that base themes can also override theme functions. And those
- *   overrides will be used by sub-themes unless the sub-theme chooses to
- *   override again.
- *
- *   Zen core only overrides one theme function. If you wish to override it, you
- *   should first look at how Zen core implements this function:
- *     theme_breadcrumbs()      in zen/template.php
- *
- *   For more information, please visit the Theme Developer's Guide on
- *   Drupal.org: http://drupal.org/node/173880
- *
- * CREATE OR MODIFY VARIABLES FOR YOUR THEME
- *
- *   Each tpl.php template file has several variables which hold various pieces
- *   of content. You can modify those variables (or add new ones) before they
- *   are used in the template files by using preprocess functions.
- *
- *   This makes THEME_preprocess_HOOK() functions the most powerful functions
- *   available to themers.
- *
- *   It works by having one preprocess function for each template file or its
- *   derivatives (called theme hook suggestions). For example:
- *     THEME_preprocess_page    alters the variables for page.tpl.php
- *     THEME_preprocess_node    alters the variables for node.tpl.php or
- *                              for node--forum.tpl.php
- *     THEME_preprocess_comment alters the variables for comment.tpl.php
- *     THEME_preprocess_block   alters the variables for block.tpl.php
- *
- *   For more information on preprocess functions and theme hook suggestions,
- *   please visit the Theme Developer's Guide on Drupal.org:
- *   http://drupal.org/node/223440 and http://drupal.org/node/1089656
- *
- *
- *   @note Preprocess functions for theme suggestions do not work. You have to
- *         either declare the theme in hook_theme or call a preprocess
- *         suggestion function from a generic preprocess function i.e. generate
- *         function name from $variables properties and then call it
- *         dynamically.
- *   @see http://drupal.org/node/939462
+ * @note Preprocess functions for theme suggestions do not work. You have to
+ *       either declare the theme in hook_theme or call a preprocess
+ *       suggestion function from a generic preprocess function i.e. generate
+ *       function name from $variables properties and then call it
+ *       dynamically.
+ * @see http://drupal.org/node/939462
  */
+
+// Add javascript settings.
+//drupal_add_js(array('hpszen' => array('navigationBreakpoint' => 699)), 'setting');
 
 /**
  * Override or insert variables into the maintenance page template.
@@ -137,23 +46,20 @@ function hpszen_preprocess_maintenance_page(&$variables, $hook) {
  */
 function hpszen_preprocess_html(&$variables, $hook) {
 
-  if ($variables['menu_item']) {
-    switch ($variables['menu_item']['page_callback']) {
-      case 'page_manager_page_execute':
-      case 'page_manager_term_view_page':
-      case 'page_manager_node_view_page':
-      case 'page_manager_contact_site':
-        // Add panels layout name to body class attribute.
-        $page = page_manager_get_current_page();
-        if (isset($page['name'])) {
-          $variables['classes_array'][] = drupal_clean_css_identifier($page['name']);
-        }
-        if (isset($page['handler'])) {
-          $variables['classes_array'][] = drupal_clean_css_identifier($page['handler']->conf['display']->layout);
-        }
-        break;
-    }
+  // Add classes for page names and panels layouts.
+  // @note Zen theme uses page_callback on menu_item for determining if this is
+  //       a panels page, but that assumes the page has a matching variant that
+  //       invokes panels, which is not always the case.
+  if ($panels_display = panels_get_current_page_display()) {
+    $variables['classes_array'][] = drupal_clean_css_identifier($panels_display->layout);
   }
+  else {
+    $variables['classes_array'][] = 'no-panels';
+  }
+  if ($current_page = page_manager_get_current_page()) {
+    $variables['classes_array'][] = drupal_clean_css_identifier($current_page['name']);
+  }
+
   // Strip html from head title
   if ($variables['head_title']) {
     $variables['head_title'] = strip_tags(htmlspecialchars_decode($variables['head_title']));
@@ -173,13 +79,26 @@ function hpszen_preprocess_html(&$variables, $hook) {
  *   The name of the template being rendered ("page" in this case.)
  */
 function hpszen_preprocess_page(&$variables, $hook) {
-  // Add log in menu item to secondary menu for anonymous users.
-  if (!user_is_logged_in()) {
-    $variables['secondary_menu']['menu-login'] = array(
-      'href' => 'user/login',
-      'title' => t('Log in'),
-    );
+
+  // Add theme wrapper for HTTP error pages
+  $status = drupal_get_http_header('status');
+  switch ($status) {
+    case '404 Not Found':
+    case '403 Forbidden':
+      if (isset($variables['page']['content']['system_main']['main']['#markup'])
+        && !preg_match('/^<div/', $variables['page']['content']['system_main']['main']['#markup'])) {
+        $variables['page']['content']['system_main']['main']['#prefix'] = '<div class="section"><div class="section-inner"><p>';
+        $variables['page']['content']['system_main']['main']['#suffix'] = '</p></div></div>';
+      }
+      break;
   }
+
+
+  // @note Removed log in link that was being added to secondary menu here
+  //       programmatically. Instead add login and logout links to menus
+  //       through GUI and use user/login? as path to avoid access issues
+  //       when creating the menu item. Alternatively use path alias.
+  // @see http://drupal.stackexchange.com/questions/75824/user-login-page-no-access-to-it
 }
 
 /**
@@ -194,8 +113,23 @@ function hpszen_preprocess_node(&$variables, $hook) {
   if ($variables['view_mode'] == 'hps_featured_content') {
     $variables['theme_hook_suggestions'][] = 'node__hps_featured_content';
   }
+
+  $variables['submitted'] = t('By !username &mdash; <time datetime="!datetime">!shortdate</time>',
+    array(
+      '!username' => $variables['name'],
+      '!datetime' => format_date($variables['node']->created, 'custom', 'c'),
+      '!shortdate' => format_date($variables['node']->created, 'short'
+    )
+  ));
+
+  // Remove empty print-link span
+  if (empty($variables['elements']['print_links']['#markup'])) {
+    $variables['elements']['print_links']['#access'] = FALSE;
+    $variables['content']['print_links']['#access'] = FALSE;
+  }
+
   // Optionally, run node-type-specific preprocess functions, like
-  // hpszen_preprocess_node_page() or STARTERKIT_preprocess_node_story().
+  // hpszen_preprocess_node_page() or hpszen_preprocess_node_story().
   //$function = __FUNCTION__ . '_' . $variables['node']->type;
   //if (function_exists($function)) {
     //$function($variables, $hook);
@@ -241,8 +175,14 @@ function hpszen_preprocess_region(&$variables, $hook) {
  * @param $hook
  *   The name of the template being rendered ("block" in this case.)
  */
-/* -- Delete this line to use this function
 function hpszen_preprocess_block(&$variables, $hook) {
+  if ($variables['block_html_id'] == 'block-system-main-menu') {
+    // Add navigation behaviour state depending on theme settings.
+    $variables['classes_array'][] = 'navigation__block';
+    if (theme_get_setting('hpszen_navigation_dropdown')) {
+      $variables['classes_array'][] = 'navigation__block--dropdown';
+    }
+  }
   // Add a count to all the blocks in the region.
   // $variables['classes_array'][] = 'count-' . $variables['block_id'];
 
@@ -318,6 +258,44 @@ function hpszen_preprocess_views_view_field(&$variables) {
 }
 
 /**
+ * Implements preprocess_panels_pane().
+ */
+function hpszen_preprocess_panels_pane(&$variables) {
+  if ($variables['pane']->subtype == 'hps_courses_search') {
+    // @note Browsing by facets using Views Facets Blocks and Panels is made
+    //       possible with patch. However, view is missing a more link, and
+    //       doesn't use views styles, sorts or paging. So we override e.g.
+    //       more link and sort, as needed here. This is quick and dirty fix.
+    // @see  http://drupal.org/node/1925114#comment-7107040
+    // @todo Make Facets Blocks in Panels adhere to views or panel settings or
+    //       find better plan for overriding Views render.
+    //$variables['more'] = l(t('more'), 'courses');
+    $data = array();
+    foreach ($variables['content']['facets']['#items'] as $key => &$item) {
+      $data[$key] = $item['data'];
+      unset($item['class']);
+      $item['data'] .= ', ';
+    }
+    $sort_direction = SORT_ASC;
+    $limit = 10;
+    if ($variables['pane']->configuration['display'] == 'search_api_views_facets_block_course_year') {
+      $sort_direction = SORT_DESC;
+      $limit = 30;
+    }
+    array_multisort($data, $sort_direction, $variables['content']['facets']['#items']);
+    // Truncate number of items displayed... alternative would be to show all and hide with client-side behaviour.
+    $variables['content']['facets']['#items'] = array_splice($variables['content']['facets']['#items'], 0, $limit);
+    // Remove comma from last item.
+    $last = array_pop($variables['content']['facets']['#items']);
+    $last['data'] = rtrim($last['data'], ", ");
+    $variables['content']['facets']['#items'][] = $last;
+    $variables['content']['facets']['#items'][] = array(
+      'data' => t('... <a href="!url">all courses</a>', array('!url' => '/courses'))
+    );
+  }
+}
+
+/**
  * Implements hook_preprocess_menu_link().
  *
  * @param $variables
@@ -377,3 +355,4 @@ function hpszen_image($variables) {
   );
   return render($element);
 }
+
