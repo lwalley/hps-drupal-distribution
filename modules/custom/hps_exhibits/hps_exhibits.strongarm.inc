@@ -124,13 +124,13 @@ function hps_exhibits_strongarm() {
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '3',
-        ),
-        'redirect' => array(
           'weight' => '2',
         ),
+        'redirect' => array(
+          'weight' => '3',
+        ),
         'metatags' => array(
-          'weight' => '7',
+          'weight' => '8',
         ),
       ),
       'display' => array(),
@@ -154,16 +154,16 @@ function hps_exhibits_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '40',
+          'weight' => '6',
         ),
         'title' => array(
-          'weight' => '-5',
+          'weight' => '0',
         ),
         'path' => array(
-          'weight' => '30',
+          'weight' => '3',
         ),
         'redirect' => array(
-          'weight' => '30',
+          'weight' => '2',
         ),
       ),
       'display' => array(),

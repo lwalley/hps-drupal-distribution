@@ -24,6 +24,7 @@ function hps_exhibits_default_rules_configuration() {
       ],
       "DO" : [
         { "rules_book_action_convert_node_to_book" : { "rules_book_parameter_node" : [ "node" ] } },
+        { "data_set" : { "data" : [ "node:group-theme" ], "value" : "mblexhibitlinear" } },
         { "entity_save" : { "data" : [ "node" ], "immediate" : 1 } },
         { "views_bulk_operations_action_load_list" : {
             "USING" : { "view" : "hps_exhibits_users|default" },

@@ -10,70 +10,6 @@
 function hps_exhibits_field_default_fields() {
   $fields = array();
 
-  // Exported field: 'field_collection_item-field_hps_exhibits_related_items-field_hps_exhibits_related_title'.
-  $fields['field_collection_item-field_hps_exhibits_related_items-field_hps_exhibits_related_title'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_hps_exhibits_related_title',
-      'foreign keys' => array(
-        'format' => array(
-          'columns' => array(
-            'format' => 'format',
-          ),
-          'table' => 'filter_format',
-        ),
-      ),
-      'indexes' => array(
-        'format' => array(
-          0 => 'format',
-        ),
-      ),
-      'locked' => '0',
-      'module' => 'text',
-      'settings' => array(
-        'max_length' => '255',
-      ),
-      'translatable' => '0',
-      'type' => 'text',
-    ),
-    'field_instance' => array(
-      'bundle' => 'field_hps_exhibits_related_items',
-      'default_value' => NULL,
-      'deleted' => '0',
-      'description' => '(Optional) Enter an alternative title to replace the related item title in listings. Leave blank to use the related item title.',
-      'display' => array(
-        'default' => array(
-          'label' => 'above',
-          'module' => 'text',
-          'settings' => array(),
-          'type' => 'text_default',
-          'weight' => 1,
-        ),
-      ),
-      'entity_type' => 'field_collection_item',
-      'fences_wrapper' => 'no_wrapper',
-      'field_name' => 'field_hps_exhibits_related_title',
-      'label' => 'Alternative title',
-      'required' => 0,
-      'settings' => array(
-        'text_processing' => '0',
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'active' => 1,
-        'module' => 'text',
-        'settings' => array(
-          'size' => '80',
-        ),
-        'type' => 'text_textfield',
-        'weight' => '32',
-      ),
-    ),
-  );
-
   // Exported field: 'field_collection_item-field_hps_exhibits_related_items-field_hps_exhibits_related_item'.
   $fields['field_collection_item-field_hps_exhibits_related_items-field_hps_exhibits_related_item'] = array(
     'field_config' => array(
@@ -150,12 +86,140 @@ function hps_exhibits_field_default_fields() {
         'active' => 1,
         'module' => 'entityreference',
         'settings' => array(
-          'match_operator' => 'STARTS_WITH',
+          'match_operator' => 'CONTAINS',
           'path' => '',
           'size' => '100',
         ),
         'type' => 'entityreference_autocomplete',
         'weight' => '31',
+      ),
+    ),
+  );
+
+  // Exported field: 'field_collection_item-field_hps_exhibits_related_items-field_hps_exhibits_related_title'.
+  $fields['field_collection_item-field_hps_exhibits_related_items-field_hps_exhibits_related_title'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_hps_exhibits_related_title',
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'text',
+      'settings' => array(
+        'max_length' => '255',
+      ),
+      'translatable' => '0',
+      'type' => 'text',
+    ),
+    'field_instance' => array(
+      'bundle' => 'field_hps_exhibits_related_items',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '(Optional) Enter an alternative title to replace the related item title in listings. Leave blank to use the related item title.',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => 1,
+        ),
+      ),
+      'entity_type' => 'field_collection_item',
+      'fences_wrapper' => 'no_wrapper',
+      'field_name' => 'field_hps_exhibits_related_title',
+      'label' => 'Alternative title',
+      'required' => 0,
+      'settings' => array(
+        'text_processing' => '0',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'size' => '80',
+        ),
+        'type' => 'text_textfield',
+        'weight' => '32',
+      ),
+    ),
+  );
+
+  // Exported field: 'field_collection_item-field_hps_exhibits_related_items-field_hps_exhibits_related_story'.
+  $fields['field_collection_item-field_hps_exhibits_related_items-field_hps_exhibits_related_story'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_hps_exhibits_related_story',
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'text',
+      'settings' => array(),
+      'translatable' => '0',
+      'type' => 'text_with_summary',
+    ),
+    'field_instance' => array(
+      'bundle' => 'field_hps_exhibits_related_items',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => 'Enter a short description or caption for the related item.',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => 2,
+        ),
+      ),
+      'entity_type' => 'field_collection_item',
+      'fences_wrapper' => 'no_wrapper',
+      'field_name' => 'field_hps_exhibits_related_story',
+      'label' => 'Description',
+      'required' => 0,
+      'settings' => array(
+        'display_summary' => 0,
+        'text_processing' => '1',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'rows' => '20',
+          'summary_rows' => 5,
+        ),
+        'type' => 'text_textarea_with_summary',
+        'weight' => '33',
       ),
     ),
   );
@@ -235,6 +299,87 @@ function hps_exhibits_field_default_fields() {
     ),
   );
 
+  // Exported field: 'node-hps_exhibit-field_hps_exhibit_banner'.
+  $fields['node-hps_exhibit-field_hps_exhibit_banner'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_hps_exhibit_banner',
+      'foreign keys' => array(
+        'fid' => array(
+          'columns' => array(
+            'fid' => 'fid',
+          ),
+          'table' => 'file_managed',
+        ),
+      ),
+      'indexes' => array(
+        'fid' => array(
+          0 => 'fid',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'image',
+      'settings' => array(
+        'default_image' => 0,
+        'uri_scheme' => 'public',
+      ),
+      'translatable' => '0',
+      'type' => 'image',
+    ),
+    'field_instance' => array(
+      'bundle' => 'hps_exhibit',
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'image',
+          'settings' => array(
+            'image_link' => '',
+            'image_style' => '',
+          ),
+          'type' => 'image',
+          'weight' => 6,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'fences_wrapper' => 'no_wrapper',
+      'field_name' => 'field_hps_exhibit_banner',
+      'label' => 'Banner',
+      'required' => 0,
+      'settings' => array(
+        'alt_field' => 1,
+        'default_image' => 0,
+        'file_directory' => 'hps/exhibits',
+        'file_extensions' => 'png gif jpg jpeg',
+        'max_filesize' => '',
+        'max_resolution' => '',
+        'min_resolution' => '600x375',
+        'title_field' => 0,
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'image',
+        'settings' => array(
+          'preview_image_style' => 'hps_minor',
+          'progress_indicator' => 'throbber',
+        ),
+        'type' => 'image_image',
+        'weight' => '6',
+      ),
+    ),
+  );
+
   // Exported field: 'node-hps_exhibit-field_hps_exhibit_image'.
   $fields['node-hps_exhibit-field_hps_exhibit_image'] = array(
     'field_config' => array(
@@ -294,12 +439,12 @@ function hps_exhibits_field_default_fields() {
       'required' => 0,
       'settings' => array(
         'alt_field' => 1,
-        'default_image' => '28723',
+        'default_image' => '32797',
         'file_directory' => 'hps/exhibits',
         'file_extensions' => 'png gif jpg jpeg',
         'max_filesize' => '',
         'max_resolution' => '',
-        'min_resolution' => '700x1000',
+        'min_resolution' => '490x700',
         'title_field' => 0,
         'user_register_form' => FALSE,
       ),
@@ -348,7 +493,7 @@ function hps_exhibits_field_default_fields() {
             'view_mode' => 'full',
           ),
           'type' => 'field_collection_fields',
-          'weight' => 6,
+          'weight' => 5,
         ),
         'teaser' => array(
           'label' => 'above',
@@ -370,7 +515,7 @@ function hps_exhibits_field_default_fields() {
         'module' => 'field_collection',
         'settings' => array(),
         'type' => 'field_collection_embed',
-        'weight' => '6',
+        'weight' => '7',
       ),
     ),
   );
@@ -448,7 +593,7 @@ function hps_exhibits_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '8',
+        'weight' => '9',
       ),
       'widget_type' => 'options_select',
     ),
@@ -607,7 +752,7 @@ function hps_exhibits_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '9',
+        'weight' => '10',
       ),
       'widget_type' => 'options_select',
     ),
@@ -875,7 +1020,7 @@ function hps_exhibits_field_default_fields() {
           'summary_rows' => 5,
         ),
         'type' => 'text_textarea_with_summary',
-        'weight' => '31',
+        'weight' => '4',
       ),
     ),
   );
@@ -934,7 +1079,7 @@ function hps_exhibits_field_default_fields() {
         'module' => 'field_collection',
         'settings' => array(),
         'type' => 'field_collection_embed',
-        'weight' => '41',
+        'weight' => '5',
       ),
     ),
   );
@@ -1055,7 +1200,7 @@ function hps_exhibits_field_default_fields() {
         'module' => 'og',
         'settings' => array(),
         'type' => 'og_complex',
-        'weight' => '0',
+        'weight' => '1',
       ),
     ),
   );
@@ -1065,10 +1210,12 @@ function hps_exhibits_field_default_fields() {
   t('(Optional) Enter an alternative title to replace the related item title in listings. Leave blank to use the related item title.');
   t('(Optional) Select events to appear in your exhibit timeline. Leave blank if you don\'t want a timeline.');
   t('Alternative title');
+  t('Banner');
   t('Body');
   t('Describe the exhibit using both summary text and a longer description. Summary text should be brief and will appear in exhibit listings across the site. The longer description may also appear in more detailed listings or on an exhibit overview page e.g. the exhibit home page or an about page describing the exhibit.');
   t('Description');
   t('Determine if this is an Organic Group.');
+  t('Enter a short description or caption for the related item.');
   t('Exhibit');
   t('Group');
   t('Include an exhibit poster with minimum dimensions 700 x 1000 px which will appear in featured exhibits listings alongside the exhibit summary. Different sizes of the poster will be created automatically which may include thumbnails that are too small for the text in the image to be legible so keep text to a minimum and ensure that important text is included either in the exhibit summary or in the image\'s alternative text. The poster may also be cropped to a square, so ensure that the primary visuals are in the middle to top part of the image.');
