@@ -138,7 +138,7 @@ ul.slides {
       overflow: hidden;
       display: block;
       float: left;
-      border: rhythm(0.5) solid lighten(nth($slideshow--colors, 1), 5%);
+      border: rhythm(0.4) solid lighten(nth($slideshow--colors, 1), 5%);
       width: round(image-width(sprite-file($icons-small, slide-previous)) / 2);
       height: round(image-height(sprite-file($icons-small, slide-previous)) / 2);
       background: transparent $icons-small no-repeat;
@@ -180,11 +180,18 @@ ul.slides {
     max-width: hipos-px-to-em(700, 13);
   }
 }
-@media all and (min-width: 1em / 16 * 481) and (max-width: 1em / 16 * 1023) {
+@media all and (min-width: 1em / 16 * 1024) and (max-width: 1em / 16 * 1919) {
   .slideshow--cycling,
   .slides,
   .slideshow__pager {
     max-width: hipos-px-to-em(700, 14);
+  }
+}
+@media all and (min-width: 1em / 16 * 1920) {
+  .slideshow--cycling,
+  .slides,
+  .slideshow__pager {
+    max-width: hipos-px-to-em(700, 15);
   }
 }
 
@@ -215,7 +222,7 @@ ul.slides {
   @include slide-vertical-rhythm(29, 16);
 }
 @media screen and (min-width: 1em / 16 * 768) and (max-width: 1em / 16 * 794) {
-  @include slide-vertical-rhythm(25, 13);
+  @include slide-vertical-rhythm(26, 13);
 }
 @media screen and (min-width: 1em / 16 * 795) and (max-width: 1em / 16 * 839) {
   @include slide-vertical-rhythm(26, 14);
