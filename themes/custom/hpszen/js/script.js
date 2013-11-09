@@ -15,16 +15,16 @@
   Drupal.behaviors.hpszen = {
     attach: function (context, settings) {
 
-      if (Drupal.settings.hpszen === undefined) {
-        Drupal.settings.hpszen = {};
+      if (settings.hpszen === undefined) {
+        settings.hpszen = {};
       }
 
       // Navigation behaviours include showing/hiding entire navigation on
       // smaller screens and hiding/showing sub navigation menus.
       $('#navigation', context).once('hpszen', function () {
 
-        if (Drupal.settings.hpszen.navigationBreakpoint === undefined) {
-          Drupal.settings.hpszen.navigationBreakpoint = 699;
+        if (settings.hpszen.navigationBreakpoint === undefined) {
+          settings.hpszen.navigationBreakpoint = 699;
         }
 
         Drupal.theme.prototype.hpszenToggleSubnavigationClosed = function () {
@@ -95,7 +95,7 @@
         navigation.once('adjustnavigation', function () {
           var nav = $(this);
           // Conditional must match the media query threshold for horizontal menu in CSS
-          if ($(document).width() < Drupal.settings.hpszen.navigationBreakpoint) {
+          if ($(document).width() < settings.hpszen.navigationBreakpoint) {
             // Convert navigation to vertical toggle menu
             nav.addClass('navigation__toggle');
             nav.find('.block-menu').each(function () {
@@ -161,19 +161,22 @@
           };
           Drupal.theme.prototype.hpszenCyclingPagerMarker = function (index, slide) {
             var slide = $(slide),
-                slide_number = index + 1,
-                slide_title = slide.find('> h2').text();
+                slideNumber = index + 1,
+                slideTitle = slide.find('> h2').text();
             return '<a title="'
-              + Drupal.t('Visually display slide @slide_number.', {'@slide_number': slide_number})
+              + Drupal.t('Visually display slide @slideNumber.', {'@slideNumber': slideNumber})
               + '" href="#">'
-              + Drupal.t('Slide: @slide_title_or_number', { '@slide_title_or_number': slide_title || slide_number })
+              + Drupal.t('Slide: @slideTitleOrNumber', { '@slideTitleOrNumber': slideTitle || slideNumber })
               + '</a>';
           };
           Drupal.theme.prototype.hpszenCyclingPagerThumbnail = function (index, slide) {
             var slide = $(slide),
                 alt = slide.find('> p').text() || '',
                 image = slide.find('> span img');
-            return '<a title="' + Drupal.t('Slide number @index.', { '@index': index + 1 }) + '" href="#"><img src="' + image.attr('src') + '" alt="' + alt + '"/></a>';
+            return '<a title="' +
+                   Drupal.t('Slide number @index.', { '@index': index + 1 }) +
+                   '" href="#"><img src="' + image.attr('src') + '" alt="'
+                   + alt + '"/></a>';
           };
 
           function pagerMarker(index, slide) {
@@ -277,6 +280,70 @@
           });
         }
       });
+
+      // Exhibits related items
+      $('.view-display-id-panel_pane_exhibits_related_items', context).once('hpszen', function () {
+
+        // If theme doesn't support toggle then do nothing
+        if (!settings.hpszen.toggleRelatedItemDetail) return;
+
+        if (settings.hpszen.relatedItemsBreakpoint === undefined) {
+          settings.hpszen.relatedItemsBreakpoint = 1500;
+        }
+
+        function toggleDetail(event) {
+          event.preventDefault();
+          event.stopPropagation();
+          var toggle    = this,
+              item      = (event.data.item instanceof Array) ? event.data.item[0] : event.data.item;
+              behaviour = (event.data.behaviour instanceof Array) ? event.data.behaviour[0] : event.data.behaviour,
+              detail    = $(item).find('.item__detail');
+          if (behaviour == 'tray') {
+            // Hide other items
+            $(item).siblings('li').removeClass('item--expanded')
+                                  .find('.item__detail').addClass('item__detail--hidden');
+          }
+          $(item).toggleClass('item--expanded');
+          $(detail).toggleClass('item__detail--hidden');
+          if (behaviour == 'tray') {
+            // Reposition footer below tray contents
+            if (($(detail).offset().top + $(detail).height()) > $('.page').height()) {
+              $('.footer').css({
+                top:  $(document).height(),
+                left: 0
+              });
+            }
+            else {
+              $('.footer').css({
+                top:  '100%',
+                left: 0
+              });
+            }
+          }
+
+        }
+
+        // Default behaviour on page load
+        var items     = $(this).find('.view-content > ul'),
+            behaviour = $(document).width() < settings.hpszen.relatedItemsBreakpoint ? 'accordion' : 'tray',
+            panel     = $(items).closest('.panel-pane');
+
+        // Hide all detail
+        items.find('.item__detail').addClass('item__detail--hidden');
+        panel.addClass(behaviour);
+        items.find('li').each(function () {
+          var item   = $(this),
+              detail = item.find('.item__detail');
+          item.find('.item__summary')
+              .bind('click', { item: item, behaviour: behaviour}, toggleDetail);
+          // Show first child for tray behaviour
+          if (behaviour == 'tray' && item.is(':first-child') === true) {
+            item.find('.item__summary').trigger('click');
+          }
+        });
+
+      });
+
     }
   };
 

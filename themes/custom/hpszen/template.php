@@ -15,9 +15,6 @@
  * @see http://drupal.org/node/939462
  */
 
-// Add javascript settings.
-//drupal_add_js(array('hpszen' => array('navigationBreakpoint' => 699)), 'setting');
-
 /**
  * Override or insert variables into the maintenance page template.
  *
@@ -64,6 +61,13 @@ function hpszen_preprocess_html(&$variables, $hook) {
   if ($variables['head_title']) {
     $variables['head_title'] = strip_tags(htmlspecialchars_decode($variables['head_title']));
   }
+
+  // Pass behaviour settings to javascript
+  drupal_add_js(array('hpszen' => array(
+    'toggleSubNavigation'     => theme_get_setting('hpszen_navigation_dropdown'),
+    'toggleRelatedItemDetail' => theme_get_setting('hpszen_exhibits_js'),
+  )), 'setting');
+
 
   // The body tag's classes are controlled by the $classes_array variable. To
   // remove a class from $classes_array, use array_diff().

@@ -23,6 +23,13 @@ function hpszen_form_system_theme_settings_alter(&$form, &$form_state, $form_id 
     '#default_value' => theme_get_setting('hpszen_navigation_dropdown'),
     '#description'   => t('Check here if you want the main navigation to use a drop-down design pattern for sub items.'),
   );
+  $form['hpszen_behaviours']['hpszen_exhibits_js'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Enable javascript in exhibits'),
+    '#default_value' => theme_get_setting('hpszen_exhibits_js'),
+    '#description'   => t('Check here if theme supports javascript behaviour like showing/hiding related items detail.'),
+  );
+
 
   // Remove some of the base theme's settings.
   /* -- Delete this line if you want to turn off this setting.

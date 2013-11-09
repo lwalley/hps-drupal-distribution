@@ -78,6 +78,7 @@ settings[zen_html5_respond_meta][]   = meta
 settings[zen_rebuild_registry]       = 1
 settings[zen_wireframes]             = 0
 settings[hpszen_navigation_dropdown] = 0
+settings[hpszen_exhibits_js]         = 0
 
 ; To make this sub-theme an admin theme with shortcut links next to titles,
 ; uncomment the line below.
