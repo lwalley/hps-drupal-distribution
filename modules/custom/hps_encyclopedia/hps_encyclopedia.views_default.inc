@@ -24,7 +24,11 @@ function hps_encyclopedia_views_default_views() {
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
-  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['cache']['type'] = 'time';
+  $handler->display->display_options['cache']['results_lifespan'] = '60';
+  $handler->display->display_options['cache']['results_lifespan_custom'] = '0';
+  $handler->display->display_options['cache']['output_lifespan'] = '60';
+  $handler->display->display_options['cache']['output_lifespan_custom'] = '0';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'full';
@@ -95,7 +99,7 @@ function hps_encyclopedia_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: DC Creator */
+  /* Field: Content: By */
   $handler->display->display_options['fields']['dc_creator']['id'] = 'dc_creator';
   $handler->display->display_options['fields']['dc_creator']['table'] = 'field_data_dc_creator';
   $handler->display->display_options['fields']['dc_creator']['field'] = 'dc_creator';
@@ -107,14 +111,15 @@ function hps_encyclopedia_views_default_views() {
   $handler->display->display_options['fields']['dc_creator']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['dc_creator']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['dc_creator']['type'] = 'text_plain';
-  /* Field: Content: DC Subject Tag */
+  $handler->display->display_options['fields']['dc_creator']['delta_offset'] = '0';
+  /* Field: Content: Keywords */
   $handler->display->display_options['fields']['dc_subject_tag']['id'] = 'dc_subject_tag';
   $handler->display->display_options['fields']['dc_subject_tag']['table'] = 'field_data_dc_subject_tag';
   $handler->display->display_options['fields']['dc_subject_tag']['field'] = 'dc_subject_tag';
   $handler->display->display_options['fields']['dc_subject_tag']['label'] = 'Keywords';
   $handler->display->display_options['fields']['dc_subject_tag']['element_type'] = '0';
   $handler->display->display_options['fields']['dc_subject_tag']['element_label_type'] = '0';
-  $handler->display->display_options['fields']['dc_subject_tag']['element_wrapper_type'] = 'span';
+  $handler->display->display_options['fields']['dc_subject_tag']['element_wrapper_type'] = 'p';
   $handler->display->display_options['fields']['dc_subject_tag']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['dc_subject_tag']['delta_offset'] = '0';
   /* Field: Content: Bitstreams */
@@ -129,10 +134,9 @@ function hps_encyclopedia_views_default_views() {
   $handler->display->display_options['fields']['dspace_bitstream_url']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['dspace_bitstream_url']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['dspace_bitstream_url']['click_sort_column'] = 'url';
-  $handler->display->display_options['fields']['dspace_bitstream_url']['type'] = 'link_plain';
   $handler->display->display_options['fields']['dspace_bitstream_url']['delta_offset'] = '0';
   $handler->display->display_options['fields']['dspace_bitstream_url']['separator'] = ' ';
-  $handler->display->display_options['fields']['dspace_bitstream_url']['field_api_classes'] = TRUE;
+  $handler->display->display_options['fields']['dspace_bitstream_url']['field_api_classes'] = FALSE;
   /* Field: Content: Image */
   $handler->display->display_options['fields']['dspace_image']['id'] = 'dspace_image';
   $handler->display->display_options['fields']['dspace_image']['table'] = 'field_data_dspace_image';
@@ -141,7 +145,7 @@ function hps_encyclopedia_views_default_views() {
   $handler->display->display_options['fields']['dspace_image']['element_type'] = '0';
   $handler->display->display_options['fields']['dspace_image']['element_label_type'] = '0';
   $handler->display->display_options['fields']['dspace_image']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['dspace_image']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['dspace_image']['element_wrapper_type'] = 'div';
   $handler->display->display_options['fields']['dspace_image']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['dspace_image']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['dspace_image']['click_sort_column'] = 'fid';
@@ -195,6 +199,24 @@ function hps_encyclopedia_views_default_views() {
   $handler->display->display_options['fields']['body']['settings'] = array(
     'trim_length' => '1000',
   );
+  /* Field: Content: DC Subject Mesh */
+  $handler->display->display_options['fields']['dc_subject_mesh']['id'] = 'dc_subject_mesh';
+  $handler->display->display_options['fields']['dc_subject_mesh']['table'] = 'field_data_dc_subject_mesh';
+  $handler->display->display_options['fields']['dc_subject_mesh']['field'] = 'dc_subject_mesh';
+  $handler->display->display_options['fields']['dc_subject_mesh']['label'] = '';
+  $handler->display->display_options['fields']['dc_subject_mesh']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['dc_subject_mesh']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['dc_subject_mesh']['alter']['text'] = '[dc_subject_mesh];';
+  $handler->display->display_options['fields']['dc_subject_mesh']['alter']['trim_whitespace'] = TRUE;
+  $handler->display->display_options['fields']['dc_subject_mesh']['element_type'] = 'p';
+  $handler->display->display_options['fields']['dc_subject_mesh']['element_label_type'] = 'h4';
+  $handler->display->display_options['fields']['dc_subject_mesh']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['dc_subject_mesh']['element_wrapper_type'] = 'div';
+  $handler->display->display_options['fields']['dc_subject_mesh']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['dc_subject_mesh']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['dc_subject_mesh']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['dc_subject_mesh']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['dc_subject_mesh']['separator'] = '; ';
   /* Field: Content: DC Subject LCSH */
   $handler->display->display_options['fields']['dc_subject_lcsh']['id'] = 'dc_subject_lcsh';
   $handler->display->display_options['fields']['dc_subject_lcsh']['table'] = 'field_data_dc_subject_lcsh';
@@ -203,46 +225,83 @@ function hps_encyclopedia_views_default_views() {
   $handler->display->display_options['fields']['dc_subject_lcsh']['exclude'] = TRUE;
   $handler->display->display_options['fields']['dc_subject_lcsh']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['dc_subject_lcsh']['alter']['text'] = '[dc_subject_lcsh]; ';
+  $handler->display->display_options['fields']['dc_subject_lcsh']['alter']['trim_whitespace'] = TRUE;
   $handler->display->display_options['fields']['dc_subject_lcsh']['element_type'] = '0';
   $handler->display->display_options['fields']['dc_subject_lcsh']['element_label_type'] = '0';
   $handler->display->display_options['fields']['dc_subject_lcsh']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['dc_subject_lcsh']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['dc_subject_lcsh']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['dc_subject_lcsh']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['dc_subject_lcsh']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['dc_subject_lcsh']['delta_offset'] = '0';
-  $handler->display->display_options['fields']['dc_subject_lcsh']['field_api_classes'] = TRUE;
-  /* Field: Content: DC Subject Mesh */
-  $handler->display->display_options['fields']['dc_subject_mesh']['id'] = 'dc_subject_mesh';
-  $handler->display->display_options['fields']['dc_subject_mesh']['table'] = 'field_data_dc_subject_mesh';
-  $handler->display->display_options['fields']['dc_subject_mesh']['field'] = 'dc_subject_mesh';
-  $handler->display->display_options['fields']['dc_subject_mesh']['label'] = 'Subject';
-  $handler->display->display_options['fields']['dc_subject_mesh']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['dc_subject_mesh']['alter']['text'] = '[dc_subject_lcsh] [dc_subject_mesh] ';
-  $handler->display->display_options['fields']['dc_subject_mesh']['alter']['trim_whitespace'] = TRUE;
-  $handler->display->display_options['fields']['dc_subject_mesh']['element_type'] = 'p';
-  $handler->display->display_options['fields']['dc_subject_mesh']['element_label_type'] = 'h4';
-  $handler->display->display_options['fields']['dc_subject_mesh']['element_wrapper_type'] = 'div';
-  $handler->display->display_options['fields']['dc_subject_mesh']['element_default_classes'] = FALSE;
-  $handler->display->display_options['fields']['dc_subject_mesh']['hide_empty'] = TRUE;
-  $handler->display->display_options['fields']['dc_subject_mesh']['hide_alter_empty'] = FALSE;
-  $handler->display->display_options['fields']['dc_subject_mesh']['delta_offset'] = '0';
-  $handler->display->display_options['fields']['dc_subject_mesh']['field_api_classes'] = TRUE;
+  $handler->display->display_options['fields']['dc_subject_lcsh']['separator'] = '; ';
   /* Field: Content: DC Subject */
   $handler->display->display_options['fields']['dc_subject']['id'] = 'dc_subject';
   $handler->display->display_options['fields']['dc_subject']['table'] = 'field_data_dc_subject';
   $handler->display->display_options['fields']['dc_subject']['field'] = 'dc_subject';
   $handler->display->display_options['fields']['dc_subject']['label'] = '';
   $handler->display->display_options['fields']['dc_subject']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['dc_subject']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['dc_subject']['alter']['text'] = '[dc_subject_mesh] [dc_subject_lcsh] [dc_subject]';
   $handler->display->display_options['fields']['dc_subject']['element_type'] = '0';
   $handler->display->display_options['fields']['dc_subject']['element_label_type'] = 'h4';
   $handler->display->display_options['fields']['dc_subject']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['dc_subject']['element_wrapper_type'] = 'p';
   $handler->display->display_options['fields']['dc_subject']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['dc_subject']['hide_empty'] = TRUE;
-  $handler->display->display_options['fields']['dc_subject']['hide_alter_empty'] = FALSE;
+  $handler->display->display_options['fields']['dc_subject']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['dc_subject']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['dc_subject']['separator'] = '; ';
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing_2']['id'] = 'nothing_2';
+  $handler->display->display_options['fields']['nothing_2']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing_2']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing_2']['label'] = 'Subject';
+  $handler->display->display_options['fields']['nothing_2']['alter']['text'] = '[dc_subject_mesh] [dc_subject_lcsh] [dc_subject] ';
+  $handler->display->display_options['fields']['nothing_2']['alter']['trim_whitespace'] = TRUE;
+  $handler->display->display_options['fields']['nothing_2']['element_type'] = 'p';
+  $handler->display->display_options['fields']['nothing_2']['element_label_type'] = 'h4';
+  $handler->display->display_options['fields']['nothing_2']['element_wrapper_type'] = 'div';
+  $handler->display->display_options['fields']['nothing_2']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['nothing_2']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['nothing_2']['hide_alter_empty'] = TRUE;
+  /* Field: Content: Format */
+  $handler->display->display_options['fields']['dc_description_type']['id'] = 'dc_description_type';
+  $handler->display->display_options['fields']['dc_description_type']['table'] = 'field_data_dc_description_type';
+  $handler->display->display_options['fields']['dc_description_type']['field'] = 'dc_description_type';
+  $handler->display->display_options['fields']['dc_description_type']['label'] = 'Formats';
+  $handler->display->display_options['fields']['dc_description_type']['element_type'] = 'p';
+  $handler->display->display_options['fields']['dc_description_type']['element_label_type'] = 'h4';
+  $handler->display->display_options['fields']['dc_description_type']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['dc_description_type']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['dc_description_type']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['dc_description_type']['delta_offset'] = '0';
+  /* Field: Content: DC Date Created */
+  $handler->display->display_options['fields']['dc_date_created']['id'] = 'dc_date_created';
+  $handler->display->display_options['fields']['dc_date_created']['table'] = 'field_data_dc_date_created';
+  $handler->display->display_options['fields']['dc_date_created']['field'] = 'dc_date_created';
+  $handler->display->display_options['fields']['dc_date_created']['label'] = 'Created';
+  $handler->display->display_options['fields']['dc_date_created']['element_type'] = 'p';
+  $handler->display->display_options['fields']['dc_date_created']['element_label_type'] = 'h4';
+  $handler->display->display_options['fields']['dc_date_created']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['dc_date_created']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['dc_date_created']['empty'] = 'Undated';
+  $handler->display->display_options['fields']['dc_date_created']['empty_zero'] = TRUE;
+  $handler->display->display_options['fields']['dc_date_created']['type'] = 'text_plain';
+  /* Field: Content: Last Modified */
+  $handler->display->display_options['fields']['dspace_lastmodified']['id'] = 'dspace_lastmodified';
+  $handler->display->display_options['fields']['dspace_lastmodified']['table'] = 'field_data_dspace_lastmodified';
+  $handler->display->display_options['fields']['dspace_lastmodified']['field'] = 'dspace_lastmodified';
+  $handler->display->display_options['fields']['dspace_lastmodified']['element_type'] = 'p';
+  $handler->display->display_options['fields']['dspace_lastmodified']['element_label_type'] = 'h4';
+  $handler->display->display_options['fields']['dspace_lastmodified']['element_wrapper_type'] = 'div';
+  $handler->display->display_options['fields']['dspace_lastmodified']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['dspace_lastmodified']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['dspace_lastmodified']['settings'] = array(
+    'format_type' => 'long',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+  );
   /* Field: Content: Handle as URL */
   $handler->display->display_options['fields']['dspace_handle']['id'] = 'dspace_handle';
   $handler->display->display_options['fields']['dspace_handle']['table'] = 'field_data_dspace_handle';
@@ -275,19 +334,6 @@ function hps_encyclopedia_views_default_views() {
   $handler->display->display_options['fields']['dc_creator_1']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['dc_creator_1']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['dc_creator_1']['type'] = 'text_plain';
-  /* Field: Content: DC Date Created */
-  $handler->display->display_options['fields']['dc_date_created']['id'] = 'dc_date_created';
-  $handler->display->display_options['fields']['dc_date_created']['table'] = 'field_data_dc_date_created';
-  $handler->display->display_options['fields']['dc_date_created']['field'] = 'dc_date_created';
-  $handler->display->display_options['fields']['dc_date_created']['label'] = '';
-  $handler->display->display_options['fields']['dc_date_created']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['dc_date_created']['element_type'] = '0';
-  $handler->display->display_options['fields']['dc_date_created']['element_label_type'] = '0';
-  $handler->display->display_options['fields']['dc_date_created']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['dc_date_created']['element_wrapper_type'] = '0';
-  $handler->display->display_options['fields']['dc_date_created']['element_default_classes'] = FALSE;
-  $handler->display->display_options['fields']['dc_date_created']['hide_empty'] = TRUE;
-  $handler->display->display_options['fields']['dc_date_created']['type'] = 'text_plain';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
@@ -298,22 +344,6 @@ function hps_encyclopedia_views_default_views() {
   $handler->display->display_options['fields']['nothing']['element_label_type'] = 'h4';
   $handler->display->display_options['fields']['nothing']['element_wrapper_type'] = 'div';
   $handler->display->display_options['fields']['nothing']['element_default_classes'] = FALSE;
-  /* Field: Content: Last Modified */
-  $handler->display->display_options['fields']['dspace_lastmodified']['id'] = 'dspace_lastmodified';
-  $handler->display->display_options['fields']['dspace_lastmodified']['table'] = 'field_data_dspace_lastmodified';
-  $handler->display->display_options['fields']['dspace_lastmodified']['field'] = 'dspace_lastmodified';
-  $handler->display->display_options['fields']['dspace_lastmodified']['element_type'] = 'p';
-  $handler->display->display_options['fields']['dspace_lastmodified']['element_label_type'] = 'h4';
-  $handler->display->display_options['fields']['dspace_lastmodified']['element_wrapper_type'] = 'div';
-  $handler->display->display_options['fields']['dspace_lastmodified']['element_default_classes'] = FALSE;
-  $handler->display->display_options['fields']['dspace_lastmodified']['hide_empty'] = TRUE;
-  $handler->display->display_options['fields']['dspace_lastmodified']['settings'] = array(
-    'format_type' => 'long',
-    'fromto' => 'both',
-    'multiple_number' => '',
-    'multiple_from' => '',
-    'multiple_to' => '',
-  );
   /* Field: Content: DC Publisher Original */
   $handler->display->display_options['fields']['dc_publisher_original']['id'] = 'dc_publisher_original';
   $handler->display->display_options['fields']['dc_publisher_original']['table'] = 'field_data_dc_publisher_original';
@@ -441,8 +471,10 @@ function hps_encyclopedia_views_default_views() {
   $handler->display->display_options['fields']['dc_rights']['element_wrapper_type'] = 'div';
   $handler->display->display_options['fields']['dc_rights']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['dc_rights']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['dc_rights']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['dc_rights']['delta_offset'] = '0';
   $handler->display->display_options['fields']['dc_rights']['separator'] = ' ';
+  $handler->display->display_options['fields']['dc_rights']['field_api_classes'] = TRUE;
   /* Field: Full Item Record Link */
   $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
@@ -468,6 +500,22 @@ function hps_encyclopedia_views_default_views() {
   $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'dspaced_entities_item' => 'dspaced_entities_item',
+  );
   $handler->display->display_options['inherit_panels_path'] = '1';
   $handler->display->display_options['argument_input'] = array(
     'nid' => array(
@@ -479,6 +527,7 @@ function hps_encyclopedia_views_default_views() {
 
   /* Display: Items */
   $handler = $view->new_display('ctools_context', 'Items', 'ctools_context_encyclopedia_items');
+  $handler->display->display_options['enabled'] = FALSE;
   $handler->display->display_options['display_description'] = 'Lists all encyclopedia items.';
   $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'ctools_context';
@@ -601,7 +650,7 @@ function hps_encyclopedia_views_default_views() {
   $handler->display->display_options['footer']['area_text_custom']['field'] = 'area_text_custom';
   $handler->display->display_options['footer']['area_text_custom']['ui_name'] = 'More Link To Custom Page';
   $handler->display->display_options['footer']['area_text_custom']['empty'] = TRUE;
-  $handler->display->display_options['footer']['area_text_custom']['content'] = '<div class="more-link"><a href="/pages">All Recent Content</a></div>';
+  $handler->display->display_options['footer']['area_text_custom']['content'] = '<div class="more-link"><a href="/pages">See more items</a></div>';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
@@ -716,7 +765,7 @@ function hps_encyclopedia_views_default_views() {
   $handler->display->display_options['fields']['body']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['body']['empty'] = '[dc_description] [dc_description_abstract]';
   $handler->display->display_options['fields']['body']['hide_alter_empty'] = FALSE;
-  /* Field: Content: DC Creator */
+  /* Field: Content: By */
   $handler->display->display_options['fields']['dc_creator']['id'] = 'dc_creator';
   $handler->display->display_options['fields']['dc_creator']['table'] = 'field_data_dc_creator';
   $handler->display->display_options['fields']['dc_creator']['field'] = 'dc_creator';
@@ -728,7 +777,7 @@ function hps_encyclopedia_views_default_views() {
   $handler->display->display_options['fields']['dc_creator']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['dc_creator']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['dc_creator']['type'] = 'text_plain';
-  /* Field: Content: DC Description Type */
+  /* Field: Content: Format */
   $handler->display->display_options['fields']['dc_description_type']['id'] = 'dc_description_type';
   $handler->display->display_options['fields']['dc_description_type']['table'] = 'field_data_dc_description_type';
   $handler->display->display_options['fields']['dc_description_type']['field'] = 'dc_description_type';

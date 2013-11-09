@@ -11,64 +11,53 @@ include_once 'hps_encyclopedia.features.inc';
  */
 function hps_encyclopedia_views_pre_render(&$view) {
 
-  foreach ($view->result as $delta => $row) {
+  foreach ($view->result as $delta => &$row) {
 
-    // Manipulate row based on bitstream values
+    // @note We pull all bistream URLs from DSpace into a multi-value field
+    //       but we don't want to show all of them when displaying the
+    //       dspace_bitstream_url field in views. For now we only want to use
+    //       PDFs and video/audio URLs in views. Since dspace_bitstream_url is a
+    //       multi-value field all URLs are rendered together with a single set
+    //       of views field options. This is not ideal. Ideally we want different
+    //       views field settings depending on the mimetype. The following
+    //       attempts to address that.
     if (property_exists($row, 'field_dspace_bitstream_url')) {
 
-      // If we just wanted to get the raw values from the original entity
-      // we could use views_handler_field_field::get_value() e.g.
-      // $bitstreams = $view->field['dspace_bitstream_url']->get_value($row);
-      // But we might need to rerender the output so we need to get the original
-      // bitstream field as renderable element
-      $field_alias = $view->field['dspace_bitstream_url']->field_alias;
-      $entity = $row->_field_data[$field_alias]['entity'];
-      $entity_type = $row->_field_data[$field_alias]['entity_type'];
-      $bitstream_element = field_view_field($entity_type, $entity, 'dspace_bitstream_url');
-
-      if ($bitstream_element) {
-        foreach ($bitstream_element['#items'] as $b => $bitstream) {
-          // We expect a link field type array
-          if (!isset($bitstream['url'])) continue;
-
-          $bitstream_element['#items'][$b]['mimetype'] = file_get_mimetype($bitstream['url']);
-
-          // Hide body field if bitsream was PDF. All displays.
-          // @todo move PDF text to different field so we don't have to have
-          //       conditional on body, see DSpaced module.
-          if (property_exists($row, 'field_body') && _is_pdf($bitstream_element['#items'][$b]['mimetype'])) {
-            foreach ($view->result[$delta]->field_body as $i => $field_body_item) {
-              // If the Views field style setting 'Use field template' is TRUE
-              // then we get a rendered string, otherwise we get a generic render
-              // #markup element. Convert rendered string into render element for
-              // consistency, then hide.
-              if (is_string($field_body_item['rendered'])) {
-                $view->result[$delta]->field_body[$i]['rendered'] = array(
-                  '#markup' => $field_body_item['rendered'],
-                );
-              }
-              $view->result[$delta]->field_body[$i]['rendered']['#access'] = FALSE;
-            }
-          }
+      $media = array();
+      foreach ($row->field_dspace_bitstream_url as $b => $bitstream) {
+        // Skip if we don't have raw data.
+        // @note Make sure 'Use field template' is unchecked in view so we get
+        //       render element and raw data.
+        if (!isset($bitstream['raw'])) continue;
+        $mimetype = file_get_mimetype($bitstream['raw']['url']);
+        if (_is_pdf($mimetype)) {
+          $row->field_dspace_bitstream_url[$b]['rendered']['#element']['title'] = t('Download PDF');
+          $row->field_dspace_bitstream_url[$b]['rendered']['#element']['attributes']['class'] = 'pdf';
         }
-
-        // Force hide label... hackarama... we should probably be rendering
-        // through Views rather than core field render...
-        $bitstream_element['#label_display'] = 'hidden';
-        // Remove unsupported bitstream mimetypes from render element
-        foreach ($bitstream_element['#items'] as $b => $bitstream) {
-          if (!hps_media_is_mimetype_supported($bitstream['mimetype'])) {
-            unset($bitstream_element['#items'][$b]);
-          }
-        }
-        // Re-render field if we have any supported bitstreams remaining
-        if (!empty($bitstream_element['#items']) && ($output = render($bitstream_element))) {
-          $view->result[$delta]->field_dspace_bitstream_url[0]['rendered'] = $output;
+        elseif (hps_media_is_mimetype_supported($mimetype)) {
+          $media[$b] = $bitstream['rendered']['#element']['url'];
+          // Add pre render hook so we can force audio/video bitstreams to use
+          // field template
+          //$row->field_dspace_bitstream_url[$b]['rendered']['#pre_render'][] = '_hps_encyclopedia_pre_render_bitstream';
         }
         else {
-          $view->result[$delta]->field_dspace_bitstream_url[0]['rendered'] = '';
+          $row->field_dspace_bitstream_url[$b]['rendered']['#access'] = FALSE;
         }
       }
+
+      if (!empty($media)) {
+        $field_alias = $view->field['dspace_bitstream_url']->field_alias;
+        $entity      = $row->_field_data[$field_alias]['entity'];
+        $entity_type = $row->_field_data[$field_alias]['entity_type'];
+        $field       = field_view_field($entity_type, $entity, 'dspace_bitstream_url');
+        $field['#label_display'] = 'hidden';
+        foreach ($media as $b => $url) {
+          // Add pre render hook for audio/video bitstreams and pass field data
+          $row->field_dspace_bitstream_url[$b]['rendered']['#pre_render'][] = '_hps_encyclopedia_pre_render_bitstream';
+          $row->field_dspace_bitstream_url[$b]['rendered']['#bitstreams'] = $field;
+        }
+      }
+
     }
 
 
@@ -111,11 +100,42 @@ function hps_encyclopedia_views_pre_render(&$view) {
   }
 }
 
+/**
+ * Pre render callback for media bitstream fields.
+ *
+ * @note Called from drupal_render.
+ *
+ * @param $element
+ *   Array containg renderable element for a single value in a multi-value
+ *   dspace_bitstream_url from views.
+ * @return
+ *   Array containing the markup of the rendered field using core field
+ *   templates.
+ */
+function _hps_encyclopedia_pre_render_bitstream($element) {
+
+  if (!isset($element['#bitstreams'])) return;
+
+  $field = $element['#bitstreams'];
+  foreach ($field['#items'] as $delta => $bitstream) {
+    // Remove other bitstream elements before rendering our element
+    if ($bitstream['url'] != $element['#element']['url']) {
+      unset($field['#items'][$delta]);
+      unset($field[$delta]);
+    }
+  }
+  // Render field and return to drupal_render for output
+  return array(
+    '#children' => render($field)
+  );
+}
+
+
 
 /**
  * Helper function to determine if the bistream is a PDF
  */
 function _is_pdf($mimetype) {
-  return in_array($mimetype, array('text/plain', 'application/pdf'));
+  return in_array($mimetype, array('application/pdf'));
 }
 

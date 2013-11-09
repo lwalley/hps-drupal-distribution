@@ -54,18 +54,18 @@ function hps_encyclopedia_default_page_manager_handlers() {
     ),
   );
   $display = new panels_display();
-  $display->layout = 'hpszen_primary_box';
+  $display->layout = 'hpszen_i1_b1';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
       'default' => NULL,
-      'primary-box' => NULL,
-      'aside-box' => NULL,
+      'i1' => NULL,
+      'b1' => NULL,
     ),
-    'primary-box' => array(
+    'i1' => array(
       'style' => 'naked',
     ),
-    'aside-box' => array(
+    'b1' => array(
       'style' => 'naked',
     ),
   );
@@ -75,7 +75,7 @@ function hps_encyclopedia_default_page_manager_handlers() {
   $display->panels = array();
     $pane = new stdClass();
     $pane->pid = 'new-1';
-    $pane->panel = 'primary-box';
+    $pane->panel = 'b1';
     $pane->type = 'views_row';
     $pane->subtype = 'views_row';
     $pane->shown = TRUE;
@@ -97,10 +97,10 @@ function hps_encyclopedia_default_page_manager_handlers() {
     $pane->position = 0;
     $pane->locks = array();
     $display->content['new-1'] = $pane;
-    $display->panels['primary-box'][0] = 'new-1';
+    $display->panels['b1'][0] = 'new-1';
     $pane = new stdClass();
     $pane->pid = 'new-2';
-    $pane->panel = 'primary-box';
+    $pane->panel = 'b1';
     $pane->type = 'block';
     $pane->subtype = 'print-print-links';
     $pane->shown = TRUE;
@@ -118,7 +118,7 @@ function hps_encyclopedia_default_page_manager_handlers() {
     $pane->position = 1;
     $pane->locks = array();
     $display->content['new-2'] = $pane;
-    $display->panels['primary-box'][1] = 'new-2';
+    $display->panels['b1'][1] = 'new-2';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
@@ -140,7 +140,18 @@ function hps_encyclopedia_default_page_manager_pages() {
   $page->admin_description = 'Lists all encyclopedia (DSpace) items.';
   $page->path = 'pages';
   $page->access = array();
-  $page->menu = array();
+  $page->menu = array(
+    'type' => 'none',
+    'title' => '',
+    'name' => 'navigation',
+    'weight' => '0',
+    'parent' => array(
+      'type' => 'none',
+      'title' => '',
+      'name' => 'navigation',
+      'weight' => '0',
+    ),
+  );
   $page->arguments = array();
   $page->conf = array(
     'admin_paths' => FALSE,
@@ -173,12 +184,19 @@ function hps_encyclopedia_default_page_manager_pages() {
     'relationships' => array(),
   );
   $display = new panels_display();
-  $display->layout = 'hpszen_primary_box';
+  $display->layout = 'hpszen_i1_b1';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
       'default' => NULL,
-      'primary-box' => NULL,
+      'i1' => NULL,
+      'b1' => NULL,
+    ),
+    'i1' => array(
+      'style' => 'naked',
+    ),
+    'b1' => array(
+      'style' => 'naked',
     ),
   );
   $display->cache = array();
@@ -187,7 +205,7 @@ function hps_encyclopedia_default_page_manager_pages() {
   $display->panels = array();
     $pane = new stdClass();
     $pane->pid = 'new-1';
-    $pane->panel = 'primary-box';
+    $pane->panel = 'b1';
     $pane->type = 'views_pager';
     $pane->subtype = 'views_pager';
     $pane->shown = TRUE;
@@ -206,10 +224,10 @@ function hps_encyclopedia_default_page_manager_pages() {
     $pane->position = 0;
     $pane->locks = array();
     $display->content['new-1'] = $pane;
-    $display->panels['primary-box'][0] = 'new-1';
+    $display->panels['b1'][0] = 'new-1';
     $pane = new stdClass();
     $pane->pid = 'new-2';
-    $pane->panel = 'primary-box';
+    $pane->panel = 'b1';
     $pane->type = 'views_row';
     $pane->subtype = 'views_row';
     $pane->shown = TRUE;
@@ -231,10 +249,10 @@ function hps_encyclopedia_default_page_manager_pages() {
     $pane->position = 1;
     $pane->locks = array();
     $display->content['new-2'] = $pane;
-    $display->panels['primary-box'][1] = 'new-2';
+    $display->panels['b1'][1] = 'new-2';
     $pane = new stdClass();
     $pane->pid = 'new-3';
-    $pane->panel = 'primary-box';
+    $pane->panel = 'b1';
     $pane->type = 'views_pager';
     $pane->subtype = 'views_pager';
     $pane->shown = TRUE;
@@ -253,7 +271,7 @@ function hps_encyclopedia_default_page_manager_pages() {
     $pane->position = 2;
     $pane->locks = array();
     $display->content['new-3'] = $pane;
-    $display->panels['primary-box'][2] = 'new-3';
+    $display->panels['b1'][2] = 'new-3';
   $display->hide_title = PANELS_TITLE_PANE;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
