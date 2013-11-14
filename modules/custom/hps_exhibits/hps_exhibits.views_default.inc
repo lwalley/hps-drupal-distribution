@@ -383,7 +383,6 @@ function hps_exhibits_views_default_views() {
   $handler->display->display_options['fields']['path']['field'] = 'path';
   $handler->display->display_options['fields']['path']['relationship'] = 'field_hps_exhibits_related_item_target_id';
   $handler->display->display_options['fields']['path']['label'] = '';
-  $handler->display->display_options['fields']['path']['exclude'] = FALSE;
   $handler->display->display_options['fields']['path']['element_type'] = '0';
   $handler->display->display_options['fields']['path']['element_label_type'] = '0';
   $handler->display->display_options['fields']['path']['element_label_colon'] = FALSE;

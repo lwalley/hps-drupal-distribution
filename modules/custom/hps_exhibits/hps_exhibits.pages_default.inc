@@ -314,8 +314,8 @@ function hps_exhibits_default_page_manager_handlers() {
     $pane = new stdClass();
     $pane->pid = 'new-7';
     $pane->panel = 'b1';
-    $pane->type = 'node_book_menu';
-    $pane->subtype = 'node_book_menu';
+    $pane->type = 'node_book_nav';
+    $pane->subtype = 'node_book_nav';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
@@ -335,6 +335,28 @@ function hps_exhibits_default_page_manager_handlers() {
     $display->panels['b1'][0] = 'new-7';
     $pane = new stdClass();
     $pane->pid = 'new-8';
+    $pane->panel = 'b1';
+    $pane->type = 'node_book_menu';
+    $pane->subtype = 'node_book_menu';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'context' => 'argument_entity_id:node_1',
+      'override_title' => 1,
+      'override_title_text' => 'Table of contents',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $display->content['new-8'] = $pane;
+    $display->panels['b1'][1] = 'new-8';
+    $pane = new stdClass();
+    $pane->pid = 'new-9';
     $pane->panel = 'b2';
     $pane->type = 'node_title';
     $pane->subtype = 'node_title';
@@ -357,10 +379,10 @@ function hps_exhibits_default_page_manager_handlers() {
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $display->content['new-8'] = $pane;
-    $display->panels['b2'][0] = 'new-8';
+    $display->content['new-9'] = $pane;
+    $display->panels['b2'][0] = 'new-9';
     $pane = new stdClass();
-    $pane->pid = 'new-9';
+    $pane->pid = 'new-10';
     $pane->panel = 'b2';
     $pane->type = 'entity_field';
     $pane->subtype = 'node:body';
@@ -385,30 +407,8 @@ function hps_exhibits_default_page_manager_handlers() {
     $pane->extras = array();
     $pane->position = 1;
     $pane->locks = array();
-    $display->content['new-9'] = $pane;
-    $display->panels['b2'][1] = 'new-9';
-    $pane = new stdClass();
-    $pane->pid = 'new-10';
-    $pane->panel = 'b2';
-    $pane->type = 'node_book_nav';
-    $pane->subtype = 'node_book_nav';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array(
-      'context' => 'argument_entity_id:node_1',
-      'override_title' => 1,
-      'override_title_text' => '',
-    );
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 2;
-    $pane->locks = array();
     $display->content['new-10'] = $pane;
-    $display->panels['b2'][2] = 'new-10';
+    $display->panels['b2'][1] = 'new-10';
     $pane = new stdClass();
     $pane->pid = 'new-11';
     $pane->panel = 'b3';
@@ -512,7 +512,7 @@ function hps_exhibits_default_page_manager_handlers() {
     $pane->panel = 'b1';
     $pane->type = 'node_book_menu';
     $pane->subtype = 'node_book_menu';
-    $pane->shown = TRUE;
+    $pane->shown = FALSE;
     $pane->access = array();
     $pane->configuration = array(
       'context' => 'relationship_entity_from_field:og_group_ref-node-node_1',
