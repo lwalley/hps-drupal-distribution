@@ -103,11 +103,11 @@ function hps_encyclopedia_views_default_views() {
   $handler->display->display_options['fields']['dc_creator']['id'] = 'dc_creator';
   $handler->display->display_options['fields']['dc_creator']['table'] = 'field_data_dc_creator';
   $handler->display->display_options['fields']['dc_creator']['field'] = 'dc_creator';
-  $handler->display->display_options['fields']['dc_creator']['label'] = 'by';
+  $handler->display->display_options['fields']['dc_creator']['label'] = 'By';
   $handler->display->display_options['fields']['dc_creator']['element_type'] = '0';
   $handler->display->display_options['fields']['dc_creator']['element_label_type'] = '0';
   $handler->display->display_options['fields']['dc_creator']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['dc_creator']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['dc_creator']['element_wrapper_type'] = 'p';
   $handler->display->display_options['fields']['dc_creator']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['dc_creator']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['dc_creator']['type'] = 'text_plain';

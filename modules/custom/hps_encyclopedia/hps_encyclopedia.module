@@ -93,6 +93,15 @@ function hps_encyclopedia_views_pre_render(&$view) {
         $parsed_creator = implode(' ', array_reverse(array_slice(explode(', ', $creator['value']), 0, 2, TRUE)));
         // Remove dates from string
         $parsed_creator = preg_replace('/\s[(]?\d{1,4}-?\d{1,4}[)]?/','', $parsed_creator);
+        // Correct badly split commas in parentheses.
+        // @note Assumes appending on end is correct fix e.g.
+        //       "Marine Biological Laboratory (Woods Hole, Mass.)"
+        //       incorrectly split to:
+        //       "Mass.) Marine Biological Laboratory (Woods Hole"
+        //       so reverse comma split:
+        if (preg_match('/^[^(]*?\)/', $parsed_creator, $matches)) {
+          $parsed_creator = trim(str_replace($matches[0], '', $parsed_creator)) . ", $matches[0]";
+        }
         $view->result[$delta]->field_dc_creator[$i]['rendered']['#markup'] = $parsed_creator;
         unset($parsed_creator);
       }
