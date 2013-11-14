@@ -68,6 +68,19 @@ function hpszen_preprocess_html(&$variables, $hook) {
     'toggleRelatedItemDetail' => theme_get_setting('hpszen_exhibits_js'),
   )), 'setting');
 
+  if (theme_get_setting('hpszen_position_sticky') && module_exists('libraries')) {
+    foreach (array('fixedfixed', 'fixedsticky') as $library) {
+      if ($library_path = libraries_get_path($library)) {
+        $file_path = "$library_path/$library";
+        if (file_exists("$file_path.js")) {
+          drupal_add_js("$file_path.js");
+          if (file_exists("$file_path.css")) {
+            drupal_add_css("$file_path.css");
+          }
+        }
+      }
+    }
+  }
 
   // The body tag's classes are controlled by the $classes_array variable. To
   // remove a class from $classes_array, use array_diff().

@@ -79,6 +79,8 @@ settings[zen_rebuild_registry]       = 1
 settings[zen_wireframes]             = 0
 settings[hpszen_navigation_dropdown] = 0
 settings[hpszen_exhibits_js]         = 0
+settings[hpszen_position_sticky]     = 0
+
 
 ; To make this sub-theme an admin theme with shortcut links next to titles,
 ; uncomment the line below.

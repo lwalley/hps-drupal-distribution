@@ -29,7 +29,12 @@ function hpszen_form_system_theme_settings_alter(&$form, &$form_state, $form_id 
     '#default_value' => theme_get_setting('hpszen_exhibits_js'),
     '#description'   => t('Check here if theme supports javascript behaviour like showing/hiding related items detail.'),
   );
-
+  $form['hpszen_behaviours']['hpszen_position_sticky'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Enable position sticky'),
+    '#default_value' => theme_get_setting('hpszen_position_sticky'),
+    '#description'   => t('Check here if theme supports sticky (fixed) positioning of elements.'),
+  );
 
   // Remove some of the base theme's settings.
   /* -- Delete this line if you want to turn off this setting.

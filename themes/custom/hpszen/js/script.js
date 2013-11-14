@@ -19,6 +19,28 @@
         settings.hpszen = {};
       }
 
+      // Make sure footer isn't overlapping dynamic content
+      function adjustFooter() {
+        if ($('.footer').length > 0) {
+          if ($(document).height() > ($('.footer').offset().top + $('.footer').height())) {
+            $('.footer').css('top', $(document).height());
+          }
+        }
+      }
+
+      // Toggle visibility of a navigation menu
+      function toggleNavigation(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        var toggle = this,
+            menu   = (event.data.menu instanceof Array) ? event.data.menu[0] : event.data.menu;
+        $(menu).toggleClass('element-invisible');
+
+        if (event.data.title) {
+          $(event.data.title).toggleClass('expanded');
+        };
+      }
+
       // Navigation behaviours include showing/hiding entire navigation on
       // smaller screens and hiding/showing sub navigation menus.
       $('#navigation', context).once('hpszen', function () {
@@ -44,19 +66,6 @@
         Drupal.theme.prototype.hpszenToggleNavigationTrigger = function () {
           return '<a class="navigation__toggle" href="#">' + Drupal.t("Menu") + '</a>';
         };
-
-        function toggleNavigation(event) {
-          event.preventDefault();
-          event.stopPropagation();
-          var toggle = this,
-              menu   = (event.data.menu instanceof Array) ? event.data.menu[0] : event.data.menu;
-          $(menu).toggleClass('element-invisible');
-
-          if (event.data.title) {
-            $(event.data.title).toggleClass('expanded');
-          };
-
-        }
 
         function toggleSubnavigation(event) {
           event.preventDefault();
@@ -94,8 +103,9 @@
         // Hide navigation and show toggle for smaller screen widths.
         navigation.once('adjustnavigation', function () {
           var nav = $(this);
+
           // Conditional must match the media query threshold for horizontal menu in CSS
-          if ($(document).width() < settings.hpszen.navigationBreakpoint) {
+          if ($(window).width() < settings.hpszen.navigationBreakpoint) {
             // Convert navigation to vertical toggle menu
             nav.addClass('navigation__toggle');
             nav.find('.block-menu').each(function () {
@@ -116,7 +126,7 @@
             // Show navigation on larger screen widths.
             nav.find('.block-menu > ul').removeClass('element-invisible');
           }
-        })
+        });
 
         // Trigger navigation adjustment on load and if screen width changes
         $(window).bind('load resize orientationchange', function () {
@@ -281,6 +291,27 @@
         }
       });
 
+      // Exhibits narrative navigation
+      $('.node-type-hps-exhibit-narrative', context).once('hpszen', function() {
+
+        if (settings.hpszen.narrativeMenuBreakpoint === undefined) {
+          settings.hpszen.narrativeMenuBreakpoint = 850;
+        }
+
+        if ($(window).width() < settings.hpszen.narrativeMenuBreakpoint) {
+          var narrativeMenu = $(this).find('.pane-node-book-menu ul'),
+              title         = $(this).find('.pane-node-book-menu h2');
+
+          $(title).wrapInner('<a href="#" />')
+                  .find('a')
+                  .bind('click',
+                        { menu: narrativeMenu, title: title },
+                        toggleNavigation
+                       );
+          $(narrativeMenu).addClass('element-invisible');
+        }
+      });
+
       // Exhibits related items
       $('.view-display-id-panel_pane_exhibits_related_items', context).once('hpszen', function () {
 
@@ -305,27 +336,12 @@
           }
           $(item).toggleClass('item--expanded');
           $(detail).toggleClass('item__detail--hidden');
-          if (behaviour == 'tray') {
-            // Reposition footer below tray contents
-            if (($(detail).offset().top + $(detail).height()) > $('.page').height()) {
-              $('.footer').css({
-                top:  $(document).height(),
-                left: 0
-              });
-            }
-            else {
-              $('.footer').css({
-                top:  '100%',
-                left: 0
-              });
-            }
-          }
-
+          if (behaviour == 'tray') adjustFooter();
         }
 
         // Default behaviour on page load
         var items     = $(this).find('.view-content > ul'),
-            behaviour = $(document).width() < settings.hpszen.relatedItemsBreakpoint ? 'accordion' : 'tray',
+            behaviour = $(window).width() < settings.hpszen.relatedItemsBreakpoint ? 'accordion' : 'tray',
             panel     = $(items).closest('.panel-pane');
 
         // Hide all detail
@@ -344,6 +360,14 @@
 
       });
 
+      // Stick sticky things
+      if ($().fixedsticky) {
+        $('.panel-pane[data-sticky-breakpoint]').each(function () {
+          if ($(window).width > $(this).attr('data-sticky-breakpoint')) {
+            $(this).addClass('fixedsticky').fixedsticky();
+          }
+        });
+      }
     }
   };
 

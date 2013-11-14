@@ -226,8 +226,13 @@ libraries[jquery.cycle][directory_name] = jquery.cycle
 libraries[jwplayer][download][type] = get
 libraries[jwplayer][download][url]  = http://www.longtailvideo.com/download/jwplayer-3359.zip
 
-;libraries[jquery.jplayer][download][type] = get
-;libraries[jquery.jplayer][download][url]  = http://www.jplayer.org/latest/jQuery.jPlayer.2.2.0.zip
+libraries[fixed-fixed][download][type] = get
+libraries[fixed-fixed][download][url]  = https://github.com/filamentgroup/fixed-fixed/archive/v0.1.2.zip
+libraries[fixed-fixed][directory_name] = fixed-fixed
+
+libraries[fixed-sticky][download][type] = get
+libraries[fixed-sticky][download][url]  = https://github.com/filamentgroup/fixed-sticky/archive/v0.1.3.zip
+libraries[fixed-sticky][directory_name] = fixed-sticky
 
 libraries[dompdf][download][type] = get
 libraries[dompdf][download][url]  = http://dompdf.googlecode.com/files/dompdf_0-6-0_beta3.zip
