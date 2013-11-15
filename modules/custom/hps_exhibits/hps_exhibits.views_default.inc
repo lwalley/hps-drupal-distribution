@@ -493,12 +493,6 @@ function hps_exhibits_views_default_views() {
   $handler->display->display_options['fields']['body']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['body']['hide_empty'] = TRUE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
-  /* Sort criterion: Content: Image (dspace_image:fid) */
-  $handler->display->display_options['sorts']['dspace_image_fid']['id'] = 'dspace_image_fid';
-  $handler->display->display_options['sorts']['dspace_image_fid']['table'] = 'field_data_dspace_image';
-  $handler->display->display_options['sorts']['dspace_image_fid']['field'] = 'dspace_image_fid';
-  $handler->display->display_options['sorts']['dspace_image_fid']['relationship'] = 'field_hps_exhibits_related_item_target_id';
-  $handler->display->display_options['sorts']['dspace_image_fid']['order'] = 'DESC';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Nid */
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
