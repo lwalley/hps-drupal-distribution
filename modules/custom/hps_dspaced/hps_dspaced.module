@@ -1,0 +1,46 @@
+<?php
+
+/**
+ * @file
+ * hps_dspaced.module
+ */
+
+/**
+ * Implements hook_dspaced_entities_default().
+ */
+function hps_dspaced_dspaced_entities_default() {
+  $entities = array();
+  $entities['fields'] = _hps_dspaced_fields();
+  $entities['instances'] = array(
+    'node' => array(
+      'dspaced_entities_item' => $entities['fields'],
+    ),
+  );
+
+  return $entities;
+}
+
+/**
+ * Implements hook_dspaced_item_feeds_importer_fields_alter().
+ */
+function hps_dspaced_dspaced_item_feeds_importer_fields_alter(&$fields) {
+  $fields = array_merge($fields, _hps_dspaced_fields());
+}
+
+/**
+ * Helper function to define custom DSpace Item fields.
+ */
+function _hps_dspaced_fields() {
+  return array(
+    'dc_identifier_youtube' => array(
+      'field_name' => 'dc_identifier_youtube',
+      'label' => t('DC Identifier YouTube'),
+      'cardinality' => FIELD_CARDINALITY_UNLIMITED,
+      'type' => 'text',
+      'settings' => array('max_length' => 50),
+      'xpath' => "metadata/metadataentity[schema = 'dc' and " .
+                 "element = 'identifier' and qualifier = 'youtube']/value",
+    )
+  );
+}
+

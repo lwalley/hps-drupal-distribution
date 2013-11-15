@@ -183,7 +183,7 @@ projects[dspaced][type] = module
 projects[dspaced][subdir] = custom
 projects[dspaced][download][type] = git
 projects[dspaced][download][url] = http://git.drupal.org/sandbox/lwalley/1911858.git
-projects[dspaced][download][revision] = 11337c084656d83261ac83a42f617f6ff60f2435
+projects[dspaced][download][revision] = 75d1c94002533f39f36e81f9a9e09c6eb13c9b7b
 
 projects[views_job_scheduler][type] = module
 projects[views_job_scheduler][subdir] = custom

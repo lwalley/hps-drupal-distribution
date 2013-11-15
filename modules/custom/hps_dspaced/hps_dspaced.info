@@ -1,0 +1,4 @@
+name = HPS DSpaced
+description = Extends DSpace Item content type with custom DSpace fields.
+core = 7.x
+dependencies[] = dspaced_entities
