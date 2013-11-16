@@ -1,0 +1,15 @@
+.ytplayer__container {
+  width: 640px;
+  height: 390px;
+}
+.ytplayer__container--480 {
+  width: 400px;
+  height: 255px;
+}
+.ytplayer__container--320 {
+  width: 320px;
+  height: 210px;
+}
+#ytplayer {
+  border: none;
+}

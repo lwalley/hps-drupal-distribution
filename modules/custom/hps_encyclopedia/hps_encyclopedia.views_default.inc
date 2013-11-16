@@ -122,6 +122,20 @@ function hps_encyclopedia_views_default_views() {
   $handler->display->display_options['fields']['dc_subject_tag']['element_wrapper_type'] = 'p';
   $handler->display->display_options['fields']['dc_subject_tag']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['dc_subject_tag']['delta_offset'] = '0';
+  /* Field: Content: DC Identifier YouTube */
+  $handler->display->display_options['fields']['dc_identifier_youtube']['id'] = 'dc_identifier_youtube';
+  $handler->display->display_options['fields']['dc_identifier_youtube']['table'] = 'field_data_dc_identifier_youtube';
+  $handler->display->display_options['fields']['dc_identifier_youtube']['field'] = 'dc_identifier_youtube';
+  $handler->display->display_options['fields']['dc_identifier_youtube']['label'] = '';
+  $handler->display->display_options['fields']['dc_identifier_youtube']['element_type'] = '0';
+  $handler->display->display_options['fields']['dc_identifier_youtube']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['dc_identifier_youtube']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['dc_identifier_youtube']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['dc_identifier_youtube']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['dc_identifier_youtube']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['dc_identifier_youtube']['empty_zero'] = TRUE;
+  $handler->display->display_options['fields']['dc_identifier_youtube']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['dc_identifier_youtube']['separator'] = ' ';
   /* Field: Content: Bitstreams */
   $handler->display->display_options['fields']['dspace_bitstream_url']['id'] = 'dspace_bitstream_url';
   $handler->display->display_options['fields']['dspace_bitstream_url']['table'] = 'field_data_dspace_bitstream_url';

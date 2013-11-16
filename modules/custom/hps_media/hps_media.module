@@ -14,6 +14,10 @@ function hps_media_theme($existing, $type, $theme, $path) {
       'template' => 'themes/hps-media-player',
       'pattern' => 'hps_media_player__',
     ),
+    'hps_media_youtube' => array(
+      'render element' => 'element',
+      'pattern' => 'hps_media_youtube__',
+    ),
   );
 }
 /**
@@ -26,6 +30,11 @@ function hps_media_element_info() {
       '#theme' => 'hps_media_player',
       '#player_library_info' => array(),
     ),
+    'hps_media_youtube' =>  array(
+      '#theme'  => 'hps_media_youtube',
+      '#prefix' => '<div class="ytplayer__container">',
+      '#suffix' => '</div>',
+    ),
   );
 }
 
@@ -36,6 +45,30 @@ function hps_media_pre_render_hps_media_player($element) {
   // @todo maybe delete this function if we're not using it.
   return $element;
 }
+
+function theme_hps_media_youtube($variables) {
+  global $base_url;
+  $youtube_id = $variables['element']['#markup'];
+  $src = array(
+    'http://www.youtube.com/embed/',
+    $youtube_id,
+    '?autohide=1',
+    '&controls=2',
+    '&rel=0',
+    "&origin={$base_url}",
+  );
+  $src = implode('', $src);
+  $iframe = array(
+    '<iframe',
+    'id="ytplayer" type="text/html" width="100%" height="100%"',
+    "src=\"{$src}\"",
+    'allowfullscreen="allowfullscreen"',
+    '></iframe>',
+  );
+  drupal_add_css(drupal_get_path('module', 'hps_media') . '/css/hps-media.css');
+  return implode(' ', $iframe);
+}
+
 /**
  * Implements hook_preprocess_field().
  *

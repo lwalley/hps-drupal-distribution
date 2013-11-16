@@ -12,15 +12,27 @@ include_once 'hps_encyclopedia.features.inc';
 function hps_encyclopedia_views_pre_render(&$view) {
 
   foreach ($view->result as $delta => &$row) {
+    // @note This needs to come before altering bitstreams
+    if ($has_youtube_id = _has_youtube_id($row)) {
+      foreach ($row->field_dc_identifier_youtube as &$youtube) {
+        // Skip if we don't have raw data.
+        // @note Make sure 'Use field template' is unchecked in view so we get
+        //       render element and raw data.
+        if (!isset($youtube['raw'])) continue;
+        // Add custom render type
+        $youtube['rendered']['#type'] = 'hps_media_youtube';
+      }
+    }
 
     // @note We pull all bistream URLs from DSpace into a multi-value field
     //       but we don't want to show all of them when displaying the
     //       dspace_bitstream_url field in views. For now we only want to use
-    //       PDFs and video/audio URLs in views. Since dspace_bitstream_url is a
-    //       multi-value field all URLs are rendered together with a single set
-    //       of views field options. This is not ideal. Ideally we want different
-    //       views field settings depending on the mimetype. The following
-    //       attempts to address that.
+    //       PDFs and video/audio URLs in views, and we only want to display
+    //       video/audio if we don't have a YouTube equivalent. Since
+    //       dspace_bitstream_url is a multi-value field all URLs are rendered
+    //       together with a single set of views field options. This is not
+    //       ideal. Ideally we want different views field settings depending
+    //       on the mimetype. The following attempts to address that.
     if (property_exists($row, 'field_dspace_bitstream_url')) {
 
       $media = array();
@@ -34,11 +46,8 @@ function hps_encyclopedia_views_pre_render(&$view) {
           $row->field_dspace_bitstream_url[$b]['rendered']['#element']['title'] = t('Download PDF');
           $row->field_dspace_bitstream_url[$b]['rendered']['#element']['attributes']['class'] = 'pdf';
         }
-        elseif (hps_media_is_mimetype_supported($mimetype)) {
+        elseif (hps_media_is_mimetype_supported($mimetype) && !$has_youtube_id) {
           $media[$b] = $bitstream['rendered']['#element']['url'];
-          // Add pre render hook so we can force audio/video bitstreams to use
-          // field template
-          //$row->field_dspace_bitstream_url[$b]['rendered']['#pre_render'][] = '_hps_encyclopedia_pre_render_bitstream';
         }
         else {
           $row->field_dspace_bitstream_url[$b]['rendered']['#access'] = FALSE;
@@ -139,7 +148,13 @@ function _hps_encyclopedia_pre_render_bitstream($element) {
   );
 }
 
-
+/**
+ * Helper function to determine if item has a YouTube ID.
+ */
+function _has_youtube_id($row) {
+  return (property_exists($row, 'field_dc_identifier_youtube') &&
+         !empty($row->field_dc_identifier_youtube));
+}
 
 /**
  * Helper function to determine if the bistream is a PDF

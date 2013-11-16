@@ -6,6 +6,7 @@ php = 5.2.4
 version = 7.x-1.0-alpha2
 project = hps_encyclopedia
 dependencies[] = ctools
+dependencies[] = hps_dspaced
 dependencies[] = hps_media
 dependencies[] = page_manager
 dependencies[] = print
