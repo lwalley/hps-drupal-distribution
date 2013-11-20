@@ -464,6 +464,22 @@ function hps_exhibits_views_default_views() {
   $handler->display->display_options['fields']['dspace_bitstream_url']['click_sort_column'] = 'url';
   $handler->display->display_options['fields']['dspace_bitstream_url']['delta_offset'] = '0';
   $handler->display->display_options['fields']['dspace_bitstream_url']['separator'] = ' ';
+  /* Field: Content: DC Identifier YouTube */
+  $handler->display->display_options['fields']['dc_identifier_youtube']['id'] = 'dc_identifier_youtube';
+  $handler->display->display_options['fields']['dc_identifier_youtube']['table'] = 'field_data_dc_identifier_youtube';
+  $handler->display->display_options['fields']['dc_identifier_youtube']['field'] = 'dc_identifier_youtube';
+  $handler->display->display_options['fields']['dc_identifier_youtube']['relationship'] = 'field_hps_exhibits_related_item_target_id';
+  $handler->display->display_options['fields']['dc_identifier_youtube']['label'] = '';
+  $handler->display->display_options['fields']['dc_identifier_youtube']['element_type'] = '0';
+  $handler->display->display_options['fields']['dc_identifier_youtube']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['dc_identifier_youtube']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['dc_identifier_youtube']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['dc_identifier_youtube']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['dc_identifier_youtube']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['dc_identifier_youtube']['empty_zero'] = TRUE;
+  $handler->display->display_options['fields']['dc_identifier_youtube']['type'] = 'text_plain';
+  $handler->display->display_options['fields']['dc_identifier_youtube']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['dc_identifier_youtube']['separator'] = ' ';
   /* Field: Field collection item: Description */
   $handler->display->display_options['fields']['field_hps_exhibits_related_story']['id'] = 'field_hps_exhibits_related_story';
   $handler->display->display_options['fields']['field_hps_exhibits_related_story']['table'] = 'field_data_field_hps_exhibits_related_story';

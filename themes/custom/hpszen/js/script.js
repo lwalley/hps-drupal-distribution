@@ -22,6 +22,7 @@
       // Make sure footer isn't overlapping dynamic content
       function adjustFooter() {
         if ($('.footer').length > 0) {
+          console.log($(document).height());
           if ($(document).height() > ($('.footer').offset().top + $('.footer').height())) {
             $('.footer').css('top', $(document).height());
           }

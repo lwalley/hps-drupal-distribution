@@ -1,14 +1,19 @@
+.jwplayer__container {
+  max-width: 800px;
+}
 .ytplayer__container {
-  width: 640px;
-  height: 390px;
+  width: 100%;
+  height: 0;
+  position: relative;
+  padding-top: 56.25% !important;
+  padding-bottom: 30px !important;
 }
-.ytplayer__container--480 {
-  width: 400px;
-  height: 255px;
-}
-.ytplayer__container--320 {
-  width: 320px;
-  height: 210px;
+.ytplayer__container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 #ytplayer {
   border: none;

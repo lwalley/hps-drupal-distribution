@@ -146,6 +146,50 @@ function hps_exhibits_form_hps_exhibit_narrative_node_form_alter(&$form, &$form_
 }
 
 /**
+ * Implements hook_views_pre_render().
+ */
+function hps_exhibits_views_pre_render(&$view) {
+  if ($view->current_display == 'panel_pane_exhibits_related_items') {
+    foreach ($view->result as $delta => &$row) {
+      // Override image path for use as video preview still
+      // @see hps_encyclopedia_views_pre_render()
+
+      // Always show summary image regardless of bitstream presence
+      if (property_exists($row, 'field_dspace_image')) {
+        $row->field_dspace_image[0]['rendered']['#access'] = TRUE;
+      }
+      // Hide detail image if we have bitstream
+      if (property_exists($row, 'field_dspace_image_1')
+        && property_exists($row, 'field_dspace_bitstream_url')
+      ) {
+        foreach ($row->field_dspace_bitstream_url as &$bitstream) {
+
+          if (isset($bitstream['rendered']['#element']['image'])) {
+            try {
+              if (($img_style = $row->field_dspace_image_1[0]['rendered']['#image_style'])
+                && ($img_uri  = $row->field_dspace_image_1[0]['rendered']['#item']['uri'])
+                && ($img_path = image_style_url($img_style, $img_uri))
+              ) {
+                $bitstream['rendered']['#element']['image'] = $img_path;
+                // Prevent image from rendering since we'll use it with the video.
+                $row->field_dspace_image_1[0]['rendered']['#access'] = FALSE;
+              }
+              unset($img_style);
+              unset($img_uri);
+              unset($img_path);
+            }
+            catch (Exception $e) {
+              watchdog('hps_exhibits', $e->getMessage());
+              error_log($e->getMessage());
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
  * Implements hook_preprocess_HOOK();
  */
 function hps_exhibits_preprocess_views_view_fields(&$vars) {
@@ -165,13 +209,14 @@ function hps_exhibits_preprocess_views_view_fields(&$vars) {
       }
       $in_detail  = array(
         'dspace_bitstream_url',
+        'dc_identifier_youtube',
         'field_hps_exhibits_related_story',
         'body',
         'hps_original',
         'hps_principal'
       );
       // Group fields in the order they are in the view using foreach
-      foreach ($vars['fields'] as $name => $field) {
+      foreach ($vars['fields'] as $name => &$field) {
         if (in_array($name, $in_summary)) {
           $vars['grouped']['summary'][] = $name;
         }
@@ -186,6 +231,18 @@ function hps_exhibits_preprocess_views_view_fields(&$vars) {
           if (in_array($style, $in_detail)) {
             $vars['grouped']['detail'][] = $name;
           }
+          unset($style);
+        }
+        // Make sure we have some wrappers on story and article content
+        if ($name == 'field_hps_exhibits_related_story'
+          && empty($field->wrapper_prefix)
+        ) {
+          $field->wrapper_prefix = '<div class="item__detail__story">';
+          $field->wrapper_suffix = '</div>';
+        }
+        if ($name == 'body' && empty($field->wrapper_prefix)) {
+          $field->wrapper_prefix = '<div class="item__detail__article">';
+          $field->wrapper_suffix = '</div>';
         }
       }
     }

@@ -11,12 +11,15 @@ function hps_media_theme($existing, $type, $theme, $path) {
   return array(
     'hps_media_player' => array(
       'render element' => 'element',
-      'template' => 'themes/hps-media-player',
       'pattern' => 'hps_media_player__',
     ),
     'hps_media_youtube' => array(
       'render element' => 'element',
       'pattern' => 'hps_media_youtube__',
+    ),
+    'hps_media_youtube_still' => array(
+      'render element' => 'element',
+      'pattern' => 'hps_media_youtube_still__',
     ),
   );
 }
@@ -28,24 +31,129 @@ function hps_media_element_info() {
     'hps_media_player' =>  array(
       '#pre_render' => array('hps_media_pre_render_hps_media_player'),
       '#theme' => 'hps_media_player',
-      '#player_library_info' => array(),
+      '#prefix' => '',
+      '#prefix_classes' => array('jwplayer__container'),
+      '#suffix' => '',
+      '#attached' => array(
+        'css' => _css(),
+        'js' => _player_library_js(),
+      ),
+      '#player' => _player_library_info(),
     ),
     'hps_media_youtube' =>  array(
       '#theme'  => 'hps_media_youtube',
       '#prefix' => '<div class="ytplayer__container">',
       '#suffix' => '</div>',
+      '#attached' => array(
+        'css' => _css(),
+      ),
+    ),
+    'hps_media_youtube_still' =>  array(
+      '#theme'    => 'hps_media_youtube_still',
+      '#prefix'   => '<div class="ytstill__container">',
+      '#suffix'   => '</div>',
+      '#version'  => 'default',
+      '#hostname' => 'i3.ytimg.com',
+      '#alt'      => '',
     ),
   );
 }
 
 /**
  * Pre render callback for hps_media_player element.
+ *
+ * Checks that we have everything we need to render element using local player,
+ * if we don't then it sets access to false.
  */
 function hps_media_pre_render_hps_media_player($element) {
-  // @todo maybe delete this function if we're not using it.
+  // Check mimetype is supported and return #access=FALSE if its not.
+  if (!isset($element['#element']['filemime'])) {
+    $element['#element']['filemime'] = file_get_mimetype($element['#element']['url']);
+  }
+  if (!hps_media_is_mimetype_supported($element['#element']['filemime'])) {
+    $element['#access'] = FALSE;
+    return $element;
+  }
+
+  // Carry on with checks since mimetype is supported.
+
+  // Add some useful classes to container element.
+  // @note We can't use class attribute on element itself because jwplayer
+  //       library overrides its.
+  if ($element['#element']['audio'] = _is_audio($element['#element']['filemime'])) {
+    $element['#prefix_classes'][] = 'jwplayer--audio';
+  }
+  if ($element['#element']['video'] = _is_video($element['#element']['filemime'])) {
+    $element['#prefix_classes'][] = 'jwplayer--video';
+  }
+
+  if (isset($element['#element']['image'])
+    && !empty($element['#element']['image'])
+  ) {
+    $element['#prefix_classes'][] = 'jwplayer--with-image';
+  }
+  else {
+    // Make it null for simpler conditional statements in theme.
+    $element['#element']['image'] = NULL;
+    $element['#prefix_classes'][] = 'jwplayer--without-image';
+  }
+
+  if (empty($element['#prefix']) && !empty($element['#prefix_classes'])) {
+    $element['#prefix'] = '<div class="'
+                        . implode(' ', $element['#prefix_classes'])
+                        . '">';
+    $element['#suffix'] = '</div>';
+  }
+
+  // Local player needs unique id attributes for each video
+  if (!isset($element['#element']['attributes']['id'])) {
+    $element['#element']['attributes']['id'] = drupal_html_id('jwplayer');
+  }
+
   return $element;
 }
 
+/**
+ * Implements theme_hook().
+ */
+function theme_hps_media_player($variables) {
+  // @note We don't use $variables['element']['#element']['attributes']['class']
+  //       because jwplayer replaces them. If custom classes are needed they
+  //       will have to be added to container e.g. alter #prefix
+  $player_settings = array(
+    "'file':   '{$variables['element']['#element']['url']}',",
+    "'width':  '100%'"
+  );
+  if ($variables['element']['#element']['audio']
+    && !$variables['element']['#element']['image']
+  ) {
+    $player_settings[] = ",'height':  '40'";
+  }
+  else {
+    // Video or we have an image to go with audio
+    $player_settings[] = ",'aspectratio': '16:9'";
+  }
+  if ($variables['element']['#element']['image']) {
+    $player_settings[] = ",'image': '{$variables['element']['#element']['image']}'";
+  }
+  $player_settings = implode('', $player_settings);
+  $output = array(
+    '<div',
+    " id=\"{$variables['element']['#element']['attributes']['id']}\"",
+    '></div>',
+    '<script type="text/javascript">',
+    "jwplayer('{$variables['element']['#element']['attributes']['id']}').setup({",
+    $player_settings,
+    '});',
+    '</script>',
+  );
+  return implode('', $output);
+
+}
+
+/**
+ * Implements theme_hook().
+ */
 function theme_hps_media_youtube($variables) {
   global $base_url;
   $youtube_id = $variables['element']['#markup'];
@@ -70,36 +178,20 @@ function theme_hps_media_youtube($variables) {
 }
 
 /**
- * Implements hook_preprocess_field().
- *
- * Override or insert variables into a field template.
- *
- * @todo Investigate remote stream wrapper module to use instead of link field
- *       for DSpace items.
- *
+ * Implements theme_hook().
  */
-function hps_media_preprocess_field(&$variables, $hook) {
-  if ($variables['element']['#field_type'] == 'link_field') {
-    // Use JW Player for supported audio and video URLs.
-    // Check JW Player is installed and get path for later use.
-    if ($player_library_info = _player_library_info()) {
-      foreach ($variables['element']['#items'] as $delta => $item) {
-        $mimetype = file_get_mimetype($item['url']);
-        if (!hps_media_is_mimetype_supported($mimetype)) continue;
-        $variables['players'][$delta] = array(
-          '#type' => 'hps_media_player',
-          '#url'  => $item['url'],
-          '#id'   => "hps-media-player-{$variables['element']['#object']->nid}-{$delta}",
-          '#player_library_info' => $player_library_info,
-          '#attached' => array('js' => $player_library_info['js']),
-          '#mimetype' => $mimetype,
-          '#is_audio' => _is_audio($mimetype),
-          '#is_video' => _is_video($mimetype),
-        );
-      }
-    }
-  }
+function theme_hps_media_youtube_still($variables) {
+  $src = array(
+    "http://{$variables['element']['#hostname']}",
+    '/vi',
+    "/{$variables['element']['#markup']}",
+    "/{$variables['element']['#version']}.jpg",
+  );
+  $src = implode('', $src);
+  return "<img src=\"{$src}\" alt=\"{$variables['element']['#alt']}\" />";
+
 }
+
 
 /**
  * Helper function to see if its an audio file.
@@ -117,21 +209,36 @@ function _is_video($mimetype) {
  * Helper function to return attributes of the media player library.
  */
 function _player_library_info() {
-  if (module_exists('libraries') && ($jwplayer_library_path = libraries_get_path('jwplayer'))) {
-    $jwplayer_file_path = "$jwplayer_library_path/jwplayer.js";
-    if (file_exists($jwplayer_file_path)) {
-      // Exclude JW Player from JS aggregation ('preprocess' => FALSE), otherwise
-      // bad things happen.
-      return array(
-        'library_path' => $jwplayer_library_path,
-        'js'           => array($jwplayer_file_path => array('preprocess' => FALSE)),
-        'name'         => 'jwplayer',
-      );
+  $info = &drupal_static('hps_media' . __FUNCTION__);
+  if (!isset($info)) {
+    if (module_exists('libraries') && ($jwplayer_library_path = libraries_get_path('jwplayer'))) {
+      $jwplayer_file_path = "$jwplayer_library_path/jwplayer.js";
+      if (file_exists($jwplayer_file_path)) {
+        // Exclude JW Player from JS aggregation ('preprocess' => FALSE), otherwise
+        // bad things happen.
+        $info = array(
+          'library_path' => $jwplayer_library_path,
+          'js'           => array($jwplayer_file_path => array('preprocess' => FALSE)),
+          'name'         => 'jwplayer',
+        );
+      }
     }
   }
-  return NULL;
+  return $info;
 }
-
+/**
+ * Helper function to return paths to js files in player library.
+ */
+function _player_library_js() {
+  $info = _player_library_info();
+  return (isset($info['js'])) ? $info['js'] : array();
+}
+/**
+ * Helper function to return paths to css files.
+ */
+function _css() {
+  return array(drupal_get_path('module', 'hps_media') . '/css/hps-media.css');
+}
 /**
  * Helper function to return supported mimetypes.
  *
@@ -226,7 +333,7 @@ function _hps_relative_scale_form($data) {
   $form['width']['#required'] = FALSE;
   $form['width']['#field_suffix'] = ' ' . t('% of the current width e.g. 50%');
   $form['height']['#required'] = FALSE;
-  $form['height']['#field_suffix'] = ' ' . t('% of the current width e.g. 50%');
+  $form['height']['#field_suffix'] = ' ' . t('% of the current height e.g. 50%');
   $form['minimum_width'] = array(
     '#type' => 'textfield',
     '#title' => t('Minimum Width'),

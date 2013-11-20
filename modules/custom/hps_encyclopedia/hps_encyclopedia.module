@@ -11,141 +11,132 @@ include_once 'hps_encyclopedia.features.inc';
  */
 function hps_encyclopedia_views_pre_render(&$view) {
 
-  foreach ($view->result as $delta => &$row) {
-    // @note This needs to come before altering bitstreams
-    if ($has_youtube_id = _has_youtube_id($row)) {
-      foreach ($row->field_dc_identifier_youtube as &$youtube) {
-        // Skip if we don't have raw data.
-        // @note Make sure 'Use field template' is unchecked in view so we get
-        //       render element and raw data.
-        if (!isset($youtube['raw'])) continue;
-        // Add custom render type
-        $youtube['rendered']['#type'] = 'hps_media_youtube';
+  // Only proceed if the view contains fields we're interested in.
+  if ($fields_found = array_intersect(
+    array_keys($view->field),
+    array('dc_identifier_youtube', 'dspace_bitstream_url', 'dc_creator')
+  )) {
+
+    $alter_ytid      = in_array('dc_identifier_youtube', $fields_found);
+    $alter_bitstream = in_array('dspace_bitstream_url', $fields_found);
+    $alter_creator   = in_array('dc_creator', $fields_found);
+
+    foreach ($view->result as $delta => &$row) {
+
+      if ($alter_ytid || $alter_bitstream) {
+        $has_youtube_id = _has_youtube_id($row);
+
+        if ($alter_ytid && $has_youtube_id) {
+          foreach ($row->field_dc_identifier_youtube as &$youtube) {
+            // Skip if we don't have raw data.
+            // @note Make sure 'Use field template' is unchecked in view so we
+            //       get render element and raw data.
+            if (!isset($youtube['raw'])) continue;
+            $youtube['rendered']['#type'] = 'hps_media_youtube';
+          }
+        }
+
+        // @note We pull all bistream URLs from DSpace into a multi-value field
+        //       but we don't want to show all of them when displaying the
+        //       dspace_bitstream_url field in views. For now we only want to use
+        //       PDFs and video/audio URLs in views, and we only want to display
+        //       video/audio if we don't have a YouTube equivalent. Since
+        //       dspace_bitstream_url is a multi-value field all URLs are rendered
+        //       together with a single set of views field options. This is not
+        //       ideal. Ideally we want different views field settings depending
+        //       on the mimetype. The following attempts to address that.
+        if ($alter_bitstream && property_exists($row, 'field_dspace_bitstream_url')) {
+
+          foreach ($row->field_dspace_bitstream_url as &$bitstream) {
+            // Skip if we don't have raw element.
+            // @note Make sure 'Use field template' is unchecked in view so we get
+            //       render element and raw data.
+            if (!isset($bitstream['raw'])) continue;
+            $mimetype = file_get_mimetype($bitstream['raw']['url']);
+            if (_is_pdf($mimetype)) {
+              $bitstream['rendered']['#element']['title'] = t('Download PDF');
+              $bitstream['rendered']['#element']['attributes']['class'] = 'pdf';
+            }
+            elseif (hps_media_is_mimetype_supported($mimetype) && !$has_youtube_id) {
+              unset($bitstream['rendered']['#theme']);
+              $bitstream['rendered']['#type'] = 'hps_media_player';
+              $bitstream['rendered']['#element']['filemime'] = $mimetype;
+
+              // Try to get image path for use as video preview still.
+              if (property_exists($row, 'field_dspace_image')) {
+                try {
+                  if (($img_style = $row->field_dspace_image[0]['rendered']['#image_style'])
+                    && ($img_uri   = $row->field_dspace_image[0]['rendered']['#item']['uri'])
+                    && ($img_path = image_style_url($img_style, $img_uri))
+                  ) {
+                    $bitstream['rendered']['#element']['image'] = $img_path;
+                    // Prevent image from rendering since we'll use it with the video.
+                    $row->field_dspace_image[0]['rendered']['#access'] = FALSE;
+                  }
+                  unset($img_style);
+                  unset($img_uri);
+                  unset($img_path);
+                }
+                catch (Exception $e) {
+                  watchdog('hps_encyclopedia', $e->getMessage());
+                  error_log($e->getMessage());
+                }
+              }
+            }
+            else {
+              $bitstream['rendered']['#access'] = FALSE;
+            }
+          }
+        }
       }
-    }
 
-    // @note We pull all bistream URLs from DSpace into a multi-value field
-    //       but we don't want to show all of them when displaying the
-    //       dspace_bitstream_url field in views. For now we only want to use
-    //       PDFs and video/audio URLs in views, and we only want to display
-    //       video/audio if we don't have a YouTube equivalent. Since
-    //       dspace_bitstream_url is a multi-value field all URLs are rendered
-    //       together with a single set of views field options. This is not
-    //       ideal. Ideally we want different views field settings depending
-    //       on the mimetype. The following attempts to address that.
-    if (property_exists($row, 'field_dspace_bitstream_url')) {
 
-      $media = array();
-      foreach ($row->field_dspace_bitstream_url as $b => $bitstream) {
-        // Skip if we don't have raw data.
-        // @note Make sure 'Use field template' is unchecked in view so we get
-        //       render element and raw data.
-        if (!isset($bitstream['raw'])) continue;
-        $mimetype = file_get_mimetype($bitstream['raw']['url']);
-        if (_is_pdf($mimetype)) {
-          $row->field_dspace_bitstream_url[$b]['rendered']['#element']['title'] = t('Download PDF');
-          $row->field_dspace_bitstream_url[$b]['rendered']['#element']['attributes']['class'] = 'pdf';
+      if ($alter_creator && property_exists($row, 'field_dc_creator')) {
+        // Get the raw values from the original entity
+        // see views_handler_field_field::get_value()
+        $creators = $view->field['dc_creator']->get_value($row);
+        foreach ($creators as $i => $creator) {
+          // It's a multivalue field so we expect an array with a value index and
+          // matching rendered values
+          if (!isset($creator['value']) || !isset($row->field_dc_creator[$i]['rendered'])) continue;
+
+          // If the Views field style setting 'Use field template' is TRUE
+          // then we get a rendered string, otherwise we get a generic render
+          // #markup element. Convert rendered string into render element for
+          // consistency, then insert new value.
+          if (is_string($row->field_dc_creator[$i]['rendered'])) {
+            $view->result[$delta]->field_dc_creator[$i]['rendered'] = array();
+          }
+          // Reverse names if commas exist in creator. Ignore dates or anything
+          // after second comma. Examples
+          //     - Brode, Howard Stidham (1890-1958) => Howard Stidham Brode
+          //     - Huettner, Alfred F. (Alfred Francis), b. 1884 => Alfred F. (Alfred Francis) Huettner
+          //     - Coolidge, Baldwin, 1845-1948 => Baldwin Coolidge
+          // @note Alternative option for multiple commas:
+          //       Reverse all parts:
+          //       implode(' ', array_reverse(explode(', ', $creator['value'])));
+          //       Move the first part to the end with a regular expression:
+          //       preg_replace('/^([^,]*),\s*(.*)$/', '$2 $1', $creator['value']);
+
+          // Reverse first two parts of comma seperated string
+          $parsed_creator = implode(' ', array_reverse(array_slice(explode(', ', $creator['value']), 0, 2, TRUE)));
+          // Remove dates from string
+          $parsed_creator = preg_replace('/\s[(]?\d{1,4}-?\d{1,4}[)]?/','', $parsed_creator);
+          // Correct badly split commas in parentheses.
+          // @note Assumes appending on end is correct fix e.g.
+          //       "Marine Biological Laboratory (Woods Hole, Mass.)"
+          //       incorrectly split to:
+          //       "Mass.) Marine Biological Laboratory (Woods Hole"
+          //       so reverse comma split:
+          if (preg_match('/^[^(]*?\)/', $parsed_creator, $matches)) {
+            $parsed_creator = trim(str_replace($matches[0], '', $parsed_creator)) . ", $matches[0]";
+          }
+          $view->result[$delta]->field_dc_creator[$i]['rendered']['#markup'] = $parsed_creator;
+          unset($parsed_creator);
         }
-        elseif (hps_media_is_mimetype_supported($mimetype) && !$has_youtube_id) {
-          $media[$b] = $bitstream['rendered']['#element']['url'];
-        }
-        else {
-          $row->field_dspace_bitstream_url[$b]['rendered']['#access'] = FALSE;
-        }
-      }
-
-      if (!empty($media)) {
-        $field_alias = $view->field['dspace_bitstream_url']->field_alias;
-        $entity      = $row->_field_data[$field_alias]['entity'];
-        $entity_type = $row->_field_data[$field_alias]['entity_type'];
-        $field       = field_view_field($entity_type, $entity, 'dspace_bitstream_url');
-        $field['#label_display'] = 'hidden';
-        foreach ($media as $b => $url) {
-          // Add pre render hook for audio/video bitstreams and pass field data
-          $row->field_dspace_bitstream_url[$b]['rendered']['#pre_render'][] = '_hps_encyclopedia_pre_render_bitstream';
-          $row->field_dspace_bitstream_url[$b]['rendered']['#bitstreams'] = $field;
-        }
-      }
-
-    }
-
-
-    // Alter rendered creator string.
-    if (property_exists($row, 'field_dc_creator')) {
-      // Get the raw values from the original entity
-      // see views_handler_field_field::get_value()
-      $creators = $view->field['dc_creator']->get_value($row);
-      foreach ($creators as $i => $creator) {
-        // It's a multivalue field so we expect an array with a value index and
-        // matching rendered values
-        if (!isset($creator['value']) || !isset($row->field_dc_creator[$i]['rendered'])) continue;
-
-        // If the Views field style setting 'Use field template' is TRUE
-        // then we get a rendered string, otherwise we get a generic render
-        // #markup element. Convert rendered string into render element for
-        // consistency, then insert new value.
-        if (is_string($row->field_dc_creator[$i]['rendered'])) {
-          $view->result[$delta]->field_dc_creator[$i]['rendered'] = array();
-        }
-        // Reverse names if commas exist in creator. Ignore dates or anything
-        // after second comma. Examples
-        //     - Brode, Howard Stidham (1890-1958) => Howard Stidham Brode
-        //     - Huettner, Alfred F. (Alfred Francis), b. 1884 => Alfred F. (Alfred Francis) Huettner
-        //     - Coolidge, Baldwin, 1845-1948 => Baldwin Coolidge
-        // @note Alternative option for multiple commas:
-        //       Reverse all parts:
-        //       implode(' ', array_reverse(explode(', ', $creator['value'])));
-        //       Move the first part to the end with a regular expression:
-        //       preg_replace('/^([^,]*),\s*(.*)$/', '$2 $1', $creator['value']);
-
-        // Reverse first two parts of comma seperated string
-        $parsed_creator = implode(' ', array_reverse(array_slice(explode(', ', $creator['value']), 0, 2, TRUE)));
-        // Remove dates from string
-        $parsed_creator = preg_replace('/\s[(]?\d{1,4}-?\d{1,4}[)]?/','', $parsed_creator);
-        // Correct badly split commas in parentheses.
-        // @note Assumes appending on end is correct fix e.g.
-        //       "Marine Biological Laboratory (Woods Hole, Mass.)"
-        //       incorrectly split to:
-        //       "Mass.) Marine Biological Laboratory (Woods Hole"
-        //       so reverse comma split:
-        if (preg_match('/^[^(]*?\)/', $parsed_creator, $matches)) {
-          $parsed_creator = trim(str_replace($matches[0], '', $parsed_creator)) . ", $matches[0]";
-        }
-        $view->result[$delta]->field_dc_creator[$i]['rendered']['#markup'] = $parsed_creator;
-        unset($parsed_creator);
       }
     }
   }
-}
-
-/**
- * Pre render callback for media bitstream fields.
- *
- * @note Called from drupal_render.
- *
- * @param $element
- *   Array containg renderable element for a single value in a multi-value
- *   dspace_bitstream_url from views.
- * @return
- *   Array containing the markup of the rendered field using core field
- *   templates.
- */
-function _hps_encyclopedia_pre_render_bitstream($element) {
-
-  if (!isset($element['#bitstreams'])) return;
-
-  $field = $element['#bitstreams'];
-  foreach ($field['#items'] as $delta => $bitstream) {
-    // Remove other bitstream elements before rendering our element
-    if ($bitstream['url'] != $element['#element']['url']) {
-      unset($field['#items'][$delta]);
-      unset($field[$delta]);
-    }
-  }
-  // Render field and return to drupal_render for output
-  return array(
-    '#children' => render($field)
-  );
 }
 
 /**
