@@ -35,17 +35,17 @@ function hps_media_element_info() {
       '#prefix_classes' => array('jwplayer__container'),
       '#suffix' => '',
       '#attached' => array(
-        'css' => _css(),
-        'js' => _player_library_js(),
+        'css' => _hps_media_css(),
+        'js' => _hps_media_player_library_js(),
       ),
-      '#player' => _player_library_info(),
+      '#player' => _hps_media_player_library_info(),
     ),
     'hps_media_youtube' =>  array(
       '#theme'  => 'hps_media_youtube',
       '#prefix' => '<div class="ytplayer__container">',
       '#suffix' => '</div>',
       '#attached' => array(
-        'css' => _css(),
+        'css' => _hps_media_css(),
       ),
     ),
     'hps_media_youtube_still' =>  array(
@@ -80,10 +80,10 @@ function hps_media_pre_render_hps_media_player($element) {
   // Add some useful classes to container element.
   // @note We can't use class attribute on element itself because jwplayer
   //       library overrides its.
-  if ($element['#element']['audio'] = _is_audio($element['#element']['filemime'])) {
+  if ($element['#element']['audio'] = _hps_media_is_audio($element['#element']['filemime'])) {
     $element['#prefix_classes'][] = 'jwplayer--audio';
   }
-  if ($element['#element']['video'] = _is_video($element['#element']['filemime'])) {
+  if ($element['#element']['video'] = _hps_media_is_video($element['#element']['filemime'])) {
     $element['#prefix_classes'][] = 'jwplayer--video';
   }
 
@@ -196,19 +196,19 @@ function theme_hps_media_youtube_still($variables) {
 /**
  * Helper function to see if its an audio file.
  */
-function _is_audio($mimetype) {
-  return in_array($mimetype, _supported_audio_mimetypes());
+function _hps_media_is_audio($mimetype) {
+  return in_array($mimetype, _hps_media_supported_audio_mimetypes());
 }
 /**
  * Helper function to see if its an audio file.
  */
-function _is_video($mimetype) {
-  return in_array($mimetype, _supported_video_mimetypes());
+function _hps_media_is_video($mimetype) {
+  return in_array($mimetype, _hps_media_supported_video_mimetypes());
 }
 /**
  * Helper function to return attributes of the media player library.
  */
-function _player_library_info() {
+function _hps_media_player_library_info() {
   $info = &drupal_static('hps_media' . __FUNCTION__);
   if (!isset($info)) {
     if (module_exists('libraries') && ($jwplayer_library_path = libraries_get_path('jwplayer'))) {
@@ -229,14 +229,14 @@ function _player_library_info() {
 /**
  * Helper function to return paths to js files in player library.
  */
-function _player_library_js() {
-  $info = _player_library_info();
+function _hps_media_player_library_js() {
+  $info = _hps_media_player_library_info();
   return (isset($info['js'])) ? $info['js'] : array();
 }
 /**
  * Helper function to return paths to css files.
  */
-function _css() {
+function _hps_media_css() {
   return array(drupal_get_path('module', 'hps_media') . '/css/hps-media.css');
 }
 /**
@@ -248,13 +248,13 @@ function _css() {
  * @note Additional mimetypes could be supported here if needed.
  * @see hook_file_mimetype_mapping_alter()
  */
-function _supported_mimetypes() {
-  return array_merge(_supported_audio_mimetypes(), _supported_video_mimetypes());
+function _hps_media_supported_mimetypes() {
+  return array_merge(_hps_media_supported_audio_mimetypes(), _hps_media_supported_video_mimetypes());
 }
 /**
  * Helper function to return supported audio mimetypes.
  */
-function _supported_audio_mimetypes() {
+function _hps_media_supported_audio_mimetypes() {
   return array(
     'audio/mp4',
     'audio/mpeg',
@@ -264,7 +264,7 @@ function _supported_audio_mimetypes() {
 /**
  * Helper function to return supported video mimetypes.
  */
-function _supported_video_mimetypes() {
+function _hps_media_supported_video_mimetypes() {
   return array(
     'video/mp4',
     'video/x-flv'
@@ -277,7 +277,7 @@ function _supported_video_mimetypes() {
  *
  */
 function hps_media_is_mimetype_supported($mimetype) {
-  return in_array($mimetype, _supported_mimetypes());
+  return in_array($mimetype, _hps_media_supported_mimetypes());
 }
 
 /**
@@ -285,23 +285,23 @@ function hps_media_is_mimetype_supported($mimetype) {
  */
 function hps_media_image_effect_info() {
   $effects = array(
-    'hps_scale_and_crop' => array(
+    'hps_media_scale_and_crop' => array(
       'label' => t('HPS Scale and Crop'),
       'help' => t('Scales image so that one dimension fits and the other is larger than desired, then crops ' .
                   'the remaining dimension. If the remainin dimension is width the crop will be even, if the ' .
                   'remaining dimension is height then the top is favoured depending on how drastic the crop is.'),
-      'effect callback' => '_hps_scale_and_crop_effect',
+      'effect callback' => '_hps_media_scale_and_crop_effect',
       'form callback' => 'image_resize_form',
       'summary theme' => 'image_resize_summary',
     ),
-    'hps_crop' => array(
+    'hps_media_crop' => array(
       'label' => t('HPS Crop'),
       'help' => t('Crops width evenly but favours top of image when cropping height depending on how drastic the crop is.'),
-      'effect callback' => '_hps_crop_effect',
+      'effect callback' => '_hps_media_crop_effect',
       'form callback' => 'image_resize_form',
       'summary theme' => 'image_resize_summary',
     ),
-    'hps_relative_scale' => array(
+    'hps_media_relative_scale' => array(
       'label' => t('HPS Relative Scale'),
       'help' => t('Scales image to a percentage of its existing dimensions. Relative scaling will maintain the aspect-ratio ' .
                   'of the original image. If only a single dimension is specified, the other dimension will be calculated. ' .
@@ -309,8 +309,8 @@ function hps_media_image_effect_info() {
                   'maintaining aspect ratio, to be bigger than its target. If a minimum dimension is provided it will be used ' .
                   'to adjust the target dimension, as needed, prior to scaling. If both dimensions are provided then one of ' .
                   'the dimensions may be smaller than its minimum value.'),
-      'effect callback' => '_hps_relative_scale_effect',
-      'form callback' => '_hps_relative_scale_form',
+      'effect callback' => '_hps_media_relative_scale_effect',
+      'form callback' => '_hps_media_relative_scale_form',
       'summary theme' => 'image_resize_summary',
     ),
   );
@@ -327,9 +327,9 @@ function hps_media_image_effect_info() {
  * @param $data
  *   The current configuration for this scale effect.
  */
-function _hps_relative_scale_form($data) {
+function _hps_media_relative_scale_form($data) {
   $form = image_resize_form($data);
-  $form['#element_validate'] = array('_hps_relative_scale_validate');
+  $form['#element_validate'] = array('_hps_media_relative_scale_validate');
   $form['width']['#required'] = FALSE;
   $form['width']['#field_suffix'] = ' ' . t('% of the current width e.g. 50%');
   $form['height']['#required'] = FALSE;
@@ -360,7 +360,7 @@ function _hps_relative_scale_form($data) {
  * Element validate handler to ensure that either a height or a width is
  * specified.
  */
-function _hps_relative_scale_validate($element, &$form_state) {
+function _hps_media_relative_scale_validate($element, &$form_state) {
   if (empty($element['width']['#value']) && empty($element['height']['#value'])) {
     form_error($element, t('Width and height can not both be blank.'));
   }
@@ -386,11 +386,11 @@ function _hps_relative_scale_validate($element, &$form_state) {
  * @return
  *   TRUE on success. FALSE on failure to crop image.
  */
-function _hps_scale_and_crop_effect(&$image, $data) {
+function _hps_media_scale_and_crop_effect(&$image, $data) {
 
   module_load_include('inc', 'hps_media', 'image.gd');
 
-  if (!image_toolkit_invoke('hps_scale_and_crop', $image, $data)) {
+  if (!image_toolkit_invoke('hps_media_scale_and_crop', $image, $data)) {
     watchdog('image', 'HPS Scale and Crop failed using the %toolkit toolkit on %path (%mimetype, %dimensions)', array('%toolkit' => $image->toolkit, '%path' => $image->source, '%mimetype' => $image->info['mime_type'], '%dimensions' => $image->info['height'] . 'x' . $image->info['height']), WATCHDOG_ERROR);
     return FALSE;
   }
@@ -411,11 +411,11 @@ function _hps_scale_and_crop_effect(&$image, $data) {
  * @return
  *   TRUE on success. FALSE on failure to crop image.
  */
-function _hps_crop_effect(&$image, $data) {
+function _hps_media_crop_effect(&$image, $data) {
 
   module_load_include('inc', 'hps_media', 'image.gd');
 
-  if (!image_toolkit_invoke('hps_crop', $image, $data)) {
+  if (!image_toolkit_invoke('hps_media_crop', $image, $data)) {
     watchdog('image', 'HPS Crop failed using the %toolkit toolkit on %path (%mimetype, %dimensions)', array('%toolkit' => $image->toolkit, '%path' => $image->source, '%mimetype' => $image->info['mime_type'], '%dimensions' => $image->info['height'] . 'x' . $image->info['height']), WATCHDOG_ERROR);
     return FALSE;
   }
@@ -442,7 +442,7 @@ function _hps_crop_effect(&$image, $data) {
  *
  * @see image_gd_hp_relative_scale
  */
-function _hps_relative_scale_effect(&$image, $data) {
+function _hps_media_relative_scale_effect(&$image, $data) {
 
   // Set sane default values.
   $data += array(
@@ -453,7 +453,7 @@ function _hps_relative_scale_effect(&$image, $data) {
 
   module_load_include('inc', 'hps_media', 'image.gd');
 
-  if (!image_toolkit_invoke('hps_relative_scale', $image, $data)) {
+  if (!image_toolkit_invoke('hps_media_relative_scale', $image, $data)) {
     watchdog('image', 'HPS Relative Scale failed using the %toolkit toolkit on %path (%mimetype, %dimensions)', array('%toolkit' => $image->toolkit, '%path' => $image->source, '%mimetype' => $image->info['mime_type'], '%dimensions' => $image->info['height'] . 'x' . $image->info['height']), WATCHDOG_ERROR);
     return FALSE;
   }

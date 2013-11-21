@@ -30,9 +30,10 @@ function hps_defaults_filter_default_formats() {
         'status' => '1',
         'settings' => array(
           'valid_elements' => '@[class],
-a[!href|title],
+a[href|name|title],
 img[!alt|!src|style],
-p,em,strong,cite,code,blockquote,address,ul,ol,li,dl,dt,dd,table,thead,tbody,tr,th,td',
+p,em,strong,cite,code,blockquote,address,ul,ol,li,dl,dt,dd,table,thead,tbody,tr,th,td,
+h2,h3,h4,h5,h6',
           'allow_comments' => '0',
           'nofollow_policy' => 'whitelist',
           'nofollow_domains' => array(
@@ -153,10 +154,10 @@ p,em,strong,cite,code,blockquote,address,ul,ol,li,dl,dt,dd,table,thead,tbody,tr,
             'zoom' => 0,
           ),
           'rule_valid_classes' => array(
-            0 => 'embryo-*',
+            0 => 'hps-*',
           ),
           'rule_valid_ids' => array(
-            0 => 'embryo-*',
+            0 => 'hps-*',
           ),
           'rule_style_urls' => array(),
         ),

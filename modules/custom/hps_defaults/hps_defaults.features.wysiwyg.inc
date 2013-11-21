@@ -69,7 +69,7 @@ function hps_defaults_wysiwyg_default_profiles() {
       'remove_linebreaks' => 1,
       'apply_source_formatting' => 0,
       'paste_auto_cleanup_on_paste' => 1,
-      'block_formats' => 'p,address,h3,h4,h5,h6,dt,dd',
+      'block_formats' => 'p,address,h2,h3,h4,h5,h6,dt,dd,blockquote',
       'css_setting' => 'theme',
       'css_path' => '',
       'css_classes' => '',

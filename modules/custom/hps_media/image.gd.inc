@@ -30,11 +30,11 @@
  * @see image_resize()
  * @see image_crop()
  */
-function image_gd_hps_scale_and_crop(stdClass $image, $width, $height) {
+function image_gd_hps_media_scale_and_crop(stdClass $image, $width, $height) {
   $scale = max($width / $image->info['width'], $height / $image->info['height']);
 
-  $x = _calculate_x_coordinate_point($image->info['width'] * $scale, $width);
-  $y = _calculate_y_coordinate_point($image->info['height'] * $scale, $height);
+  $x = _hps_media_calculate_x_coordinate_point($image->info['width'] * $scale, $width);
+  $y = _hps_media_calculate_y_coordinate_point($image->info['height'] * $scale, $height);
 
   if (image_resize($image, $image->info['width'] * $scale, $image->info['height'] * $scale)) {
     return image_crop($image, $x, $y, $width, $height);
@@ -59,7 +59,7 @@ function image_gd_hps_scale_and_crop(stdClass $image, $width, $height) {
  * @see image_crop()
  * @see image_gd_crop()
  */
-function image_gd_hps_crop(stdClass $image, $width, $height) {
+function image_gd_hps_media_crop(stdClass $image, $width, $height) {
 
   $aspect = $image->info['height'] / $image->info['width'];
   if (empty($height)) $height = $width / $aspect;
@@ -68,8 +68,8 @@ function image_gd_hps_crop(stdClass $image, $width, $height) {
   $width = (int) round($width);
   $height = (int) round($height);
 
-  $x = _calculate_x_coordinate_point($image->info['width'], $width);
-  $y = _calculate_y_coordinate_point($image->info['height'], $height);
+  $x = _hps_media_calculate_x_coordinate_point($image->info['width'], $width);
+  $y = _hps_media_calculate_y_coordinate_point($image->info['height'], $height);
 
   return image_toolkit_invoke('crop', $image, array($x, $y, $width, $height));
 }
@@ -101,10 +101,10 @@ function image_gd_hps_crop(stdClass $image, $width, $height) {
  * @see image_load()
  * @see image_scale_and_crop()
  */
-function image_gd_hps_relative_scale(stdClass $image, $width = NULL, $height = NULL, $minimum_width = NULL, $minimum_height = NULL) {
+function image_gd_hps_media_relative_scale(stdClass $image, $width = NULL, $height = NULL, $minimum_width = NULL, $minimum_height = NULL) {
   // Form validation ensures we have width and height values between and
   // including 1 and 99 so no need to check here.
-  // @see _hps_relative_scale_validate()
+  // @see _hps_media_relative_scale_validate()
 
   $dimensions = $image->info;
 
@@ -143,7 +143,7 @@ function image_gd_hps_relative_scale(stdClass $image, $width = NULL, $height = N
  * @return int
  *   Top left x coordinate point for the crop area in pixels.
  */
-function _calculate_x_coordinate_point($image_width, $crop_width) {
+function _hps_media_calculate_x_coordinate_point($image_width, $crop_width) {
   // Crop width evenly since it's difficult to guess which side is important
   return (int) round(($image_width - $crop_width) / 2);
 }
@@ -161,7 +161,7 @@ function _calculate_x_coordinate_point($image_width, $crop_width) {
  * @return int
  *   Top left y coordinate point for the crop area in pixels.
  */
-function _calculate_y_coordinate_point($image_height, $crop_height) {
+function _hps_media_calculate_y_coordinate_point($image_height, $crop_height) {
   $crop_ratio = $crop_height / $image_height;
   if ($crop_ratio > 0.7) {
     // Chopping nothing or less than 30% off the original image favour the top
