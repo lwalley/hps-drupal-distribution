@@ -364,7 +364,7 @@
       // Stick sticky things
       if ($().fixedsticky) {
         $('.panel-pane[data-sticky-breakpoint]').each(function () {
-          if ($(window).width > $(this).attr('data-sticky-breakpoint')) {
+          if ($(window).width() > $(this).attr('data-sticky-breakpoint')) {
             $(this).addClass('fixedsticky').fixedsticky();
           }
         });
