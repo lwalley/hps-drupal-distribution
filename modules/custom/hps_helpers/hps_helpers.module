@@ -1,0 +1,51 @@
+<?php
+
+/**
+ * Helper function to add vocabulary to page manager handler access plugin.
+ *
+ * @param object $vocabulary
+ *   A vocabulary object e.g. one array element extracted from the result of
+ *   taxonomy_vocabulary_get_names.
+ * @param object $handler
+ *   Handler object from e.g. hook_default_page_manager_pages() or
+ *   hook_default_page_manager_handlers().
+ */
+function hps_helpers_add_vocabulary_to_access_plugins($vocabulary, &$handler) {
+  foreach ($handler->conf['access']['plugins'] as &$access_plugin) {
+    if ($access_plugin['name'] == 'term_vocabulary') {
+      $access_plugin['settings']['vids'][(int) $vocabulary->vid] = (string) $vocabulary->vid;
+    }
+  }
+}
+
+/**
+ * Helper function to return vocabulary given attribute.
+ *
+ * @param mixed $value
+ * @param string $attribute
+ */
+function hps_helpers_find_vocabulary_by($value, $attribute = 'machine_name') {
+  foreach (taxonomy_vocabulary_get_names() as $vocabulary) {
+    if (!isset($vocabulary->$attribute)) continue;
+    if ($vocabulary->$attribute == $value) {
+      return $vocabulary;
+    }
+  }
+  return NULL;
+}
+
+/**
+ * Helper function to return mlid given menu and path
+ */
+function hps_helpers_find_mlid_by_menu_path($path, $menu = 'main-menu') {
+  $mlids = &drupal_static(__FUNCTION__, array());
+  if (!isset($mlids[$menu][$path])) {
+    $mlids[$menu][$path] = db_select('menu_links', 'ml')
+      ->condition('ml.link_path' , $path)
+      ->condition('ml.menu_name', $menu)
+      ->fields('ml' , array('mlid'))
+      ->execute()
+      ->fetchField();
+  }
+  return $mlids[$menu][$path];
+}

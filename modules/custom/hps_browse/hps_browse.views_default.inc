@@ -18,13 +18,17 @@ function hps_browse_views_default_views() {
   $view->human_name = 'HPS Browse';
   $view->core = 7;
   $view->api_version = '3.0';
-  $view->disabled = TRUE;
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
-  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['cache']['type'] = 'time';
+  $handler->display->display_options['cache']['results_lifespan'] = '3600';
+  $handler->display->display_options['cache']['results_lifespan_custom'] = '0';
+  $handler->display->display_options['cache']['output_lifespan'] = '3600';
+  $handler->display->display_options['cache']['output_lifespan_custom'] = '0';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Ascending';
@@ -109,11 +113,10 @@ function hps_browse_views_default_views() {
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
-  /* Field: Content: DC Creator */
+  /* Field: Content: By */
   $handler->display->display_options['fields']['dc_creator']['id'] = 'dc_creator';
   $handler->display->display_options['fields']['dc_creator']['table'] = 'field_data_dc_creator';
   $handler->display->display_options['fields']['dc_creator']['field'] = 'dc_creator';
-  $handler->display->display_options['fields']['dc_creator']['label'] = 'By';
   $handler->display->display_options['fields']['dc_creator']['alter']['trim_whitespace'] = TRUE;
   $handler->display->display_options['fields']['dc_creator']['alter']['strip_tags'] = TRUE;
   $handler->display->display_options['fields']['dc_creator']['element_type'] = 'em';
@@ -151,10 +154,23 @@ function hps_browse_views_default_views() {
   $handler->display->display_options['fields']['dspace_bitstream_url']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['dspace_bitstream_url']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['dspace_bitstream_url']['click_sort_column'] = 'url';
-  $handler->display->display_options['fields']['dspace_bitstream_url']['type'] = 'link_plain';
   $handler->display->display_options['fields']['dspace_bitstream_url']['delta_offset'] = '0';
   $handler->display->display_options['fields']['dspace_bitstream_url']['separator'] = ' ';
-  $handler->display->display_options['fields']['dspace_bitstream_url']['field_api_classes'] = TRUE;
+  /* Field: Content: DC Identifier YouTube */
+  $handler->display->display_options['fields']['dc_identifier_youtube']['id'] = 'dc_identifier_youtube';
+  $handler->display->display_options['fields']['dc_identifier_youtube']['table'] = 'field_data_dc_identifier_youtube';
+  $handler->display->display_options['fields']['dc_identifier_youtube']['field'] = 'dc_identifier_youtube';
+  $handler->display->display_options['fields']['dc_identifier_youtube']['label'] = '';
+  $handler->display->display_options['fields']['dc_identifier_youtube']['element_type'] = '0';
+  $handler->display->display_options['fields']['dc_identifier_youtube']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['dc_identifier_youtube']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['dc_identifier_youtube']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['dc_identifier_youtube']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['dc_identifier_youtube']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['dc_identifier_youtube']['empty_zero'] = TRUE;
+  $handler->display->display_options['fields']['dc_identifier_youtube']['type'] = 'text_plain';
+  $handler->display->display_options['fields']['dc_identifier_youtube']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['dc_identifier_youtube']['separator'] = ' ';
   /* Field: Content: DC Description */
   $handler->display->display_options['fields']['dc_description']['id'] = 'dc_description';
   $handler->display->display_options['fields']['dc_description']['table'] = 'field_data_dc_description';
@@ -173,7 +189,7 @@ function hps_browse_views_default_views() {
     'trim_length' => '600',
   );
   $handler->display->display_options['fields']['dc_description']['delta_offset'] = '0';
-  $handler->display->display_options['fields']['dc_description']['separator'] = '';
+  $handler->display->display_options['fields']['dc_description']['separator'] = ' ';
   /* Field: Content: DC Description Abstract */
   $handler->display->display_options['fields']['dc_description_abstract']['id'] = 'dc_description_abstract';
   $handler->display->display_options['fields']['dc_description_abstract']['table'] = 'field_data_dc_description_abstract';
@@ -225,15 +241,14 @@ function hps_browse_views_default_views() {
     'interval' => '2',
     'interval_display' => 'time ago',
   );
-  /* Field: Content: DC Description Type */
+  /* Field: Content: Format */
   $handler->display->display_options['fields']['dc_description_type']['id'] = 'dc_description_type';
   $handler->display->display_options['fields']['dc_description_type']['table'] = 'field_data_dc_description_type';
   $handler->display->display_options['fields']['dc_description_type']['field'] = 'dc_description_type';
-  $handler->display->display_options['fields']['dc_description_type']['label'] = 'Format';
   $handler->display->display_options['fields']['dc_description_type']['alter']['trim_whitespace'] = TRUE;
   $handler->display->display_options['fields']['dc_description_type']['element_type'] = '0';
   $handler->display->display_options['fields']['dc_description_type']['element_label_type'] = '0';
-  $handler->display->display_options['fields']['dc_description_type']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['dc_description_type']['element_wrapper_type'] = 'p';
   $handler->display->display_options['fields']['dc_description_type']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['dc_description_type']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['dc_description_type']['delta_offset'] = '0';
@@ -251,34 +266,12 @@ function hps_browse_views_default_views() {
   $handler->display->display_options['sorts']['title']['field'] = 'title';
   $handler->display->display_options['sorts']['title']['exposed'] = TRUE;
   $handler->display->display_options['sorts']['title']['expose']['label'] = 'Title';
-  /* Sort criterion: Content: DC Creator (dc_creator) */
-  $handler->display->display_options['sorts']['dc_creator_value']['id'] = 'dc_creator_value';
-  $handler->display->display_options['sorts']['dc_creator_value']['table'] = 'field_data_dc_creator';
-  $handler->display->display_options['sorts']['dc_creator_value']['field'] = 'dc_creator_value';
-  $handler->display->display_options['sorts']['dc_creator_value']['exposed'] = TRUE;
-  $handler->display->display_options['sorts']['dc_creator_value']['expose']['label'] = 'Creator';
-  /* Sort criterion: Content: DC Date Created (dc_date_created) */
-  $handler->display->display_options['sorts']['dc_date_created_value']['id'] = 'dc_date_created_value';
-  $handler->display->display_options['sorts']['dc_date_created_value']['table'] = 'field_data_dc_date_created';
-  $handler->display->display_options['sorts']['dc_date_created_value']['field'] = 'dc_date_created_value';
-  $handler->display->display_options['sorts']['dc_date_created_value']['exposed'] = TRUE;
-  $handler->display->display_options['sorts']['dc_date_created_value']['expose']['label'] = 'Created';
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
-  $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Content: Published */
-  $handler->display->display_options['filters']['status']['id'] = 'status';
-  $handler->display->display_options['filters']['status']['table'] = 'node';
-  $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['value'] = 1;
-  $handler->display->display_options['filters']['status']['group'] = 1;
-  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Content: Type */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'dspaced_entities_item' => 'dspaced_entities_item',
-  );
+  /* Sort criterion: Content: DC Date Created Standard -  start date (dc_date_createdstandard) */
+  $handler->display->display_options['sorts']['dc_date_createdstandard_value']['id'] = 'dc_date_createdstandard_value';
+  $handler->display->display_options['sorts']['dc_date_createdstandard_value']['table'] = 'field_data_dc_date_createdstandard';
+  $handler->display->display_options['sorts']['dc_date_createdstandard_value']['field'] = 'dc_date_createdstandard_value';
+  $handler->display->display_options['sorts']['dc_date_createdstandard_value']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['dc_date_createdstandard_value']['expose']['label'] = 'Created';
   $handler->display->display_options['pane_category']['name'] = 'HPS Browse Panes';
   $handler->display->display_options['pane_category']['weight'] = '0';
   $handler->display->display_options['argument_input'] = array(
@@ -365,11 +358,10 @@ function hps_browse_views_default_views() {
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
-  /* Field: Content: DC Creator */
+  /* Field: Content: By */
   $handler->display->display_options['fields']['dc_creator']['id'] = 'dc_creator';
   $handler->display->display_options['fields']['dc_creator']['table'] = 'field_data_dc_creator';
   $handler->display->display_options['fields']['dc_creator']['field'] = 'dc_creator';
-  $handler->display->display_options['fields']['dc_creator']['label'] = 'By';
   $handler->display->display_options['fields']['dc_creator']['alter']['trim_whitespace'] = TRUE;
   $handler->display->display_options['fields']['dc_creator']['alter']['strip_tags'] = TRUE;
   $handler->display->display_options['fields']['dc_creator']['element_type'] = '0';
@@ -464,31 +456,12 @@ function hps_browse_views_default_views() {
   $handler->display->display_options['sorts']['title']['id'] = 'title';
   $handler->display->display_options['sorts']['title']['table'] = 'node';
   $handler->display->display_options['sorts']['title']['field'] = 'title';
-  /* Sort criterion: Content: DC Creator (dc_creator) */
-  $handler->display->display_options['sorts']['dc_creator_value']['id'] = 'dc_creator_value';
-  $handler->display->display_options['sorts']['dc_creator_value']['table'] = 'field_data_dc_creator';
-  $handler->display->display_options['sorts']['dc_creator_value']['field'] = 'dc_creator_value';
   /* Sort criterion: Content: DC Date Created (dc_date_created) */
   $handler->display->display_options['sorts']['dc_date_created_value']['id'] = 'dc_date_created_value';
   $handler->display->display_options['sorts']['dc_date_created_value']['table'] = 'field_data_dc_date_created';
   $handler->display->display_options['sorts']['dc_date_created_value']['field'] = 'dc_date_created_value';
   $handler->display->display_options['sorts']['dc_date_created_value']['order'] = 'DESC';
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
-  $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Content: Published */
-  $handler->display->display_options['filters']['status']['id'] = 'status';
-  $handler->display->display_options['filters']['status']['table'] = 'node';
-  $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['value'] = 1;
-  $handler->display->display_options['filters']['status']['group'] = 1;
-  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Content: Type */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'dspaced_entities_item' => 'dspaced_entities_item',
-  );
+  $handler->display->display_options['sorts']['dc_date_created_value']['expose']['label'] = 'Created';
   $handler->display->display_options['pane_category']['name'] = 'HPS Browse Panes';
   $handler->display->display_options['pane_category']['weight'] = '0';
   $handler->display->display_options['argument_input'] = array(
@@ -507,6 +480,12 @@ function hps_browse_views_default_views() {
   $handler = $view->new_display('panel_pane', 'Gallery', 'panel_pane_gallery');
   $handler->display->display_options['display_description'] = 'Content pane for displaying items as a gallery.';
   $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '48';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['style_options']['default_row_class'] = FALSE;
@@ -518,33 +497,22 @@ function hps_browse_views_default_views() {
   $handler->display->display_options['row_options']['default_field_elements'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Title */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = '';
-  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['element_type'] = 'h2';
-  $handler->display->display_options['fields']['title']['element_label_type'] = '0';
-  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['title']['element_wrapper_type'] = '0';
-  $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
-  /* Field: Content: DC Creator */
-  $handler->display->display_options['fields']['dc_creator']['id'] = 'dc_creator';
-  $handler->display->display_options['fields']['dc_creator']['table'] = 'field_data_dc_creator';
-  $handler->display->display_options['fields']['dc_creator']['field'] = 'dc_creator';
-  $handler->display->display_options['fields']['dc_creator']['label'] = 'By';
-  $handler->display->display_options['fields']['dc_creator']['alter']['trim_whitespace'] = TRUE;
-  $handler->display->display_options['fields']['dc_creator']['alter']['strip_tags'] = TRUE;
-  $handler->display->display_options['fields']['dc_creator']['element_type'] = 'em';
-  $handler->display->display_options['fields']['dc_creator']['element_label_type'] = 'span';
-  $handler->display->display_options['fields']['dc_creator']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['dc_creator']['element_wrapper_type'] = 'p';
-  $handler->display->display_options['fields']['dc_creator']['element_default_classes'] = FALSE;
-  $handler->display->display_options['fields']['dc_creator']['hide_empty'] = TRUE;
-  $handler->display->display_options['fields']['dc_creator']['empty_zero'] = TRUE;
-  $handler->display->display_options['fields']['dc_creator']['type'] = 'text_plain';
+  /* Field: Content: Image */
+  $handler->display->display_options['fields']['dspace_image']['id'] = 'dspace_image';
+  $handler->display->display_options['fields']['dspace_image']['table'] = 'field_data_dspace_image';
+  $handler->display->display_options['fields']['dspace_image']['field'] = 'dspace_image';
+  $handler->display->display_options['fields']['dspace_image']['label'] = '';
+  $handler->display->display_options['fields']['dspace_image']['element_type'] = '0';
+  $handler->display->display_options['fields']['dspace_image']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['dspace_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['dspace_image']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['dspace_image']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['dspace_image']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['dspace_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['dspace_image']['settings'] = array(
+    'image_style' => 'hps_uniform',
+    'image_link' => 'content',
+  );
   /* Field: Content: Bitstreams */
   $handler->display->display_options['fields']['dspace_bitstream_url']['id'] = 'dspace_bitstream_url';
   $handler->display->display_options['fields']['dspace_bitstream_url']['table'] = 'field_data_dspace_bitstream_url';
@@ -557,10 +525,48 @@ function hps_browse_views_default_views() {
   $handler->display->display_options['fields']['dspace_bitstream_url']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['dspace_bitstream_url']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['dspace_bitstream_url']['click_sort_column'] = 'url';
-  $handler->display->display_options['fields']['dspace_bitstream_url']['type'] = 'link_plain';
   $handler->display->display_options['fields']['dspace_bitstream_url']['delta_offset'] = '0';
   $handler->display->display_options['fields']['dspace_bitstream_url']['separator'] = ' ';
-  $handler->display->display_options['fields']['dspace_bitstream_url']['field_api_classes'] = TRUE;
+  /* Field: Content: DC Identifier YouTube */
+  $handler->display->display_options['fields']['dc_identifier_youtube']['id'] = 'dc_identifier_youtube';
+  $handler->display->display_options['fields']['dc_identifier_youtube']['table'] = 'field_data_dc_identifier_youtube';
+  $handler->display->display_options['fields']['dc_identifier_youtube']['field'] = 'dc_identifier_youtube';
+  $handler->display->display_options['fields']['dc_identifier_youtube']['label'] = '';
+  $handler->display->display_options['fields']['dc_identifier_youtube']['element_type'] = '0';
+  $handler->display->display_options['fields']['dc_identifier_youtube']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['dc_identifier_youtube']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['dc_identifier_youtube']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['dc_identifier_youtube']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['dc_identifier_youtube']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['dc_identifier_youtube']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['dc_identifier_youtube']['separator'] = ' ';
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_type'] = 'h2';
+  $handler->display->display_options['fields']['title']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
+  /* Field: Content: By */
+  $handler->display->display_options['fields']['dc_creator']['id'] = 'dc_creator';
+  $handler->display->display_options['fields']['dc_creator']['table'] = 'field_data_dc_creator';
+  $handler->display->display_options['fields']['dc_creator']['field'] = 'dc_creator';
+  $handler->display->display_options['fields']['dc_creator']['alter']['trim_whitespace'] = TRUE;
+  $handler->display->display_options['fields']['dc_creator']['alter']['strip_tags'] = TRUE;
+  $handler->display->display_options['fields']['dc_creator']['element_type'] = 'em';
+  $handler->display->display_options['fields']['dc_creator']['element_label_type'] = 'span';
+  $handler->display->display_options['fields']['dc_creator']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['dc_creator']['element_wrapper_type'] = 'p';
+  $handler->display->display_options['fields']['dc_creator']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['dc_creator']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['dc_creator']['empty_zero'] = TRUE;
+  $handler->display->display_options['fields']['dc_creator']['type'] = 'text_plain';
+  $handler->display->display_options['fields']['dc_creator']['delta_offset'] = '0';
   /* Field: Content: Body */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
@@ -619,21 +625,25 @@ function hps_browse_views_default_views() {
   $handler->display->display_options['fields']['dc_description_abstract']['delta_offset'] = '0';
   $handler->display->display_options['fields']['dc_description_abstract']['separator'] = '  ';
   /* Field: Content: Image */
-  $handler->display->display_options['fields']['dspace_image']['id'] = 'dspace_image';
-  $handler->display->display_options['fields']['dspace_image']['table'] = 'field_data_dspace_image';
-  $handler->display->display_options['fields']['dspace_image']['field'] = 'dspace_image';
-  $handler->display->display_options['fields']['dspace_image']['label'] = '';
-  $handler->display->display_options['fields']['dspace_image']['element_type'] = '0';
-  $handler->display->display_options['fields']['dspace_image']['element_label_type'] = '0';
-  $handler->display->display_options['fields']['dspace_image']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['dspace_image']['element_wrapper_type'] = '0';
-  $handler->display->display_options['fields']['dspace_image']['element_default_classes'] = FALSE;
-  $handler->display->display_options['fields']['dspace_image']['empty'] = '[dc_description_abstract]';
-  $handler->display->display_options['fields']['dspace_image']['hide_alter_empty'] = FALSE;
-  $handler->display->display_options['fields']['dspace_image']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['dspace_image']['settings'] = array(
-    'image_style' => 'hps_uniform',
-    'image_link' => 'content',
+  $handler->display->display_options['fields']['dspace_image_1']['id'] = 'dspace_image_1';
+  $handler->display->display_options['fields']['dspace_image_1']['table'] = 'field_data_dspace_image';
+  $handler->display->display_options['fields']['dspace_image_1']['field'] = 'dspace_image';
+  $handler->display->display_options['fields']['dspace_image_1']['label'] = '';
+  $handler->display->display_options['fields']['dspace_image_1']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['dspace_image_1']['alter']['text'] = '&#32;';
+  $handler->display->display_options['fields']['dspace_image_1']['alter']['trim_whitespace'] = TRUE;
+  $handler->display->display_options['fields']['dspace_image_1']['alter']['strip_tags'] = TRUE;
+  $handler->display->display_options['fields']['dspace_image_1']['element_type'] = '0';
+  $handler->display->display_options['fields']['dspace_image_1']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['dspace_image_1']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['dspace_image_1']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['dspace_image_1']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['dspace_image_1']['empty'] = '[dc_description_abstract]';
+  $handler->display->display_options['fields']['dspace_image_1']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['dspace_image_1']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['dspace_image_1']['settings'] = array(
+    'image_style' => 'hps_minor',
+    'image_link' => '',
   );
   /* Field: Content: DC Date Created */
   $handler->display->display_options['fields']['dc_date_created']['id'] = 'dc_date_created';
@@ -684,34 +694,12 @@ function hps_browse_views_default_views() {
   $handler->display->display_options['sorts']['title']['field'] = 'title';
   $handler->display->display_options['sorts']['title']['exposed'] = TRUE;
   $handler->display->display_options['sorts']['title']['expose']['label'] = 'Title';
-  /* Sort criterion: Content: DC Creator (dc_creator) */
-  $handler->display->display_options['sorts']['dc_creator_value']['id'] = 'dc_creator_value';
-  $handler->display->display_options['sorts']['dc_creator_value']['table'] = 'field_data_dc_creator';
-  $handler->display->display_options['sorts']['dc_creator_value']['field'] = 'dc_creator_value';
-  $handler->display->display_options['sorts']['dc_creator_value']['exposed'] = TRUE;
-  $handler->display->display_options['sorts']['dc_creator_value']['expose']['label'] = 'Creator';
-  /* Sort criterion: Content: DC Date Created (dc_date_created) */
-  $handler->display->display_options['sorts']['dc_date_created_value']['id'] = 'dc_date_created_value';
-  $handler->display->display_options['sorts']['dc_date_created_value']['table'] = 'field_data_dc_date_created';
-  $handler->display->display_options['sorts']['dc_date_created_value']['field'] = 'dc_date_created_value';
-  $handler->display->display_options['sorts']['dc_date_created_value']['exposed'] = TRUE;
-  $handler->display->display_options['sorts']['dc_date_created_value']['expose']['label'] = 'Created';
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
-  $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Content: Published */
-  $handler->display->display_options['filters']['status']['id'] = 'status';
-  $handler->display->display_options['filters']['status']['table'] = 'node';
-  $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['value'] = 1;
-  $handler->display->display_options['filters']['status']['group'] = 1;
-  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Content: Type */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'dspaced_entities_item' => 'dspaced_entities_item',
-  );
+  /* Sort criterion: Content: DC Date Created Standard -  start date (dc_date_createdstandard) */
+  $handler->display->display_options['sorts']['dc_date_createdstandard_value']['id'] = 'dc_date_createdstandard_value';
+  $handler->display->display_options['sorts']['dc_date_createdstandard_value']['table'] = 'field_data_dc_date_createdstandard';
+  $handler->display->display_options['sorts']['dc_date_createdstandard_value']['field'] = 'dc_date_createdstandard_value';
+  $handler->display->display_options['sorts']['dc_date_createdstandard_value']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['dc_date_createdstandard_value']['expose']['label'] = 'Created';
   $handler->display->display_options['pane_category']['name'] = 'HPS Browse Panes';
   $handler->display->display_options['pane_category']['weight'] = '0';
   $handler->display->display_options['argument_input'] = array(
@@ -735,13 +723,17 @@ function hps_browse_views_default_views() {
   $view->human_name = 'HPS Browse By';
   $view->core = 7;
   $view->api_version = '3.0';
-  $view->disabled = TRUE;
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
-  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['cache']['type'] = 'time';
+  $handler->display->display_options['cache']['results_lifespan'] = '3600';
+  $handler->display->display_options['cache']['results_lifespan_custom'] = '0';
+  $handler->display->display_options['cache']['output_lifespan'] = '3600';
+  $handler->display->display_options['cache']['output_lifespan_custom'] = '0';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'full';
@@ -762,10 +754,6 @@ function hps_browse_views_default_views() {
   $handler->display->display_options['style_options']['wrapper_class'] = '';
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['row_options']['default_field_elements'] = FALSE;
-  /* Relationship: Taxonomy term: Parent term */
-  $handler->display->display_options['relationships']['parent']['id'] = 'parent';
-  $handler->display->display_options['relationships']['parent']['table'] = 'taxonomy_term_hierarchy';
-  $handler->display->display_options['relationships']['parent']['field'] = 'parent';
   /* Field: Taxonomy term: Name */
   $handler->display->display_options['fields']['name_1']['id'] = 'name_1';
   $handler->display->display_options['fields']['name_1']['table'] = 'taxonomy_term_data';
@@ -806,10 +794,10 @@ function hps_browse_views_default_views() {
   $handler->display->display_options['fields']['description']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['description']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['description']['hide_empty'] = TRUE;
-  /* Sort criterion: Taxonomy term: Weight */
-  $handler->display->display_options['sorts']['weight']['id'] = 'weight';
-  $handler->display->display_options['sorts']['weight']['table'] = 'taxonomy_term_data';
-  $handler->display->display_options['sorts']['weight']['field'] = 'weight';
+  /* Sort criterion: Taxonomy term: Sort order (field_sort_order) */
+  $handler->display->display_options['sorts']['field_sort_order_value']['id'] = 'field_sort_order_value';
+  $handler->display->display_options['sorts']['field_sort_order_value']['table'] = 'field_data_field_sort_order';
+  $handler->display->display_options['sorts']['field_sort_order_value']['field'] = 'field_sort_order_value';
   /* Contextual filter: Taxonomy vocabulary: Vocabulary ID */
   $handler->display->display_options['arguments']['vid']['id'] = 'vid';
   $handler->display->display_options['arguments']['vid']['table'] = 'taxonomy_vocabulary';
@@ -819,17 +807,59 @@ function hps_browse_views_default_views() {
   $handler->display->display_options['arguments']['vid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['vid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['vid']['summary_options']['items_per_page'] = '25';
-  /* Filter criterion: Taxonomy term: Parent term */
-  $handler->display->display_options['filters']['parent']['id'] = 'parent';
-  $handler->display->display_options['filters']['parent']['table'] = 'taxonomy_term_hierarchy';
-  $handler->display->display_options['filters']['parent']['field'] = 'parent';
-  $handler->display->display_options['filters']['parent']['operator'] = '>';
-  $handler->display->display_options['filters']['parent']['value']['value'] = '0';
 
   /* Display: Browse by terms */
   $handler = $view->new_display('panel_pane', 'Browse by terms', 'panel_pane_browse_by');
   $handler->display->display_options['display_description'] = 'Lists terms from a browse by vocabulary.';
   $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'list';
+  $handler->display->display_options['style_options']['default_row_class'] = FALSE;
+  $handler->display->display_options['style_options']['row_class_special'] = FALSE;
+  $handler->display->display_options['style_options']['wrapper_class'] = '';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['row_options']['default_field_elements'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Taxonomy term: Name */
+  $handler->display->display_options['fields']['name']['id'] = 'name';
+  $handler->display->display_options['fields']['name']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['label'] = '';
+  $handler->display->display_options['fields']['name']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['name']['element_type'] = '0';
+  $handler->display->display_options['fields']['name']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['name']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['name']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['name']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['name']['link_to_taxonomy'] = TRUE;
+  /* Field: Taxonomy term: Term description */
+  $handler->display->display_options['fields']['description']['id'] = 'description';
+  $handler->display->display_options['fields']['description']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['fields']['description']['field'] = 'description';
+  $handler->display->display_options['fields']['description']['label'] = '';
+  $handler->display->display_options['fields']['description']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['description']['alter']['strip_tags'] = TRUE;
+  $handler->display->display_options['fields']['description']['alter']['preserve_tags'] = '<em> <strong> <b> <i> <a>';
+  $handler->display->display_options['fields']['description']['element_type'] = '0';
+  $handler->display->display_options['fields']['description']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['description']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['description']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['description']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['description']['hide_empty'] = TRUE;
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Taxonomy term: Name */
+  $handler->display->display_options['sorts']['name']['id'] = 'name';
+  $handler->display->display_options['sorts']['name']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['sorts']['name']['field'] = 'name';
+  /* Sort criterion: Taxonomy term: Sort order (field_sort_order) */
+  $handler->display->display_options['sorts']['field_sort_order_value']['id'] = 'field_sort_order_value';
+  $handler->display->display_options['sorts']['field_sort_order_value']['table'] = 'field_data_field_sort_order';
+  $handler->display->display_options['sorts']['field_sort_order_value']['field'] = 'field_sort_order_value';
   $handler->display->display_options['pane_category']['name'] = 'HPS Browse Panes';
   $handler->display->display_options['pane_category']['weight'] = '0';
   $handler->display->display_options['argument_input'] = array(

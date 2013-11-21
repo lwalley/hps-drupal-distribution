@@ -1,0 +1,5 @@
+name = HPS Helpers
+description = Shared helper functions.
+core = 7.x
+package = HPS
+

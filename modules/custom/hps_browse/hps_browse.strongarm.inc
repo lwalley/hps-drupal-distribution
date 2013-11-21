@@ -14,7 +14,7 @@ function hps_browse_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_hps_browse_by';
-  $strongarm->value = 'edit-menu';
+  $strongarm->value = 'edit-print';
   $export['additional_settings__active_tab_hps_browse_by'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -99,20 +99,6 @@ function hps_browse_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'page_manager_node_view_disabled';
-  $strongarm->value = TRUE;
-  $export['page_manager_node_view_disabled'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'page_manager_term_view_disabled';
-  $strongarm->value = TRUE;
-  $export['page_manager_term_view_disabled'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_node_hps_browse_by_pattern';
   $strongarm->value = 'browse/[node:title]';
   $export['pathauto_node_hps_browse_by_pattern'] = $strongarm;
@@ -142,7 +128,7 @@ function hps_browse_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'taxonomy_menu_display_descendants_dc_description_type';
-  $strongarm->value = 0;
+  $strongarm->value = 1;
   $export['taxonomy_menu_display_descendants_dc_description_type'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -219,7 +205,7 @@ function hps_browse_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'taxonomy_menu_vocab_parent_dc_description_type';
-  $strongarm->value = '539';
+  $strongarm->value = '0';
   $export['taxonomy_menu_vocab_parent_dc_description_type'] = $strongarm;
 
   $strongarm = new stdClass();
