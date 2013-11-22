@@ -22,7 +22,6 @@
       // Make sure footer isn't overlapping dynamic content
       function adjustFooter() {
         if ($('.footer').length > 0) {
-          console.log($(document).height());
           if ($(document).height() > ($('.footer').offset().top + $('.footer').height())) {
             $('.footer').css('top', $(document).height());
           }
@@ -130,6 +129,7 @@
         });
 
         // Trigger navigation adjustment on load and if screen width changes
+        // @fixme This doesn't appear to work
         $(window).bind('load resize orientationchange', function () {
           $('#navigation').trigger('adjustnavigation');
         });
@@ -361,14 +361,6 @@
 
       });
 
-      // Stick sticky things
-      if ($().fixedsticky) {
-        $('.panel-pane[data-sticky-breakpoint]').each(function () {
-          if ($(window).width() > $(this).attr('data-sticky-breakpoint')) {
-            $(this).addClass('fixedsticky').fixedsticky();
-          }
-        });
-      }
     }
   };
 

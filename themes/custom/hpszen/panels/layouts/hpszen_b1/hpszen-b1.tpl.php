@@ -11,7 +11,7 @@
 ?>
 <div id="basic" class"basic">
   <div class="bucket basic__bucket">
-    <div id="basic__one" class="panel basic__panel">
+    <div id="basic__one" class="basic__one panel basic__panel">
       <?php print $content['b1']; ?>
     </div>
   </div>
