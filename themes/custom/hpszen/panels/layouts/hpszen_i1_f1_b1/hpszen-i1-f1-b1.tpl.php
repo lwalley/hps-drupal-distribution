@@ -13,14 +13,14 @@
 ?>
 <div id="introduction" class="introduction">
   <div class="bucket introduction__bucket">
-    <div id="introduction__one" class="panel introduction__panel">
+    <div id="introduction__one" class="introduction__one panel introduction__panel">
       <?php print $content['i1']; ?>
     </div>
   </div>
 </div>
 <div id="featured" class="featured">
   <div class="bucket featured__bucket">
-    <div id="featured__one" class="panel featured__panel">
+    <div id="featured__one" class="featured__one panel featured__panel">
       <?php print $content['f1']; ?>
     </div>
   </div>

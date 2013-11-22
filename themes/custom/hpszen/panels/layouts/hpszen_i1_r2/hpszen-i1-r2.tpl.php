@@ -13,17 +13,17 @@
 ?>
 <div id="introduction" class="introduction">
   <div class="bucket introduction__bucket">
-    <div id="introduction__one" class="panel introduction__panel">
+    <div id="introduction__one" class="introduction__one panel introduction__panel">
       <?php print $content['i1']; ?>
     </div>
   </div>
 </div>
 <div id="results" class="results">
   <div class="bucket results__bucket">
-    <div id="results__one" class="panel panel__results">
+    <div id="results__one" class="results__one panel panel__results">
       <?php print $content['r1']; ?>
     </div>
-    <div id="results__two" class="panel panel__results">
+    <div id="results__two" class="results__two panel panel__results">
       <?php print $content['r2']; ?>
     </div>
   </div>
